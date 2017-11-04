@@ -38,14 +38,19 @@ under the License.
   <inceptionYear>2011</inceptionYear>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/maven/skins/trunk/maven-fluido-skin/</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/maven/skins/trunk/maven-fluido-skin/</developerConnection>
-    <url>http://svn.apache.org/viewvc/maven/skins/trunk/maven-fluido-skin/</url>
+    <connection>scm:git:https://gitbox.apache.org/repos/asf/maven-fluido-skin.git</connection>
+    <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/maven-fluido-skin.git</developerConnection>
+    <url>https://github.com/apache/maven-fluido-skin/tree/${project.scm.tag}</url>
+    <tag>HEAD</tag>
   </scm>
   <issueManagement>
     <system>jira</system>
     <url>https://issues.apache.org/jira/browse/MSKINS/component/12326474</url>
   </issueManagement>
+  <ciManagement>
+    <system>Jenkins</system>
+    <url>https://builds.apache.org/view/M-R/view/Maven/job/maven-fluido-skin/</url>
+  </ciManagement>
   <distributionManagement>
     <site>
       <id>apache.website</id>
