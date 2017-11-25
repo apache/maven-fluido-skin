@@ -276,7 +276,7 @@ Welcome to ${project.name}!
 
 ** Project profile
 
- As shown in the MOJOs {{{http://mojo.codehaus.org/plugins.html}list}}, plugins life-cycle are characterized by
+ As shown in {{{http://www.mojohaus.org/plugins.html}MojoHaus Maven plugins list}}, plugins life-cycle are characterized by
  different status/stages:
 
  * Production
