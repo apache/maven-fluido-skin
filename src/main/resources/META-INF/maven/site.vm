@@ -222,6 +222,10 @@
         <ul class="breadcrumb">
 #*      *##publishDate( "left" $decoration.publishDate $decoration.version )
 #*      *##publishDate( "right" $decoration.publishDate $decoration.version )
+#if( $decoration.edit && $docRenderingContext.editable )
+        <li class="pull-right"><a href="$docRenderingContext.getDoxiaSourcePath( $decoration.edit )"><img src="$relativePath/images/accessories-text-editor.png" alt="edit" /></a></li>
+#end
+##
 #*      *### MSITE-44
 #*      *##if ( !$topBarEnabled
               && $decoration.body.links
