@@ -16,7 +16,7 @@
 ## under the License.
 ##
 #macro ( topMenu $menus )
-  #foreach( $menu in $menus )
+#**##foreach( $menu in $menus )
 #**##if ( $menu.name )
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">$menu.name <b class="caret"></b></a>
@@ -45,7 +45,7 @@
         </ul>
       </li>
 #**##end
-  #end
+#**##end
 #end
 ##
 ##
@@ -90,12 +90,12 @@
 #*  *##if ( $position == "left" )
 #*    *#<a href="$href"$linkClass$linkTarget$linkTitle>#image($img $alt $border $width $height)$name</a>##
 #*  *##else
-#*    *#<a href="$href"$linkClass$linkTarget$linkTitle>$name #image($img $alt $border $width $height)</a>
+#*    *#<a href="$href"$linkClass$linkTarget$linkTitle>$name #image($img $alt $border $width $height)</a>##
 #*  *##end
 #**##else
 #*  *#<a href="$href"$linkClass$linkTarget$linkTitle>##
 #*  *##if($icon)
-#*  *#<span class="$icon"></span>##
+#*    *#<span class="$icon"></span>##
 #*  *##end
 #*  *#$name</a>##
 #**##end
@@ -104,36 +104,36 @@
 ##
 ##
 #macro ( image $img $alt $border $width $height )
-  #if( $img )
-    #if ( !$decoration.isLink( $img ) )
-      #set ( $imgSrc = $PathTool.calculateLink( $img, $relativePath ) )
-      #set ( $imgSrc = $imgSrc.replaceAll( '\\', '/' ) )
-      #set ( $imgSrc = ' src="' + $imgSrc + '"' )
-    #else
-      #set ( $imgSrc = ' src="' + $img + '"' )
-    #end
-    #if( $alt )
-      #set ( $imgAlt = ' alt="' + $alt + '"' )
-    #else
-      #set ( $imgAlt = ' alt=""' )
-    #end
-    #if( $border )
-      #set ( $imgBorder = ' border="' + $border + '"' )
-    #else
-      #set ( $imgBorder = "" )
-    #end
-    #if( $width )
-      #set ( $imgWidth = ' width="' + $width + '"' )
-    #else
-      #set ( $imgWidth = "" )
-    #end
-    #if( $height )
-      #set ( $imgHeight = ' height="' + $height + '"' )
-    #else
-      #set ( $imgHeight = "" )
-    #end
-    <img class="imageLink"$imgSrc$imgAlt$imgBorder$imgWidth$imgHeight/>
-  #end
+#**##if( $img )
+#*  *##if ( !$decoration.isLink( $img ) )
+#*    *##set ( $imgSrc = $PathTool.calculateLink( $img, $relativePath ) )
+#*    *##set ( $imgSrc = $imgSrc.replaceAll( '\\', '/' ) )
+#*    *##set ( $imgSrc = ' src="' + $imgSrc + '"' )
+#*  *##else
+#*    *##set ( $imgSrc = ' src="' + $img + '"' )
+#*  *##end
+#*  *##if( $alt )
+#*    *##set ( $imgAlt = ' alt="' + $alt + '"' )
+#*  *##else
+#*    *##set ( $imgAlt = ' alt=""' )
+#*  *##end
+#*  *##if( $border )
+#*    *##set ( $imgBorder = ' border="' + $border + '"' )
+#*  *##else
+#*    *##set ( $imgBorder = "" )
+#*  *##end
+#*  *##if( $width )
+#*    *##set ( $imgWidth = ' width="' + $width + '"' )
+#*  *##else
+#*    *##set ( $imgWidth = "" )
+#*  *##end
+#*  *##if( $height )
+#*    *##set ( $imgHeight = ' height="' + $height + '"' )
+#*  *##else
+#*    *##set ( $imgHeight = "" )
+#*  *##end
+<img class="imageLink"$imgSrc$imgAlt$imgBorder$imgWidth$imgHeight/>##
+#**##end
 #end
 ##
 ##
@@ -224,12 +224,12 @@
 ##
 ##
 #macro ( breadcrumbs $breadcrumbs $cssClass )
-  #foreach( $item in $breadcrumbs )
-#**##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
-#**##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
-#**##if ( ( $currentItemHref == '' ) )
-#*  *##set ( $currentItemHref = './' )
-#**##end
+#**##foreach( $item in $breadcrumbs )
+#*  *##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
+#*  *##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
+#*  *##if ( ( $currentItemHref == '' ) )
+#*    *##set ( $currentItemHref = './' )
+#*  *##end
 ##
       <li class="$cssClass">##
 #*  *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false )
@@ -297,20 +297,20 @@
 #**##if ( $item.img )
 #*  *##if ( $item.position == "left" )
 #*    *##if ( $alignedFileName == $currentItemHref )
-#*      *#<a href="#">#image($item.img $item.alt $item.border $item.width $item.height) $item.name</a>
+#*      *#<a href="#">#image($item.img $item.alt $item.border $item.width $item.height) $item.name</a>##
 #*    *##else
 #*      *##link($currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false)
 #*    *##end
 #*  *##else
 #*    *##if ( $alignedFileName == $currentItemHref )
-#*      *#<a href="#">$item.name #image($item.img $item.alt $item.border $item.width $item.height)</a>
+#*      *#<a href="#">$item.name #image($item.img $item.alt $item.border $item.width $item.height)</a>##
 #*    *##else
 #*      *##link($currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false)
 #*    *##end
 #*  *##end
 #**##else
 #*  *##if ( $alignedFileName == $currentItemHref )
-#*    *#<a href="#"><span class="$collapseClass"></span>$item.name</a>
+#*    *#<a href="#"><span class="$collapseClass"></span>$item.name</a>##
 #*  *##else
 #*    *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height $collapseClass)
 #*  *##end
@@ -318,21 +318,21 @@
 #**##if ( $item && $item.items && $item.items.size() > 0 )
 #*  *##if ( $collapseClass == "icon-chevron-down" )
 
-      <ul class="nav nav-list">
+    <ul class="nav nav-list">
 #*    *##foreach( $subitem in $item.items )
 #*      *##menuItem( $subitem )
 #*    *##end
-      </ul>
+    </ul>
 #*  *##end
 #**##end
-  </li>
+#**#</li>
 #end
 ##
 ##
 ##
 #macro ( mainMenu $menus )
-<ul class="nav nav-list">
-  #foreach( $menu in $menus )
+    <ul class="nav nav-list">
+#**##foreach( $menu in $menus )
 #**##if ( $menu.name )
 #*  *##if ( $menu.img )
 #*    *##if( $menu.position )
@@ -375,12 +375,12 @@
 #*    *##set ( $img = '<img class="imageLink"' + $src + $alt + $border + $width + $height + "/>" )
 ##
 #*    *##if ( $position == "left" )
-        <li class="nav-header">$img $menu.name</li>
+      <li class="nav-header">$img $menu.name</li>
 #*    *##else
-        <li class="nav-header">$menu.name $img</li>
+      <li class="nav-header">$menu.name $img</li>
 #*    *##end
 #*  *##else
-        <li class="nav-header">$menu.name</li>
+      <li class="nav-header">$menu.name</li>
 #*  *##end
 #**##end
 #**##if ( $menu.items && $menu.items.size() > 0 )
@@ -388,7 +388,7 @@
 #*    *##menuItem( $item )
 #*  *##end
 #**##end
-  #end
+#**##end
 </ul>
 #end
 ##
@@ -476,7 +476,7 @@
 #*      *##if ( $breadcrumbs && $breadcrumbs.size() > 0 )
 #*        *#<span class="divider">|</span>##
 #*      *##end
-#*    *#</li>
+#*      *#</li>
 #*    *##end
 #*    *##if ( $breadcrumbs && $breadcrumbs.size() > 0 )
 #*      *##breadcrumbs( $breadcrumbs "" )
@@ -511,7 +511,7 @@
 ##
 ##
 #macro ( builtByLogo $poweredBy )
-  #if( $poweredBy )
+#**##if( $poweredBy )
 #**##foreach ($item in $poweredBy)
 #*  *##if( $item.href )
 #*    *##set ( $href = $PathTool.calculateLink( $item.href, $relativePath ) )
@@ -570,20 +570,20 @@
 #*    *#<img class="builtBy" alt="$i18n.getString( "site-renderer", $locale, "template.builtby" ) Maven" src="$relativePath/images/logos/maven-feather.png" />##
 #*  *#</a>
 #**##end
-  #else
+#**##else
 #**#<a href="http://maven.apache.org/" title="$i18n.getString( "site-renderer", $locale, "template.builtby" ) Maven" class="poweredBy">##
 #*  *#<img class="builtBy" alt="$i18n.getString( "site-renderer", $locale, "template.builtby" ) Maven" src="$relativePath/images/logos/maven-feather.png" />##
 #**#</a>
-  #end
+#**##end
 #end
 ##
 ##
 ##
 #macro ( piwik )
-  #if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'piwik' ).getChild( 'piwikUrl' )
+#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'piwik' ).getChild( 'piwikUrl' )
         && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'piwik' ).getChild( 'idsite' ) )
-    #set ( $piwikUrl =  $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'piwik' ).getChild( 'piwikUrl' ).getValue() )
-    #set ( $idsite =  $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'piwik' ).getChild( 'idsite' ).getValue() )
+#*  *##set ( $piwikUrl =  $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'piwik' ).getChild( 'piwikUrl' ).getValue() )
+#*  *##set ( $idsite =  $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'piwik' ).getChild( 'idsite' ).getValue() )
 ##
     <!-- Piwik -->
     <script type="text/javascript">
@@ -597,13 +597,13 @@
     } catch( err ) {}
     </script><noscript><p><img src="http://$piwikUrl/piwik.php?idsite=$idsite" style="border:0" alt=""/></p></noscript>
     <!-- End Piwik Tag -->
-  #end
+#**##end
 #end
 ##
 ##
 ##
 #macro ( googleAnalytics $accountId )
-  #if( $accountId && $accountId != "" )
+#**##if( $accountId && $accountId != "" )
     <!-- Google Analytics -->
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -615,19 +615,19 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
-  #end
+#**##end
 #end
 ##
 ##
 ##
 #macro ( googleSearch $top )
 <form id="search-form" action="https://www.google.com/search" method="get" #if ( $top ) class="navbar-search pull-right" #end>
-  #if( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'googleSearch' ).getChild( 'sitesearch' ) )
-    #set( $sitesearchValue = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'googleSearch' ).getChild( 'sitesearch' ).getValue() )
-  #else
-    #set( $startIndex = $project.url.indexOf("://") + 3 )
-    #set( $sitesearchValue = $project.url.substring( $startIndex, $project.url.length() ) )
-  #end
+#**##if( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'googleSearch' ).getChild( 'sitesearch' ) )
+#*  *##set( $sitesearchValue = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'googleSearch' ).getChild( 'sitesearch' ).getValue() )
+#**##else
+#*  *##set( $startIndex = $project.url.indexOf("://") + 3 )
+#*  *##set( $sitesearchValue = $project.url.substring( $startIndex, $project.url.length() ) )
+#**##end
   <input value="$sitesearchValue" name="sitesearch" type="hidden"/>
   <input class="search-query" name="q" id="query" type="text" />
 </form>
@@ -637,186 +637,186 @@
 ##
 ##
 #macro ( forkMeOnGitHub )
-  #if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'gitHub' )
+#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'gitHub' )
             && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'gitHub' ).getChild( 'projectId' ) )
 ##
-    #set ( $gitHubProjectId = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'gitHub' ).getChild( 'projectId' ).getValue() )
+#*  *##set ( $gitHubProjectId = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'gitHub' ).getChild( 'projectId' ).getValue() )
 ##
-    #set ( $leftRibbon = { "red" : "forkme_left_red_aa0000.png", "green" : "forkme_left_green_007200.png", "black" : "forkme_left_darkblue_121621.png", "darkblue" : "forkme_left_darkblue_121621.png", "orange" : "forkme_left_orange_ff7600.png", "gray" : "forkme_left_gray_6d6d6d.png" } )
-    #set ( $rightRibbon = { "red" : "forkme_right_red_aa0000.png", "green" : "forkme_right_green_007200.png", "black" : "forkme_right_darkblue_121621.png", "darkblue" : "forkme_right_darkblue_121621.png", "orange" : "forkme_right_orange_ff7600.png", "gray" : "forkme_right_gray_6d6d6d.png" } )
+#*  *##set ( $leftRibbon = { "red" : "forkme_left_red_aa0000.png", "green" : "forkme_left_green_007200.png", "black" : "forkme_left_darkblue_121621.png", "darkblue" : "forkme_left_darkblue_121621.png", "orange" : "forkme_left_orange_ff7600.png", "gray" : "forkme_left_gray_6d6d6d.png" } )
+#*  *##set ( $rightRibbon = { "red" : "forkme_right_red_aa0000.png", "green" : "forkme_right_green_007200.png", "black" : "forkme_right_darkblue_121621.png", "darkblue" : "forkme_right_darkblue_121621.png", "orange" : "forkme_right_orange_ff7600.png", "gray" : "forkme_right_gray_6d6d6d.png" } )
 ##
-    #set ( $ribbon = $leftRibbon )
-    #set ( $ribbonOrientation = 'left' )
-    #set ( $definedRibbonOrientation = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'gitHub' ).getChild( 'ribbonOrientation' ) )
-    #if ( $definedRibbonOrientation && $definedRibbonOrientation.getValue().equalsIgnoreCase( "right" ) )
-      #set ( $ribbonOrientation = 'right' )
-      #set ( $ribbon = $rightRibbon )
-    #end
+#*  *##set ( $ribbon = $leftRibbon )
+#*  *##set ( $ribbonOrientation = 'left' )
+#*  *##set ( $definedRibbonOrientation = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'gitHub' ).getChild( 'ribbonOrientation' ) )
+#*  *##if ( $definedRibbonOrientation && $definedRibbonOrientation.getValue().equalsIgnoreCase( "right" ) )
+#*    *##set ( $ribbonOrientation = 'right' )
+#*    *##set ( $ribbon = $rightRibbon )
+#*  *##end
 ##
-    #set ( $ribbonColor = 'red' )
-    #set ( $definedRibbonColor = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'gitHub' ).getChild( 'ribbonColor' ) )
+#*  *##set ( $ribbonColor = 'red' )
+#*  *##set ( $definedRibbonColor = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'gitHub' ).getChild( 'ribbonColor' ) )
 ##
-    #if ( $definedRibbonColor
+#*  *##if ( $definedRibbonColor
             && ( $definedRibbonColor.getValue().equalsIgnoreCase( "red" )
             || $definedRibbonColor.getValue().equalsIgnoreCase( "green" )
             || $definedRibbonColor.getValue().equalsIgnoreCase( "black" )
             || $definedRibbonColor.getValue().equalsIgnoreCase( "orange" )
             || $definedRibbonColor.getValue().equalsIgnoreCase( "gray" ) ) )
-      #set ( $ribbonColor = $definedRibbonColor.getValue().toLowerCase() )
-    #end
+#*    *##set ( $ribbonColor = $definedRibbonColor.getValue().toLowerCase() )
+#*  *##end
 ##
     <a href="https://github.com/$gitHubProjectId">
       <img style="position: absolute; top: 0; $ribbonOrientation: 0; border: 0; z-index: 10000;"
         src="https://s3.amazonaws.com/github/ribbons/$ribbon.get( $ribbonColor )"
         alt="Fork me on GitHub">
     </a>
-  #end
+#**##end
 #end
 ##
 ##
 ## activate profile background image if custom.fluidoSkin.profile value set to "retired", "pre-release" or "sandbox"
 #macro ( prjProfile )
-  #if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'profile' ) )
-    #set ( $profile = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'profile' ).getValue() )
-    #if ( $profile.equalsIgnoreCase( "retired" )
+#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'profile' ) )
+#*  *##set ( $profile = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'profile' ).getValue() )
+#*  *##if ( $profile.equalsIgnoreCase( "retired" )
           || $profile.equalsIgnoreCase( "pre-release" )
           || $profile.equalsIgnoreCase( "sandbox" ) )
       <style type="text/css">body{background-image: url('$relativePath/images/profiles/${profile}.png');}</style>
-    #end
-  #end
+#*  *##end
+#**##end
 #end
 ##
 ##
 ##
 #macro ( googlePlusOne $sideBarEnabled )
-  #if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'googlePlusOne' )
+#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'googlePlusOne' )
           && $project.url )
-    #set( $dataSize = 'tall' )
-    #if( !$sideBarEnabled )
-      #set( $dataSize = 'medium' )
-    #end
+#*  *##set( $dataSize = 'tall' )
+#*  *##if( !$sideBarEnabled )
+#*    *##set( $dataSize = 'medium' )
+#*  *##end
     <script type="text/javascript">asyncJs( 'https://apis.google.com/js/plusone.js' )</script>
-    #if( !$sideBarEnabled )
+#*  *##if( !$sideBarEnabled )
     <ul class="nav pull-right"><li style="margin-top: 10px;">
-    #end
+#*  *##end
     <div class="g-plusone" data-href="$project.url" data-size="$dataSize" #if( !$sideBarEnabled ) width="60px" align="right" #end></div>
-    #if( !$sideBarEnabled )
+#*  *##if( !$sideBarEnabled )
     </li></ul>
-    #end
-  #end
+#*  *##end
+#**##end
 #end
 ##
 ##
 ##
 #macro ( facebookLike $sideBarEnabled )
-  #if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'facebookLike' )
+#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'facebookLike' )
           && $project.url )
-    #set( $facebookLike = $decoration.custom.getChild( 'facebookLike' ) )
+#*  *##set( $facebookLike = $decoration.custom.getChild( 'facebookLike' ) )
 ##  ## kindly hardcoded
 ##
-    #set( $layout = 'box_count' )
-    #if( !$sideBarEnabled )
-      #set( $layout = 'button_count' )
-    #end
+#*  *##set( $layout = 'box_count' )
+#*  *##if( !$sideBarEnabled )
+#*    *##set( $layout = 'button_count' )
+#*  *##end
 ##
-    #set( $colorscheme = 'light' )
-    #if( !$sideBarEnabled )
-      #set( $colorscheme = 'dark' )
-    #end
+#*  *##set( $colorscheme = 'light' )
+#*  *##if( !$sideBarEnabled )
+#*    *##set( $colorscheme = 'dark' )
+#*  *##end
 ##
-    #set( $frameWidth = 'width:48px; height:63px' )
-    #if( !$sideBarEnabled )
-      #set( $frameWidth = 'width:100px; height:20px' )
-    #end
+#*  *##set( $frameWidth = 'width:48px; height:63px' )
+#*  *##if( !$sideBarEnabled )
+#*    *##set( $frameWidth = 'width:100px; height:20px' )
+#*  *##end
 ##
     <iframe src="https://www.facebook.com/plugins/like.php?href=$project.url&send=false&layout=$layout&show-faces=false&action=like&colorscheme=$colorscheme"
         scrolling="no" frameborder="0"
         style="border:none; $frameWidth; margin-top: 10px;" #if( !$sideBarEnabled ) class="pull-right" #end></iframe>
-  #end
+#**##end
 #end
 ##
 ##
 ##
 #macro ( followTwitter $sideBarEnabled )
-  #if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' )
+#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' )
         && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' ).getChild( 'user' ) )
-    #set ( $user = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' ).getChild( 'user' ).getValue() )
+#*  *##set ( $user = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' ).getChild( 'user' ).getValue() )
 ##
-    #if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' ).getChild( 'showUser' )
+#*  *##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' ).getChild( 'showUser' )
             && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' ).getChild( 'showUser' ).getValue().equalsIgnoreCase( "true" ) )
-      #set( $showUser = true )
-    #else
-      #set( $showUser = false )
-    #end
+#*    *##set( $showUser = true )
+#*  *##else
+#*    *##set( $showUser = false )
+#*  *##end
 ##
-    #if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' ).getChild( 'showFollowers' )
+#*  *##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' ).getChild( 'showFollowers' )
             && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' ).getChild( 'showFollowers' ).getValue().equalsIgnoreCase( "true" ) )
-      #set( $showFollowers = true )
-    #else
-      #set( $showFollowers = false )
-    #end
+#*    *##set( $showFollowers = true )
+#*  *##else
+#*    *##set( $showFollowers = false )
+#*  *##end
 ##
-    #if ( $sideBarEnabled )
-      #set( $dataSize = "medium" )
-      #set( $dataAlign = "left" )
+#*  *##if ( $sideBarEnabled )
+#*    *##set( $dataSize = "medium" )
+#*    *##set( $dataAlign = "left" )
     <div id="twitter">
-    #else
-      #set( $dataSize = "large" )
-      #set( $dataAlign = "right" )
+#*  *##else
+#*    *##set( $dataSize = "large" )
+#*    *##set( $dataAlign = "right" )
     <ul class="nav pull-right"><li>
-    #end
+#*  *##end
 ##
     <a href="https://twitter.com/${user}" class="twitter-follow-button" data-show-count="${showFollowers}" data-align="${dataAlign}" data-size="${dataSize}" data-show-screen-name="${showUser}" data-lang="${locale}">Follow ${user}</a>
     <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 ##
-    #if ( $sideBarEnabled )
+#*  *##if ( $sideBarEnabled )
     </div>
-    #else
+#*  *##else
     </li></ul>
-    #end
-  #end
+#*  *##end
+#**##end
 #end
 ##
 ##
 ##
 #macro ( ohloh )
-  #if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'ohloh' )
+#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'ohloh' )
         && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'ohloh' ).getChild( 'projectId' ) )
-    #set ( $projectId = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'ohloh' ).getChild( 'projectId' ).getValue() )
+#*  *##set ( $projectId = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'ohloh' ).getChild( 'projectId' ).getValue() )
 ##
-    #set( $widget = "users_logo.js" )
+#*  *##set( $widget = "users_logo.js" )
 ##
-    #if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'ohloh' ).getChild( 'widget' ) )
-      #set( $definedWidget = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'ohloh' ).getChild( 'widget' ).getValue() )
+#*  *##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'ohloh' ).getChild( 'widget' ) )
+#*    *##set( $definedWidget = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'ohloh' ).getChild( 'widget' ).getValue() )
 ##
-      #if ( $definedWidget.equalsIgnoreCase( "users-logo" ) )
-        #set( $widget = "users_logo.js" )
-      #elseif ( $definedWidget.equalsIgnoreCase( "users-green" ) )
-        #set( $widget = "users.js?style=green" )
-      #elseif ( $definedWidget.equalsIgnoreCase( "users-red" ) )
-        #set( $widget = "users.js?style=red" )
-      #elseif ( $definedWidget.equalsIgnoreCase( "users-blue" ) )
-        #set( $widget = "users.js?style=blue" )
-      #elseif ( $definedWidget.equalsIgnoreCase( "users-gray" ) )
-        #set( $widget = "users.js?style=gray" )
-      #elseif ( $definedWidget.equalsIgnoreCase( "users-rainbow" ) )
-        #set( $widget = "users.js?style=rainbow" )
-      #elseif ( $definedWidget.equalsIgnoreCase( "users" ) )
-        #set( $widget = "users.js" )
-      #elseif ( $definedWidget.equalsIgnoreCase( "thin-badge" ) )
-        #set( $widget = "thin_badge.js" )
-      #elseif ( $definedWidget.equalsIgnoreCase( "partner-badge" ) )
-        #set( $widget = "partner_badge.js" )
-      #elseif ( $definedWidget.equalsIgnoreCase( "languages" ) )
-        #set( $widget = "languages.js" )
-      #elseif ( $definedWidget.equalsIgnoreCase( "factoids" ) )
-        #set( $widget = "factoids.js" )
-      #elseif ( $definedWidget.equalsIgnoreCase( "cocomo" ) )
-        #set( $widget = "cocomo.js" )
-      #elseif ( $definedWidget.equalsIgnoreCase( "stats" ) )
-        #set( $widget = "basic_stats.js" )
-      #end
-    #end
+#*    *##if ( $definedWidget.equalsIgnoreCase( "users-logo" ) )
+#*      *##set( $widget = "users_logo.js" )
+#*    *##elseif ( $definedWidget.equalsIgnoreCase( "users-green" ) )
+#*      *##set( $widget = "users.js?style=green" )
+#*    *##elseif ( $definedWidget.equalsIgnoreCase( "users-red" ) )
+#*    *##set( $widget = "users.js?style=red" )
+#*  *##elseif ( $definedWidget.equalsIgnoreCase( "users-blue" ) )
+#*    *##set( $widget = "users.js?style=blue" )
+#*  *##elseif ( $definedWidget.equalsIgnoreCase( "users-gray" ) )
+#*    *##set( $widget = "users.js?style=gray" )
+#*  *##elseif ( $definedWidget.equalsIgnoreCase( "users-rainbow" ) )
+#*    *##set( $widget = "users.js?style=rainbow" )
+#*  *##elseif ( $definedWidget.equalsIgnoreCase( "users" ) )
+#*    *##set( $widget = "users.js" )
+#*  *##elseif ( $definedWidget.equalsIgnoreCase( "thin-badge" ) )
+#*    *##set( $widget = "thin_badge.js" )
+#*  *##elseif ( $definedWidget.equalsIgnoreCase( "partner-badge" ) )
+#*    *##set( $widget = "partner_badge.js" )
+#*  *##elseif ( $definedWidget.equalsIgnoreCase( "languages" ) )
+#*    *##set( $widget = "languages.js" )
+#*  *##elseif ( $definedWidget.equalsIgnoreCase( "factoids" ) )
+#*    *##set( $widget = "factoids.js" )
+#*  *##elseif ( $definedWidget.equalsIgnoreCase( "cocomo" ) )
+#*    *##set( $widget = "cocomo.js" )
+#*  *##elseif ( $definedWidget.equalsIgnoreCase( "stats" ) )
+#*    *##set( $widget = "basic_stats.js" )
+#*  *##end
+#**##end
 ##
     <div id="ohloh" class="pull-right">
       <script type="text/javascript" src="https://www.ohloh.net/p/${projectId}/widgets/project_${widget}"></script>
@@ -827,7 +827,7 @@
 ##
 ##
 #macro ( flattrHead )
-  #if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' )
+#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' )
     && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'thing' )
     && ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'url' )
           || $project.url ) )
@@ -841,45 +841,45 @@
             t.parentNode.insertBefore(s, t);
         })();
     /* ]]> */</script>
-  #end
+#**##end
 #end
 ##
 ##
 ##
 #macro ( flattrBody $sideBarEnabled )
-  #if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' )
+#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' )
     && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'thing' )
     && ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'url' )
           || $project.url ) )
-    #set ( $flattrThing = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'thing' ).getValue() )
-    #if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'url' ) )
-      #set ( $flattrUrl = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'url' ).getValue() )
-    #else
-      #set ( $flattrUrl = $project.url )
-    #end
+#*  *##set ( $flattrThing = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'thing' ).getValue() )
+#*  *##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'url' ) )
+#*    *##set ( $flattrUrl = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'url' ).getValue() )
+#*  *##else
+#*    *##set ( $flattrUrl = $project.url )
+#*  *##end
 ##
-    #set ( $styleModifier = '' )
-    #if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'style' ) )
-      #set ( $style = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'style' ).getValue() )
-      #if ( $style.equalsIgnoreCase( 'compact' ) )
-        #set ( $styleModifier = 'rev="flattr;button:compact;"' )
-      #end
-    #end
+#*  *##set ( $styleModifier = '' )
+#*  *##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'style' ) )
+#*    *##set ( $style = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'style' ).getValue() )
+#*    *##if ( $style.equalsIgnoreCase( 'compact' ) )
+#*      *##set ( $styleModifier = 'rev="flattr;button:compact;"' )
+#*    *##end
+#*  *##end
 ##
-    #if ( $sideBarEnabled )
+#*  *##if ( $sideBarEnabled )
     <div id="flattr">
-    #else
+#*  *##else
     <ul class="nav pull-right"><li>
-    #end
+#*  *##end
 ##
     <a class="FlattrButton" style="display:none;" $styleModifier href="$flattrUrl"></a>
     <noscript><a href="https://flattr.com/thing/$flattrThing" target="_blank">
     <img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
 ##
-    #if ( $sideBarEnabled )
+#*  *##if ( $sideBarEnabled )
     </div>
-    #else
+#*  *##else
     </li></ul>
-    #end
-  #end
+#*  *##end
+#**##end
 #end

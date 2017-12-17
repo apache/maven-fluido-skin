@@ -61,9 +61,9 @@
               && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'topBarEnabled' )
               && 'true' == $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'topBarEnabled' ).getValue() )
 #**##set( $topBarEnabled = true )
-    <body class="topBarEnabled">
+  <body class="topBarEnabled">
 #**##else
-    <body class="topBarDisabled">
+  <body class="topBarDisabled">
 #**##end
 #**##forkMeOnGitHub()
 ##
