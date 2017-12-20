@@ -241,10 +241,15 @@
 #*  *#<span class="divider">$breadcrumbDivider</span>##
 #*  *#</li>
 #**##end
+#**### add Edit button if content is editable
+#**##set ( $edit = '' )
+#**##if( $decoration.edit && $docRenderingContext.editable )
+#*  *##set ( $edit = ' <a href="' + $docRenderingContext.getDoxiaSourcePath( $decoration.edit ) + '"><img src="' + $relativePath + '/images/accessories-text-editor.png" title="Edit" /></a>' )
+#**##end
 #**##if ( $shortTitle )
-    <li class="active $cssClass">$shortTitle</li>
+    <li class="active $cssClass">$shortTitle$edit</li>
 #**##else
-    <li class="active $cssClass">$title</li>
+    <li class="active $cssClass">$title$edit</li>
 #**##end
 #end
 ##
