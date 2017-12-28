@@ -224,6 +224,7 @@
 ##
 ##
 #macro ( breadcrumbs $breadcrumbs $cssClass )
+#**##set ( $breadcrumbDivider = $decoration.getCustomValue( 'fluidoSkin.breadcrumbDivider', '/' ) )
 #**##foreach( $item in $breadcrumbs )
 #*  *##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
 #*  *##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
@@ -233,23 +234,17 @@
 ##
       <li class="$cssClass">##
 #*  *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false )
-#*  *##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'breadcrumbDivider' ) )
-#*    *##set ( $breadcrumbDivider = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'breadcrumbDivider' ).getValue() )
-#*  *##else
-#*    *##set ( $breadcrumbDivider = '/' )
-#*  *##end
 #*  *#<span class="divider">$breadcrumbDivider</span>##
 #*  *#</li>
 #**##end
 #**### add Edit button if content is editable
-#**##set ( $edit = '' )
 #**##if( $decoration.edit && $docRenderingContext.editable )
 #*  *##set ( $edit = ' <a href="' + $docRenderingContext.getDoxiaSourcePath( $decoration.edit ) + '"><img src="' + $relativePath + '/images/accessories-text-editor.png" title="Edit" /></a>' )
 #**##end
 #**##if ( $shortTitle )
-    <li class="active $cssClass">$shortTitle$edit</li>
+    <li class="active $cssClass">$shortTitle$!edit</li>
 #**##else
-    <li class="active $cssClass">$title$edit</li>
+    <li class="active $cssClass">$title$!edit</li>
 #**##end
 #end
 ##
@@ -585,10 +580,10 @@
 ##
 ##
 #macro ( piwik )
-#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'piwik' ).getChild( 'piwikUrl' )
-        && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'piwik' ).getChild( 'idsite' ) )
-#*  *##set ( $piwikUrl =  $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'piwik' ).getChild( 'piwikUrl' ).getValue() )
-#*  *##set ( $idsite =  $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'piwik' ).getChild( 'idsite' ).getValue() )
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.piwik.piwikUrl' )
+        && $decoration.getCustomChild( 'fluidoSkin.piwik.idsite' ) )
+#*  *##set ( $piwikUrl =  $decoration.getCustomValue( 'fluidoSkin.piwik.piwikUrl' ) )
+#*  *##set ( $idsite =  $decoration.getCustomValue( 'fluidoSkin.piwik.idsite' ) )
 ##
     <!-- Piwik -->
     <script type="text/javascript">
@@ -627,8 +622,8 @@
 ##
 #macro ( googleSearch $top )
 <form id="search-form" action="https://www.google.com/search" method="get" #if ( $top ) class="navbar-search pull-right" #end>
-#**##if( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'googleSearch' ).getChild( 'sitesearch' ) )
-#*  *##set( $sitesearchValue = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'googleSearch' ).getChild( 'sitesearch' ).getValue() )
+#**##if( $decoration.getCustomChild( 'fluidoSkin.googleSearch.sitesearch' ) )
+#*  *##set( $sitesearchValue = $decoration.getCustomValue( 'fluidoSkin.googleSearch.sitesearch' ) )
 #**##else
 #*  *##set( $startIndex = $project.url.indexOf("://") + 3 )
 #*  *##set( $sitesearchValue = $project.url.substring( $startIndex, $project.url.length() ) )
@@ -642,24 +637,22 @@
 ##
 ##
 #macro ( forkMeOnGitHub )
-#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'gitHub' )
-            && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'gitHub' ).getChild( 'projectId' ) )
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.gitHub.projectId' ) )
 ##
-#*  *##set ( $gitHubProjectId = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'gitHub' ).getChild( 'projectId' ).getValue() )
+#*  *##set ( $gitHubProjectId = $decoration.getCustomValue( 'fluidoSkin.gitHub.projectId' ) )
 ##
 #*  *##set ( $leftRibbon = { "red" : "forkme_left_red_aa0000.png", "green" : "forkme_left_green_007200.png", "black" : "forkme_left_darkblue_121621.png", "darkblue" : "forkme_left_darkblue_121621.png", "orange" : "forkme_left_orange_ff7600.png", "gray" : "forkme_left_gray_6d6d6d.png" } )
 #*  *##set ( $rightRibbon = { "red" : "forkme_right_red_aa0000.png", "green" : "forkme_right_green_007200.png", "black" : "forkme_right_darkblue_121621.png", "darkblue" : "forkme_right_darkblue_121621.png", "orange" : "forkme_right_orange_ff7600.png", "gray" : "forkme_right_gray_6d6d6d.png" } )
 ##
 #*  *##set ( $ribbon = $leftRibbon )
 #*  *##set ( $ribbonOrientation = 'left' )
-#*  *##set ( $definedRibbonOrientation = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'gitHub' ).getChild( 'ribbonOrientation' ) )
-#*  *##if ( $definedRibbonOrientation && $definedRibbonOrientation.getValue().equalsIgnoreCase( "right" ) )
+#*  *##if ( $decoration.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'right' ) )
 #*    *##set ( $ribbonOrientation = 'right' )
 #*    *##set ( $ribbon = $rightRibbon )
 #*  *##end
 ##
 #*  *##set ( $ribbonColor = 'red' )
-#*  *##set ( $definedRibbonColor = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'gitHub' ).getChild( 'ribbonColor' ) )
+#*  *##set ( $definedRibbonColor = $decoration.getCustomChild( 'fluidoSkin.gitHub.ribbonColor' ) )
 ##
 #*  *##if ( $definedRibbonColor
             && ( $definedRibbonColor.getValue().equalsIgnoreCase( "red" )
@@ -681,21 +674,18 @@
 ##
 ## activate profile background image if custom.fluidoSkin.profile value set to "retired", "pre-release" or "sandbox"
 #macro ( prjProfile )
-#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'profile' ) )
-#*  *##set ( $profile = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'profile' ).getValue() )
-#*  *##if ( $profile.equalsIgnoreCase( "retired" )
+#**##set ( $profile = $decoration.getCustomValue( 'fluidoSkin.profile', '' ) )
+#**##if ( $profile.equalsIgnoreCase( "retired" )
           || $profile.equalsIgnoreCase( "pre-release" )
           || $profile.equalsIgnoreCase( "sandbox" ) )
       <style type="text/css">body{background-image: url('$relativePath/images/profiles/${profile}.png');}</style>
-#*  *##end
 #**##end
 #end
 ##
 ##
 ##
 #macro ( googlePlusOne $sideBarEnabled )
-#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'googlePlusOne' )
-          && $project.url )
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.googlePlusOne' ) && $project.url )
 #*  *##set( $dataSize = 'tall' )
 #*  *##if( !$sideBarEnabled )
 #*    *##set( $dataSize = 'medium' )
@@ -714,9 +704,7 @@
 ##
 ##
 #macro ( facebookLike $sideBarEnabled )
-#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'facebookLike' )
-          && $project.url )
-#*  *##set( $facebookLike = $decoration.custom.getChild( 'facebookLike' ) )
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.facebookLike' ) && $project.url )
 ##  ## kindly hardcoded
 ##
 #*  *##set( $layout = 'box_count' )
@@ -743,23 +731,10 @@
 ##
 ##
 #macro ( followTwitter $sideBarEnabled )
-#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' )
-        && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' ).getChild( 'user' ) )
-#*  *##set ( $user = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' ).getChild( 'user' ).getValue() )
-##
-#*  *##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' ).getChild( 'showUser' )
-            && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' ).getChild( 'showUser' ).getValue().equalsIgnoreCase( "true" ) )
-#*    *##set( $showUser = true )
-#*  *##else
-#*    *##set( $showUser = false )
-#*  *##end
-##
-#*  *##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' ).getChild( 'showFollowers' )
-            && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'twitter' ).getChild( 'showFollowers' ).getValue().equalsIgnoreCase( "true" ) )
-#*    *##set( $showFollowers = true )
-#*  *##else
-#*    *##set( $showFollowers = false )
-#*  *##end
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.twitter.user' ) )
+#*  *##set( $user = $decoration.getCustomValue( 'fluidoSkin.twitter.user' ) )
+#*  *##set( $showUser = $decoration.getCustomValue( 'fluidoSkin.twitter.showUser', '' ).equalsIgnoreCase( 'true' ) )
+#*  *##set( $showFollowers = $decoration.getCustomValue( 'fluidoSkin.twitter.showFollowers', '' ).equalsIgnoreCase( 'true' ) )
 ##
 #*  *##if ( $sideBarEnabled )
 #*    *##set( $dataSize = "medium" )
@@ -785,14 +760,13 @@
 ##
 ##
 #macro ( ohloh )
-#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'ohloh' )
-        && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'ohloh' ).getChild( 'projectId' ) )
-#*  *##set ( $projectId = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'ohloh' ).getChild( 'projectId' ).getValue() )
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.ohloh.projectId' ) )
+#*  *##set ( $projectId = $decoration.getCustomValue( 'fluidoSkin.ohloh.projectId' ) )
 ##
 #*  *##set( $widget = "users_logo.js" )
 ##
-#*  *##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'ohloh' ).getChild( 'widget' ) )
-#*    *##set( $definedWidget = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'ohloh' ).getChild( 'widget' ).getValue() )
+#*  *##if ( $decoration.getCustomChild( 'fluidoSkin.ohloh.widget' ) )
+#*    *##set( $definedWidget = $decoration.getCustomValue( 'fluidoSkin.ohloh.widget' ) )
 ##
 #*    *##if ( $definedWidget.equalsIgnoreCase( "users-logo" ) )
 #*      *##set( $widget = "users_logo.js" )
@@ -832,10 +806,8 @@
 ##
 ##
 #macro ( flattrHead )
-#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' )
-    && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'thing' )
-    && ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'url' )
-          || $project.url ) )
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.flattr.thing' )
+          && ( $decoration.getCustomChild( 'fluidoSkin.flattr.url' ) || $project.url ) )
     <script type="text/javascript">
     /* <![CDATA[ */
         (function() {
@@ -852,23 +824,14 @@
 ##
 ##
 #macro ( flattrBody $sideBarEnabled )
-#**##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' )
-    && $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'thing' )
-    && ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'url' )
-          || $project.url ) )
-#*  *##set ( $flattrThing = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'thing' ).getValue() )
-#*  *##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'url' ) )
-#*    *##set ( $flattrUrl = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'url' ).getValue() )
-#*  *##else
-#*    *##set ( $flattrUrl = $project.url )
-#*  *##end
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.flattr.thing' )
+          && ( $decoration.getCustomChild( 'fluidoSkin.flattr.url' ) || $project.url ) )
+#*  *##set ( $flattrThing = $decoration.getCustomValue( 'fluidoSkin.flattr.thing' ) )
+#*  *##set ( $flattrUrl = $decoration.getCustomValue( 'fluidoSkin.flattr.url', $project.url ) )
 ##
 #*  *##set ( $styleModifier = '' )
-#*  *##if ( $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'style' ) )
-#*    *##set ( $style = $decoration.custom.getChild( 'fluidoSkin' ).getChild( 'flattr' ).getChild( 'style' ).getValue() )
-#*    *##if ( $style.equalsIgnoreCase( 'compact' ) )
-#*      *##set ( $styleModifier = 'rev="flattr;button:compact;"' )
-#*    *##end
+#*  *##if ( $decoration.getCustomValue( 'fluidoSkin.flattr.style', '' ).equalsIgnoreCase( 'compact' ) )
+#*    *##set ( $styleModifier = 'rev="flattr;button:compact;"' )
 #*  *##end
 ##
 #*  *##if ( $sideBarEnabled )
