@@ -59,35 +59,7 @@ under the License.
       <item name="Sidebar" href="./sidebar/index.html"/>
       <item name="Topbar" href="./topbar/index.html"/>
       <item name="Topbar (inverse)" href="./topbar-inverse/index.html"/>
-    </menu>
-
-    <menu name="Issues ITs">
-      <item name="MSKINS-10" href="./mskins-10/index.html"/>
-      <item name="MSKINS-13" href="./mskins-13/index.html"/>
-      <item name="Search" href="./mskins-14/index.html"/>
-      <item name="Search (sitesearch)" href="./mskins-14_sitesearch/index.html"/>
-      <item name="MSKINS-15" href="./mskins-15/index.html"/>
-      <item name="MSKINS-16" href="./mskins-16/index.html"/>
-      <item name="MSKINS-17" href="./mskins-17/index.html"/>
-      <item name="MSKINS-21" href="./mskins-21/index.html"/>
-      <item name="GitHub" href="./mskins-22/index.html"/>
-      <item name="GitHub (default)" href="./mskins-22_default/index.html"/>
-      <item name="GitHub (topbar)" href="./mskins-22_topbar/index.html"/>
-      <item name="MSKINS-23" href="./mskins-23/index.html"/>
-      <item name="Twitter" href="./mskins-24/index.html"/>
-      <item name="Twitter (topbar)" href="./mskins-24_topbar/index.html"/>
-      <item name="Ohloh" href="./mskins-25/index.html"/>
-      <item name="MSKINS-31" href="./mskins-31/index.html"/>
-      <item name="Like" href="./mskins-33/index.html"/>
-      <item name="Like (topbar)" href="./mskins-33_topbar/index.html"/>
-      <item name="Google +1" href="./mskins-34/index.html"/>
-      <item name="Google +1 (topbar)" href="./mskins-34_topbar/index.html"/>
-      <item name="MSKINS-41" href="./mskins-41/index.html"/>
-      <item name="MSKINS-72" href="./mskins-72/index.html"/>
-      <item name="MSKINS-75" href="./mskins-75/index.html"/>
-      <item name="MSKINS-76" href="./mskins-76/index.html"/>
-      <item name="MSKINS-76 (topbar)" href="./mskins-76_topbar/index.html"/>
-      <item name="MSKINS-85" href="./mskins-85/index.html"/>
+      <item name="Issues ITs" href="./ITs.html"/>
     </menu>
 
     <menu ref="reports"/>
