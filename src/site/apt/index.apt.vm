@@ -304,7 +304,7 @@ Welcome to ${project.name}!
 
 ** Twitter follow button
 
- Since version <<1.1>>, fluido-skin supports the Twitter {{{https://dev.twitter.com/docs/follow-button}follow button}}
+ Since version <<1.1>>, fluido-skin supports the Twitter {{{https://dev.twitter.com/web/follow-button}follow button}}
  to simplify its integration. Users must define:
 
  * <<<custom.fluidoSkin.twitter.user>>>: <<required>>, it is the Twitter id to suggest to follow;
