@@ -267,7 +267,7 @@
 ##
 ##
 ##
-#macro ( menuItem $item )
+#macro ( menuItem $item $indent )
 #**##set ( $collapseClass = "none" )
 #**##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
 #**##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
@@ -289,9 +289,9 @@
 #**##end
 ##
 #**##if ( $alignedFileName == $currentItemHref )
-    <li class="active">##
+$indent    <li class="active">##
 #**##else
-    <li>##
+$indent    <li>##
 #**##end
 ##
 #**##if ( $item.img )
@@ -318,11 +318,11 @@
 #**##if ( $item && $item.items && $item.items.size() > 0 )
 #*  *##if ( $collapseClass == "icon-chevron-down" )
 
-    <ul class="nav nav-list">
+$indent     <ul class="nav nav-list">
 #*    *##foreach( $subitem in $item.items )
-#*      *##menuItem( $subitem )
+#*      *##menuItem( $subitem "$indent  " )
 #*    *##end
-    </ul>
+$indent     </ul>##
 #*  *##end
 #**##end
 #**#</li>
@@ -331,7 +331,7 @@
 ##
 ##
 #macro ( mainMenu $menus )
-    <ul class="nav nav-list">
+  <ul class="nav nav-list">
 #**##foreach( $menu in $menus )
 #**##if ( $menu.name )
 #*  *##if ( $menu.img )
@@ -375,21 +375,21 @@
 #*    *##set ( $img = '<img class="imageLink"' + $src + $alt + $border + $width + $height + "/>" )
 ##
 #*    *##if ( $position == "left" )
-      <li class="nav-header">$img $menu.name</li>
+   <li class="nav-header">$img $menu.name</li>
 #*    *##else
-      <li class="nav-header">$menu.name $img</li>
+   <li class="nav-header">$menu.name $img</li>
 #*    *##end
 #*  *##else
-      <li class="nav-header">$menu.name</li>
+   <li class="nav-header">$menu.name</li>
 #*  *##end
 #**##end
 #**##if ( $menu.items && $menu.items.size() > 0 )
 #*  *##foreach( $item in $menu.items )
-#*    *##menuItem( $item )
+#*    *##menuItem( $item '' )
 #*  *##end
 #**##end
 #**##end
-</ul>
+  </ul>
 #end
 ##
 ##
