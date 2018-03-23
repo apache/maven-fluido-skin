@@ -166,6 +166,37 @@ Welcome to ${project.name}!
 </project>
 +-----+
 
+** GoogleAnalytics
+
+ Users can optionally enable <<Google Analytics>> for the generated site:
+
++-----+
+<project name="xxx">
+  [...]
+  <googleAnalytics>UA-12345...</googleAnalytics>
+  [...]
+</project>
++-----+
+
+ By default, <<<forceSSL>>> and <<<anonymizeIp>>> are enabled. You can disable both, but this might be illegal in several countries or regions (e.g., in the EU due to GDPR):
+
++-----+
+<project name="xxx">
+  [...]
+  <googleAnalytics>UA-12345...</googleAnalytics>
+  [...]
+  <custom>
+    <fluidoSkin>
+      <googleAnalytics>
+        <anonymizeIp>true/false</anonymizeIp>
+        <forceSSL>true/false</forceSSL>
+      </googleAnalytics>
+    </fluidoSkin>
+  </custom>
+  [...]
+</project>
++-----+
+
 ** GoogleSearch
 
  Users can optionally enable the <<Google Search>> for the generated site, requirements are:
