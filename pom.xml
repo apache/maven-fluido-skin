@@ -728,6 +728,51 @@ under the License.
                   <outputDirectory>${project.build.directory}/site/mskins-85/</outputDirectory>
                 </configuration>
               </execution>
+              <execution>
+                <id>copy-mskins-143_false</id>
+                <phase>site</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <resources>
+                    <resource>
+                      <directory>${project.build.directory}/it/mskins-143_false/target/site/</directory>
+                    </resource>
+                  </resources>
+                  <outputDirectory>${project.build.directory}/site/mskins-143_false/</outputDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>copy-mskins-143_true</id>
+                <phase>site</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <resources>
+                    <resource>
+                      <directory>${project.build.directory}/it/mskins-143_true/target/site/</directory>
+                    </resource>
+                  </resources>
+                  <outputDirectory>${project.build.directory}/site/mskins-143_true/</outputDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>copy-mskins-143_default</id>
+                <phase>site</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <resources>
+                    <resource>
+                      <directory>${project.build.directory}/it/mskins-143_default/target/site/</directory>
+                    </resource>
+                  </resources>
+                  <outputDirectory>${project.build.directory}/site/mskins-143_default/</outputDirectory>
+                </configuration>
+              </execution>
             </executions>
           </plugin>
         </plugins>

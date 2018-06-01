@@ -82,5 +82,11 @@ Maven Fuido Skin ITs
 
   * {{{./mskins-85/index.html}MSKINS-85}}
 
+  * {{{./mskins-143_default/index.html}MSKINS-143 (using defaults)}}
+
+  * {{{./mskins-143_false/index.html}MSKINS-143 (using explicit false)}}
+
+  * {{{./mskins-143_true/index.html}MSKINS-143 (using explicit true}}
+
   []
  

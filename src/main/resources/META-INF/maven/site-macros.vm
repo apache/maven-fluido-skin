@@ -609,6 +609,12 @@ $indent     </ul>##
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', '$accountId']);
       _gaq.push(['_trackPageview']);
+#**##if( $decoration.getCustomValue( 'fluidoSkin.googleAnalytics.anonymizeIp', 'true' ) == 'true' )
+      _gaq.push(['_gat._anonymizeIp']);
+#**##end
+#**##if( $decoration.getCustomValue( 'fluidoSkin.googleAnalytics.forceSSL', 'true' ) == 'true' )
+      _gaq.push(['_gat._forceSSL']);
+#**##end
       (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
