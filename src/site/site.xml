@@ -35,7 +35,7 @@ under the License.
       <googlePlusOne />
       <facebookLike />
       <gitHub>
-        <projectId>apache/maven-skins</projectId>
+        <projectId>apache/${project.artifactId}</projectId>
         <ribbonOrientation>right</ribbonOrientation>
         <ribbonColor>gray</ribbonColor>
       </gitHub>
