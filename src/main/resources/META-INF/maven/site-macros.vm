@@ -605,21 +605,19 @@ $indent     </ul>##
 #macro ( googleAnalytics $accountId )
 #**##if( $accountId && $accountId != "" )
     <!-- Google Analytics -->
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '$accountId']);
-      _gaq.push(['_trackPageview']);
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', '$accountId', 'auto');
+      ga('send', 'pageview');
 #**##if( $decoration.getCustomValue( 'fluidoSkin.googleAnalytics.anonymizeIp', 'true' ) == 'true' )
-      _gaq.push(['_gat._anonymizeIp']);
+      ga('set', 'anonymizeIp', true);
 #**##end
 #**##if( $decoration.getCustomValue( 'fluidoSkin.googleAnalytics.forceSSL', 'true' ) == 'true' )
-      _gaq.push(['_gat._forceSSL']);
+      ga('set', 'forceSSL', true);
 #**##end
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
     </script>
 #**##end
 #end
