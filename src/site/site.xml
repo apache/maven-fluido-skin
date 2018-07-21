@@ -64,11 +64,6 @@ under the License.
 
     <menu ref="reports"/>
 
-    <footer>
-      <![CDATA[
-      <div class="row-fluid">Apache Maven, $project.name, Apache, the Apache feather logo, and the Apache Maven project logos are trademarks of The Apache Software Foundation.
-      All other marks mentioned may be trademarks or registered trademarks of their respective owners.</div>
-      ]]>
-    </footer>
   </body>
+
 </project>
