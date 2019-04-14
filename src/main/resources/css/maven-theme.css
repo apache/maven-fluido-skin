@@ -72,7 +72,7 @@ li.none {
 }
 
 body.topBarEnabled {
-  padding-top: 60px;
+  padding-top: 10px;
 }
 body.topBarDisabled {
   padding-top: 20px;
