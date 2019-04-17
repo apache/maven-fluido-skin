@@ -17,7 +17,6 @@
 # specific language governing permissions and limitations
 # under the License.
 #------------------------------------------------------------------------------
-# $Id$
 
 montage window-new.png \
         internet-web-browser.png \

@@ -17,6 +17,5 @@
 # specific language governing permissions and limitations
 # under the License.
 #------------------------------------------------------------------------------
-# $Id$
 
 convert $1 -adaptive-resize 14x14 $1

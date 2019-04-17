@@ -17,8 +17,6 @@
  * under the License.
  */
 
-/* $Id$ */
-
 /*IE6/7 don't support selectors*/
 a.externalLink {
   padding-right: 18px;
