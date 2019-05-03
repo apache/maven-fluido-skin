@@ -133,7 +133,6 @@
 ##
 #*      *##if ( !$sideBarEnabled )
 #*        *##facebookLike( $sideBarEnabled )
-#*        *##googlePlusOne( $sideBarEnabled )
 #*        *##followTwitter( $sideBarEnabled )
 #*        *##flattrBody( $sideBarEnabled )
 #*      *##end
@@ -213,8 +212,6 @@
 #*      *##end
           <hr />
           <div id="poweredBy">
-#*        *##googlePlusOne( $sideBarEnabled )
-            <div class="clear"></div>
 #*        *##facebookLike( $sideBarEnabled )
             <div class="clear"></div>
 #*        *##followTwitter( $sideBarEnabled )

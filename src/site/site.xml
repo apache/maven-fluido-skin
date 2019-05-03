@@ -32,7 +32,6 @@ under the License.
 
   <custom>
     <fluidoSkin>
-      <googlePlusOne />
       <facebookLike />
       <gitHub>
         <projectId>apache/${project.artifactId}</projectId>
