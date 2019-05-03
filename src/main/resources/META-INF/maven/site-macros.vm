@@ -688,25 +688,6 @@ $indent     </ul>##
 ##
 ##
 ##
-#macro ( googlePlusOne $sideBarEnabled )
-#**##if ( $decoration.getCustomChild( 'fluidoSkin.googlePlusOne' ) && $project.url )
-#*  *##set( $dataSize = 'tall' )
-#*  *##if( !$sideBarEnabled )
-#*    *##set( $dataSize = 'medium' )
-#*  *##end
-    <script type="text/javascript">asyncJs( 'https://apis.google.com/js/plusone.js' )</script>
-#*  *##if( !$sideBarEnabled )
-    <ul class="nav pull-right"><li style="margin-top: 10px;">
-#*  *##end
-    <div class="g-plusone" data-href="$project.url" data-size="$dataSize" #if( !$sideBarEnabled ) width="60px" align="right" #end></div>
-#*  *##if( !$sideBarEnabled )
-    </li></ul>
-#*  *##end
-#**##end
-#end
-##
-##
-##
 #macro ( facebookLike $sideBarEnabled )
 #**##if ( $decoration.getCustomChild( 'fluidoSkin.facebookLike' ) && $project.url )
 ##  ## kindly hardcoded
