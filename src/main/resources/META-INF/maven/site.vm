@@ -42,9 +42,6 @@
 #if ( $dateRevision && !$skipGenerationDate )
     <meta name="Date-Revision-yyyymmdd" content="$dateRevision" />
 #end
-#if ( $locale )
-    <meta http-equiv="Content-Language" content="$locale.language" />
-#end
     <title>$title</title>
     <link rel="stylesheet" href="$relativePath/css/apache-maven-fluido-@project.version@.min.css" />
     <link rel="stylesheet" href="$relativePath/css/site.css" />
