@@ -48,8 +48,6 @@
 #**##end
 #end
 ##
-##
-##
 #macro ( topLink $href $name $target )
 #**##set ( $linkTitle = ' title="' + $name + '"' )
 #**##if( $target )
@@ -60,8 +58,6 @@
 #**#<a href="$href"$linkTarget title="$name">$name</a>##
 #end
 ##
-##
-##
 #macro ( topLinks $links )
 #**##set ( $counter = 0 )
 #**##foreach( $item in $links )
@@ -71,8 +67,6 @@
     <li>#topLink( $currentItemHref $item.name $item.target )</li>
 #**##end
 #end
-##
-##
 ##
 #macro ( link $href $name $target $img $position $alt $border $width $height $icon)
 #**##set ( $linkTitle = ' title="' + $name + '"' )
@@ -100,8 +94,6 @@
 #*  *#$name</a>##
 #**##end
 #end
-##
-##
 ##
 #macro ( image $img $alt $border $width $height )
 #**##if( $img )
@@ -135,8 +127,6 @@
 <img class="imageLink"$imgSrc$imgAlt$imgBorder$imgWidth$imgHeight/>##
 #**##end
 #end
-##
-##
 ##
 #macro ( banner $banner $id )
 #**##if ( $banner )
@@ -200,8 +190,6 @@
 #**##end
 #end
 ##
-##
-##
 #macro ( links $links )
 #**##set ( $counter = 0 )
 #**### MSKINS-41
@@ -220,8 +208,6 @@
 #*  *#</li>
 #**##end
 #end
-##
-##
 ##
 #macro ( breadcrumbs $breadcrumbs $cssClass )
 #**##set ( $breadcrumbDivider = $decoration.getCustomValue( 'fluidoSkin.breadcrumbDivider', '/' ) )
@@ -248,8 +234,6 @@
 #**##end
 #end
 ##
-##
-##
 #macro ( displayTree $display $item )
 #**##if ( $item && $item.items && $item.items.size() > 0 )
 #*  *##foreach( $subitem in $item.items )
@@ -264,8 +248,6 @@
 #*  *##end
 #**##end
 #end
-##
-##
 ##
 #macro ( menuItem $item $indent )
 #**##set ( $collapseClass = "none" )
@@ -327,8 +309,6 @@ $indent     </ul>##
 #**##end
 #**#</li>
 #end
-##
-##
 ##
 #macro ( mainMenu $menus )
   <ul class="nav nav-list">
@@ -392,8 +372,6 @@ $indent     </ul>##
   </ul>
 #end
 ##
-##
-##
 #macro ( copyright )
 #**##if ( $project )
 #*  *##if ( ${project.organization} && ${project.organization.name} )
@@ -419,8 +397,6 @@ $indent     </ul>##
 #*  *##end
 #**##end
 #end
-##
-##
 ##
 #macro ( publishDate $position $decorationPublishDate $version )
 #**##if ( $publishDate )
@@ -508,8 +484,6 @@ $indent     </ul>##
 #**##end
 #end
 ##
-##
-##
 #macro ( builtByLogo $poweredBy )
 #**##if( $poweredBy )
 #**##foreach ($item in $poweredBy)
@@ -577,8 +551,6 @@ $indent     </ul>##
 #**##end
 #end
 ##
-##
-##
 #macro ( piwik )
 #**##if ( $decoration.getCustomChild( 'fluidoSkin.piwik.piwikUrl' )
         && $decoration.getCustomChild( 'fluidoSkin.piwik.idsite' ) )
@@ -600,8 +572,6 @@ $indent     </ul>##
 #**##end
 #end
 ##
-##
-##
 #macro ( googleAnalytics $accountId )
 #**##if( $accountId && $accountId != "" )
     <!-- Google Analytics -->
@@ -622,8 +592,6 @@ $indent     </ul>##
 #**##end
 #end
 ##
-##
-##
 #macro ( googleSearch $top )
 <form id="search-form" action="https://www.google.com/search" method="get" #if ( $top ) class="navbar-search pull-right" #end>
 #**##if( $decoration.getCustomChild( 'fluidoSkin.googleSearch.sitesearch' ) )
@@ -637,8 +605,6 @@ $indent     </ul>##
 </form>
 <script type="text/javascript">asyncJs( 'https://cse.google.com/brand?form=search-form' )</script>
 #end
-##
-##
 ##
 #macro ( forkMeOnGitHub )
 #**##if ( $decoration.getCustomChild( 'fluidoSkin.gitHub.projectId' ) )
@@ -675,7 +641,6 @@ $indent     </ul>##
 #**##end
 #end
 ##
-##
 ## activate profile background image if custom.fluidoSkin.profile value set to "retired", "pre-release" or "sandbox"
 #macro ( prjProfile )
 #**##set ( $profile = $decoration.getCustomValue( 'fluidoSkin.profile', '' ) )
@@ -685,8 +650,6 @@ $indent     </ul>##
       <style type="text/css">body{background-image: url('$relativePath/images/profiles/${profile}.png');}</style>
 #**##end
 #end
-##
-##
 ##
 #macro ( facebookLike $sideBarEnabled )
 #**##if ( $decoration.getCustomChild( 'fluidoSkin.facebookLike' ) && $project.url )
@@ -712,8 +675,6 @@ $indent     </ul>##
         style="border:none; $frameWidth; margin-top: 10px;" #if( !$sideBarEnabled ) class="pull-right" #end></iframe>
 #**##end
 #end
-##
-##
 ##
 #macro ( followTwitter $sideBarEnabled )
 #**##if ( $decoration.getCustomChild( 'fluidoSkin.twitter.user' ) )
@@ -741,8 +702,6 @@ $indent     </ul>##
 #*  *##end
 #**##end
 #end
-##
-##
 ##
 #macro ( ohloh )
 #**##if ( $decoration.getCustomChild( 'fluidoSkin.ohloh.projectId' ) )
@@ -788,8 +747,6 @@ $indent     </ul>##
   #end
 #end
 ##
-##
-##
 #macro ( flattrHead )
 #**##if ( $decoration.getCustomChild( 'fluidoSkin.flattr.thing' )
           && ( $decoration.getCustomChild( 'fluidoSkin.flattr.url' ) || $project.url ) )
@@ -805,8 +762,6 @@ $indent     </ul>##
     /* ]]> */</script>
 #**##end
 #end
-##
-##
 ##
 #macro ( flattrBody $sideBarEnabled )
 #**##if ( $decoration.getCustomChild( 'fluidoSkin.flattr.thing' )
@@ -836,6 +791,7 @@ $indent     </ul>##
 #*  *##end
 #**##end
 #end
+##
 #macro( generatedBy )
 Apache Maven Doxia Site Renderer#if( $doxiaSiteRendererVersion ) $doxiaSiteRendererVersion#end##
 #end
