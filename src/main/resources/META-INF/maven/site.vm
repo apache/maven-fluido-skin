@@ -38,11 +38,8 @@
 #foreach( $author in $authors )
     <meta name="author" content="$author" />
 #end
-#if ( $dateCreation )
-    <meta name="Date-Creation-yyyymmdd" content="$dateCreation" />
-#end
-#if ( $dateRevision && !$skipGenerationDate )
-    <meta name="Date-Revision-yyyymmdd" content="$dateRevision" />
+#if ( $documentDate )
+    <meta name="date" content="$documentDate" />
 #end
     <title>$title</title>
     <link rel="stylesheet" href="$relativePath/css/apache-maven-fluido-@project.version@.min.css" />
