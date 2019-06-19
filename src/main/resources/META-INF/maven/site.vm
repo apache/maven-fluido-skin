@@ -29,10 +29,10 @@
  | Rendered using Apache Maven Fluido Skin @project.version@
 -->
 ##
-<html xmlns="http://www.w3.org/1999/xhtml"#if ( $locale ) xml:lang="$locale.language" lang="$locale.language"#end>
+<html xmlns="http://www.w3.org/1999/xhtml"#if ( $locale ) lang="$locale.language"#end>
   <head>
     <meta charset="${outputEncoding}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 ## put meta together
     <meta name="generator" content="#generatedBy()" />
 #foreach( $author in $authors )
@@ -68,7 +68,7 @@
 ##
 #**##if ( $topBarEnabled )
 #*  *##set ( $navBarStyle = $decoration.getCustomValue( 'fluidoSkin.navBarStyle', '' ) )
-    <div id="topbar" class="navbar navbar-fixed-top $navBarStyle">
+    <header id="topbar" class="navbar navbar-fixed-top $navBarStyle">
       <div class="navbar-inner">
 #*    *##if ( $sideBarEnabled )
         <div class="container-fluid">
@@ -85,7 +85,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </a>
-          <div class="nav-collapse">
+          <nav class="nav-collapse">
 #*      *##else
             <div class="container">
               <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
@@ -93,7 +93,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </a>
-          <div class="nav-collapse">
+          <nav class="nav-collapse">
 #*      *##end
 #*    *##end
 #*    *##if ( $decoration.getCustomChild( 'fluidoSkin.topBarIcon' ) )
@@ -135,6 +135,11 @@
             </ul>
 #*      *##end
 ##
+#*      *##if (!$sideBarEnabled)
+          </nav>
+          <div class="nav-collapse">
+#*      *##end
+##
 #*      *##if ( $searchEnabled && !$sideBarEnabled )
 #*        *##googleSearch(true)
 #*      *##end
@@ -159,13 +164,13 @@
             </ul>
 #*      *##end
 ##
-#*      *##if ($topBarEnabled)
-            </div>
+#*      *##if (!$sideBarEnabled)
+          </div>
 #*      *##end
 ##
         </div>
       </div>
-    </div>
+    </header>
 #**##end
 ##
 #**##if ( $sideBarEnabled )
@@ -173,68 +178,72 @@
 #**##else
     <div class="container">
 #**##end
-      <div id="banner">
-        <div class="pull-left">##
-#*      *##if( $decoration.bannerLeft )
-#*        *##banner( $decoration.bannerLeft "bannerLeft" )
-#*      *##else
-#*      *### MSKINS-32
-          <h1>##
-#*        *##if( $project.name && $project.name != '' )
-#*          *#$project.name
+      <header>
+        <div id="banner">
+          <div class="pull-left">##
+#*        *##if( $decoration.bannerLeft )
+#*          *##banner( $decoration.bannerLeft "bannerLeft" )
 #*        *##else
-#*          *#$project.artifactId
+#*        *### MSKINS-32
+            <h1>##
+#*          *##if( $project.name && $project.name != '' )
+#*            *#$project.name
+#*          *##else
+#*            *#$project.artifactId
+#*          *##end
+#*        *#</h1>##
 #*        *##end
-#*      *#</h1>##
-#*      *##end
-#*    *#</div>
-        <div class="pull-right">#banner( $decoration.bannerRight "bannerRight" )</div>
-        <div class="clear"><hr/></div>
-      </div>
+#*      *#</div>
+          <div class="pull-right">#banner( $decoration.bannerRight "bannerRight" )</div>
+          <div class="clear"><hr/></div>
+        </div>
 
-      <div id="breadcrumbs">
-        <ul class="breadcrumb">
-#*      *##publishDate( "left" $decoration.publishDate $decoration.version )
-#*      *##publishDate( "right" $decoration.publishDate $decoration.version )
+        <div id="breadcrumbs">
+          <ul class="breadcrumb">
+#*        *##publishDate( "left" $decoration.publishDate $decoration.version )
+#*        *##publishDate( "right" $decoration.publishDate $decoration.version )
 ##
-#*      *### MSITE-44
-#*      *##if ( !$topBarEnabled
-              && $decoration.body.links
-              && $decoration.body.links.size() > 0 )
-#*        *##links( $decoration.body.links )
-#*      *##end
-        </ul>
-      </div>
+#*        *### MSITE-44
+#*        *##if ( !$topBarEnabled
+                && $decoration.body.links
+                && $decoration.body.links.size() > 0 )
+#*          *##links( $decoration.body.links )
+#*        *##end
+          </ul>
+        </div>
+      </header>
 ##
 #*    *##if ( $sideBarEnabled )
 #*      *##set ( $leftColumnClass = $decoration.getCustomValue( 'fluidoSkin.leftColumnClass', 'span2' ) )
 ##
       <div class="row-fluid">
-        <div id="leftColumn" class="$leftColumnClass">
-          <div class="well sidebar-nav">
+        <header id="leftColumn" class="$leftColumnClass">
+          <nav class="well sidebar-nav">
 #*      *##publishDate( "navigation-top" $decoration.publishDate $decoration.version )
 #*      *##mainMenu( $decoration.body.menus )
 #*      *##publishDate( "navigation-bottom" $decoration.publishDate $decoration.version )
+          </nav>
+          <div class="well sidebar-nav">
 #*      *##if ( $searchEnabled )
 #*        *##googleSearch( false )
 #*      *##end
-          <hr />
-          <div id="poweredBy">
+            <hr />
+            <div id="poweredBy">
 #*        *##facebookLike( $sideBarEnabled )
-            <div class="clear"></div>
+              <div class="clear"></div>
 #*        *##followTwitter( $sideBarEnabled )
-            <div class="clear"></div>
+              <div class="clear"></div>
 #*        *##flattrBody( $sideBarEnabled )
-            <div class="clear"></div>
+              <div class="clear"></div>
 #*        *##builtByLogo( $decoration.poweredBy )
             </div>
           </div>
-        </div>
+        </header>
 #*    *##end
 ##
 #*    *##set ( $bodyColumnClass = $decoration.getCustomValue( 'fluidoSkin.bodyColumnClass', 'span10' ) )
 ##
-        <div id="bodyColumn" #if ( $sideBarEnabled ) class="$bodyColumnClass" #end>
+        <main id="bodyColumn" #if ( $sideBarEnabled ) class="$bodyColumnClass" #end>
 #*      *##if ( $title && $title.endsWith( "Project License" ) )
 #*        *#$bodyContent
 #*      *##else
@@ -246,7 +255,7 @@
 ##
 #*        *#$bodyContent.replaceAll( "<div class=${esc.q}source${esc.q}>(\r?\n)?<pre>", "<div class=${esc.q}source${esc.q}><pre class=${esc.q}$sourceStyle${esc.q}>" ).replaceAll( "class=${esc.q}bodyTable${esc.q}", "class=${esc.q}table table-striped${esc.q}" )
 #*      *##end
-        </div>
+        </main>
 #*    *##if ( $sideBarEnabled )
       </div>
 #*    *##end
