@@ -100,7 +100,7 @@ under the License.
   <properties>
     <bootstrap.version>2.3.2</bootstrap.version>
     <jquery.version>1.11.2</jquery.version>
-    <sitePluginVersion>3.7</sitePluginVersion>
+    <sitePluginVersion>3.8.2</sitePluginVersion>
   </properties>
 
   <repositories>
