@@ -30,7 +30,7 @@ under the License.
   </parent>
 
   <artifactId>maven-fluido-skin</artifactId>
-  <version>1.8-SNAPSHOT</version>
+  <version>1.8</version>
 
   <name>Apache Maven Fluido Skin</name>
   <description>The Apache Maven Fluido Skin is an Apache Maven site skin
@@ -41,7 +41,7 @@ under the License.
     <connection>scm:git:https://gitbox.apache.org/repos/asf/maven-fluido-skin.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/maven-fluido-skin.git</developerConnection>
     <url>https://github.com/apache/maven-fluido-skin/tree/${project.scm.tag}</url>
-    <tag>HEAD</tag>
+    <tag>maven-fluido-skin-1.8</tag>
   </scm>
   <issueManagement>
     <system>jira</system>
