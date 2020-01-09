@@ -278,7 +278,7 @@
 #*      *##if ( $decoration.getCustomChild( 'fluidoSkin.copyrightClass' ) )
 #*        *##set ( $copyrightClass = ' class="' + $decoration.getCustomValue( 'fluidoSkin.copyrightClass' ) + '"' )
 #*      *##end
-            <p$!copyrightClass>Copyright &#169;#copyright().#publishDate( "bottom" $decoration.publishDate $decoration.version )</p>
+            <p$!copyrightClass>&#169;#copyright()#publishDate( "bottom" $decoration.publishDate $decoration.version )</p>
 #*    *##end
         </div>
 ##
