@@ -561,7 +561,7 @@ $indent     </ul>##
     piwikTracker.trackPageView();
     piwikTracker.enableLinkTracking();
     } catch( err ) {}
-    </script><noscript><p><img src="http://$piwikUrl/piwik.php?idsite=$idsite" style="border:0" alt=""/></p></noscript>
+    </script><noscript><p><img src="http://$piwikUrl/piwik.php?idsite=$idsite" style="border:0" alt="Piwik"/></p></noscript>
     <!-- End Piwik Tag -->
 #**##end
 #end
