@@ -61,6 +61,7 @@
   <body class="topBarDisabled">
 #**##end
 #**##forkMeOnGitHub()
+#**##facebookLoadSDK()
 ##
 #**##set ( $sideBarEnabled = 'false' != $decoration.getCustomValue( 'fluidoSkin.sideBarEnabled' ) )
 #**##set ( $searchEnabled = $decoration.getCustomChild( 'fluidoSkin.googleSearch' )
