@@ -48,7 +48,15 @@ Maven Fuido Skin ITs
 
   * {{{./mskins-33/index.html}Like}}
 
+  * {{{./mskins-161-sidebar-fb-like-share}Like with share}}
+
+  * {{{./mskins-161-sidebar-fb-recommend-share}Like - Recommend with share}}
+
   * {{{./mskins-33_topbar/index.html}Like (topbar)}}
+
+  * {{{./mskins-161-topbar-fb-like-share}Like with share (topbar)}}
+
+  * {{{./mskins-161-topbar-fb-recommend-share}Like - Recommend with share (topbar)}}
 
   * {{{./mskins-10/index.html}MSKINS-10}}
 
@@ -85,4 +93,3 @@ Maven Fuido Skin ITs
   * {{{./mskins-143_true/index.html}MSKINS-143 (using explicit true)}}
 
   []
- 

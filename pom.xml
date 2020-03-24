@@ -728,6 +728,66 @@ under the License.
                   <outputDirectory>${project.build.directory}/site/mskins-143_true/</outputDirectory>
                 </configuration>
               </execution>
+              <execution>
+                <id>copy-mskins-161-sidebar-fb-like-share</id>
+                <phase>site</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <resources>
+                    <resource>
+                      <directory>${project.build.directory}/it/mskins-161/sidebar-fb-like-share/target/site/</directory>
+                    </resource>
+                  </resources>
+                  <outputDirectory>${project.build.directory}/site/mskins-161-sidebar-fb-like-share/</outputDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>copy-mskins-161-sidebar-fb-recommend-share</id>
+                <phase>site</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <resources>
+                    <resource>
+                      <directory>${project.build.directory}/it/mskins-161/sidebar-fb-recommend-share/target/site/</directory>
+                    </resource>
+                  </resources>
+                  <outputDirectory>${project.build.directory}/site/mskins-161-sidebar-fb-recommend-share/</outputDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>copy-mskins-161-topbar-fb-like-share</id>
+                <phase>site</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <resources>
+                    <resource>
+                      <directory>${project.build.directory}/it/mskins-161/topbar-fb-like-share/target/site/</directory>
+                    </resource>
+                  </resources>
+                  <outputDirectory>${project.build.directory}/site/mskins-161-topbar-fb-like-share/</outputDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>copy-mskins-161-topbar-fb-recommend-share</id>
+                <phase>site</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <resources>
+                    <resource>
+                      <directory>${project.build.directory}/it/mskins-161/topbar-fb-recommend-share/target/site/</directory>
+                    </resource>
+                  </resources>
+                  <outputDirectory>${project.build.directory}/site/mskins-161-topbar-fb-recommend-share/</outputDirectory>
+                </configuration>
+              </execution>
             </executions>
           </plugin>
         </plugins>

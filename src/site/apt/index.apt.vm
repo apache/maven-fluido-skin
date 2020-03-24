@@ -417,15 +417,33 @@ Welcome to ${project.name}!
 
 ** Facebook like button
 
- Since version <<1.2>>, fluido-skin supports the Facebook {{{http://developers.facebook.com/docs/reference/plugins/like/}like}}
- integration. Users have just to declare:
+ Since version <<1.2>>, fluido-skin supports the Facebook {{{https://developers.facebook.com/docs/plugins/like-button}like}}
+ integration. Users can define similar option to Facebook SDK:
+
+ * <<<custom.fluidoSkin.facebookLike.recommend>>>: <<optional>>, if set to <<<true>>> <<Recommend>> button will be rendered instead of <<Like>>
+
+ * <<<custom.fluidoSkin.facebookLike.shareButton>>>: <<optional>>, if set to <<<true>>> <<Share Button>> will be included.
+
+ * <<<custom.fluidoSkin.facebookLike.layout>>>: <<optional>> facebook layout, Can be one of:
+
+   * <<<standard>>>
+
+   * <<<button_count>>>: default if sidebar is not enabled
+
+   * <<<button>>>
+
+   * <<<box_count>>>: default if sidebar is enabled
 
 +-----+
 <project name="xxx">
   [...]
   <custom>
     <fluidoSkin>
-      <facebookLike />
+      <facebookLike>
+        <recommend>true/false</recommend>
+        <shareButton>true/false</shareButton>
+        <layout>box_count</layout>
+      </facebookLike>
     </fluidoSkin>
   </custom>
   [...]
