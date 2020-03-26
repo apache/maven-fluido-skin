@@ -18,6 +18,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-skins</artifactId>
+    <version>@project.parent.version@</version>
+  </parent>
 
   <groupId>org.apache.maven.skins.its</groupId>
   <artifactId>@project.artifactId@-mskins-13</artifactId>
@@ -49,23 +54,22 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.4</version>
+        <version>3.0.0</version>
         <configuration>
           <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
-          <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
         </configuration>
         <reportSets>
           <reportSet>
             <reports>
               <report>index</report>
               <report>summary</report>
-              <report>license</report>
-              <report>project-team</report>
+              <report>licenses</report>
+              <report>team</report>
               <report>scm</report>
-              <report>issue-tracking</report>
-              <report>mailing-list</report>
+              <report>issue-management</report>
+              <report>mailing-lists</report>
               <report>dependencies</report>
-              <report>cim</report>
+              <report>ci-management</report>
               <report>plugin-management</report>
               <report>plugins</report>
             </reports>

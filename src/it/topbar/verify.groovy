@@ -26,6 +26,6 @@ String html = index.getText()
 assert html.contains( '<li><a href="index.html" title="About">About</a></li>' )
 // inactive menu
 assert html.contains( '<li><a href="summary.html" title="Summary">Summary</a></li>' )
-assert html.contains( '<li><a href="https://maven.apache.org/plugins/index.html" title="Plugins">Plugins</a></li>' )
+assert html.contains( '<li><a href="plugins.html" title="Plugins">Plugins</a></li>' )
 // breadcrumb
 assert html.contains( '<li class=""><a href="https://www.apache.org/" class="externalLink" title="Apache">Apache</a><span class="divider">/</span></li>' )

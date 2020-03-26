@@ -34,7 +34,7 @@
   <!-- START SNIPPET: skin-custom-config -->
   <custom>
     <fluidoSkin>
-      <!-- Cannot use multibyte chars due to https://jira.codehaus.org/browse/DOXIA-386 -->
+      <!-- Cannot use multibyte chars due to https://issues.apache.org/jira/browse/DOXIA-386 -->
       <breadcrumbDivider>&#xbb;</breadcrumbDivider>
     </fluidoSkin>
   </custom>
