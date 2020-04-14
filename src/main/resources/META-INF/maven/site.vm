@@ -293,5 +293,6 @@
       </div>
     </footer>
 #**##piwik()
+#**##anchorJS()
   </body>
 </html>
