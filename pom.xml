@@ -101,6 +101,7 @@ under the License.
     <bootstrap.version>2.3.2</bootstrap.version>
     <jquery.version>1.11.2</jquery.version>
     <sitePluginVersion>3.8.2</sitePluginVersion>
+    <project.build.outputTimestamp>2020-05-25T18:04:00Z</project.build.outputTimestamp>
   </properties>
 
   <repositories>
