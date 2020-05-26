@@ -217,6 +217,7 @@ under the License.
                 <jsSourceFile>fluido.js</jsSourceFile>
               </jsSourceFiles>
               <jsFinalFile>apache-maven-fluido-${project.version}.js</jsFinalFile>
+              <jsEngine>CLOSURE</jsEngine>
             </configuration>
             <goals>
               <goal>minify</goal>
