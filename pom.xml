@@ -102,6 +102,7 @@ under the License.
     <jquery.version>1.11.2</jquery.version>
     <sitePluginVersion>3.8.2</sitePluginVersion>
     <project.build.outputTimestamp>2020-05-25T18:04:00Z</project.build.outputTimestamp>
+    <anchorjs.version>4.2.2</anchorjs.version>
   </properties>
 
   <repositories>
@@ -164,6 +165,7 @@ under the License.
               <exclude>src/main/resources/fonts/glyphicons-halflings-regular.svg</exclude>
               <exclude>src/main/resources/js/prettify.js</exclude>
               <exclude>src/main/resources/js/jquery-*.js</exclude>
+              <exclude>src/main/resources/js/anchor-*.js</exclude>
             </excludes>
           </configuration>
         </plugin>
@@ -215,6 +217,7 @@ under the License.
                 <jsSourceFile>bootstrap-${bootstrap.version}.js</jsSourceFile>
                 <jsSourceFile>prettify.js</jsSourceFile>
                 <jsSourceFile>fluido.js</jsSourceFile>
+                <jsSourceFile>anchor-${anchorjs.version}.js</jsSourceFile>
               </jsSourceFiles>
               <jsFinalFile>apache-maven-fluido-${project.version}.js</jsFinalFile>
               <jsEngine>CLOSURE</jsEngine>

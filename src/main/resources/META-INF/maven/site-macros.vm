@@ -794,9 +794,10 @@ Apache Maven Doxia Site Renderer#if( $doxiaSiteRendererVersion ) $doxiaSiteRende
 ##
 ##
 #macro( anchorJS )
-<script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
 <script>
-  anchors.add();
+	if(anchors) {
+	  anchors.add();
+	}
 </script>
 #end
 ##
