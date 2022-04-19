@@ -38,8 +38,8 @@ under the License.
   <inceptionYear>2011</inceptionYear>
 
   <scm>
-    <connection>scm:git:https://gitbox.apache.org/repos/asf/maven-fluido-skin.git</connection>
-    <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/maven-fluido-skin.git</developerConnection>
+    <connection>scm:git:https://github.com/apache/maven-fluido-skin.git</connection>
+    <developerConnection>scm:git:https://github.com/apache/maven-fluido-skin.git</developerConnection>
     <url>https://github.com/apache/maven-fluido-skin/tree/${project.scm.tag}</url>
     <tag>HEAD</tag>
   </scm>
@@ -101,6 +101,7 @@ under the License.
     <bootstrap.version>2.3.2</bootstrap.version>
     <jquery.version>1.11.2</jquery.version>
     <sitePluginVersion>3.8.2</sitePluginVersion>
+    <doxiaSitetoolsVersion>1.11.2-SNAPSHOT</doxiaSitetoolsVersion>
     <project.build.outputTimestamp>2021-11-27T17:27:14Z</project.build.outputTimestamp>
     <anchorjs.version>4.2.2</anchorjs.version>
   </properties>
@@ -260,6 +261,7 @@ under the License.
               <goals>
                 <goal>site</goal>
               </goals>
+              <streamLogsOnFailures>true</streamLogsOnFailures>
             </configuration>
             <executions>
               <execution>
@@ -791,6 +793,21 @@ under the License.
                     </resource>
                   </resources>
                   <outputDirectory>${project.build.directory}/site/mskins-161-topbar-fb-recommend-share/</outputDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>copy-mskins-177-apache-analytics</id>
+                <phase>site</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <resources>
+                    <resource>
+                      <directory>${project.build.directory}/it/mskins-177-apache-analytics/target/site/</directory>
+                    </resource>
+                  </resources>
+                  <outputDirectory>${project.build.directory}/site/mskins-177-apache-analytics/</outputDirectory>
                 </configuration>
               </execution>
             </executions>

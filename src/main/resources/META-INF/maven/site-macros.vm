@@ -585,6 +585,32 @@ $indent     </ul>##
     </script>
 #**##end
 #end
+
+#macro ( apacheAnalytics $accountId )
+    #**##if( $accountId && $accountId != "" )
+<![CDATA[<!-- Matomo -->
+<script>
+    var _paq = window._paq = window._paq || [];
+#*    *##foreach( $option in $decoration.apacheAnalyticsOptions.entrySet() )
+#*      *##if( $option.value && $option.value != "" )
+    _paq.push(['$option.key', '$option.value']);
+#*      *##else
+    _paq.push(['$option.key']);
+#*      *##end
+#*    *##end
+
+    (function() {
+        var u="//$decoration.apacheAnalyticsUrl/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '$accountId']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+<!-- End Matomo Code -->]]>
+    #**##end
+#end
+
 ##
 #macro ( googleSearch $top )
 <form id="search-form" action="https://www.google.com/search" method="get" #if ( $top ) class="navbar-search pull-right" #end>

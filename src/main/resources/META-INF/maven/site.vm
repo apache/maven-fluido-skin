@@ -52,6 +52,7 @@
 #**##end
 #**##if( $headContent )$headContent#end
 #**##googleAnalytics( $decoration.googleAnalyticsAccountId )
+#**##apacheAnalytics( $decoration.apacheAnalyticsSiteId )
 #**##flattrHead()
   </head>
 #**##set ( $topBarEnabled = 'true' == $decoration.getCustomValue( 'fluidoSkin.topBarEnabled' ) )
