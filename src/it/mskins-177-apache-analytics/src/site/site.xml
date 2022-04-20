@@ -35,7 +35,7 @@
   <custom>
     <matomo>
       <siteId>3</siteId>
-      <url>analytics.apache.org</url>
+      <url>https://analytics.apache.org</url>
       <options>
         <disableCookies/>
         <trackPageView/>

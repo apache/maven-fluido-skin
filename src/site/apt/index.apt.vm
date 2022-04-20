@@ -166,10 +166,10 @@ Welcome to ${project.name}!
 </project>
 +-----+
 
-** Matomo (i.e ApacheAnalytics)
+** Matomo (e.g ApacheAnalytics)
 
   Users can optionally enable <<Matomo>>.
-  How to configure it for Apache Analytics:
+  How to configure it for Apache Analytics, the <<options>> element will contain some configuration (here some privacy setup) :
 
 +-----+
 <project name="xxx">
@@ -177,7 +177,7 @@ Welcome to ${project.name}!
   <custom>
       <matomo>
         <siteId>xxx</siteId>
-        <url></url>
+        <url>https://analytics.apache.org</url>
         <options>
             <disableCookies/>
             <trackPageView/>
