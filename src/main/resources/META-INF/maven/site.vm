@@ -52,7 +52,11 @@
 #**##end
 #**##if( $headContent )$headContent#end
 #**##googleAnalytics( $decoration.googleAnalyticsAccountId )
-#**##apacheAnalytics( $decoration.apacheAnalyticsSiteId )
+#**##if (  $decoration.getCustomValue( 'matomo.url' ) && $decoration.getCustomValue( 'matomo.url' ) != ''
+            && $decoration.getCustomValue( 'matomo.siteId' ) && $decoration.getCustomValue( 'matomo.siteId' ) != ''
+  )
+#*  *##matomo( $decoration.custom.getChild('matomo') )
+#**##end
 #**##flattrHead()
   </head>
 #**##set ( $topBarEnabled = 'true' == $decoration.getCustomValue( 'fluidoSkin.topBarEnabled' ) )

@@ -36,12 +36,6 @@
     <matomo>
       <siteId>3</siteId>
       <url>analytics.apache.org</url>
-      <options>
-        <disableCookies/>
-        <trackPageView/>
-        <enableLinkTracking/>
-        <foo>Bar</foo>
-      </options>
     </matomo>
   </custom>
   <!-- END SNIPPET: skin-apache-analytics -->

@@ -166,39 +166,27 @@ Welcome to ${project.name}!
 </project>
 +-----+
 
-** ApacheAnalytics
+** Matomo (i.e ApacheAnalytics)
 
-  Users can optionally enable <<Apache Analytics>> for the generated site with basic options:
+  Users can optionally enable <<Matomo>>.
+  How to configure it for Apache Analytics:
 
 +-----+
 <project name="xxx">
   [...]
-  <apacheAnalyticsSiteId>xxxx</apacheAnalyticsSiteId>
-  <apacheAnalyticsOptions>
-    <disableCookies/>
-    <trackPageView/>
-    <enableLinkTracking/>
-  </apacheAnalyticsOptions>
+  <custom>
+      <matomo>
+        <siteId>xxx</siteId>
+        <url></url>
+        <options>
+            <disableCookies/>
+            <trackPageView/>
+            <enableLinkTracking/>
+        </options>
+      </matomo>
+  </custom>
   [...]
 </project>
-+-----+
-
-  If not the Maven Site plugin you are using is not at minimum of 1.11.2 for doxia site tools dependency you will need to add such dependency
-  in your Maven Site plugin configuration
-
-+-----+
-<plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-site-plugin</artifactId>
-  <version>${sitePluginVersion}</version>
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.maven.doxia</groupId>
-      <artifactId>doxia-decoration-model</artifactId>
-      <version>1.12</version>
-      </dependency>
-    </dependencies>
- </plugin>
 +-----+
 
 ** GoogleAnalytics
