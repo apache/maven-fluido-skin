@@ -590,7 +590,7 @@ $indent     </ul>##
 #**##if (  $decoration.getCustomValue( 'matomo.url' ) && $decoration.getCustomValue( 'matomo.url' ) != ''
 && $decoration.getCustomValue( 'matomo.siteId' ) && $decoration.getCustomValue( 'matomo.siteId' ) != '')
 
-    <![CDATA[<!-- Matomo -->
+    <!-- Matomo -->
     <script>
         var _paq = window._paq = window._paq || [];
     #*    *##foreach( $option in $matomoDom.getChild("options").getChildren() )
@@ -609,7 +609,7 @@ $indent     </ul>##
             g.async=true; g.src=u+'/matomo.js'; s.parentNode.insertBefore(g,s);
         })();
     </script>
-    <!-- End Matomo Code -->]]>
+    <!-- End Matomo Code -->
 #**##end
 #end
 
