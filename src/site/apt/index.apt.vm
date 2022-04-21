@@ -166,6 +166,29 @@ Welcome to ${project.name}!
 </project>
 +-----+
 
+** Matomo (e.g. Apache Analytics)
+
+  Users can optionally enable <<Matomo>>.
+  How to configure it for Apache Analytics, the <<options>> element will contain some configuration (here some privacy setup):
+
++-----+
+<project name="xxx">
+  [...]
+  <custom>
+      <matomo>
+        <siteId>xxx</siteId>
+        <url>https://analytics.apache.org</url>
+        <options>
+            <disableCookies/>
+            <trackPageView/>
+            <enableLinkTracking/>
+        </options>
+      </matomo>
+  </custom>
+  [...]
+</project>
++-----+
+
 ** GoogleAnalytics
 
  Users can optionally enable <<Google Analytics>> for the generated site:
