@@ -231,7 +231,6 @@
 #*      *##if ( $searchEnabled )
 #*        *##googleSearch( false )
 #*      *##end
-            <hr />
             <div id="poweredBy">
 #*        *##facebookLike( $sideBarEnabled )
               <div class="clear"></div>
