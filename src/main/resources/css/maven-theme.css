@@ -135,3 +135,7 @@ li.pull-right {
   margin-left: 3px;
   margin-right: 3px;
 }
+
+.well {
+  margin-bottom: 10px;
+}
