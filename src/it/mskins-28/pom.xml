@@ -27,7 +27,7 @@
   <groupId>org.apache.maven.skins.its</groupId>
   <artifactId>mskins-28</artifactId>
   <version>1.0-SNAPSHOT</version>
-  
+
   <description>
     Multiple logo's in the leftside bar
   </description>
@@ -49,13 +49,13 @@
       </plugin>
     </plugins>
   </build>
-  
+
   <reporting>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>@projectInfoReportsPluginVersion@</version>
         <reportSets>
           <reportSet>
             <reports>
