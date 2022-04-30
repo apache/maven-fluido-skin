@@ -40,7 +40,9 @@
   </custom>
   <!-- END SNIPPET: skin-apache-analytics -->
 
-  <body/>
+  <body>
+    <head/>
+  </body>
 
   <!-- empty one to disable inherited from parent -->
   <googleAnalyticsAccountId></googleAnalyticsAccountId>

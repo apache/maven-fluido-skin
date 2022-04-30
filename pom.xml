@@ -25,7 +25,7 @@ under the License.
   <parent>
     <groupId>org.apache.maven.skins</groupId>
     <artifactId>maven-skins</artifactId>
-    <version>34</version>
+    <version>36</version>
     <relativePath>../../pom/maven/maven-skins/pom.xml</relativePath>
   </parent>
 
@@ -105,17 +105,6 @@ under the License.
     <anchorjs.version>4.2.2</anchorjs.version>
   </properties>
 
-  <repositories>
-    <repository>
-      <id>apache.snapshots</id>
-      <name>Apache Snapshot Repository</name>
-      <url>https://repository.apache.org/snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-    </repository>
-  </repositories>
-
   <build>
     <resources>
       <resource>
@@ -127,13 +116,21 @@ under the License.
         </includes>
       </resource>
 
-      <!-- exclude css and js since will include the minified version -->
+      <!-- exclude css and js since will include the minified version, META-INF is filtered separately -->
       <resource>
         <directory>${basedir}/src/main/resources</directory>
         <excludes>
           <exclude>css/**</exclude>
           <exclude>js/**</exclude>
+          <exclude>META-INF/**</exclude>
         </excludes>
+      </resource>
+
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+        <includes>
+          <include>META-INF/**</include>
+        </includes>
         <filtering>true</filtering> <!-- add skin-info -->
       </resource>
 
@@ -168,11 +165,6 @@ under the License.
               <exclude>src/main/resources/js/anchor-*.js</exclude>
             </excludes>
           </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-invoker-plugin</artifactId>
-          <version>3.2.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
