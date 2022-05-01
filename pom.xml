@@ -253,7 +253,6 @@ under the License.
               <goals>
                 <goal>site</goal>
               </goals>
-              <streamLogsOnFailures>true</streamLogsOnFailures>
             </configuration>
             <executions>
               <execution>

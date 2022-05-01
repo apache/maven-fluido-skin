@@ -110,21 +110,21 @@
 #*    *##set ( $imgAlt = ' alt=""' )
 #*  *##end
 #*  *##if( $border )
-#*    *##set ( $imgBorder = ' border="' + $border + '"' )
+#*    *##set ( $imgBorder = 'border: ' + $border + '; ' )
 #*  *##else
 #*    *##set ( $imgBorder = "" )
 #*  *##end
 #*  *##if( $width )
-#*    *##set ( $imgWidth = ' width="' + $width + '"' )
+#*    *##set ( $imgWidth = 'width: ' + $width + '; ' )
 #*  *##else
 #*    *##set ( $imgWidth = "" )
 #*  *##end
 #*  *##if( $height )
-#*    *##set ( $imgHeight = ' height="' + $height + '"' )
+#*    *##set ( $imgHeight = 'height: ' + $height + ';' )
 #*  *##else
 #*    *##set ( $imgHeight = "" )
 #*  *##end
-<img class="imageLink"$imgSrc$imgAlt$imgBorder$imgWidth$imgHeight/>##
+<img class="imageLink"$imgSrc$imgAlt style="$imgBorder$imgWidth$imgHeight" />##
 #**##end
 #end
 ##
@@ -158,17 +158,17 @@
 #*      *##set ( $alt = ' alt=""' )
 #*    *##end
 #*    *##if( $banner.border )
-#*      *##set ( $imgBorder = ' border="' + $banner.border + '"' )
+#*      *##set ( $imgBorder = 'border: ' + $banner.border + '; ' )
 #*    *##else
 #*      *##set ( $imgBorder = "" )
 #*    *##end
 #*    *##if( $banner.width )
-#*      *##set ( $imgWidth = ' width="' + $banner.width + '"' )
+#*      *##set ( $imgWidth = 'width: ' + $banner.width + '; ' )
 #*    *##else
 #*      *##set ( $imgWidth = "" )
 #*    *##end
 #*    *##if( $banner.height )
-#*      *##set ( $imgHeight = ' height="' + $banner.height + '"' )
+#*      *##set ( $imgHeight = 'height: ' + $banner.height + ';' )
 #*    *##else
 #*      *##set ( $imgHeight = "" )
 #*    *##end
@@ -177,7 +177,7 @@
 #*    *##else
 #*      *##set ( $bannerTitle="" )
 #*    *##end
-#*    *#<img src="$src" $alt$bannerTitle$imgBorder$imgWidth$imgHeight/>##
+#*    *#<img src="$src" $alt$bannerTitle style="$imgBorder$imgWidth$imgHeight" />##
 #*  *##else
 #*    *#<h2>$banner.name</h2>
 #*  *##end
@@ -336,23 +336,23 @@ $indent     </ul>##
 #*    *##end
 ##
 #*    *##if( $menu.border )
-#*      *##set ( $border = ' border="' + $menu.border + '"' )
+#*      *##set ( $border = 'border: ' + $menu.border + '; ' )
 #*    *##else
-#*      *##set ( $border = ' border="0"' )
+#*      *##set ( $border = 'border: 0;' )
 #*    *##end
 ##
 #*    *##if( $menu.width )
-#*      *##set ( $width = ' width="' + $menu.width + '"' )
+#*      *##set ( $width = 'width: ' + $menu.width + '; ' )
 #*    *##else
 #*      *##set ( $width = "" )
 #*    *##end
 #*    *##if( $menu.height )
-#*      *##set ( $height = ' height="' + $menu.height + '"' )
+#*      *##set ( $height = 'height: ' + $menu.height + ';' )
 #*    *##else
 #*      *##set ( $height = "" )
 #*    *##end
 ##
-#*    *##set ( $img = '<img class="imageLink"' + $src + $alt + $border + $width + $height + "/>" )
+#*    *##set ( $img = '<img class="imageLink"' + $src + $alt + ' style="' + $border + $width + $height + '" />' )
 ##
 #*    *##if ( $position == "left" )
    <li class="nav-header">$img $menu.name</li>
@@ -513,24 +513,24 @@ $indent     </ul>##
 #*  *##end
 ##
 #*  *##if( $item.border )
-#*    *##set ( $border = ' border="' + $item.border + '"' )
+#*    *##set ( $border = 'border: ' + $item.border + '; ' )
 #*  *##else
 #*    *##set ( $border = "" )
 #*  *##end
 ##
 #*  *##if( $item.width )
-#*    *##set ( $width = ' width="' + $item.width + '"' )
+#*    *##set ( $width = 'width: ' + $item.width + '; ' )
 #*  *##else
 #*    *##set ( $width = "" )
 #*  *##end
 #*  *##if( $item.height )
-#*    *##set ( $height = ' height="' + $item.height + '"' )
+#*    *##set ( $height = 'height: ' + $item.height + ';' )
 #*  *##else
 #*    *##set ( $height = "" )
 #*  *##end
 ##
 #*  *#<a href="$href" title="$name" class="builtBy">##
-#*    *#<img class="builtBy" $alt src="$img" $border $width $height />##
+#*    *#<img class="builtBy" $alt src="$img" style="$border$width$height" />##
 #*  *#</a>
 #**##end
 #**##if( $poweredBy.isEmpty() )
@@ -561,7 +561,7 @@ $indent     </ul>##
     piwikTracker.trackPageView();
     piwikTracker.enableLinkTracking();
     } catch( err ) {}
-    </script><noscript><p><img src="http://$piwikUrl/piwik.php?idsite=$idsite" style="border:0" alt="Piwik"/></p></noscript>
+    </script><noscript><p><img src="http://$piwikUrl/piwik.php?idsite=$idsite" style="border: 0;" alt="Piwik"/></p></noscript>
     <!-- End Piwik Tag -->
 #**##end
 #end
@@ -806,7 +806,7 @@ $indent     </ul>##
 ##
     <a class="FlattrButton" style="display:none;" $styleModifier href="$flattrUrl"></a>
     <noscript><a href="https://flattr.com/thing/$flattrThing" target="_blank">
-    <img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+    <img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" style="border: 0;" /></a></noscript>
 ##
 #*  *##if ( $sideBarEnabled )
     </div>

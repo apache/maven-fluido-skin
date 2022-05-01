@@ -34,16 +34,16 @@
   <bannerLeft>
     <href>http://www.apache.org</href>
     <border>0</border>
-    <width>473</width>
-    <height>93</height>
+    <width>473px</width>
+    <height>93px</height>
     <src>images/apache-maven-project-2.png</src>
   </bannerLeft>
 
   <bannerRight>
     <href>http://maven.apache.org</href>
     <border>1</border>
-    <width>473</width>
-    <height>93</height>
+    <width>473px</width>
+    <height>93px</height>
     <src>images/apache-maven-project-2.png</src>
   </bannerRight>
 

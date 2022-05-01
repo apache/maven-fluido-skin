@@ -33,4 +33,4 @@ assert 1 == index.getText().count( '''\
 assert 1 == index.getText().count( '''\
 <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://opensource.org/"></a>
     <noscript><a href="https://flattr.com/thing/448050/Open-Source-Initiative-OSI" target="_blank">
-    <img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>'''.replace( "\n", System.getProperty( "line.separator" ) ) )
+    <img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" style="border: 0;" /></a></noscript>'''.replace( "\n", System.getProperty( "line.separator" ) ) )
