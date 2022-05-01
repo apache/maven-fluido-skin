@@ -24,7 +24,7 @@
 #**##if( $docRenderingContext.generator ) $docRenderingContext.generator#end##
 #**##if( $docRenderingContext.doxiaSource ) $docRenderingContext.doxiaSourcePath#end##
 #end
-#if ( !$skipGenerationDate ) at $date.systemDate#end
+#if ( !$skipGenerationDate ) at $date#end
 
  | Rendered using Apache Maven Fluido Skin @project.version@
 -->
