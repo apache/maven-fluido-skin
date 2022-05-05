@@ -728,50 +728,6 @@ $indent     </ul>##
 #**##end
 #end
 ##
-#macro ( ohloh )
-#**##if ( $decoration.getCustomChild( 'fluidoSkin.ohloh.projectId' ) )
-#*  *##set ( $projectId = $decoration.getCustomValue( 'fluidoSkin.ohloh.projectId' ) )
-##
-#*  *##set( $widget = "users_logo.js" )
-##
-#*  *##if ( $decoration.getCustomChild( 'fluidoSkin.ohloh.widget' ) )
-#*    *##set( $definedWidget = $decoration.getCustomValue( 'fluidoSkin.ohloh.widget' ) )
-##
-#*    *##if ( $definedWidget.equalsIgnoreCase( "users-logo" ) )
-#*      *##set( $widget = "users_logo.js" )
-#*    *##elseif ( $definedWidget.equalsIgnoreCase( "users-green" ) )
-#*      *##set( $widget = "users.js?style=green" )
-#*    *##elseif ( $definedWidget.equalsIgnoreCase( "users-red" ) )
-#*    *##set( $widget = "users.js?style=red" )
-#*  *##elseif ( $definedWidget.equalsIgnoreCase( "users-blue" ) )
-#*    *##set( $widget = "users.js?style=blue" )
-#*  *##elseif ( $definedWidget.equalsIgnoreCase( "users-gray" ) )
-#*    *##set( $widget = "users.js?style=gray" )
-#*  *##elseif ( $definedWidget.equalsIgnoreCase( "users-rainbow" ) )
-#*    *##set( $widget = "users.js?style=rainbow" )
-#*  *##elseif ( $definedWidget.equalsIgnoreCase( "users" ) )
-#*    *##set( $widget = "users.js" )
-#*  *##elseif ( $definedWidget.equalsIgnoreCase( "thin-badge" ) )
-#*    *##set( $widget = "thin_badge.js" )
-#*  *##elseif ( $definedWidget.equalsIgnoreCase( "partner-badge" ) )
-#*    *##set( $widget = "partner_badge.js" )
-#*  *##elseif ( $definedWidget.equalsIgnoreCase( "languages" ) )
-#*    *##set( $widget = "languages.js" )
-#*  *##elseif ( $definedWidget.equalsIgnoreCase( "factoids" ) )
-#*    *##set( $widget = "factoids.js" )
-#*  *##elseif ( $definedWidget.equalsIgnoreCase( "cocomo" ) )
-#*    *##set( $widget = "cocomo.js" )
-#*  *##elseif ( $definedWidget.equalsIgnoreCase( "stats" ) )
-#*    *##set( $widget = "basic_stats.js" )
-#*  *##end
-#**##end
-##
-    <div id="ohloh" class="pull-right">
-      <script src="https://www.ohloh.net/p/${projectId}/widgets/project_${widget}"></script>
-    </div>
-  #end
-#end
-##
 #macro ( flattrHead )
 #**##if ( $decoration.getCustomChild( 'fluidoSkin.flattr.thing' )
           && ( $decoration.getCustomChild( 'fluidoSkin.flattr.url' ) || $project.url ) )

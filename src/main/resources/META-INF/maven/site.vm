@@ -290,8 +290,6 @@
 #*      *##builtByLogo( $decoration.poweredBy )
 #*    *#</p>
 #*    *##end
-##
-#*    *##ohloh()
       </div>
     </footer>
 #**##piwik()
