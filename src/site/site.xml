@@ -34,7 +34,6 @@ under the License.
 
   <custom>
     <fluidoSkin>
-      <facebookLike />
       <gitHub>
         <projectId>apache/${project.artifactId}</projectId>
         <ribbonOrientation>right</ribbonOrientation>
