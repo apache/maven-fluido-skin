@@ -202,19 +202,23 @@
           <div class="clear"><hr/></div>
         </div>
 
+#*    *##set ( $publishDateLeftContent = "#publishDate( 'left' $decoration.publishDate $decoration.version )" )
+#*    *##set ( $publishDateRightContent = "#publishDate( 'right' $decoration.publishDate $decoration.version )" )
+#*    *### MSITE-44
+#*    *##if ( !$topBarEnabled )
+#*      *##set ( $linksContent = "#links( $decoration.body.links )" )
+#*    *##end
+#*    *##if ( $publishDateLeftContent.length() > 0 || $publishDateRightContent.length() > 0 ||
+              ( $linksContent && $linksContent.length() > 0 ) )
         <div id="breadcrumbs">
           <ul class="breadcrumb">
-#*        *##publishDate( "left" $decoration.publishDate $decoration.version )
-#*        *##publishDate( "right" $decoration.publishDate $decoration.version )
+#*        *#$publishDateLeftContent##
+#*        *#$publishDateRightContent##
 ##
-#*        *### MSITE-44
-#*        *##if ( !$topBarEnabled
-                && $decoration.body.links
-                && $decoration.body.links.size() > 0 )
-#*          *##links( $decoration.body.links )
-#*        *##end
+#*        *#$!linksContent##
           </ul>
         </div>
+#*    *##end
       </header>
 ##
 #*    *##if ( $sideBarEnabled )
