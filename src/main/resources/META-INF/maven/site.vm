@@ -184,20 +184,7 @@
 #**##end
       <header>
         <div id="banner">
-          <div class="pull-left">##
-#*        *##if( $decoration.bannerLeft )
-#*          *##banner( $decoration.bannerLeft "bannerLeft" )
-#*        *##else
-#*        *### MSKINS-32
-            <h1>##
-#*          *##if( $project.name && $project.name != '' )
-#*            *#$project.name
-#*          *##else
-#*            *#$project.artifactId
-#*          *##end
-#*        *#</h1>##
-#*        *##end
-#*      *#</div>
+          <div class="pull-left">#banner( $decoration.bannerLeft "bannerLeft" )</div>
           <div class="pull-right">#banner( $decoration.bannerRight "bannerRight" )</div>
           <div class="clear"><hr/></div>
         </div>

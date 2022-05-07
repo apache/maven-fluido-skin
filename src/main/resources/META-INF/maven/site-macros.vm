@@ -179,7 +179,7 @@
 #*    *##end
 #*    *#<img src="$src" $alt$bannerTitle style="$imgBorder$imgWidth$imgHeight" />##
 #*  *##else
-#*    *#<h2>$banner.name</h2>
+#*    *#<h1>$banner.name</h1>
 #*  *##end
 ##
 #*  *##if( $banner.href )
