@@ -23,7 +23,7 @@ assert index.exists()
 // MSKINS-130 check that html structure is as clean as possible
 String html = index.getText()
 // active menu
-assert html.contains( '<li class="active"><a href="#"><span class="none"></span>About</a>' )
+assert html.contains( '<li class="active"><a><span class="none"></span>About</a>' )
 // inactive menu
 assert html.contains( '<li><a href="summary.html" title="Summary"><span class="none"></span>Summary</a>' )
 assert html.contains( '<li><a href="plugins.html" title="Plugins"><span class="none"></span>Plugins</a></li>' )
