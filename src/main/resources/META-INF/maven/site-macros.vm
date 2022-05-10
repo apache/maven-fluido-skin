@@ -22,14 +22,14 @@
         <a class="dropdown-toggle" data-toggle="dropdown">$menu.name <b class="caret"></b></a>
         <ul class="dropdown-menu">
 #*    *##foreach( $item in $menu.items )
-#*      *##if ($item.items.size() > 0)
+#*      *##if ( $item.items.size() > 0 )
             <li class="dropdown-submenu">
 #*            *##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
 #*            *##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
 #*            *##topLink( $currentItemHref $item.name $item.target )
 
               <ul class="dropdown-menu">
-#*            *##foreach($subitem in $item.items)
+#*            *##foreach( $subitem in $item.items )
 #*              *##set ( $currentItemHref = $PathTool.calculateLink( $subitem.href, $relativePath ) )
 #*              *##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
                   <li>#topLink( $currentItemHref $subitem.name $subitem.target )</li>
@@ -72,7 +72,7 @@
 #**##end
 #end
 ##
-#macro ( link $href $name $target $img $position $alt $border $width $height $icon)
+#macro ( link $href $name $target $img $position $alt $border $width $height $icon )
 #**##set ( $linkTitle = ' title="' + $name + '"' )
 #**##if( $target )
 #*  *##set ( $linkTarget = ' target="' + $target + '"' )
@@ -86,13 +86,13 @@
 #**##end
 #**##if ( $img )
 #*  *##if ( $position == "left" )
-#*    *#<a href="$href"$linkClass$linkTarget$linkTitle>#image($img $alt $border $width $height)$name</a>##
+#*    *#<a href="$href"$linkClass$linkTarget$linkTitle>#image( $img $alt $border $width $height )$name</a>##
 #*  *##else
-#*    *#<a href="$href"$linkClass$linkTarget$linkTitle>$name #image($img $alt $border $width $height)</a>##
+#*    *#<a href="$href"$linkClass$linkTarget$linkTitle>$name #image( $img $alt $border $width $height )</a>##
 #*  *##end
 #**##else
 #*  *#<a href="$href"$linkClass$linkTarget$linkTitle>##
-#*  *##if($icon)
+#*  *##if( $icon )
 #*    *#<span class="$icon"></span>##
 #*  *##end
 #*  *#$name</a>##
@@ -209,7 +209,7 @@
 #*    *##if ( $counter > 0 && $counter < $links.size() )
 #*    *#<span class="divider">|</span>
 #*    *##end
-#*    *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false)
+#*    *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false )
 #*    *#</li>
 #*  *##end
 #**##end
@@ -285,22 +285,22 @@ $indent    <li>##
 #**##if ( $item.img )
 #*  *##if ( $item.position == "left" )
 #*    *##if ( $alignedFileName == $currentItemHref )
-#*      *#<a>#image($item.img $item.alt $item.border $item.width $item.height) $item.name</a>##
+#*      *#<a>#image( $item.img $item.alt $item.border $item.width $item.height ) $item.name</a>##
 #*    *##else
-#*      *##link($currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false)
+#*      *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false )
 #*    *##end
 #*  *##else
 #*    *##if ( $alignedFileName == $currentItemHref )
-#*      *#<a>$item.name #image($item.img $item.alt $item.border $item.width $item.height)</a>##
+#*      *#<a>$item.name #image( $item.img $item.alt $item.border $item.width $item.height )</a>##
 #*    *##else
-#*      *##link($currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false)
+#*      *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false )
 #*    *##end
 #*  *##end
 #**##else
 #*  *##if ( $alignedFileName == $currentItemHref )
 #*    *#<a><span class="$collapseClass"></span>$item.name</a>##
 #*  *##else
-#*    *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height $collapseClass)
+#*    *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height $collapseClass )
 #*  *##end
 #**##end
 #**##if ( $item && $item.items && $item.items.size() > 0 )
@@ -415,7 +415,7 @@ $indent     </ul>##
 ##
 #**##if ( $datePosition.equalsIgnoreCase( "right" ) && ( $versionPosition.equalsIgnoreCase( "right" ) || !$topBarEnabled
                                                                                                          && $decoration.body.links
-                                                                                                         && $decoration.body.links.size() > 0) )
+                                                                                                         && $decoration.body.links.size() > 0 ) )
 #*  *##set ( $prefix = '<span class="divider">|</span> ' )
 #**##else
 #*  *##set ( $prefix = "" )
@@ -443,7 +443,7 @@ $indent     </ul>##
       </div>
 #*  *##elseif ( $datePosition.equalsIgnoreCase("left") )
         <li id="publishDate">$text.get( "template.lastpublished" ): $dateValue##
-#*    *##if ( $versionPosition.equalsIgnoreCase( $position ) || $breadcrumbs && $breadcrumbs.size() > 0)
+#*    *##if ( $versionPosition.equalsIgnoreCase( $position ) || $breadcrumbs && $breadcrumbs.size() > 0 )
 #*      *#<span class="divider">|</span>
 #*    *##end
 #*    *#</li>
@@ -486,7 +486,7 @@ $indent     </ul>##
 ##
 #macro ( builtByLogo $poweredBy )
 #**##if( $poweredBy )
-#**##foreach ($item in $poweredBy)
+#**##foreach ( $item in $poweredBy )
 #*  *##if( $item.href )
 #*    *##set ( $href = $PathTool.calculateLink( $item.href, $relativePath ) )
 #*    *##set ( $href = $href.replaceAll( '\\', '/' ) )

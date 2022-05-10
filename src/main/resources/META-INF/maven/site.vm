@@ -139,13 +139,13 @@
             </ul>
 #*      *##end
 ##
-#*      *##if (!$sideBarEnabled)
+#*      *##if ( !$sideBarEnabled )
           </nav>
           <div class="nav-collapse">
 #*      *##end
 ##
 #*      *##if ( $searchEnabled && !$sideBarEnabled )
-#*        *##googleSearch(true)
+#*        *##googleSearch( true )
 #*      *##end
 ##
 #*      *##if ( !$sideBarEnabled )
@@ -168,7 +168,7 @@
             </ul>
 #*      *##end
 ##
-#*      *##if (!$sideBarEnabled)
+#*      *##if ( !$sideBarEnabled )
           </div>
 #*      *##end
 ##
