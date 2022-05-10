@@ -582,10 +582,10 @@ $indent     </ul>##
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', '$accountId', 'auto');
       ga('send', 'pageview');
-#**##if( $decoration.getCustomValue( 'fluidoSkin.googleAnalytics.anonymizeIp', 'true' ) == 'true' )
+#**##if( $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.googleAnalytics.anonymizeIp', 'true' ) ) )
       ga('set', 'anonymizeIp', true);
 #**##end
-#**##if( $decoration.getCustomValue( 'fluidoSkin.googleAnalytics.forceSSL', 'true' ) == 'true' )
+#**##if( $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.googleAnalytics.forceSSL', 'true' ) ) )
       ga('set', 'forceSSL', true);
 #**##end
     </script>
@@ -697,11 +697,11 @@ $indent     </ul>##
 #*  *##set( $layout = $decoration.getCustomValue( 'fluidoSkin.facebookLike.layout', $layout ) )
 ##
 #*  *##set( $action = 'like' )
-#*  *##if ( $decoration.getCustomValue( 'fluidoSkin.facebookLike.recommend' ).equalsIgnoreCase( 'true' ) )
+#*  *##if ( $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.facebookLike.recommend', 'false' ) ) )
 #*    *##set( $action = 'recommend' )
 #*  *##end
 ##
-#*  *##set( $shareButton = $decoration.getCustomValue( 'fluidoSkin.facebookLike.shareButton', '' ).equalsIgnoreCase( 'true' ) )
+#*  *##set( $shareButton = $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.facebookLike.shareButton', 'false' ) ) )
 ##
     <div class="fb-like#if( !$sideBarEnabled ) pull-right#end" style="border:none; margin-top: 10px" data-href="$project.url" data-layout="$layout" data-show-faces="false" data-action="$action" data-share="$shareButton"></div>
 #**##end
@@ -710,8 +710,8 @@ $indent     </ul>##
 #macro ( followTwitter $sideBarEnabled )
 #**##if ( $decoration.getCustomChild( 'fluidoSkin.twitter.user' ) )
 #*  *##set( $user = $decoration.getCustomValue( 'fluidoSkin.twitter.user' ) )
-#*  *##set( $showUser = $decoration.getCustomValue( 'fluidoSkin.twitter.showUser', '' ).equalsIgnoreCase( 'true' ) )
-#*  *##set( $showFollowers = $decoration.getCustomValue( 'fluidoSkin.twitter.showFollowers', '' ).equalsIgnoreCase( 'true' ) )
+#*  *##set( $showUser = $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.twitter.showUser', 'false' ) ) )
+#*  *##set( $showFollowers = $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.twitter.showFollowers', 'false' ) ) )
 ##
 #*  *##if ( $sideBarEnabled )
 #*    *##set( $dataSize = "medium" )
