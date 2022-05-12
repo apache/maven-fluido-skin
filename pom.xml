@@ -801,6 +801,21 @@ under the License.
                   <outputDirectory>${project.build.directory}/site/mskins-177-apache-analytics/</outputDirectory>
                 </configuration>
               </execution>
+              <execution>
+                <id>copy-mskins-187</id>
+                <phase>site</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <resources>
+                    <resource>
+                      <directory>${project.build.directory}/it/mskins-187/target/site/</directory>
+                    </resource>
+                  </resources>
+                  <outputDirectory>${project.build.directory}/site/mskins-187/</outputDirectory>
+                </configuration>
+              </execution>
             </executions>
           </plugin>
         </plugins>

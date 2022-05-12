@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+ -->
+
+<project xmlns="http://maven.apache.org/DECORATION/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.1.0 http://maven.apache.org/xsd/decoration-1.1.0.xsd"
+  name="${skinName}">
+
+  <skin>
+    <groupId>${skinGroupId}</groupId>
+    <artifactId>${skinArtifactId}</artifactId>
+    <version>${skinVersion}</version>
+  </skin>
+
+  <body>
+
+    <menu ref="parent"/>
+
+    <menu name="External Links">
+      <item name="https://" href="https://example.com"/>
+      <item name="http://" href="http://example.com"/>
+      <item name="ftp://" href="ftp://example.com"/>
+      <item name="file://" href="file://example.com"/>
+      <item name="mailto:" href="mailto:info@example.com"/>
+      <item name=".asc" href="http://example.com/file.asc"/>
+      <item name=".jpg" href="http://example.com/file.jpg"/>
+      <item name=".jpeg" href="http://example.com/file.jpeg"/>
+      <item name=".gif" href="http://example.com/file.gif"/>
+      <item name=".png" href="http://example.com/file.png"/>
+      <item name=".tar.gz" href="http://example.com/file.tar.gz"/>
+      <item name=".zip" href="http://example.com/file.zip"/>
+      <item name=".md5" href="http://example.com/file.md5"/>
+      <item name=".sha1" href="http://example.com/file.sha1"/>
+      <item name="collape https://" collapse="true" href="https://example.com">
+        <item name="https://" href="https://example.com"/>
+        <item name="http://" href="http://example.com"/>
+        <item name="ftp://" href="ftp://example.com"/>
+        <item name="file://" href="file://example.com"/>
+        <item name=".asc" href="http://example.com/file.asc"/>
+        <item name=".jpg" href="http://example.com/file.jpg"/>
+        <item name=".jpeg" href="http://example.com/file.jpeg"/>
+        <item name=".gif" href="http://example.com/file.gif"/>
+        <item name=".png" href="http://example.com/file.png"/>
+        <item name=".tar.gz" href="http://example.com/file.tar.gz"/>
+        <item name=".zip" href="http://example.com/file.zip"/>
+        <item name=".md5" href="http://example.com/file.md5"/>
+        <item name=".sha1" href="http://example.com/file.sha1"/>
+      </item>
+      <item name="non-collapse .jpeg" collapse="false" href="http://example.com/file.jpeg">
+        <item name=".jpg" href="http://example.com/file.jpg"/>
+        <item name=".jpeg" href="http://example.com/file.jpeg"/>
+      </item>
+    </menu>
+
+    <menu ref="reports"/>
+
+  </body>
+
+</project>
