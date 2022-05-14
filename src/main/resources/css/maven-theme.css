@@ -66,7 +66,11 @@ li.none {
   background-image: url(https://cse.google.com/cse/images/google_custom_search_watermark.gif);
   background-attachment: initial; background-origin: initial; background-clip: initial;
   background-color: rgb(255, 255, 255); background-position: 0% 50%; background-repeat: no-repeat no-repeat;
-  width:95%
+  width:95%;
+}
+
+.sidebar-nav .search-query {
+  width: calc(100% - 30px);
 }
 
 body.topBarEnabled {
@@ -138,10 +142,6 @@ li.pull-right {
 
 .well {
   margin-bottom: 10px;
-}
-
-input.search-query {
-  padding-right: 0px;
 }
 
 a.dropdown-toggle {
