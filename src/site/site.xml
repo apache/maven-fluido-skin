@@ -29,7 +29,7 @@ under the License.
     <artifactId>maven-fluido-skin</artifactId>
     <!-- TODO check with next parent, and next m-site-p -->
     <!-- <version>${project.version}</version> -->
-    <version>1.10.0</version>
+    <version>1.11.0</version>
   </skin>
 
   <custom>

@@ -57,7 +57,12 @@ Welcome to ${project.name}!
 </project>
 +-----+
 
-** TopBar and/or sideBar
+
+ The following aspects may be configured:
+
+%{toc|section=1|fromDepth=3}
+
+** Topbar and/or Sidebar
 
  The skin supports different layouts, enabling/disabling the left sidebar menu and the topbar menu.
  Users have just play with flags in the <<<custom.fluidoSkin>>> element in <<<site.xml>>>:
@@ -89,7 +94,7 @@ Welcome to ${project.name}!
 
  Default skin setting is the option <<1>>.
 
-** TopBarIcon
+** Topbar icon
 
  When users decide to enable the topbar, they can plug a small icon/logo there (typically 108*20 px) just configuring
  the <<<custom.fluidoSkin.topBarIcon>>> element in <<<site.xml>>>:
@@ -112,7 +117,7 @@ Welcome to ${project.name}!
 </project>
 +-----+
 
-** TopBarContainerStyle
+** Topbar container style
 
   You can configure the style attribute value of the div container for your topbar
 
@@ -129,7 +134,7 @@ Welcome to ${project.name}!
 </project>
 +-----+
 
-** NavBarStyle
+** Navbar style
 
   You can configure style of your top bar nav (since bootstrap 2.1.0 is not anymore black by default).
   Use navbar-inverse to have the black one.
@@ -166,7 +171,7 @@ Welcome to ${project.name}!
 </project>
 +-----+
 
-** Matomo (e.g. Apache Analytics)
+** {Matomo} (e.g. Apache Analytics)
 
   Users can optionally enable <<Matomo>>.
   How to configure it for Apache Analytics, the <<options>> element will contain some configuration (here some privacy setup):
@@ -189,7 +194,7 @@ Welcome to ${project.name}!
 </project>
 +-----+
 
-** GoogleAnalytics
+** Google Analytics
 
  Users can optionally enable <<Google Analytics>> for the generated site:
 
@@ -220,7 +225,35 @@ Welcome to ${project.name}!
 </project>
 +-----+
 
-** GoogleSearch
+
+** Piwik web analytics (Deprecated)
+
+ <This feature is deprecated since version 1.11.0 as it has been replaced by {{Matomo}} ({{{https://matomo.org/blog/2018/01/piwik-is-now-matomo/}Piwik is named Matomo since 2018}})>.
+ 
+ Since version <<1.3.1>>, fluido-skin supports inserting {{{http://piwik.org/}Piwik web analytics}}
+ {{{http://piwik.org/docs/javascript-tracking/#toc-where-can-i-find-the-piwik-tracking-code}tracking code}} into the generated pages.
+ Users have to declare:
+
+ * <<<custom.fluidoSkin.piwik.piwikUrl>>>: URL of the Piwik installation without protocol, leading and trailing slashes (i. e. without <<http://>>).
+
+ * <<<custom.fluidoSkin.piwik.idsite>>>: ID in the Piwik installation of the site which is tracked.
+
++-----+
+<project name="xxx">
+  [...]
+  <custom>
+    <fluidoSkin>
+        <piwik>
+            <piwikUrl>example.org/piwik</piwikUrl>
+            <idsite>1</idsite>
+        </piwik>
+    </fluidoSkin>
+  </custom>
+  [...]
+</project>
++-----+
+
+** Google Search
 
  Users can optionally enable the <<Google Search>> for the generated site, requirements are:
 
@@ -263,7 +296,7 @@ Welcome to ${project.name}!
  External links are either rendered in the sidebar or the topbar. When both sidebar and topbar are enabled,
  they are rendered as dropdown in the topbar only.
 
-** SourceLineNumbers
+** Source code line numbers
 
  Source code sections are enhanced by {{{https://github.com/google/code-prettify}Google Code Prettify}}, users can
  optionally enable line numbers rendering (disabled by default):
@@ -424,31 +457,6 @@ Welcome to ${project.name}!
 
  <<Note>> in order the Facebook like button appears, <<<$\{project.url\}>>> property <<must>> be set in the <<<pom.xml>>>!
 
-** Piwik web analytics
-
- Since version <<1.3.1>>, fluido-skin supports inserting {{{http://piwik.org/}Piwik web analytics}}
- {{{http://piwik.org/docs/javascript-tracking/#toc-where-can-i-find-the-piwik-tracking-code}tracking code}} into the generated pages.
- Users have to declare:
-
- * <<<custom.fluidoSkin.piwik.piwikUrl>>>: URL of the Piwik installation without protocol, leading and trailing slashes (i. e. without <<http://>>).
-
- * <<<custom.fluidoSkin.piwik.idsite>>>: ID in the Piwik installation of the site which is tracked.
-
-+-----+
-<project name="xxx">
-  [...]
-  <custom>
-    <fluidoSkin>
-        <piwik>
-            <piwikUrl>example.org/piwik</piwikUrl>
-            <idsite>1</idsite>
-        </piwik>
-    </fluidoSkin>
-  </custom>
-  [...]
-</project>
-+-----+
-
 ** Flattr button
 
  Since version <<1.3.1>>, fluido-skin supports {{{http://flattr.com}Flattr}} {{{http://flattr.com/support/button}button}} integration.
@@ -495,7 +503,7 @@ Welcome to ${project.name}!
 </project>
 +-----+
 
-** Breadcrumb Divider
+** Breadcrumb divider
 
    Since version <<1.3.1>>, you can configure the breadcrumb divider (default is a slash):
 
