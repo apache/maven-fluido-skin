@@ -188,7 +188,23 @@ under the License.
         </configuration>
         <executions>
           <execution>
-            <id>copy-bootstrap-into-build-ouput</id>
+            <id>copy-anchor-js-into-build-output</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/node_modules/anchor-js</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+              <outputDirectory>${minifiyResourcesDirectory}/js</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-bootstrap-into-build-output</id>
             <phase>process-resources</phase>
             <goals>
               <goal>copy-resources</goal>
@@ -204,7 +220,7 @@ under the License.
             </configuration>
           </execution>
           <execution>
-            <id>copy-resources-into-build-ouput</id>
+            <id>copy-resources-into-build-output</id>
             <phase>process-resources</phase>
             <goals>
               <goal>copy-resources</goal>
@@ -227,7 +243,7 @@ under the License.
         <artifactId>frontend-maven-plugin</artifactId>
         <version>1.12.1</version>
         <configuration>
-          <arguments>install bootstrap@${bootstrap.version}</arguments>
+          <arguments>install bootstrap@${bootstrap.version} anchor-js@${anchorjs.version}</arguments>
           <nodeVersion>v16.15.1</nodeVersion>
           <workingDirectory>${project.build.directory}</workingDirectory>
         </configuration>
@@ -265,7 +281,7 @@ under the License.
                 <jsSourceFile>bootstrap.js</jsSourceFile>
                 <jsSourceFile>prettify.js</jsSourceFile>
                 <jsSourceFile>fluido.js</jsSourceFile>
-                <jsSourceFile>anchor-${anchorjs.version}.js</jsSourceFile>
+                <jsSourceFile>anchor.js</jsSourceFile>
               </jsSourceFiles>
               <jsFinalFile>apache-maven-fluido-${project.version}.js</jsFinalFile>
               <jsEngine>CLOSURE</jsEngine>
