@@ -1,0 +1,259 @@
+## Licensed to the Apache Software Foundation (ASF) under one
+## or more contributor license agreements.  See the NOTICE file
+## distributed with this work for additional information
+## regarding copyright ownership.  The ASF licenses this file
+## to you under the Apache License, Version 2.0 (the
+## "License"); you may not use this file except in compliance
+## with the License.  You may obtain a copy of the License at
+##
+##     http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing,
+## software distributed under the License is distributed on an
+## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+## KIND, either express or implied.  See the License for the
+## specific language governing permissions and limitations
+## under the License.
+##
+#macro ( image $img $alt $border $width $height )
+#**##if( $img )
+#*  *##if ( !$decoration.isLink( $img ) )
+#*    *##set ( $imgSrc = $PathTool.calculateLink( $img, $relativePath ) )
+#*    *##set ( $imgSrc = $imgSrc.replaceAll( '\\', '/' ) )
+#*    *##set ( $imgSrc = ' src="' + $imgSrc + '"' )
+#*  *##else
+#*    *##set ( $imgSrc = ' src="' + $img + '"' )
+#*  *##end
+#*  *##if( $alt )
+#*    *##set ( $imgAlt = ' alt="' + $alt + '"' )
+#*  *##else
+#*    *##set ( $imgAlt = ' alt=""' )
+#*  *##end
+#*  *##if( $border )
+#*    *##set ( $imgBorder = 'border: ' + $border + '; ' )
+#*  *##else
+#*    *##set ( $imgBorder = "" )
+#*  *##end
+#*  *##if( $width )
+#*    *##set ( $imgWidth = 'width: ' + $width + '; ' )
+#*  *##else
+#*    *##set ( $imgWidth = "" )
+#*  *##end
+#*  *##if( $height )
+#*    *##set ( $imgHeight = 'height: ' + $height + ';' )
+#*  *##else
+#*    *##set ( $imgHeight = "" )
+#*  *##end
+<img class="imageLink"$imgSrc$imgAlt style="$imgBorder$imgWidth$imgHeight" />##
+#**##end
+#end
+##
+#macro ( banner $banner $id )
+#**##if ( $banner )
+#*  *##if( $banner.href )
+#*    *##set ( $hrf = $banner.href )
+#*    *##if ( !$decoration.isLink( $hrf ) )
+#*      *##set ( $hrf = $PathTool.calculateLink( $hrf, $relativePath ) )
+#*      *##set ( $hrf = $hrf.replaceAll( '\\', '/' ) )
+#*      *##if ( ( $hrf == '' ) )
+#*        *##set ( $hrf = './' )
+#*      *##end
+#*    *##end
+#*    *#<a href="$hrf" id="$id"#if( $banner.alt ) title="$banner.alt"#end>##
+#*  *##else
+#*    *#<div id="$id">##
+#*  *##end
+##
+#*  *##if( $banner.src )
+#*    *##set ( $src = $banner.src )
+#*    *##if ( !$decoration.isLink( $src ) )
+#*      *##set ( $src = $PathTool.calculateLink( $src, $relativePath ) )
+#*      *##set ( $src = $src.replaceAll( '\\', '/' ) )
+#*    *##end
+#*    *##if ( $banner.alt )
+#*      *##set ( $alt = ' alt="' + $banner.alt + '"' )
+#*    *##elseif ( $banner.name )
+#*      *##set ( $alt = ' alt="' + $banner.name + '"' )
+#*    *##else
+#*      *##set ( $alt = ' alt=""' )
+#*    *##end
+#*    *##if( $banner.border )
+#*      *##set ( $imgBorder = 'border: ' + $banner.border + '; ' )
+#*    *##else
+#*      *##set ( $imgBorder = "" )
+#*    *##end
+#*    *##if( $banner.width )
+#*      *##set ( $imgWidth = 'width: ' + $banner.width + '; ' )
+#*    *##else
+#*      *##set ( $imgWidth = "" )
+#*    *##end
+#*    *##if( $banner.height )
+#*      *##set ( $imgHeight = 'height: ' + $banner.height + ';' )
+#*    *##else
+#*      *##set ( $imgHeight = "" )
+#*    *##end
+#*    *##if( $banner.title )
+#*      *##set ( $bannerTitle=' title="' + $banner.title + '"' )
+#*    *##else
+#*      *##set ( $bannerTitle="" )
+#*    *##end
+#*    *#<img src="$src" $alt$bannerTitle style="$imgBorder$imgWidth$imgHeight" />##
+#*  *##else
+#*    *#<h1>$banner.name</h1>
+#*  *##end
+##
+#*  *##if( $banner.href )
+#*    *#</a>##
+#*  *##else
+#*    *#</div>
+#*  *##end
+#**##end
+#end
+##
+#macro ( mainMenu $menus )
+  <ul class="nav nav-list">
+#**##foreach( $menu in $menus )
+#**##if ( $menu.name )
+#*  *##if ( $menu.img )
+#*    *##if( $menu.position )
+#*      *##set ( $position = $menu.position )
+#*    *##else
+#*      *##set ( $position = "left" )
+#*    *##end
+##
+#*    *##if ( !$decoration.isLink( $menu.img ) )
+#*      *##set ( $src = $PathTool.calculateLink( $menu.img, $relativePath ) )
+#*      *##set ( $src = $src.replaceAll( '\\', '/' ) )
+#*      *##set ( $src = ' src="' + $src + '"' )
+#*    *##else
+#*      *##set ( $src = ' src="' + $menu.img + '"' )
+#*    *##end
+##
+#*    *##if( $menu.alt )
+#*      *##set ( $alt = ' alt="' + $menu.alt + '"' )
+#*    *##else
+#*      *##set ( $alt = ' alt="' + $menu.name + '"' )
+#*    *##end
+##
+#*    *##if( $menu.border )
+#*      *##set ( $border = 'border: ' + $menu.border + '; ' )
+#*    *##else
+#*      *##set ( $border = 'border: 0;' )
+#*    *##end
+##
+#*    *##if( $menu.width )
+#*      *##set ( $width = 'width: ' + $menu.width + '; ' )
+#*    *##else
+#*      *##set ( $width = "" )
+#*    *##end
+#*    *##if( $menu.height )
+#*      *##set ( $height = 'height: ' + $menu.height + ';' )
+#*    *##else
+#*      *##set ( $height = "" )
+#*    *##end
+##
+#*    *##set ( $img = '<img class="imageLink"' + $src + $alt + ' style="' + $border + $width + $height + '" />' )
+##
+#*    *##if ( $position == "left" )
+   <li class="nav-header">$img $menu.name</li>
+#*    *##else
+   <li class="nav-header">$menu.name $img</li>
+#*    *##end
+#*  *##else
+   <li class="nav-header">$menu.name</li>
+#*  *##end
+#**##end
+#**##if ( $menu.items && $menu.items.size() > 0 )
+#*  *##foreach( $item in $menu.items )
+#*    *##menuItem( $item '' )
+#*  *##end
+#**##end
+#**##end
+  </ul>
+#end
+##
+#macro ( menuItem $item $indent )
+#**##set ( $collapseClass = "none" )
+#**##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
+#**##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
+##
+#**##if ( $item && $item.items && $item.items.size() > 0 )
+#*  *##if ( $item.collapse == false )
+#*    *##set ( $collapseClass = "icon-chevron-down" )
+#*  *##else
+#*    *### By default collapsed
+#*    *##set ( $collapseClass = "icon-chevron-right" )
+#*  *##end
+##
+#*  *##set ( $display = false )
+#*  *##displayTree( $display $item )
+##
+#*  *##if ( $alignedFileName == $currentItemHref || $display )
+#*    *##set ( $collapseClass = "icon-chevron-down" )
+#*  *##end
+#**##end
+##
+#**##if ( $alignedFileName == $currentItemHref )
+$indent    <li class="active">##
+#**##else
+$indent    <li>##
+#**##end
+##
+#**##if ( $item.img )
+#*  *##if ( $item.position == "left" )
+#*    *##if ( $alignedFileName == $currentItemHref )
+#*      *#<a>#image( $item.img $item.alt $item.border $item.width $item.height ) $item.name</a>##
+#*    *##else
+#*      *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false )
+#*    *##end
+#*  *##else
+#*    *##if ( $alignedFileName == $currentItemHref )
+#*      *#<a>$item.name #image( $item.img $item.alt $item.border $item.width $item.height )</a>##
+#*    *##else
+#*      *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false )
+#*    *##end
+#*  *##end
+#**##else
+#*  *##if ( $alignedFileName == $currentItemHref )
+#*    *#<a><span class="$collapseClass"></span>$item.name</a>##
+#*  *##else
+#*    *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height $collapseClass )
+#*  *##end
+#**##end
+#**##if ( $item && $item.items && $item.items.size() > 0 )
+#*  *##if ( $collapseClass == "icon-chevron-down" )
+
+$indent     <ul class="nav nav-list">
+#*    *##foreach( $subitem in $item.items )
+#*      *##menuItem( $subitem "$indent  " )
+#*    *##end
+$indent     </ul>##
+#*  *##end
+#**##end
+#**#</li>
+#end
+##
+#macro ( breadcrumbs $breadcrumbs $cssClass )
+#**##set ( $breadcrumbDivider = $decoration.getCustomValue( 'fluidoSkin.breadcrumbDivider', '/' ) )
+#**##foreach( $item in $breadcrumbs )
+#*  *##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
+#*  *##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
+#*  *##if ( ( $currentItemHref == '' ) )
+#*    *##set ( $currentItemHref = './' )
+#*  *##end
+##
+      <li class="$cssClass">##
+#*  *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false )
+#*  *#<span class="divider">$breadcrumbDivider</span>##
+#*  *#</li>
+#**##end
+#**### add Edit button if content is editable
+#**##if( $decoration.edit && $docRenderingContext.editable )
+#*  *##set ( $edit = ' <a href="' + $docRenderingContext.getDoxiaSourcePath( $decoration.edit ) + '"><img src="' + $relativePath + '/images/accessories-text-editor.png" title="Edit" /></a>' )
+#**##end
+#**##if ( $shortTitle )
+    <li class="active $cssClass">$shortTitle$!edit</li>
+#**##else
+    <li class="active $cssClass">$title$!edit</li>
+#**##end
+#end

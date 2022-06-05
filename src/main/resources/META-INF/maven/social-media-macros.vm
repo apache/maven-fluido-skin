@@ -1,0 +1,150 @@
+## Licensed to the Apache Software Foundation (ASF) under one
+## or more contributor license agreements.  See the NOTICE file
+## distributed with this work for additional information
+## regarding copyright ownership.  The ASF licenses this file
+## to you under the Apache License, Version 2.0 (the
+## "License"); you may not use this file except in compliance
+## with the License.  You may obtain a copy of the License at
+##
+##     http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing,
+## software distributed under the License is distributed on an
+## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+## KIND, either express or implied.  See the License for the
+## specific language governing permissions and limitations
+## under the License.
+##
+#macro ( forkMeOnGitHub )
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.gitHub.projectId' ) )
+##
+#*  *##set ( $gitHubProjectId = $decoration.getCustomValue( 'fluidoSkin.gitHub.projectId' ) )
+##
+#*  *##set ( $leftRibbon = { "red" : "forkme_left_red_aa0000.png", "green" : "forkme_left_green_007200.png", "black" : "forkme_left_darkblue_121621.png", "darkblue" : "forkme_left_darkblue_121621.png", "orange" : "forkme_left_orange_ff7600.png", "gray" : "forkme_left_gray_6d6d6d.png" } )
+#*  *##set ( $rightRibbon = { "red" : "forkme_right_red_aa0000.png", "green" : "forkme_right_green_007200.png", "black" : "forkme_right_darkblue_121621.png", "darkblue" : "forkme_right_darkblue_121621.png", "orange" : "forkme_right_orange_ff7600.png", "gray" : "forkme_right_gray_6d6d6d.png" } )
+##
+#*  *##set ( $ribbon = $leftRibbon )
+#*  *##set ( $ribbonOrientation = 'left' )
+#*  *##if ( $decoration.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'right' ) )
+#*    *##set ( $ribbonOrientation = 'right' )
+#*    *##set ( $ribbon = $rightRibbon )
+#*  *##end
+##
+#*  *##set ( $ribbonColor = 'red' )
+#*  *##set ( $definedRibbonColor = $decoration.getCustomChild( 'fluidoSkin.gitHub.ribbonColor' ) )
+##
+#*  *##if ( $definedRibbonColor
+            && ( $definedRibbonColor.getValue().equalsIgnoreCase( "red" )
+            || $definedRibbonColor.getValue().equalsIgnoreCase( "green" )
+            || $definedRibbonColor.getValue().equalsIgnoreCase( "black" )
+            || $definedRibbonColor.getValue().equalsIgnoreCase( "orange" )
+            || $definedRibbonColor.getValue().equalsIgnoreCase( "gray" ) ) )
+#*    *##set ( $ribbonColor = $definedRibbonColor.getValue().toLowerCase() )
+#*  *##end
+##
+    <a href="https://github.com/$gitHubProjectId">
+      <img style="position: absolute; top: 0; $ribbonOrientation: 0; border: 0; z-index: 10000;"
+        src="https://s3.amazonaws.com/github/ribbons/$ribbon.get( $ribbonColor )"
+        alt="Fork me on GitHub">
+    </a>
+#**##end
+#end
+##
+#macro ( facebookLoadSDK )
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.facebookLike' ) && $project.url )
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/${locale}/sdk.js#xfbml=1&version=v6.0"></script>
+#**##end
+#end
+##
+#macro ( facebookLike $sideBarEnabled )
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.facebookLike' ) && $project.url )
+##
+#*  *##set( $layout = 'box_count' )
+#*  *##if( !$sideBarEnabled )
+#*    *##set( $layout = 'button_count' )
+#*  *##end
+#*  *##set( $layout = $decoration.getCustomValue( 'fluidoSkin.facebookLike.layout', $layout ) )
+##
+#*  *##set( $action = 'like' )
+#*  *##if ( $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.facebookLike.recommend', 'false' ) ) )
+#*    *##set( $action = 'recommend' )
+#*  *##end
+##
+#*  *##set( $shareButton = $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.facebookLike.shareButton', 'false' ) ) )
+##
+    <div class="fb-like#if( !$sideBarEnabled ) pull-right#end" style="border:none; margin-top: 10px" data-href="$project.url" data-layout="$layout" data-show-faces="false" data-action="$action" data-share="$shareButton"></div>
+#**##end
+#end
+##
+#macro ( followTwitter $sideBarEnabled )
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.twitter.user' ) )
+#*  *##set( $user = $decoration.getCustomValue( 'fluidoSkin.twitter.user' ) )
+#*  *##set( $showUser = $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.twitter.showUser', 'false' ) ) )
+#*  *##set( $showFollowers = $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.twitter.showFollowers', 'false' ) ) )
+##
+#*  *##if ( $sideBarEnabled )
+#*    *##set( $dataSize = "medium" )
+#*    *##set( $dataAlign = "left" )
+    <div id="twitter" style="border:none; margin-top: 10px">
+#*  *##else
+#*    *##set( $dataSize = "large" )
+#*    *##set( $dataAlign = "right" )
+    <ul class="nav pull-right" style="border:none; margin-top: 7px"><li>
+#*  *##end
+##
+    <a href="https://twitter.com/${user}" class="twitter-follow-button" data-show-count="${showFollowers}" data-align="${dataAlign}" data-size="${dataSize}" data-show-screen-name="${showUser}" data-lang="${locale}">Follow ${user}</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+##
+#*  *##if ( $sideBarEnabled )
+    </div>
+#*  *##else
+    </li></ul>
+#*  *##end
+#**##end
+#end
+##
+#macro ( flattrHead )
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.flattr.thing' )
+          && ( $decoration.getCustomChild( 'fluidoSkin.flattr.url' ) || $project.url ) )
+    <script>
+    /* <![CDATA[ */
+        (function() {
+            var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+            s.async = true;
+            s.src = 'https://api.flattr.com/js/0.6/load.js?mode=auto';
+            t.parentNode.insertBefore(s, t);
+        })();
+    /* ]]> */</script>
+#**##end
+#end
+##
+#macro ( flattrBody $sideBarEnabled )
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.flattr.thing' )
+          && ( $decoration.getCustomChild( 'fluidoSkin.flattr.url' ) || $project.url ) )
+#*  *##set ( $flattrThing = $decoration.getCustomValue( 'fluidoSkin.flattr.thing' ) )
+#*  *##set ( $flattrUrl = $decoration.getCustomValue( 'fluidoSkin.flattr.url', $project.url ) )
+##
+#*  *##set ( $styleModifier = '' )
+#*  *##if ( $decoration.getCustomValue( 'fluidoSkin.flattr.style', '' ).equalsIgnoreCase( 'compact' ) )
+#*    *##set ( $styleModifier = 'rev="flattr;button:compact;"' )
+#*  *##end
+##
+#*  *##if ( $sideBarEnabled )
+    <div id="flattr">
+#*  *##else
+    <ul class="nav pull-right"><li>
+#*  *##end
+##
+    <a class="FlattrButton" style="display:none;" $styleModifier href="$flattrUrl"></a>
+    <noscript><a href="https://flattr.com/thing/$flattrThing" target="_blank">
+    <img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" style="border: 0;" /></a></noscript>
+##
+#*  *##if ( $sideBarEnabled )
+    </div>
+#*  *##else
+    </li></ul>
+#*  *##end
+#**##end
+#end

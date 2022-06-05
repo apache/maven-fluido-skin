@@ -1,0 +1,83 @@
+## Licensed to the Apache Software Foundation (ASF) under one
+## or more contributor license agreements.  See the NOTICE file
+## distributed with this work for additional information
+## regarding copyright ownership.  The ASF licenses this file
+## to you under the Apache License, Version 2.0 (the
+## "License"); you may not use this file except in compliance
+## with the License.  You may obtain a copy of the License at
+##
+##     http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing,
+## software distributed under the License is distributed on an
+## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+## KIND, either express or implied.  See the License for the
+## specific language governing permissions and limitations
+## under the License.
+##
+#macro ( builtByLogo $poweredBy )
+#**##if( $poweredBy )
+#**##foreach ( $item in $poweredBy )
+#*  *##if( $item.href )
+#*    *##set ( $href = $PathTool.calculateLink( $item.href, $relativePath ) )
+#*    *##set ( $href = $href.replaceAll( '\\', '/' ) )
+#*  *##else
+#*    *##set ( $href="https://maven.apache.org/" )
+#*  *##end
+##
+#*  *##if( $item.name )
+#*    *##set ( $name = $item.name )
+#*  *##else
+#*    *##set ( $name = $text.get( "template.builtby" )  )
+#*    *##set ( $name = "${name} Maven"  )
+#*  *##end
+##
+#*  *##if( $item.img )
+#*    *##set ( $img = $item.img )
+#*  *##else
+#*    *##set ( $img = "images/logos/maven-feather.png" )
+#*  *##end
+##
+#*  *##if ( !$decoration.isLink( $img ) )
+#*    *##set ( $img = $PathTool.calculateLink( $img, $relativePath ) )
+#*    *##set ( $img = $img.replaceAll( '\\', '/' ) )
+#*  *##end
+##
+#*  *##if( $item.alt )
+#*    *##set ( $alt = ' alt="' + $item.alt + '"' )
+#*  *##else
+#*    *##set ( $alt = ' alt="' + $name + '"' )
+#*  *##end
+##
+#*  *##if( $item.border )
+#*    *##set ( $border = 'border: ' + $item.border + '; ' )
+#*  *##else
+#*    *##set ( $border = "" )
+#*  *##end
+##
+#*  *##if( $item.width )
+#*    *##set ( $width = 'width: ' + $item.width + '; ' )
+#*  *##else
+#*    *##set ( $width = "" )
+#*  *##end
+#*  *##if( $item.height )
+#*    *##set ( $height = 'height: ' + $item.height + ';' )
+#*  *##else
+#*    *##set ( $height = "" )
+#*  *##end
+##
+#*  *#<a href="$href" title="$name" class="builtBy">##
+#*    *#<img class="builtBy" $alt src="$img" style="$border$width$height" />##
+#*  *#</a>
+#**##end
+#**##if( $poweredBy.isEmpty() )
+#*  *#<a href="http://maven.apache.org/" title="$text.get( "template.builtby" ) Maven" class="poweredBy">##
+#*    *#<img class="builtBy" alt="$text.get( "template.builtby" ) Maven" src="$relativePath/images/logos/maven-feather.png" />##
+#*  *#</a>
+#**##end
+#**##else
+#**#<a href="http://maven.apache.org/" title="$text.get( "template.builtby" ) Maven" class="poweredBy">##
+#*  *#<img class="builtBy" alt="$text.get( "template.builtby" ) Maven" src="$relativePath/images/logos/maven-feather.png" />##
+#**#</a>
+#**##end
+#end
