@@ -98,12 +98,14 @@ under the License.
   </contributors>
 
   <properties>
-    <bootstrap.version>2.3.2</bootstrap.version>
+    <bootstrap.version>3.1.1</bootstrap.version>
     <jquery.version>1.11.2</jquery.version>
     <sitePluginVersion>3.12.0</sitePluginVersion>
     <projectInfoReportsPluginVersion>3.3.0</projectInfoReportsPluginVersion>
     <project.build.outputTimestamp>2022-05-14T18:16:12Z</project.build.outputTimestamp>
     <anchorjs.version>4.2.2</anchorjs.version>
+
+    <minifiyResourcesDirectory>${project.build.directory}/interim-minify/</minifiyResourcesDirectory>
   </properties>
 
   <build>
@@ -184,6 +186,61 @@ under the License.
           </delimiters>
           <useDefaultDelimiters>false</useDefaultDelimiters>
         </configuration>
+        <executions>
+          <execution>
+            <id>copy-bootstrap-into-build-ouput</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/node_modules/bootstrap/dist</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+              <outputDirectory>${minifiyResourcesDirectory}</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-resources-into-build-ouput</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${basedir}/src/main/resources</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+              <outputDirectory>${minifiyResourcesDirectory}</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Lets use the frontend plugin to grab the release of bootstrap. -->
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>1.12.1</version>
+        <configuration>
+          <arguments>install bootstrap@${bootstrap.version}</arguments>
+          <nodeVersion>v16.15.1</nodeVersion>
+          <workingDirectory>${project.build.directory}</workingDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <id>retrieve-bootstrap</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>install-node-and-npm</goal>
+              <goal>npm</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>com.samaxes.maven</groupId>
@@ -192,13 +249,12 @@ under the License.
         <executions>
           <execution>
             <id>default-minify</id>
-            <phase>generate-resources</phase>
+            <phase>compile</phase>
             <configuration>
-              <webappSourceDir>${basedir}/src/main/resources</webappSourceDir>
+              <webappSourceDir>${minifiyResourcesDirectory}</webappSourceDir>
               <cssSourceDir>css</cssSourceDir>
               <cssSourceFiles>
-                <cssSourceFile>bootstrap-${bootstrap.version}.css</cssSourceFile>
-                <cssSourceFile>bootstrap-${bootstrap.version}-responsive.css</cssSourceFile>
+                <cssSourceFile>bootstrap.css</cssSourceFile>
                 <cssSourceFile>maven-base.css</cssSourceFile>
                 <cssSourceFile>maven-theme.css</cssSourceFile>
                 <cssSourceFile>prettify.css</cssSourceFile>
@@ -206,8 +262,7 @@ under the License.
               <cssFinalFile>apache-maven-fluido-${project.version}.css</cssFinalFile>
               <jsSourceDir>js</jsSourceDir>
               <jsSourceFiles>
-                <jsSourceFile>jquery-${jquery.version}.js</jsSourceFile>
-                <jsSourceFile>bootstrap-${bootstrap.version}.js</jsSourceFile>
+                <jsSourceFile>bootstrap.js</jsSourceFile>
                 <jsSourceFile>prettify.js</jsSourceFile>
                 <jsSourceFile>fluido.js</jsSourceFile>
                 <jsSourceFile>anchor-${anchorjs.version}.js</jsSourceFile>
