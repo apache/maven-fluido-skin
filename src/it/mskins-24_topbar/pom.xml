@@ -26,11 +26,11 @@
 
   <groupId>org.apache.maven.skins.its</groupId>
   <artifactId>@project.artifactId@-mskins-24_topbar</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>@project.version@</version>
   <packaging>jar</packaging>
 
   <name>@project.name@ IT, MSKINS-24</name>
-  <url>http://maven.apache.org/skins/@project.artifactId@/mskins-24_topbar/</url>
+  <url>https://maven.apache.org/skins/@project.artifactId@/mskins-24_topbar/</url>
 
   <properties>
     <skinName>@project.name@</skinName>

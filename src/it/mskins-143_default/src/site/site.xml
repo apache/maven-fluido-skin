@@ -33,6 +33,10 @@
 
   <body/>
 
+  <!-- START SNIPPET: skin-custom-config -->
+  <!-- no custom config -->
+  <!-- END SNIPPET: skin-custom-config -->
+
   <googleAnalyticsAccountId>FOO-BAR</googleAnalyticsAccountId>
 
 </project>

@@ -26,11 +26,11 @@
 
   <groupId>org.apache.maven.skins.its</groupId>
   <artifactId>@project.artifactId@-topbar</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>@project.version@</version>
   <packaging>jar</packaging>
 
-  <name>@project.artifactId@ IT, topbar layout</name>
-  <url>http://maven.apache.org/skins/@project.artifactId@/topbar/</url>
+  <name>@project.name@ IT, topbar layout</name>
+  <url>https://maven.apache.org/skins/@project.artifactId@/topbar/</url>
 
   <properties>
     <skinName>@project.name@</skinName>

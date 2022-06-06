@@ -48,7 +48,7 @@ Powered By
 * Non-ASF projects
 
 *-----*------*------*
-{{{//http://www.mojohaus.org/}MojoHaus}} | {{{https://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/latest/index.html}Maven Alfresco Lifecycle}} | {{{http://www.silverpeas.org/}silverpeas.org}}
+{{{http://www.mojohaus.org/}MojoHaus}} | {{{https://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/latest/index.html}Maven Alfresco Lifecycle}} | {{{http://www.silverpeas.org/}silverpeas.org}}
 *-----*------*------*
 {{{http://www.mybatis.org/mybatis-3/}MyBatis SQL Mapper}} | {{{http://redline-rpm.org/}Redline RPM}} | {{{http://www.99soft.org/}The 99 Software Foundation}}
 *-----*------*------*

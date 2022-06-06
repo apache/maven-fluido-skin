@@ -26,7 +26,7 @@
 
   <groupId>org.apache.maven.skins.its</groupId>
   <artifactId>mskins-143_false</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>@project.version@</version>
 
   <properties>
     <skinName>@project.name@</skinName>
