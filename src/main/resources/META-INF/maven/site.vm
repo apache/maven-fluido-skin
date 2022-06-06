@@ -16,7 +16,9 @@
 ## specific language governing permissions and limitations
 ## under the License.
 ##
-#parse( "analytics-macros.vm" )
+#parse( "analytic-macros.vm" )
+#parse( "footer-macros.vm" )
+#parse( "header-macros.vm" )
 #parse( "navbar-macros.vm" )
 #parse( "sidebar-macros.vm" )
 #parse( "site-macros.vm" )
