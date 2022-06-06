@@ -32,6 +32,10 @@
   </skin>
 
   <body>
+    <breadcrumbs>
+      <item name="Apache Maven Fluido Skin"  href="https://maven.apache.org/skins/maven-fluido-skin/index.html" />
+      <item name="Maven Fluido Skin ITs"  href="https://maven.apache.org/skins/maven-fluido-skin/ITs.html" />
+    </breadcrumbs>
     <!-- START SNIPPET: skin-custom-config -->
     <links>
       <item name="First Link" href="http://maven.apache.org/"/>

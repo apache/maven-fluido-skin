@@ -31,7 +31,12 @@
     <version>${skinVersion}</version>
   </skin>
 
-  <body/>
+  <body>
+    <breadcrumbs>
+      <item name="Apache Maven Fluido Skin"  href="https://maven.apache.org/skins/maven-fluido-skin/index.html" />
+      <item name="Maven Fluido Skin ITs"  href="https://maven.apache.org/skins/maven-fluido-skin/ITs.html" />
+    </breadcrumbs>
+  </body>
 
   <!-- START SNIPPET: skin-custom-config -->
   <!-- no custom config -->
