@@ -26,10 +26,10 @@
 
   <groupId>org.apache.maven.skins.its</groupId>
   <artifactId>@project.artifactId@-mskins-161-parent</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>@project.version@</version>
   <packaging>pom</packaging>
   <name>@project.name@ IT, MSKINS-161</name>
-  <url>http://maven.apache.org/skins/@project.artifactId@/mskins-161/</url>
+  <url>https://maven.apache.org/skins/@project.artifactId@/mskins-161/</url>
 
   <modules>
     <module>sidebar-fb-like-share</module>

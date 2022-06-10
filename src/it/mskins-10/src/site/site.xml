@@ -32,6 +32,10 @@
   </skin>
 
   <body>
+    <breadcrumbs>
+      <item name="Apache Maven Fluido Skin"  href="https://maven.apache.org/skins/maven-fluido-skin/index.html" />
+      <item name="Maven Fluido Skin ITs"  href="https://maven.apache.org/skins/maven-fluido-skin/ITs.html" />
+    </breadcrumbs>
     <menu>
       <item name="Suppress line wrapping in navigation caused by spaces or hyphens" href="./"/>
       <item name="Beer" href="beer.html" collapse="true">

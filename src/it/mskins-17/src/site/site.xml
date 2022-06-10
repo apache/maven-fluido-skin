@@ -39,5 +39,10 @@
 
   <publishDate format="yyyy-MM-dd" position="right" />
 
-  <body/>
+  <body>
+    <breadcrumbs>
+      <item name="Apache Maven Fluido Skin"  href="https://maven.apache.org/skins/maven-fluido-skin/index.html" />
+      <item name="Maven Fluido Skin ITs"  href="https://maven.apache.org/skins/maven-fluido-skin/ITs.html" />
+    </breadcrumbs>
+  </body>
 </project>

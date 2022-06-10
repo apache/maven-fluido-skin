@@ -27,9 +27,7 @@ under the License.
   <skin>
     <groupId>org.apache.maven.skins</groupId>
     <artifactId>maven-fluido-skin</artifactId>
-    <!-- TODO check with next parent, and next m-site-p -->
-    <!-- <version>${project.version}</version> -->
-    <version>1.10.0</version>
+    <version>${project.version}</version><!-- keep using current version, even if it implies running mvn -Prun-its,reporting install site -->
   </skin>
 
   <custom>

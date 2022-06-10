@@ -44,6 +44,10 @@
   <version position="right" />
 
   <body>
+    <breadcrumbs>
+      <item name="Apache Maven Fluido Skin"  href="https://maven.apache.org/skins/maven-fluido-skin/index.html" />
+      <item name="Maven Fluido Skin ITs"  href="https://maven.apache.org/skins/maven-fluido-skin/ITs.html" />
+    </breadcrumbs>
 
     <menu name="Overview">
       <item name="Introduction" href="index.html"/>

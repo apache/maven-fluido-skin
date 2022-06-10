@@ -39,6 +39,10 @@
   </custom>
   
   <body>
+    <breadcrumbs>
+      <item name="Apache Maven Fluido Skin"  href="https://maven.apache.org/skins/maven-fluido-skin/index.html" />
+      <item name="Maven Fluido Skin ITs"  href="https://maven.apache.org/skins/maven-fluido-skin/ITs.html" />
+    </breadcrumbs>
     <links>
       <item name="Maven Skins" href="http://maven.apache.org/skins/"/>
       <item name="Twitter Bootstrap" href="http://twitter.github.com/bootstrap/"/>
