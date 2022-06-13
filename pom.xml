@@ -164,6 +164,7 @@ under the License.
               <exclude>src/main/resources/js/prettify.js</exclude>
               <exclude>src/main/resources/js/jquery-*.js</exclude>
               <exclude>src/main/resources/js/anchor-*.js</exclude>
+              <exclude>src/main/resources/css/gh-fork-ribbon.css</exclude>
             </excludes>
           </configuration>
         </plugin>
@@ -202,6 +203,7 @@ under the License.
                 <cssSourceFile>maven-base.css</cssSourceFile>
                 <cssSourceFile>maven-theme.css</cssSourceFile>
                 <cssSourceFile>prettify.css</cssSourceFile>
+                <cssSourceFile>gh-fork-ribbon.css</cssSourceFile>
               </cssSourceFiles>
               <cssFinalFile>apache-maven-fluido-${project.version}.css</cssFinalFile>
               <jsSourceDir>js</jsSourceDir>

@@ -634,38 +634,32 @@ $indent     </ul>##
 <script>asyncJs( 'https://cse.google.com/brand?form=search-form' )</script>
 #end
 ##
-#macro ( forkMeOnGitHub )
-#**##if ( $decoration.getCustomChild( 'fluidoSkin.gitHub.projectId' ) )
-##
-#*  *##set ( $gitHubProjectId = $decoration.getCustomValue( 'fluidoSkin.gitHub.projectId' ) )
-##
-#*  *##set ( $leftRibbon = { "red" : "forkme_left_red_aa0000.png", "green" : "forkme_left_green_007200.png", "black" : "forkme_left_darkblue_121621.png", "darkblue" : "forkme_left_darkblue_121621.png", "orange" : "forkme_left_orange_ff7600.png", "gray" : "forkme_left_gray_6d6d6d.png" } )
-#*  *##set ( $rightRibbon = { "red" : "forkme_right_red_aa0000.png", "green" : "forkme_right_green_007200.png", "black" : "forkme_right_darkblue_121621.png", "darkblue" : "forkme_right_darkblue_121621.png", "orange" : "forkme_right_orange_ff7600.png", "gray" : "forkme_right_gray_6d6d6d.png" } )
-##
-#*  *##set ( $ribbon = $leftRibbon )
-#*  *##set ( $ribbonOrientation = 'left' )
-#*  *##if ( $decoration.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'right' ) )
-#*    *##set ( $ribbonOrientation = 'right' )
-#*    *##set ( $ribbon = $rightRibbon )
-#*  *##end
+#macro ( forkMeOnGitHubHead )
 ##
 #*  *##set ( $ribbonColor = 'red' )
 #*  *##set ( $definedRibbonColor = $decoration.getCustomChild( 'fluidoSkin.gitHub.ribbonColor' ) )
 ##
 #*  *##if ( $definedRibbonColor
-            && ( $definedRibbonColor.getValue().equalsIgnoreCase( "red" )
-            || $definedRibbonColor.getValue().equalsIgnoreCase( "green" )
+            && ($definedRibbonColor.getValue().equalsIgnoreCase( "green" )
             || $definedRibbonColor.getValue().equalsIgnoreCase( "black" )
             || $definedRibbonColor.getValue().equalsIgnoreCase( "orange" )
             || $definedRibbonColor.getValue().equalsIgnoreCase( "gray" ) ) )
 #*    *##set ( $ribbonColor = $definedRibbonColor.getValue().toLowerCase() )
+    <style>.github-fork-ribbon:before { background-color: $ribbonColor; }</style>
+#*  *##end
+#end
+##
+#macro ( forkMeOnGitHub )
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.gitHub.projectId' ) )
+##
+#*  *##set ( $gitHubProjectId = $decoration.getCustomValue( 'fluidoSkin.gitHub.projectId' ) )
+##
+#*  *##set ( $ribbonOrientation = 'left-top' )
+#*  *##if ( $decoration.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'right' ) )
+#*    *##set ( $ribbonOrientation = 'right-top' )
 #*  *##end
 ##
-    <a href="https://github.com/$gitHubProjectId">
-      <img style="position: absolute; top: 0; $ribbonOrientation: 0; border: 0; z-index: 10000;"
-        src="https://s3.amazonaws.com/github/ribbons/$ribbon.get( $ribbonColor )"
-        alt="Fork me on GitHub">
-    </a>
+    <a class="github-fork-ribbon $ribbonOrientation" href="https://github.com/$gitHubProjectId" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
 #**##end
 #end
 ##

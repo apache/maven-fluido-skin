@@ -56,6 +56,7 @@
 #**##googleAnalytics( $decoration.googleAnalyticsAccountId )
 #**##matomo( $decoration.custom.getChild('matomo') )
 #**##flattrHead()
+#**##forkMeOnGitHubHead()
   </head>
 #**##set ( $topBarEnabled = $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.topBarEnabled', 'false' ) ) )
 #**##if ( $topBarEnabled )
