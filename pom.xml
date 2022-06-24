@@ -98,12 +98,15 @@ under the License.
   </contributors>
 
   <properties>
-    <bootstrap.version>2.3.2</bootstrap.version>
+    <bootstrap.version>3.1.1</bootstrap.version>
+    <code-prettify.version>0.1.0</code-prettify.version>
     <jquery.version>1.11.2</jquery.version>
     <sitePluginVersion>3.12.0</sitePluginVersion>
     <projectInfoReportsPluginVersion>3.3.0</projectInfoReportsPluginVersion>
     <project.build.outputTimestamp>2022-05-14T18:16:12Z</project.build.outputTimestamp>
     <anchorjs.version>4.2.2</anchorjs.version>
+    <!-- MSKINS-191 added so we can move versions of the library into the project as release artifacts. -->
+    <minifiyResourcesDirectory>${project.build.directory}/interim-minifiy/</minifiyResourcesDirectory>
   </properties>
 
   <build>
@@ -123,33 +126,8 @@ under the License.
         <excludes>
           <exclude>css/**</exclude>
           <exclude>js/**</exclude>
-          <exclude>META-INF/**</exclude>
         </excludes>
-      </resource>
-
-      <resource>
-        <directory>${basedir}/src/main/resources</directory>
-        <includes>
-          <include>META-INF/**</include>
-        </includes>
         <filtering>true</filtering> <!-- add skin-info -->
-      </resource>
-
-      <!-- include the print.css -->
-      <resource>
-        <directory>${basedir}/src/main/resources</directory>
-        <includes>
-          <include>css/print.css</include>
-        </includes>
-      </resource>
-
-      <!-- include minified only -->
-      <resource>
-        <directory>${project.build.directory}/${project.build.finalName}</directory>
-        <includes>
-          <include>css/apache-maven-fluido-${project.version}.min.css</include>
-          <include>js/apache-maven-fluido-${project.version}.min.js</include>
-        </includes>
       </resource>
     </resources>
 
@@ -161,9 +139,6 @@ under the License.
           <configuration>
             <excludes combine.children="append">
               <exclude>src/main/resources/fonts/glyphicons-halflings-regular.svg</exclude>
-              <exclude>src/main/resources/js/prettify.js</exclude>
-              <exclude>src/main/resources/js/jquery-*.js</exclude>
-              <exclude>src/main/resources/js/anchor-*.js</exclude>
               <exclude>src/main/resources/css/gh-fork-ribbon.css</exclude>
             </excludes>
           </configuration>
@@ -173,18 +148,166 @@ under the License.
           <artifactId>maven-site-plugin</artifactId>
           <version>${sitePluginVersion}</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <configuration>
+            <delimiters>
+              <delimiter>@</delimiter>
+            </delimiters>
+            <useDefaultDelimiters>false</useDefaultDelimiters>
+          </configuration>
+        </plugin>  
       </plugins>
     </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-anchor-js-into-interim-minify</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/node_modules/anchor-js</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+              <outputDirectory>${minifiyResourcesDirectory}/js</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-async-js-into-interim-minify</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/node_modules/jquery/dist</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+              <outputDirectory>${minifiyResourcesDirectory}/js</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-bootstrap-into-interim-minify</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/node_modules/bootstrap/dist</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+              <outputDirectory>${minifiyResourcesDirectory}</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-bootstrap-into-build-output</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/node_modules/bootstrap/fonts</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+              <outputDirectory>${project.build.outputDirectory}/fonts</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-resources-into-build-output</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${basedir}/src/main/resources</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+              <outputDirectory>${minifiyResourcesDirectory}</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-prettify-css-into-interim-minify</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/node_modules/code-prettify/src</directory>
+                  <includes>
+                    <include>prettify.css</include>
+                  </includes>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+              <outputDirectory>${minifiyResourcesDirectory}/css</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-prettify-js-into-interim-minify</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/node_modules/code-prettify/src</directory>
+                  <includes>
+                    <include>prettify.js</include>
+                  </includes>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+              <outputDirectory>${minifiyResourcesDirectory}/js</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- MSKINS-191 uses the frontend plugin to grab the release of front end libraries we use as part of the skin. -->
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>1.12.1</version>
         <configuration>
-          <delimiters>
-            <delimiter>@</delimiter>
-          </delimiters>
-          <useDefaultDelimiters>false</useDefaultDelimiters>
+          <nodeVersion>v16.15.1</nodeVersion>
+          <workingDirectory>${project.build.directory}</workingDirectory>
         </configuration>
+        <executions>
+          <execution>
+            <id>retrieve-bootstrap</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>install-node-and-npm</goal>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+                <arguments>install bootstrap@${bootstrap.version} anchor-js@${anchorjs.version} jquery@${jquery.version} code-prettify@${code-prettify.version}</arguments>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>com.samaxes.maven</groupId>
@@ -193,13 +316,13 @@ under the License.
         <executions>
           <execution>
             <id>default-minify</id>
-            <phase>generate-resources</phase>
+            <phase>compile</phase>
             <configuration>
-              <webappSourceDir>${basedir}/src/main/resources</webappSourceDir>
+              <webappSourceDir>${minifiyResourcesDirectory}</webappSourceDir>
+              <webappTargetDir>${project.build.outputDirectory}</webappTargetDir>
               <cssSourceDir>css</cssSourceDir>
               <cssSourceFiles>
-                <cssSourceFile>bootstrap-${bootstrap.version}.css</cssSourceFile>
-                <cssSourceFile>bootstrap-${bootstrap.version}-responsive.css</cssSourceFile>
+                <cssSourceFile>bootstrap.css</cssSourceFile>
                 <cssSourceFile>maven-base.css</cssSourceFile>
                 <cssSourceFile>maven-theme.css</cssSourceFile>
                 <cssSourceFile>prettify.css</cssSourceFile>
@@ -208,14 +331,15 @@ under the License.
               <cssFinalFile>apache-maven-fluido-${project.version}.css</cssFinalFile>
               <jsSourceDir>js</jsSourceDir>
               <jsSourceFiles>
-                <jsSourceFile>jquery-${jquery.version}.js</jsSourceFile>
-                <jsSourceFile>bootstrap-${bootstrap.version}.js</jsSourceFile>
+                <jsSourceFile>jquery.js</jsSourceFile>
+                <jsSourceFile>bootstrap.js</jsSourceFile>
                 <jsSourceFile>prettify.js</jsSourceFile>
                 <jsSourceFile>fluido.js</jsSourceFile>
-                <jsSourceFile>anchor-${anchorjs.version}.js</jsSourceFile>
+                <jsSourceFile>anchor.js</jsSourceFile>
               </jsSourceFiles>
               <jsFinalFile>apache-maven-fluido-${project.version}.js</jsFinalFile>
               <jsEngine>CLOSURE</jsEngine>
+              <nosuffix>true</nosuffix>
             </configuration>
             <goals>
               <goal>minify</goal>
