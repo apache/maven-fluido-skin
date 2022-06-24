@@ -484,7 +484,7 @@ $indent     </ul>##
 #**##end
 #end
 ##
-#macro ( builtByLogo $poweredBy )
+#macro ( builtByLogo $poweredBy $spanClasses )
 #**##if( $poweredBy )
 #**##foreach ( $item in $poweredBy )
 #*  *##if( $item.href )
@@ -504,7 +504,7 @@ $indent     </ul>##
 #*  *##if( $item.img )
 #*    *##set ( $img = $item.img )
 #*  *##else
-#*    *##set ( $img = "images/logos/maven-feather.png" )
+#*    *##set ( $img = "images/logos/powered-by-apache.png" )
 #*  *##end
 ##
 #*  *##if ( !$decoration.isLink( $img ) )
@@ -535,19 +535,25 @@ $indent     </ul>##
 #*    *##set ( $height = "" )
 #*  *##end
 ##
-#*  *#<a href="$href" title="$name" class="builtBy">##
-#*    *#<img class="builtBy" $alt src="$img" style="$border$width$height" />##
-#*  *#</a>
+#*  *#<span class="$spanClasses">
+#*    *#<a href="$href" title="$name" class="builtBy">##
+#*      *#<img class="builtBy" $alt src="$img" style="$border$width$height" />##
+#*    *#</a>
+#*  *#</span>
 #**##end
 #**##if( $poweredBy.isEmpty() )
-#*  *#<a href="http://maven.apache.org/" title="$text.get( "template.builtby" ) Maven" class="poweredBy">##
-#*    *#<img class="builtBy" alt="$text.get( "template.builtby" ) Maven" src="$relativePath/images/logos/maven-feather.png" />##
-#*  *#</a>
+#*  *#<span class="$spanClasses">
+#*    *#<a href="http://maven.apache.org/" title="$text.get( "template.builtby" ) Maven" class="poweredBy">##
+#*      *#<img class="builtBy" alt="$text.get( "template.builtby" ) Maven" src="$relativePath/images/logos/powered-by-apache.png" />##
+#*    *#</a>
+#*  *#</span>
 #**##end
 #**##else
-#**#<a href="http://maven.apache.org/" title="$text.get( "template.builtby" ) Maven" class="poweredBy">##
-#*  *#<img class="builtBy" alt="$text.get( "template.builtby" ) Maven" src="$relativePath/images/logos/maven-feather.png" />##
-#**#</a>
+#**#<span class="$spanClasses">
+#*  *#<a href="http://maven.apache.org/" title="$text.get( "template.builtby" ) Maven" class="poweredBy">##
+#*    *#<img class="builtBy" alt="$text.get( "template.builtby" ) Maven" src="$relativePath/images/logos/powered-by-apache.png" />##
+#*  *#</a>
+#**#</span>
 #**##end
 #end
 ##
