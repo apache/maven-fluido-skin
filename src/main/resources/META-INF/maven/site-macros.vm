@@ -28,11 +28,11 @@
 #*            *##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
 #*            *##topLink( $currentItemHref $item.name $item.target )
 
-              <ul class="dropdown-menu">
+              <ul class="submenu dropdown-menu">
 #*            *##foreach( $subitem in $item.items )
 #*              *##set ( $currentItemHref = $PathTool.calculateLink( $subitem.href, $relativePath ) )
 #*              *##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
-                  <li>#topLink( $currentItemHref $subitem.name $subitem.target )</li>
+                  <li>#topLink( $currentItemHref $subitem.name $subitem.target "dropdown-item" )</li>
 #*            *##end
               </ul>
             </li>
@@ -48,7 +48,7 @@
 #**##end
 #end
 ##
-#macro ( topLink $href $name $target )
+#macro ( topLink $href $name $target $classes )
 #**##set ( $linkTitle = ' title="' + $name + '"' )
 #**##if( $target )
 #*  *##set ( $linkTarget = ' target="' + $target + '"' )
@@ -58,7 +58,7 @@
 #**##if ( $alignedFileName == $href )
 #*  *#<a title="$name">$name</a>##
 #**##else
-#*  *#<a href="$href"$linkTarget title="$name">$name</a>##
+#*  *#<a href="$href"$linkTarget title="$name" class="$classes" >$name</a>##
 #**##end
 #end
 ##
@@ -86,16 +86,17 @@
 #**##end
 #**##if ( $img )
 #*  *##if ( $position == "left" )
-#*    *#<a href="$href"$linkClass$linkTarget$linkTitle>#image( $img $alt $border $width $height )$name</a>##
+#*    *#<a id="${name}LinkWithImg" href="$href"$linkClass$linkTarget$linkTitle>#image( $img $alt $border $width $height )$name</a>##
 #*  *##else
-#*    *#<a href="$href"$linkClass$linkTarget$linkTitle>$name #image( $img $alt $border $width $height )</a>##
+#*    *#<a id="${name}LinkWithImg" href="$href"$linkClass$linkTarget$linkTitle>$name #image( $img $alt $border $width $height )</a>##
 #*  *##end
 #**##else
-#*  *#<a href="$href"$linkClass$linkTarget$linkTitle>##
+#*  *#<a id="${name}Link" href="$href"$linkClass$linkTarget$linkTitle>##
+#*  *#$name##
 #*  *##if( $icon )
-#*    *#<span class="$icon"></span>##
+#*    *#<span id="${name}LinkSpan" class="$icon"></span>##
 #*  *##end
-#*  *#$name</a>##
+#*  *#</a>##
 #**##end
 #end
 ##
@@ -224,9 +225,9 @@
 #*    *##set ( $currentItemHref = './' )
 #*  *##end
 ##
-      <li class="$cssClass">##
+     <li id="breadcrumb${item.name}ListItem" class="$cssClass">##
 #*  *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false )
-#*  *#<span class="divider">$breadcrumbDivider</span>##
+#*  *#<span id="breadcrumb${item.name}SpanDivider" class="divider">$breadcrumbDivider</span>##
 #*  *#</li>
 #**##end
 #**### add Edit button if content is editable
@@ -262,24 +263,32 @@
 ##
 #**##if ( $item && $item.items && $item.items.size() > 0 )
 #*  *##if ( $item.collapse == false )
-#*    *##set ( $collapseClass = "icon-chevron-down" )
+#*    *##set ( $collapseClass = "glyphicon glyphicon-chevron-down pull-right" )
 #*  *##else
 #*    *### By default collapsed
-#*    *##set ( $collapseClass = "icon-chevron-right" )
+#*    *##set ( $collapseClass = "glyphicon glyphicon-chevron-right pull-right" )
 #*  *##end
 ##
 #*  *##set ( $display = false )
 #*  *##displayTree( $display $item )
 ##
 #*  *##if ( $alignedFileName == $currentItemHref || $display )
-#*    *##set ( $collapseClass = "icon-chevron-down" )
+#*    *##set ( $collapseClass = "glyphicon glyphicon-chevron-down pull-right" )
 #*  *##end
 #**##end
 ##
 #**##if ( $alignedFileName == $currentItemHref )
-$indent    <li class="active">##
+#*  *##if ( $collapseClass == "glyphicon glyphicon-chevron-down pull-right" )
+$indent    <li class="active nav-header">##
+#*  *##else
+$indent    <li class="active nav-item">##
+#*  *##end
 #**##else
-$indent    <li>##
+#*  *##if ( $collapseClass == "glyphicon glyphicon-chevron-down pull-right" )
+$indent    <li class="nav-header">##
+#*  *##else
+$indent    <li class="nav-item">##
+#*  *##end
 #**##end
 ##
 #**##if ( $item.img )
@@ -304,9 +313,9 @@ $indent    <li>##
 #*  *##end
 #**##end
 #**##if ( $item && $item.items && $item.items.size() > 0 )
-#*  *##if ( $collapseClass == "icon-chevron-down" )
+#*  *##if ( $collapseClass == "glyphicon glyphicon-chevron-down pull-right" )
 
-$indent     <ul class="nav nav-list">
+$indent     <ul class="nav nav-pills">
 #*    *##foreach( $subitem in $item.items )
 #*      *##menuItem( $subitem "$indent  " )
 #*    *##end
@@ -317,7 +326,7 @@ $indent     </ul>##
 #end
 ##
 #macro ( mainMenu $menus )
-  <ul class="nav nav-list">
+  <ul class="nav">
 #**##foreach( $menu in $menus )
 #**##if ( $menu.name )
 #*  *##if ( $menu.img )
@@ -620,8 +629,8 @@ $indent     </ul>##
 #end
 
 ##
-#macro ( googleSearch $top )
-<form id="search-form" action="https://www.google.com/search" method="get" #if ( $top ) class="navbar-search pull-right" #end>
+#macro ( googleSearch $top $formCss )
+<form id="search-form" action="https://www.google.com/search" method="get" #if ( $top ) class="$formCss" #end>
 #**##if( $decoration.getCustomChild( 'fluidoSkin.googleSearch.sitesearch' ) )
 #*  *##set( $sitesearchValue = $decoration.getCustomValue( 'fluidoSkin.googleSearch.sitesearch' ) )
 #**##else
@@ -629,7 +638,7 @@ $indent     </ul>##
 #*  *##set( $sitesearchValue = $project.url.substring( $startIndex, $project.url.length() ) )
 #**##end
   <input value="$sitesearchValue" name="sitesearch" type="hidden"/>
-  <input class="search-query" name="q" id="query" type="text" placeholder="Search with Google..." />
+  <input class="form-control" name="q" id="query" type="text" />
 </form>
 #end
 ##

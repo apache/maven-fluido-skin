@@ -66,15 +66,86 @@ li.none {
   width:95%;
 }
 
-.sidebar-nav .search-query {
-  width: calc(100% - 30px);
+/** MSKINS-191 Added to ensure the breadcrumb version bar is displayed correctly. */
+.breadcrumb {
+  margin-bottom: 0px;
 }
 
-body.topBarEnabled {
-  padding-top: 60px;
+/** MSKINS-191 Added for the sidebar to ensure the menu items get the same style as the original look. */
+#sidebar-list > .nav > li > a {
+    font-size: 14px;
+    padding: 5px;
+    text-transform: none;
 }
-body.topBarDisabled {
-  padding-top: 20px;
+
+/** MSKINS-191 Added for the sidebar so pills take up the bar width rather than act as buttons. */
+#sidebar-list > .nav > .nav-header > .nav-pills > li {
+  float: none;
+}
+
+/** MSKINS-191 Added for the sidebar to ensure the menu items get the same style as the original look. */
+#sidebar-list > .nav > .nav-header > .nav-pills > li > a {
+  font-size: 14px;
+  font-weight: normal;
+  padding: 5px;
+  text-transform: none;
+}
+
+/** MSKINS-191 added since nav-header isn't styled in >2.8, this recreates the sidebar section title layout. */
+#sidebar-list > .nav > li.nav-header {
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 20px;
+  margin-top: 9px;
+  text-transform: uppercase;
+}
+
+
+/** MSKINS-191 added since nav-header isn't styled in >2.8, this recreates the sidebar section title layout. */
+#sidebar-list > .nav > .nav-header > a {
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 20px;
+  margin-top: 9px;
+  padding: 0px;
+  text-transform: uppercase;
+}
+
+/** MSKINS-191 Added to restore line numbers to every line in the pretty print statement. */
+li.L0, li.L1, li.L2, li.L3,
+li.L5, li.L6, li.L7, li.L8 {
+  list-style-type: decimal !important;
+}
+
+/* MSKINS-191 Added for submenu in responsive small screens */
+.dropdown-submenu {
+  position: relative;
+}
+/* MSKINS-191 Added for submenu in responsive small screens */
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+}
+
+/* MSKINS-191 Added for submenu in responsive small screens */
+.navbar-nav li:hover > ul.submenu {
+  display: block;
+}
+
+/* MSKINS-191 Added for submenu in responsive small screens */
+@media all and (min-width: 992px) {
+  .dropdown-menu li{
+    position: relative;
+  }
+  .dropdown-menu .submenu{
+    display: none;
+  	position: absolute;
+  	left:100%; top:-7px;
+  }
+  .dropdown-menu .submenu-left{
+  	right:100%; left:auto;
+  }
 }
 
 .builtBy {
@@ -111,24 +182,6 @@ li {
 /* avoid transparent background of table */
 table.zebra-striped {
   background-color:#FFF
-}
-
-/* avoid transparent footer */
-.footer {
-  background-color:#EEE
-}
-
-/* align with adjustments of http://twitter.github.com/bootstrap/examples/fluid.html */
-.sidebar-nav {
-    padding-left: 0px;
-    padding-right: 0px;
-}
-
-.sidebar-nav .icon-chevron-right, .sidebar-nav .icon-chevron-down {
-  margin-top: 2px;
-  margin-right: -6px;
-  float: right;
-  opacity: 0.25;
 }
 
 /* MSKINS-79: pull-right compresses list items */

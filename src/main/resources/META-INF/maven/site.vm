@@ -44,11 +44,11 @@
 #if ( $title )
     <title>$title</title>
 #end
-    <link rel="stylesheet" href="$relativePath/css/apache-maven-fluido-@project.version@.min.css" />
+    <link rel="stylesheet" href="$relativePath/css/apache-maven-fluido-@project.version@.css" />
     <link rel="stylesheet" href="$relativePath/css/site.css" />
     <link rel="stylesheet" href="$relativePath/css/print.css" media="print" />
 #**##prjProfile()
-    <script src="$relativePath/js/apache-maven-fluido-@project.version@.min.js"></script>
+    <script src="$relativePath/js/apache-maven-fluido-@project.version@.js"></script>
 #**##if( $decoration.body.head )
 #*  *#$render.eval( $decoration.body.head )
 #**##end
@@ -58,12 +58,10 @@
 #**##flattrHead()
 #**##forkMeOnGitHubHead()
   </head>
+ <body>
+#*  *##set ( $navBarStyle = $decoration.getCustomValue( 'fluidoSkin.navBarStyle', '' ) )
+    <nav id="topbar" class="navbar navbar-default navbar-static-top $navBarStyle">
 #**##set ( $topBarEnabled = $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.topBarEnabled', 'false' ) ) )
-#**##if ( $topBarEnabled )
-  <body class="topBarEnabled">
-#**##else
-  <body class="topBarDisabled">
-#**##end
 #**##forkMeOnGitHub()
 #**##facebookLoadSDK()
 ##
@@ -72,81 +70,63 @@
              && ( $decoration.getCustomValue( 'fluidoSkin.googleSearch.sitesearch' ) || $project.url ) )
 ##
 #**##if ( $topBarEnabled )
-#*  *##set ( $navBarStyle = $decoration.getCustomValue( 'fluidoSkin.navBarStyle', '' ) )
-    <header id="topbar" class="navbar navbar-fixed-top $navBarStyle">
-      <div class="navbar-inner">
-#*    *##if ( $sideBarEnabled )
-        <div class="container-fluid">
-        <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-#*    *##else
-#*      *##if ( $decoration.getCustomValue( 'fluidoSkin.topBarContainerStyle' ) )
-            <div class="container" style="$decoration.getCustomValue( 'fluidoSkin.topBarContainerStyle' )">
-              <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </a>
-          <nav class="nav-collapse">
-#*      *##else
-            <div class="container">
-              <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </a>
-          <nav class="nav-collapse">
-#*      *##end
-#*    *##end
-#*    *##if ( $decoration.getCustomChild( 'fluidoSkin.topBarIcon' ) )
-#*      *##set ( $topBarIcon = $decoration.getCustomChild( 'fluidoSkin.topBarIcon' ) )
+       <div id="navbarWrapper" class="container-fluid">
+          <div id="navbarIcon" class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+#*          *##if ( $decoration.getCustomChild( 'fluidoSkin.topBarIcon' ) )
+#*            *##set ( $topBarIcon = $decoration.getCustomChild( 'fluidoSkin.topBarIcon' ) )
+#*            *##if ( $topBarIcon.getChild( 'href' ) )
 ##
-#*      *##if ( $topBarIcon.getChild( 'href' ) )
-#*        *##set ( $hrf = $topBarIcon.getChild( 'href' ).getValue() )
-#*        *##if ( !$decoration.isLink( $hrf ) )
-#*          *##set ( $hrf = $PathTool.calculateLink( $hrf, $relativePath ) )
-#*          *##set ( $hrf = $hrf.replaceAll( '\\', '/' ) )
-#*          *##if ( ( $hrf == '' ) )
-#*            *##set ( $hrf = './' )
+#*              *##set ( $hrf = $topBarIcon.getChild( 'href' ).getValue() )
+#*              *##if ( !$decoration.isLink( $hrf ) )
+#*                *##set ( $hrf = $PathTool.calculateLink( $hrf, $relativePath ) )
+#*                *##set ( $hrf = $hrf.replaceAll( '\\', '/' ) )
+#*                *##if ( ( $hrf == '' ) )
+#*                  *##set ( $hrf = './' )
+#*                *##end
+#*              *##end
+##
+#*              *#<a id="navbarIconLink" class="navbar-brand" href="$hrf" #if( $topBarIcon.getChild( 'alt' ) ) title="$topBarIcon.getChild( 'alt' ).getValue()"#end>##
+##
+#*              *##set ( $topBarIconName = $decoration.getCustomValue( 'fluidoSkin.topBarIcon.name', $project.name ) )
+##
+#*              *##if( $topBarIcon.getChild( 'src' ) )
+#*                *##set ( $src = $topBarIcon.getChild( 'src' ).getValue() )
+#*                *##if ( !$decoration.isLink( $src ) )
+#*                  *##set ( $src = $PathTool.calculateLink( $src, $relativePath ) )
+#*                  *##set ( $src = $src.replaceAll( '\\', '/' ) )
+#*                *##end
+#*                *##set ( $alt = $decoration.getCustomValue( 'fluidoSkin.topBarIcon.alt', $topBarIconName ) )
+#*                *#<img id="navbarIcon" src="$src" alt="$alt" />
+#*              *##else
+#*                *#$topBarIconName
+#*              *##end
+#*              *#</a>
+##
+#*            *##else
+                <a id="navbarIconLinkNoHref" class="navbar-brand" href="#">$project.name</a>
+#*            *##end
+#*          *##else
+              <a id="navbarBrandLink" class="navbar-brand" href="#">$project.name</a>
 #*          *##end
-#*        *##end
-#*        *#<a class="brand" href="$hrf" #if( $topBarIcon.getChild( 'alt' ) ) title="$topBarIcon.getChild( 'alt' ).getValue()"#end>##
-##
-#*        *##set ( $topBarIconName = $decoration.getCustomValue( 'fluidoSkin.topBarIcon.name', $project.name ) )
-##
-#*        *##if( $topBarIcon.getChild( 'src' ) )
-#*          *##set ( $src = $topBarIcon.getChild( 'src' ).getValue() )
-#*          *##if ( !$decoration.isLink( $src ) )
-#*            *##set ( $src = $PathTool.calculateLink( $src, $relativePath ) )
-#*            *##set ( $src = $src.replaceAll( '\\', '/' ) )
-#*          *##end
-#*          *##set ( $alt = $decoration.getCustomValue( 'fluidoSkin.topBarIcon.alt', $topBarIconName ) )
-#*          *#<img src="$src" alt="$alt" />
-#*        *##else
-#*          *#$topBarIconName
-#*        *##end
-##
-#*        *#</a>
-#*      *##end
-#*    *##end
-##
-##      ## MSKINS-31
-#*      *##if( $decoration.body && $decoration.body.menus )
-            <ul class="nav">
-#*          *##topMenu( $decoration.body.menus )
+          </div>
+## Adds the Top Menu Navigation options
+## MSKINS-31
+          <div id="navbar" class="navbar-collapse collapse">
+#*        *##if( $decoration.body && $decoration.body.menus )
+            <ul id="navbarList" class="nav navbar-nav">
+#*            *##topMenu( $decoration.body.menus )         
             </ul>
-#*      *##end
-##
-#*      *##if ( !$sideBarEnabled )
-          </nav>
-          <div class="nav-collapse">
-#*      *##end
+#*        *##end
 ##
 #*      *##if ( $searchEnabled && !$sideBarEnabled )
-#*        *##googleSearch( true )
+#*        *##googleSearch( true 'navbar-form navbar-right' )
 #*      *##end
 ##
 #*      *##if ( !$sideBarEnabled )
@@ -159,7 +139,7 @@
 #*      *##if( $decoration.body
               && $decoration.body.links
               && $decoration.body.links.size() > 0 )
-            <ul class="nav pull-right">
+            <ul id="navbarLinksList" class="nav pull-right">
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown">External Links <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -168,28 +148,15 @@
               </li>
             </ul>
 #*      *##end
-##
-#*      *##if ( !$sideBarEnabled )
           </div>
-#*      *##end
-##
-        </div>
-      </div>
-    </header>
-#**##end
-##
-#**##if ( $sideBarEnabled )
-    <div class="container-fluid">
-#**##else
-    <div class="container">
-#**##end
-      <header>
-        <div id="banner">
+#*    *##else
+        <div id="banner" class="row-fluid $navBarStyle">
           <div class="pull-left">#banner( $decoration.bannerLeft "bannerLeft" )</div>
           <div class="pull-right">#banner( $decoration.bannerRight "bannerRight" )</div>
           <div class="clear"><hr/></div>
         </div>
-
+#*    *##end
+##
 #*    *##set ( $publishDateLeftContent = "#publishDate( 'left' $decoration.publishDate $decoration.version )" )
 #*    *##set ( $publishDateRightContent = "#publishDate( 'right' $decoration.publishDate $decoration.version )" )
 #*    *### MSITE-44
@@ -198,28 +165,27 @@
 #*    *##end
 #*    *##if ( $publishDateLeftContent.length() > 0 || $publishDateRightContent.length() > 0 ||
               ( $linksContent && $linksContent.length() > 0 ) )
-        <div id="breadcrumbs">
-          <ul class="breadcrumb">
+        <div id="breadcrumbs" class="row-fluid $navBarStyle">
+          <ol id="breadcrumbsList" class="breadcrumb">
 #*        *#$publishDateLeftContent##
 #*        *#$publishDateRightContent##
 ##
 #*        *#$!linksContent##
-          </ul>
+          </ol>
         </div>
 #*    *##end
-      </header>
-##
-#*    *##if ( $sideBarEnabled )
-#*      *##set ( $leftColumnClass = $decoration.getCustomValue( 'fluidoSkin.leftColumnClass', 'span2' ) )
-##
-      <div class="row-fluid">
-        <header id="leftColumn" class="$leftColumnClass">
-          <nav class="well sidebar-nav">
-#*      *##publishDate( "navigation-top" $decoration.publishDate $decoration.version )
-#*      *##mainMenu( $decoration.body.menus )
-#*      *##publishDate( "navigation-bottom" $decoration.publishDate $decoration.version )
-          </nav>
-          <div class="well sidebar-nav">
+      </div>
+    </nav>
+#*  *##if ( $sideBarEnabled )
+    <nav id="sidebar" class="col-sm-2 navbar-default $navBarStyle">
+      <div id="sidebar-collapse" class="navbar-collapse collapse">
+#*      *##if( $decoration.body && $decoration.body.menus )
+          <ul id="sidebar-list" class="nav navbar-nav col-sm-12">
+#*          *##mainMenu( $decoration.body.menus )
+          </ul>
+#*      *##end
+      </div>
+      <div id="sidebar-project-extras" class="row-fluid $navBarStyle">
 #*      *##if ( $searchEnabled )
 #*        *##googleSearch( false )
 #*      *##end
@@ -231,14 +197,19 @@
 #*        *##flattrBody( $sideBarEnabled )
               <div class="clear"></div>
 #*        *##builtByLogo( $decoration.poweredBy )
-            </div>
-          </div>
-        </header>
-#*    *##end
+       </div>
+      </div>
+    </nav>
+#*  *##end
+
+#*  *##if ( $sideBarEnabled )
+    <main class="container-fluid col-sm-offset-2">
+#*  *##else
+    <main class="container-fluid">
+#*  *##end
 ##
 #*    *##set ( $bodyColumnClass = $decoration.getCustomValue( 'fluidoSkin.bodyColumnClass', 'span10' ) )
 ##
-        <main id="bodyColumn" #if ( $sideBarEnabled ) class="$bodyColumnClass" #end>
 #*      *##if ( $title && $title.endsWith( "Project License" ) )
 #*        *#$bodyContent
 #*      *##else
@@ -251,22 +222,10 @@
 #*        *#$bodyContent.replaceAll( "<div class=${esc.q}source${esc.q}>(\r?\n)?<pre>", "<div class=${esc.q}source${esc.q}><pre class=${esc.q}$sourceStyle${esc.q}>" ).replaceAll( "class=${esc.q}bodyTable${esc.q}", "class=${esc.q}table table-striped${esc.q}" )
 #*      *##end
         </main>
-#*    *##if ( $sideBarEnabled )
-      </div>
-#*    *##end
-    </div>
     <hr/>
     <footer>
-#*  *##if ( $sideBarEnabled )
       <div class="container-fluid">
-#*  *##else
-      <div class="container">
-#*  *##end
-#*    *##if ( $sideBarEnabled )
         <div class="row-fluid">
-#*    *##else
-        <div class="row">
-#*    *##end
 #*    *##if ( $decoration.body.footer )
 #*      *#$render.eval( $decoration.body.footer )
 #*    *##else
