@@ -25,6 +25,4 @@ File index = new File( basedir, 'target/site/index.html')
 assert index.exists()
 assert index.text.contains('<div id="fb-root"></div>')
 assert index.text.contains('<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en/sdk.js#xfbml=1&version=v6.0"></script>')
-assert index.text.contains(
-        '<div class="fb-like pull-right" style="border:none; margin-top: 10px" data-href="https://maven.apache.org/skins/maven-fluido-skin/mskins-33/" data-layout="button_count" data-show-faces="false" data-action="like" data-share="false"></div>')
-
+assert index.text.contains('<div class="fb-like pull-right" style="border:none; margin-top: 10px" data-href="https://maven.apache.org/skins/maven-fluido-skin/mskins-33/" data-layout="button_count" data-show-faces="false" data-action="like" data-share="false"></div>')

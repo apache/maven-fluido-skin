@@ -23,9 +23,9 @@ assert index.exists()
 // MSKINS-130 check that html structure is as clean as possible
 String html = index.getText()
 // active menu
-assert html.contains( '<li class="active"><a><span class="none"></span>About</a>' )
+assert html.contains( '<li class="active nav-item"><a><span class="none"></span>Introduction</a></li>' )
 // inactive menu
-assert html.contains( '<li><a href="summary.html" title="Summary"><span class="none"></span>Summary</a>' )
-assert html.contains( '<li><a href="plugins.html" title="Plugins"><span class="none"></span>Plugins</a></li>' )
+assert html.contains( '<li class="nav-item"><a id="SummaryLink" href="summary.html" title="Summary">Summary<span id="SummaryLinkSpan" class="none"></span></a></li>' )
+assert html.contains( '<li class="nav-item"><a id="PluginsLink" href="plugins.html" title="Plugins">Plugins<span id="PluginsLinkSpan" class="none"></span></a></li>' )
 // breadcrumb
-assert html.contains( '<li class=""><a href="https://www.apache.org/" class="externalLink" title="Apache">Apache</a><span class="divider">/</span></li>' )
+assert html.contains( '<li id="breadcrumbApacheListItem" class=""><a id="ApacheLink" href="https://www.apache.org/" class="externalLink" title="Apache">Apache</a><span id="breadcrumbApacheSpanDivider" class="divider">/</span></li>' )
