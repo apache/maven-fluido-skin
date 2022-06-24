@@ -100,7 +100,7 @@ under the License.
   <properties>
     <bootstrap.version>3.1.1</bootstrap.version>
     <code-prettify.version>0.1.0</code-prettify.version>
-    <jquery.version>1.11.2</jquery.version>
+    <jquery.version>3.6.0</jquery.version>
     <sitePluginVersion>3.12.0</sitePluginVersion>
     <projectInfoReportsPluginVersion>3.3.0</projectInfoReportsPluginVersion>
     <project.build.outputTimestamp>2022-05-14T18:16:12Z</project.build.outputTimestamp>
