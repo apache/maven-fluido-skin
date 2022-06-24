@@ -222,7 +222,7 @@
 #*      *##if ( $searchEnabled )
 #*        *##googleSearch( false )
 #*      *##end
-            <div id="poweredBy">
+            <div id="poweredBy" class="row-fluid" >
 #*        *##facebookLike( $sideBarEnabled )
               <div class="clear"></div>
 #*        *##followTwitter( $sideBarEnabled )
