@@ -229,7 +229,6 @@
               <div class="clear"></div>
 #*        *##flattrBody( $sideBarEnabled )
               <div class="clear"></div>
-              <!-- MSKINS-188, added to centralise the logo. -->
               <span class="span3"> </span>
 #*        *##builtByLogo( $decoration.poweredBy 'span5' )
               <span class="span3"> </span>
