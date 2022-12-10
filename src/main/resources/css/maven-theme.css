@@ -155,3 +155,11 @@ li.pull-right {
 a.dropdown-toggle {
   cursor: pointer;
 }
+
+h1 > code,
+h2 > code,
+h3 > code,
+h4 > code,
+h5 > code {
+  font-size: unset;
+}
