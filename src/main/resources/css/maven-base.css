@@ -17,7 +17,21 @@
  * under the License.
  */
 
-.clear{clear:both;visibility: hidden;}
-.clear hr{display: none;}
-section p,section dt{margin-right: 7px;margin-left: 7px;}
-#poweredBy{text-align: center}
+.clear {
+  clear: both;
+  visibility: hidden;
+}
+
+.clear hr {
+  display: none;
+}
+
+section p,
+section dt {
+  margin-right: 7px;
+  margin-left: 7px;
+}
+
+#poweredBy {
+  text-align: center;
+}
