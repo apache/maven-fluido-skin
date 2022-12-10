@@ -22,40 +22,50 @@ a.externalLink {
   padding-right: 18px;
 }
 a.newWindow {
-  background: url('../images/window-new.png') right center no-repeat;padding-right: 18px;
+  background: url('../images/window-new.png') right center no-repeat;
+  padding-right: 18px;
 }
 
 a.externalLink[href^=http] {
-  background: url('../images/internet-web-browser.png') right center no-repeat;padding-right: 18px;
+  background: url('../images/internet-web-browser.png') right center no-repeat;
+  padding-right: 18px;
 }
 a.externalLink[href$=".asc"] {
-  background: url('../images/accessories-text-editor.png') right center no-repeat;padding-right: 18px;
+  background: url('../images/accessories-text-editor.png') right center no-repeat;
+  padding-right: 18px;
 }
 a.externalLink[href$=".jpg"],
 a.externalLink[href$=".jpeg"],
 a.externalLink[href$=".gif"],
 a.externalLink[href$=".png"] {
-  background: url('../images/image-x-generic.png') right center no-repeat;padding-right: 18px;
+  background: url('../images/image-x-generic.png') right center no-repeat;
+  padding-right: 18px;
 }
 a.externalLink[href$=".tar.gz"],
 a.externalLink[href$=".zip"] {
-  background: url('../images/package-x-generic.png') right center no-repeat;padding-right: 18px;
+  background: url('../images/package-x-generic.png') right center no-repeat;
+  padding-right: 18px;
 }
 a.externalLink[href$=".md5"],
 a.externalLink[href$=".sha1"] {
-  background: url('../images/document-properties.png') right center no-repeat;padding-right: 18px;
+  background: url('../images/document-properties.png') right center no-repeat;
+  padding-right: 18px;
 }
 a.externalLink[href^=https] {
-  background: url('../images/application-certificate.png') right center no-repeat;padding-right: 18px;
+  background: url('../images/application-certificate.png') right center no-repeat;
+  padding-right: 18px;
 }
 a.externalLink[href^=file] {
-  background: url('../images/drive-harddisk.png') right center no-repeat;padding-right: 18px;
+  background: url('../images/drive-harddisk.png') right center no-repeat;
+  padding-right: 18px;
 }
 a.externalLink[href^=ftp] {
-  background: url('../images/network-server.png') right center no-repeat;padding-right: 18px;
+  background: url('../images/network-server.png') right center no-repeat;
+  padding-right: 18px;
 }
 a.externalLink[href^=mailto] {
-  background: url('../images/contact-new.png') right center no-repeat;padding-right: 18px;
+  background: url('../images/contact-new.png') right center no-repeat;
+  padding-right: 18px;
 }
 
 li.none {
@@ -85,7 +95,8 @@ img.builtBy {
 }
 
 #search-form {
-  margin-left: 9px;margin-right:9px;
+  margin-left: 9px;
+  margin-right: 9px;
 }
 
 /* Tweaks to the bootstrap theme
@@ -110,18 +121,18 @@ li {
 
 /* avoid transparent background of table */
 table.zebra-striped {
-  background-color:#FFF
+  background-color:#FFF;
 }
 
 /* avoid transparent footer */
 .footer {
-  background-color:#EEE
+  background-color:#EEE;
 }
 
 /* align with adjustments of http://twitter.github.com/bootstrap/examples/fluid.html */
 .sidebar-nav {
-    padding-left: 0px;
-    padding-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .sidebar-nav .icon-chevron-right, .sidebar-nav .icon-chevron-down {
