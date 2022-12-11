@@ -30,6 +30,6 @@ assert 1 == index.getText().count( '''\
     piwikTracker.trackPageView();
     piwikTracker.enableLinkTracking();
     } catch( err ) {}
-    </script><noscript><p><img src="http://example.org/piwik/piwik.php?idsite=1" style="border: 0;" alt="Piwik"/></p></noscript>
+    </script><noscript><p><img src="http://example.org/piwik/piwik.php?idsite=1" style="border: 0;" alt="Piwik" /></p></noscript>
     <!-- End Piwik Tag -->
 '''.replace( "\n", System.getProperty( "line.separator" ) ) )
