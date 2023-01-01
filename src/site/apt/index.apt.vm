@@ -225,34 +225,6 @@ Welcome to ${project.name}!
 </project>
 +-----+
 
-
-** Piwik Web Analytics (deprecated)
-
- <This feature is deprecated since version 1.11.0 as it has been replaced by {{Matomo}} ({{{https://matomo.org/blog/2018/01/piwik-is-now-matomo/}Piwik is named Matomo since 2018}})>.
-
- Since version <<1.3.1>>, fluido-skin supports inserting {{{http://piwik.org/}Piwik web analytics}}
- {{{http://piwik.org/docs/javascript-tracking/#toc-where-can-i-find-the-piwik-tracking-code}tracking code}} into the generated pages.
- Users have to declare:
-
- * <<<custom.fluidoSkin.piwik.piwikUrl>>>: URL of the Piwik installation without protocol, leading and trailing slashes (i. e. without <<http://>>).
-
- * <<<custom.fluidoSkin.piwik.idsite>>>: ID in the Piwik installation of the site which is tracked.
-
-+-----+
-<project name="xxx">
-  [...]
-  <custom>
-    <fluidoSkin>
-        <piwik>
-            <piwikUrl>example.org/piwik</piwikUrl>
-            <idsite>1</idsite>
-        </piwik>
-    </fluidoSkin>
-  </custom>
-  [...]
-</project>
-+-----+
-
 ** Google Search
 
  Users can optionally enable the <<Google Search>> for the generated site, requirements are:

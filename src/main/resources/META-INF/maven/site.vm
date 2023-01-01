@@ -54,7 +54,7 @@
 #**##end
 #**##if( $headContent )$headContent#end
 #**##googleAnalytics( $decoration.googleAnalyticsAccountId )
-#**##matomo( $decoration.custom.getChild('matomo') )
+#**##matomo()
 #**##flattrHead()
 #**##forkMeOnGitHubHead()
   </head>
@@ -284,7 +284,6 @@
 #*    *##end
       </div>
     </footer>
-#**##piwik()
 #**##anchorJS()
   </body>
 </html>

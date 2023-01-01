@@ -551,27 +551,6 @@ $indent     </ul>##
 #**##end
 #end
 ##
-#macro ( piwik )
-#**##if ( $decoration.getCustomChild( 'fluidoSkin.piwik.piwikUrl' )
-        && $decoration.getCustomChild( 'fluidoSkin.piwik.idsite' ) )
-#*  *##set ( $piwikUrl =  $decoration.getCustomValue( 'fluidoSkin.piwik.piwikUrl' ) )
-#*  *##set ( $idsite =  $decoration.getCustomValue( 'fluidoSkin.piwik.idsite' ) )
-##
-    <!-- Piwik -->
-    <script>
-    var pkBaseURL = (("https:" == document.location.protocol) ? "https://$piwikUrl/" : "http://$piwikUrl/");
-    document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js'%3E%3C/script%3E"));
-    </script><script>
-    try {
-    var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", $idsite);
-    piwikTracker.trackPageView();
-    piwikTracker.enableLinkTracking();
-    } catch( err ) {}
-    </script><noscript><p><img src="http://$piwikUrl/piwik.php?idsite=$idsite" style="border: 0;" alt="Piwik" /></p></noscript>
-    <!-- End Piwik Tag -->
-#**##end
-#end
-##
 #macro ( googleAnalytics $accountId )
 #**##if( $accountId && $accountId != "" )
     <!-- Google Analytics -->
@@ -592,20 +571,20 @@ $indent     </ul>##
 #**##end
 #end
 
-#macro ( matomo $matomoDom )
+#macro ( matomo )
 #**##if (  $decoration.getCustomValue( 'matomo.url' ) && $decoration.getCustomValue( 'matomo.url' ) != ''
 && $decoration.getCustomValue( 'matomo.siteId' ) && $decoration.getCustomValue( 'matomo.siteId' ) != '')
 
     <!-- Matomo -->
     <script>
         var _paq = window._paq = window._paq || [];
-    #*    *##foreach( $option in $matomoDom.getChild("options").getChildren() )
-    #*      *##if( $option.value && $option.value != "" )
+#*    *##foreach( $option in $decoration.getCustomChild( 'matomo.options' ).getChildren() )
+#*      *##if( $option.value && $option.value != "" )
         _paq.push(['$option.name', '$option.value']);
-    #*      *##else
+#*      *##else
         _paq.push(['$option.name']);
-    #*      *##end
-    #*    *##end
+#*      *##end
+#*    *##end
 
         (function() {
             var u="$decoration.getCustomValue( 'matomo.url' )";
