@@ -58,7 +58,7 @@
 #**##flattrHead()
 #**##forkMeOnGitHubHead()
   </head>
-#**##set ( $topBarEnabled = $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.topBarEnabled', 'false' ) ) )
+#**##set ( $topBarEnabled = $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.topBarEnabled', 'false' ) ) && ! $standalone )
 #**##if ( $topBarEnabled )
   <body class="topBarEnabled">
 #**##else
@@ -67,7 +67,7 @@
 #**##forkMeOnGitHub()
 #**##facebookLoadSDK()
 ##
-#**##set ( $sideBarEnabled = $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.sideBarEnabled', 'true' ) ) )
+#**##set ( $sideBarEnabled = $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.sideBarEnabled', 'true' ) ) && ! $standalone )
 #**##set ( $searchEnabled = $decoration.getCustomChild( 'fluidoSkin.googleSearch' )
              && ( $decoration.getCustomValue( 'fluidoSkin.googleSearch.sitesearch' ) || $project.url ) )
 ##
