@@ -48,7 +48,4 @@
     <head/>
   </body>
 
-  <!-- empty one to disable inherited from parent -->
-  <googleAnalyticsAccountId></googleAnalyticsAccountId>
-
 </project>

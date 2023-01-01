@@ -53,7 +53,7 @@
 #*  *#$render.eval( $decoration.body.head )
 #**##end
 #**##if( $headContent )$headContent#end
-#**##googleAnalytics( $decoration.googleAnalyticsAccountId )
+#**##googleAnalytics()
 #**##matomo()
 #**##flattrHead()
 #**##forkMeOnGitHubHead()

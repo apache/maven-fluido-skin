@@ -39,9 +39,13 @@
   </body>
 
   <!-- START SNIPPET: skin-custom-config -->
-  <!-- no custom config -->
+  <custom>
+    <fluidoSkin>
+      <googleAnalytics>
+        <accountId>FOO-BAR</accountId>
+      </googleAnalytics>
+    </fluidoSkin>
+  </custom>
   <!-- END SNIPPET: skin-custom-config -->
-
-  <googleAnalyticsAccountId>FOO-BAR</googleAnalyticsAccountId>
 
 </project>

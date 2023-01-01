@@ -551,7 +551,8 @@ $indent     </ul>##
 #**##end
 #end
 ##
-#macro ( googleAnalytics $accountId )
+#macro ( googleAnalytics )
+#set ( $accountId = $decoration.getCustomValue( 'fluidoSkin.googleAnalytics.accountId' ) )
 #**##if( $accountId && $accountId != "" )
     <!-- Google Analytics -->
     <script>

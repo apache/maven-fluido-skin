@@ -201,7 +201,13 @@ Welcome to ${project.name}!
 +-----+
 <project name="xxx">
   [...]
-  <googleAnalytics>UA-12345...</googleAnalytics>
+  <custom>
+    <fluidoSkin>
+      <googleAnalytics>
+        <accountId>UA-12345...</accountId>
+      </googleAnalytics>
+    </fluidoSkin>
+  </custom>
   [...]
 </project>
 +-----+
@@ -211,11 +217,10 @@ Welcome to ${project.name}!
 +-----+
 <project name="xxx">
   [...]
-  <googleAnalytics>UA-12345...</googleAnalytics>
-  [...]
   <custom>
     <fluidoSkin>
       <googleAnalytics>
+        <accountId>UA-12345...</accountId>
         <anonymizeIp>true/false</anonymizeIp>
         <forceSSL>true/false</forceSSL>
       </googleAnalytics>
