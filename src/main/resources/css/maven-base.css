@@ -27,7 +27,8 @@
 }
 
 section > p,
-section > dt {
+section > dt,
+section > table.table {
   margin-right: 7px;
   margin-left: 7px;
 }
