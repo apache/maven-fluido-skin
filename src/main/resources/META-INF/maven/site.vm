@@ -239,17 +239,13 @@
 #*    *##set ( $bodyColumnClass = $decoration.getCustomValue( 'fluidoSkin.bodyColumnClass', 'span10' ) )
 ##
         <main id="bodyColumn" #if ( $sideBarEnabled ) class="$bodyColumnClass" #end>
-#*      *##if ( $title && $title.endsWith( "Project License" ) )
-#*        *#$bodyContent
+#*      *##if ( $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.sourceLineNumbersEnabled', 'false' ) ) )
+#*        *##set ( $sourceStyle = "prettyprint linenums" )
 #*      *##else
-#*        *##if ( $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.sourceLineNumbersEnabled', 'false' ) ) )
-#*          *##set ( $sourceStyle = "prettyprint linenums" )
-#*        *##else
-#*          *##set ( $sourceStyle = "prettyprint" )
-#*        *##end
-##
-#*        *#$bodyContent.replaceAll( "<div class=${esc.q}source${esc.q}>(\r?\n)?<pre>", "<div class=${esc.q}source${esc.q}><pre class=${esc.q}$sourceStyle${esc.q}>" ).replaceAll( "class=${esc.q}bodyTable${esc.q}", "class=${esc.q}table table-striped${esc.q}" )
+#*        *##set ( $sourceStyle = "prettyprint" )
 #*      *##end
+##
+#*      *#$bodyContent.replaceAll( "<div class=${esc.q}source${esc.q}>(\r?\n)?<pre>", "<div class=${esc.q}source${esc.q}><pre class=${esc.q}$sourceStyle${esc.q}>" ).replaceAll( "class=${esc.q}bodyTable${esc.q}", "class=${esc.q}table table-striped${esc.q}" ).replaceAll( "class=${esc.q}bodyTable bodyTableBorder${esc.q}", "class=${esc.q}table table-bordered table-striped${esc.q}" )
         </main>
 #*    *##if ( $sideBarEnabled )
       </div>
