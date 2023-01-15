@@ -224,7 +224,11 @@
 #*    *##set ( $currentItemHref = './' )
 #*  *##end
 ##
+#*  *##if( !$cssClass.isEmpty() )
       <li class="$cssClass">##
+#*  *##else
+      <li>##
+#end
 #*  *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false )
 #*  *#<span class="divider">$breadcrumbDivider</span>##
 #*  *#</li>
