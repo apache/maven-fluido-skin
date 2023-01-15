@@ -84,14 +84,19 @@
 #**##else
 #*  *##set ( $linkClass = "" )
 #**##end
+#**##if( $href )
+#*  *##set ( $href = ' href="' + $href + '"' )
+#**##else
+#*  *##set ( $href = "" )
+#**##end
 #**##if ( $img )
 #*  *##if ( $position == "left" )
-#*    *#<a href="$href"$linkClass$linkTarget$linkTitle>#image( $img $alt $border $width $height )$name</a>##
+#*    *#<a$href$linkClass$linkTarget$linkTitle>#image( $img $alt $border $width $height )$name</a>##
 #*  *##else
-#*    *#<a href="$href"$linkClass$linkTarget$linkTitle>$name #image( $img $alt $border $width $height )</a>##
+#*    *#<a$href$linkClass$linkTarget$linkTitle>$name #image( $img $alt $border $width $height )</a>##
 #*  *##end
 #**##else
-#*  *#<a href="$href"$linkClass$linkTarget$linkTitle>##
+#*  *#<a$href$linkClass$linkTarget$linkTitle>##
 #*  *##if( $icon )
 #*    *#<span class="$icon"></span>##
 #*  *##end
