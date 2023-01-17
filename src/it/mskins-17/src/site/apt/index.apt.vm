@@ -33,4 +33,4 @@ ${project.name}
 
 * Actual configuration
 
-%{snippet|id=skin-custom-config|file=${project.basedir}/src/site/site.xml}
+%{snippet|id=skin-custom-config|file=${project.basedir}/pom.xml}

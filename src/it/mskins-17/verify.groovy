@@ -19,4 +19,4 @@
 
 File index = new File( basedir, "target/site/index.html" )
 assert index.exists()
-assert index.text.contains( '<li id="publishDate" class="pull-right"><span class="divider">|</span> Last Published: 1970-01-01</li>' )
+assert index.text.contains( '<li id="publishDate" class="pull-right"><span class="divider">|</span> Last Published: 1990-01-01</li>' )

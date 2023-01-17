@@ -410,8 +410,6 @@ $indent     </ul>##
 #macro ( publishDate $position $decorationPublishDate $version )
 #**##if ( $publishDate )
 #*  *##set ( $dateValue = $date.format( $publishDate ) )
-#**##elseif ( $decoration.custom.getChild( 'publishDate' ) )
-#*  *##set ( $dateValue = $decoration.custom.getChild( 'publishDate' ).getValue() )
 #**##else
 #*  *##set ( $dateValue = $date )
 #**##end

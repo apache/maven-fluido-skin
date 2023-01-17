@@ -31,12 +31,6 @@
     <version>${skinVersion}</version>
   </skin>
 
-  <!-- START SNIPPET: skin-custom-config -->
-  <custom>
-    <publishDate>1970-01-01</publishDate>
-  </custom>
-  <!-- END SNIPPET: skin-custom-config -->
-
   <publishDate format="yyyy-MM-dd" position="right" />
 
   <body>
