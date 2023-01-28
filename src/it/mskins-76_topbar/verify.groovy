@@ -19,8 +19,8 @@
 
 File index = new File( basedir, "target/site/index.html" )
 assert index.exists()
-String text = index.getText().replaceAll( "\r?\n", System.lineSeparator() )
-assert 1 == text.count( '''\
+String text = index.text.normalize()
+assert text.contains( '''\
 <script>
     /* <![CDATA[ */
         (function() {
@@ -29,9 +29,9 @@ assert 1 == text.count( '''\
             s.src = 'https://api.flattr.com/js/0.6/load.js?mode=auto';
             t.parentNode.insertBefore(s, t);
         })();
-    /* ]]> */</script>'''.replaceAll( "\r?\n", System.lineSeparator() ) )
+    /* ]]> */</script>'''.normalize() )
 
-assert 1 == text.count( '''\
+assert text.contains( '''\
 <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://opensource.org/"></a>
     <noscript><a href="https://flattr.com/thing/448050/Open-Source-Initiative-OSI" target="_blank">
-    <img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" style="border: 0;" /></a></noscript>'''.replaceAll( "\r?\n", System.lineSeparator() ) )
+    <img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" style="border: 0;" /></a></noscript>'''.normalize() )

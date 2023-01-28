@@ -19,7 +19,7 @@
 
 File index = new File( basedir, "target/site/index.html" )
 assert index.exists()
-assert 0 == index.getText().count( '_gaq.push([\'_setAccount\', \'FOO-BAR\']);' )
-assert 1 == index.getText().count( 'ga(\'create\', \'FOO-BAR\', \'auto\');' )
-assert 0 == index.getText().count( 'ga(\'set\', \'anonymizeIp\', true);' )
-assert 0 == index.getText().count( 'ga(\'set\', \'forceSSL\', true);' )
+assert !index.text.contains( '_gaq.push([\'_setAccount\', \'FOO-BAR\']);' )
+assert index.text.contains( 'ga(\'create\', \'FOO-BAR\', \'auto\');' )
+assert !index.text.contains( 'ga(\'set\', \'anonymizeIp\', true);' )
+assert !index.text.contains( 'ga(\'set\', \'forceSSL\', true);' )

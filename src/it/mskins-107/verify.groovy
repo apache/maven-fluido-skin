@@ -20,4 +20,4 @@
 File index = new File( basedir, "target/site/index.html" )
 
 assert index.exists()
-assert 1 == index.getText().count("<meta name=\"generator\" content=\"Apache Maven Doxia Site Renderer 1.11.1\" />")
+assert index.text.contains("<meta name=\"generator\" content=\"Apache Maven Doxia Site Renderer 1.11.1\" />")

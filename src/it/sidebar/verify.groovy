@@ -21,7 +21,7 @@ File index = new File( basedir, "target/site/index.html" )
 assert index.exists()
 
 // MSKINS-130 check that html structure is as clean as possible
-String html = index.getText()
+String html = index.text
 // active menu
 assert html.contains( '<li class="active"><a><span class="none"></span>About</a>' )
 // inactive menu
