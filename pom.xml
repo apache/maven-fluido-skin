@@ -30,7 +30,7 @@ under the License.
   </parent>
 
   <artifactId>maven-fluido-skin</artifactId>
-  <version>2.0.0-M3</version>
+  <version>2.0.0-M4-SNAPSHOT</version>
 
   <name>Apache Maven Fluido Skin</name>
   <description>The Apache Maven Fluido Skin is an Apache Maven site skin
@@ -41,7 +41,7 @@ under the License.
     <connection>scm:git:https://gitbox.apache.org/repos/asf/maven-fluido-skin.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/maven-fluido-skin.git</developerConnection>
     <url>https://github.com/apache/maven-fluido-skin/tree/${project.scm.tag}</url>
-    <tag>maven-fluido-skin-2.0.0-M3</tag>
+    <tag>HEAD</tag>
   </scm>
   <issueManagement>
     <system>jira</system>
@@ -102,7 +102,7 @@ under the License.
     <jquery.version>1.11.2</jquery.version>
     <sitePluginVersion>4.0.0-M5</sitePluginVersion>
     <projectInfoReportsPluginVersion>3.4.2</projectInfoReportsPluginVersion>
-    <project.build.outputTimestamp>2023-02-12T18:32:49Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2023-02-12T18:33:10Z</project.build.outputTimestamp>
     <anchorjs.version>4.2.2</anchorjs.version>
   </properties>
 
