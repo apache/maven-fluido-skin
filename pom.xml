@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
@@ -18,7 +17,6 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -26,7 +24,7 @@ under the License.
     <groupId>org.apache.maven.skins</groupId>
     <artifactId>maven-skins</artifactId>
     <version>36</version>
-    <relativePath>../../pom/maven/maven-skins/pom.xml</relativePath>
+    <relativePath />
   </parent>
 
   <artifactId>maven-fluido-skin</artifactId>
@@ -36,27 +34,6 @@ under the License.
   <description>The Apache Maven Fluido Skin is an Apache Maven site skin
     built on top of Twitter's bootstrap.</description>
   <inceptionYear>2011</inceptionYear>
-
-  <scm>
-    <connection>scm:git:https://gitbox.apache.org/repos/asf/maven-fluido-skin.git</connection>
-    <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/maven-fluido-skin.git</developerConnection>
-    <url>https://github.com/apache/maven-fluido-skin/tree/${project.scm.tag}</url>
-    <tag>HEAD</tag>
-  </scm>
-  <issueManagement>
-    <system>jira</system>
-    <url>https://issues.apache.org/jira/issues/?jql=project%20%3D%20MSKINS%20AND%20component%20%3D%20%22Fluido%20Skin%22</url>
-  </issueManagement>
-  <ciManagement>
-    <system>Jenkins</system>
-    <url>https://ci-maven.apache.org/job/Maven/job/maven-box/job/maven-fluido-skin/</url>
-  </ciManagement>
-  <distributionManagement>
-    <site>
-      <id>apache.website</id>
-      <url>scm:svn:https://svn.apache.org/repos/asf/maven/website/components/${maven.site.path}</url>
-    </site>
-  </distributionManagement>
 
   <contributors>
     <!-- in alphabetical order -->
@@ -97,6 +74,27 @@ under the License.
     </contributor>
   </contributors>
 
+  <scm>
+    <connection>scm:git:https://gitbox.apache.org/repos/asf/maven-fluido-skin.git</connection>
+    <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/maven-fluido-skin.git</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://github.com/apache/maven-fluido-skin/tree/${project.scm.tag}</url>
+  </scm>
+  <issueManagement>
+    <system>jira</system>
+    <url>https://issues.apache.org/jira/issues/?jql=project%20%3D%20MSKINS%20AND%20component%20%3D%20%22Fluido%20Skin%22</url>
+  </issueManagement>
+  <ciManagement>
+    <system>Jenkins</system>
+    <url>https://ci-maven.apache.org/job/Maven/job/maven-box/job/maven-fluido-skin/</url>
+  </ciManagement>
+  <distributionManagement>
+    <site>
+      <id>apache.website</id>
+      <url>scm:svn:https://svn.apache.org/repos/asf/maven/website/components/${maven.site.path}</url>
+    </site>
+  </distributionManagement>
+
   <properties>
     <bootstrap.version>2.3.2</bootstrap.version>
     <jquery.version>1.11.2</jquery.version>
@@ -109,8 +107,8 @@ under the License.
   <build>
     <resources>
       <resource>
-        <directory>.</directory>
         <targetPath>META-INF</targetPath>
+        <directory>.</directory>
         <includes>
           <include>NOTICE</include>
           <include>LICENSE</include>
@@ -128,11 +126,12 @@ under the License.
       </resource>
 
       <resource>
+        <filtering>true</filtering>
         <directory>${basedir}/src/main/resources</directory>
         <includes>
           <include>META-INF/**</include>
         </includes>
-        <filtering>true</filtering> <!-- add skin-info -->
+        <!-- add skin-info -->
       </resource>
 
       <!-- include the print.css -->
@@ -193,6 +192,9 @@ under the License.
         <executions>
           <execution>
             <id>default-minify</id>
+            <goals>
+              <goal>minify</goal>
+            </goals>
             <phase>generate-resources</phase>
             <configuration>
               <webappSourceDir>${basedir}/src/main/resources</webappSourceDir>
@@ -217,9 +219,6 @@ under the License.
               <jsFinalFile>apache-maven-fluido-${project.version}.js</jsFinalFile>
               <jsEngine>CLOSURE</jsEngine>
             </configuration>
-            <goals>
-              <goal>minify</goal>
-            </goals>
           </execution>
         </executions>
       </plugin>
@@ -253,6 +252,7 @@ under the License.
                 <pomInclude>*/pom.xml</pomInclude>
               </pomIncludes>
               <goals>
+                <goal>site:effective-site</goal>
                 <goal>site</goal>
               </goals>
             </configuration>
@@ -280,10 +280,10 @@ under the License.
             <executions>
               <execution>
                 <id>copy-sidebar</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -295,10 +295,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-topbar</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -310,10 +310,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-topbar-inverse</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -325,10 +325,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-10</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -340,10 +340,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-13</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -355,10 +355,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-14</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -370,10 +370,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-14_sitesearch</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -385,10 +385,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-15</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -400,10 +400,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-16</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -415,10 +415,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-17</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -430,10 +430,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-21</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -445,10 +445,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-22</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -460,10 +460,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-22_default</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -475,10 +475,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-22_topbar</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -490,10 +490,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-23</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -505,10 +505,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-24</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -520,10 +520,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-24_topbar</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -535,10 +535,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-25</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -550,10 +550,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-28</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -565,10 +565,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-33</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -580,10 +580,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-33_topbar</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -595,10 +595,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-41</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -610,10 +610,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-72</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -625,10 +625,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-76</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -640,10 +640,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-76_topbar</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -655,10 +655,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-85</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -670,10 +670,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-143_default</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -685,10 +685,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-143_false</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -700,10 +700,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-143_true</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -715,10 +715,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-161-sidebar-fb-like-share</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -730,10 +730,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-161-sidebar-fb-recommend-share</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -745,10 +745,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-161-topbar-fb-like-share</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -760,10 +760,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-161-topbar-fb-recommend-share</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
@@ -775,10 +775,10 @@ under the License.
               </execution>
               <execution>
                 <id>copy-mskins-177-apache-analytics</id>
-                <phase>site</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
+                <phase>site</phase>
                 <configuration>
                   <resources>
                     <resource>
