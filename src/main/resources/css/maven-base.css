@@ -28,6 +28,7 @@
 
 section > p,
 section > dt,
+section > dl,
 section > table.table {
   margin-right: 7px;
   margin-left: 7px;
