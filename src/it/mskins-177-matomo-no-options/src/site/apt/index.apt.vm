@@ -28,9 +28,9 @@
 
 ${project.name}
 
- This is a test for ${skinName} with additional Apache Analytics options.
+ This is a test for ${skinName} with default Matomo options.
  ${skinDescription}
 
 * Actual configuration
 
-%{snippet|id=skin-apache-analytics|file=${project.basedir}/src/site/site.xml}
+%{snippet|id=skin-matomo|file=${project.basedir}/src/site/site.xml}

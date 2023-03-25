@@ -31,14 +31,14 @@
     <version>${skinVersion}</version>
   </skin>
 
-  <!-- START SNIPPET: skin-apache-analytics -->
+  <!-- START SNIPPET: skin-matomo -->
   <custom>
     <matomo>
-      <siteId>3</siteId>
-      <url>https://analytics.apache.org</url>
+      <siteId>X</siteId>
+      <url>https://matomo.example.com</url>
     </matomo>
   </custom>
-  <!-- END SNIPPET: skin-apache-analytics -->
+  <!-- END SNIPPET: skin-matomo -->
 
   <body>
     <breadcrumbs>

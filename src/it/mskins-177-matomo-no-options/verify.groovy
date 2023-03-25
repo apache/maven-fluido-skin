@@ -19,8 +19,8 @@
 
 File index = new File( basedir, "target/site/index.html" )
 assert index.exists()
-assert index.text.contains( 'var u=\"https://analytics.apache.org\";')
-assert index.text.contains( '_paq.push([\'setSiteId\', \'3\']);')
+assert index.text.contains( 'var u=\"https://matomo.example.com\";')
+assert index.text.contains( '_paq.push([\'setSiteId\', \'X\']);')
 assert index.text.contains( '_paq.push([\'setTrackerUrl\', u+\'/matomo.php\']');
 assert !index.text.contains( '_paq.push([\'disableCookies\']);')
 assert !index.text.contains( '_paq.push([\'trackPageView\']);')
