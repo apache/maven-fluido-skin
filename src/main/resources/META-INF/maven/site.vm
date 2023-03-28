@@ -245,7 +245,7 @@
 #*        *##set ( $sourceStyle = "prettyprint" )
 #*      *##end
 ##
-#*      *#$bodyContent.replaceAll( "<div class=${esc.q}source${esc.q}>(\r?\n)?<pre>", "<div class=${esc.q}source${esc.q}><pre class=${esc.q}$sourceStyle${esc.q}>" ).replaceAll( "class=${esc.q}bodyTable${esc.q}", "class=${esc.q}table table-striped${esc.q}" ).replaceAll( "class=${esc.q}bodyTable bodyTableBorder${esc.q}", "class=${esc.q}table table-bordered table-striped${esc.q}" )
+#*      *#$bodyContent.replaceAll( "<div class=${esc.q}verbatim source${esc.q}>(\r?\n)?<pre>", "<div class=${esc.q}verbatim source${esc.q}><pre class=${esc.q}$sourceStyle${esc.q}>" ).replaceAll( "class=${esc.q}bodyTable${esc.q}", "class=${esc.q}table table-striped${esc.q}" ).replaceAll( "class=${esc.q}bodyTable bodyTableBorder${esc.q}", "class=${esc.q}table table-bordered table-striped${esc.q}" )
         </main>
 #*    *##if ( $sideBarEnabled )
       </div>
