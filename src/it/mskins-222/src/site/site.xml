@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+ -->
+
+<project xmlns="http://maven.apache.org/DECORATION/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.1.0 http://maven.apache.org/xsd/decoration-1.1.0.xsd"
+  name="${skinName}">
+
+  <skin>
+    <groupId>${skinGroupId}</groupId>
+    <artifactId>${skinArtifactId}</artifactId>
+    <version>${skinVersion}</version>
+  </skin>
+
+  <bannerLeft>
+    <name>Banner &quot;left&quot; &lt;name&gt;</name>
+    <alt>Banner &quot;left&quot; &lt;alt&gt;</alt>
+    <title>Banner &quot;left&quot; &lt;title&gt;</title>
+  </bannerLeft>
+  <bannerRight>
+    <name>Banner &quot;right&quot; &lt;name&gt;</name>
+    <alt>Banner &quot;right&quot; &lt;alt&gt;</alt>
+    <title>Banner &quot;right&quot; &lt;title&gt;</title>
+  </bannerRight>
+
+  <poweredBy>
+    <logo name="&lt;Powered by&gt; &quot;logo&quot; &apos;@name&apos;" alt="&lt;Powered by&gt; &quot;logo&quot; &apos;@alt&apos;" title="&lt;Powered by&gt; &quot;logo&quot; &apos;@title&apos;" />
+  </poweredBy>
+
+  <body>
+    <links>
+      <item name="&lt;Links&gt; &quot;item&quot; &apos;@name&apos;" alt="&lt;Links&gt; &quot;item&quot; &apos;@alt&apos;" title="&lt;Links&gt; &quot;item&quot; &apos;@title&apos;" />
+    </links>
+    <breadcrumbs>
+      <item name="&lt;Breadcrumbs&gt; &quot;item&quot; &apos;@name&apos;" alt="&lt;Breadcrumbs&gt; &quot;item&quot; &apos;@alt&apos;" title="&lt;Breadcrumbs&gt; &quot;item&quot; &apos;@title&apos;" />
+   </breadcrumbs>
+
+    <menu name="&lt;Menu&gt; &apos;@name&apos;" alt="&lt;Menu&gt; &apos;@alt&apos;" title="&lt;Menu&gt; &apos;@title&apos;">
+      <item name="&lt;Menu&gt; &quot;item&quot; &apos;@name&apos;" alt="&lt;Menu&gt; &quot;item&quot; &apos;@alt&apos;" title="&lt;Menu&gt; &quot;item&quot; &apos;@title&apos;" />
+    </menu>
+  </body>
+
+</project>

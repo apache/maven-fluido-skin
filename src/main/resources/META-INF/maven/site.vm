@@ -36,12 +36,12 @@
 ## put meta together
     <meta name="generator" content="#generatedBy()" />
 #foreach( $author in $authors )
-    <meta name="author" content="$author" />
+    <meta name="author" content="$esc.xml( $author )" />
 #end
 #if ( $documentDate )
     <meta name="date" content="$documentDate" />
 #end
-    <title>$title</title>
+    <title>$esc.xml( $title )</title>
     <link rel="stylesheet" href="$relativePath/css/apache-maven-fluido-@project.version@.min.css" />
     <link rel="stylesheet" href="$relativePath/css/site.css" />
     <link rel="stylesheet" href="$relativePath/css/print.css" media="print" />
@@ -111,7 +111,7 @@
 #*            *##set ( $hrf = './' )
 #*          *##end
 #*        *##end
-#*        *#<a class="brand" href="$hrf" #if( $topBarIcon.getChild( 'alt' ) ) title="$topBarIcon.getChild( 'alt' ).getValue()"#end>##
+#*        *#<a class="brand" href="$hrf" #if( $topBarIcon.getChild( 'alt' ) ) title="$esc.xml( $topBarIcon.getChild( 'alt' ).getValue() )"#end>##
 ##
 #*        *##set ( $topBarIconName = $decoration.getCustomValue( 'fluidoSkin.topBarIcon.name', $project.name ) )
 ##
@@ -122,9 +122,9 @@
 #*            *##set ( $src = $src.replaceAll( '\\', '/' ) )
 #*          *##end
 #*          *##set ( $alt = $decoration.getCustomValue( 'fluidoSkin.topBarIcon.alt', $topBarIconName ) )
-#*          *#<img src="$src" alt="$alt" />
+#*          *#<img src="$src" alt="$esc.xml( $alt )" />
 #*        *##else
-#*          *#$topBarIconName
+#*          *#$esc.xml( $topBarIconName )
 #*        *##end
 ##
 #*        *#</a>
@@ -267,7 +267,7 @@
 #*      *##if ( $decoration.getCustomChild( 'fluidoSkin.copyrightClass' ) )
 #*        *##set ( $copyrightClass = ' class="' + $decoration.getCustomValue( 'fluidoSkin.copyrightClass' ) + '"' )
 #*      *##end
-            <p$!copyrightClass>&#169;#copyright()#publishDate( "bottom" $decoration.publishDate $decoration.version )</p>
+            <p$!copyrightClass>$esc.unicode( '\u00A9' )#copyright()#publishDate( "bottom" $decoration.publishDate $decoration.version )</p>
 #*    *##end
         </div>
 ##
