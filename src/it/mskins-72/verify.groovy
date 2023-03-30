@@ -21,4 +21,4 @@ File index = new File( basedir, "target/site/index.html" )
 int inceptionYear = 2002
 int currentYear = Calendar.getInstance().get(Calendar.YEAR)
 assert index.exists()
-assert index.text.contains( "<p class=\"pull-right\">&#169;" )
+assert index.getText("UTF-8").contains( "<p class=\"pull-right\">\u00A9" )

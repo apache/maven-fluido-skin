@@ -113,7 +113,7 @@
 #*            *##set ( $hrf = './' )
 #*          *##end
 #*        *##end
-#*        *#<a class="brand" href="$hrf" #if( $topBarIcon.getChild( 'alt' ) ) title="$topBarIcon.getChild( 'alt' ).getValue()"#end>##
+#*        *#<a class="brand" href="$hrf" #if( $topBarIcon.getChild( 'alt' ) ) title="$esc.xml( $topBarIcon.getChild( 'alt' ).getValue() )"#end>##
 ##
 #*        *##set ( $topBarIconName = $decoration.getCustomValue( 'fluidoSkin.topBarIcon.name', $project.name ) )
 ##
@@ -124,9 +124,9 @@
 #*            *##set ( $src = $src.replaceAll( '\\', '/' ) )
 #*          *##end
 #*          *##set ( $alt = $decoration.getCustomValue( 'fluidoSkin.topBarIcon.alt', $topBarIconName ) )
-#*          *#<img src="$src" alt="$alt" />
+#*          *#<img src="$src" alt="$esc.xml( $alt )" />
 #*        *##else
-#*          *#$topBarIconName
+#*          *#$esc.xml( $topBarIconName )
 #*        *##end
 ##
 #*        *#</a>
@@ -273,7 +273,7 @@
 #*      *##if ( $decoration.getCustomChild( 'fluidoSkin.copyrightClass' ) )
 #*        *##set ( $copyrightClass = ' class="' + $decoration.getCustomValue( 'fluidoSkin.copyrightClass' ) + '"' )
 #*      *##end
-            <p$!copyrightClass>&#169;#copyright()#publishDate( "bottom" $decoration.publishDate $decoration.version )</p>
+            <p$!copyrightClass>$esc.unicode( '\u00A9' )#copyright()#publishDate( "bottom" $decoration.publishDate $decoration.version )</p>
 #*    *##end
         </div>
 ##
