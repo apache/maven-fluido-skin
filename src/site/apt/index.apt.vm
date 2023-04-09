@@ -171,7 +171,7 @@ Welcome to ${project.name}!
 </project>
 +-----+
 
-** {Matomo} (e.g. Apache Analytics)
+** {Matomo (e.g. Apache Analytics)}
 
   Users can optionally enable <<Matomo>>.
   How to configure it for Apache Analytics, the <<options>> element will contain some configuration (here some privacy setup):
