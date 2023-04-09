@@ -184,9 +184,9 @@ Welcome to ${project.name}!
         <siteId>xxx</siteId>
         <url>https://analytics.apache.org</url>
         <options>
-            <disableCookies/>
-            <trackPageView/>
-            <enableLinkTracking/>
+          <disableCookies/>
+          <trackPageView/>
+          <enableLinkTracking/>
         </options>
       </matomo>
   </custom>
