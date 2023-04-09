@@ -98,7 +98,7 @@ under the License.
   <properties>
     <bootstrap.version>2.3.2</bootstrap.version>
     <jquery.version>1.11.2</jquery.version>
-    <sitePluginVersion>4.0.0-M6</sitePluginVersion>
+    <sitePluginVersion>4.0.0-M7</sitePluginVersion>
     <projectInfoReportsPluginVersion>3.4.2</projectInfoReportsPluginVersion>
     <project.build.outputTimestamp>2023-03-28T16:39:17Z</project.build.outputTimestamp>
     <anchorjs.version>4.2.2</anchorjs.version>
