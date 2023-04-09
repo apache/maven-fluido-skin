@@ -557,12 +557,19 @@ $indent     </ul>##
 Apache Maven Doxia Site Renderer#if( $doxiaSiteRendererVersion ) $doxiaSiteRendererVersion#end##
 #end
 ##
-##
-#macro( anchorJS )
-<script>
-  if(anchors) {
-    anchors.add();
-  }
-</script>
+#macro( anchorJs )
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.anchorJs' ) )
+    <script>
+#*  *##if ( $decoration.getCustomValue( 'fluidoSkin.anchorJs.cssSelector' ) && $decoration.getCustomValue( 'fluidoSkin.anchorJs.cssSelector' ) != '' )
+#*    *##set ( $cssSelector = '"' + $decoration.getCustomValue( 'fluidoSkin.anchorJs.cssSelector' ) + '"' )
+#*  *##end
+#*  *##foreach( $option in $decoration.getCustomChild( 'fluidoSkin.anchorJs.options' ).getChildren() )
+#*    *##if( $option.value && $option.value != "" )
+    anchors.options.$option.name = "$option.value";
+#*    *##end
+#*  *##end
+    anchors.add($!cssSelector);
+    </script>
+#**##end
 #end
 ##
