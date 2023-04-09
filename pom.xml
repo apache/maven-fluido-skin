@@ -103,7 +103,7 @@ under the License.
     <sitePluginVersion>3.12.0</sitePluginVersion>
     <projectInfoReportsPluginVersion>3.3.0</projectInfoReportsPluginVersion>
     <project.build.outputTimestamp>2023-01-17T09:12:52Z</project.build.outputTimestamp>
-    <anchorjs.version>4.2.2</anchorjs.version>
+    <anchorjs.version>4.3.1</anchorjs.version>
   </properties>
 
   <build>
