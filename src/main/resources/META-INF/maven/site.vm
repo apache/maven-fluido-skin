@@ -122,7 +122,7 @@
 #*            *##set ( $src = $src.replaceAll( '\\', '/' ) )
 #*          *##end
 #*          *##set ( $alt = $decoration.getCustomValue( 'fluidoSkin.topBarIcon.alt', $topBarIconName ) )
-#*          *#<img src="$src" alt="$esc.xml( $alt )" />
+#*          *#<img src="$src" #if( $alt ) alt="$esc.xml( $alt )"#end />
 #*        *##else
 #*          *#$esc.xml( $topBarIconName )
 #*        *##end
