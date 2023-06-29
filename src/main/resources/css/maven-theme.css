@@ -163,3 +163,8 @@ h4 > code,
 h5 > code {
   font-size: unset;
 }
+
+.table th,
+.table td {
+  text-align: revert;
+}
