@@ -116,7 +116,7 @@
 #*  *##if( $alt )
 #*    *##set ( $imgAlt = ' alt="' + $esc.xml( $alt ) + '"' )
 #*  *##else
-#*    *##set ( $imgAlt = ' alt=""' )
+#*    *##set ( $imgAlt = "" )
 #*  *##end
 #*  *##if( $border )
 #*    *##set ( $imgBorder = 'border: ' + $border + '; ' )
@@ -164,7 +164,7 @@
 #*    *##elseif ( $banner.name )
 #*      *##set ( $alt = ' alt="' + $esc.xml( $banner.name ) + '"' )
 #*    *##else
-#*      *##set ( $alt = ' alt=""' )
+#*      *##set ( $alt = "" )
 #*    *##end
 #*    *##if( $banner.border )
 #*      *##set ( $imgBorder = 'border: ' + $banner.border + '; ' )
