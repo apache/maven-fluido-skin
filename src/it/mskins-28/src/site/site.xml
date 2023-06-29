@@ -43,13 +43,15 @@
 
   <!-- START SNIPPET: skin-custom-config -->
   <poweredBy>
-    <logo name="First Logo" img="./images/logos/maven-feather.png" href="http://maven.apache.org/"/>
+    <logo name="First Logo" alt="First Logo" img="./images/logos/maven-feather.png" href="http://maven.apache.org/"/>
     <!-- Second logo is wider than the sidebar -->
-    <logo name="Second Logo" width="500px" img="./images/logos/maven-feather.png" href="http://maven.apache.org/"/>
+    <logo name="Second Logo" alt="Second Logo" width="500px" img="./images/logos/maven-feather.png" href="http://maven.apache.org/"/>
     <!-- Third and forth logo fit next to eachother in the sidebar -->
-    <logo name="Third Logo" img="./images/logos/maven-feather.png" href="http://maven.apache.org/"/>
-    <logo name="Fourth Logo" img="./images/logos/maven-feather.png" href="http://maven.apache.org/"/>
-    <logo name="Fifth Logo" img="./images/logos/maven-feather.png" href="http://maven.apache.org/"/>
+    <logo name="Third Logo" alt="Third Logo" img="./images/logos/maven-feather.png" href="http://maven.apache.org/"/>
+    <logo name="Fourth Logo" alt="Fourth Logo" img="./images/logos/maven-feather.png" href="http://maven.apache.org/"/>
+    <logo name="Fifth Logo" alt="Fifth Logo" img="./images/logos/maven-feather.png" href="http://maven.apache.org/"/>
+    <logo name="Sixth Logo" alt="Sixth Logo" img="./images/logos/maven-feather.png"/>
+    <logo name="Seventh Logo"/>
   </poweredBy>
   <!-- END SNIPPET: skin-custom-config -->
 

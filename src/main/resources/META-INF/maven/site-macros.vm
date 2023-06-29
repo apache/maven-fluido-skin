@@ -15,31 +15,25 @@
 ## specific language governing permissions and limitations
 ## under the License.
 ##
-#macro ( topMenu $menus )
+#macro( topMenu $menus )
 #**##foreach( $menu in $menus )
-#**##if ( $menu.name )
+#**##if( $menu.name )
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown">$esc.xml( $menu.name ) <b class="caret"></b></a>
         <ul class="dropdown-menu">
 #*    *##foreach( $item in $menu.items )
-#*      *##if ( $item.items.size() > 0 )
+#*      *##if( $item.items.size() > 0 )
             <li class="dropdown-submenu">
-#*            *##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
-#*            *##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
-#*            *##topLink( $currentItemHref $item.name $item.target )
+#*            *##topLink( $item )
 
               <ul class="dropdown-menu">
-#*            *##foreach( $subitem in $item.items )
-#*              *##set ( $currentItemHref = $PathTool.calculateLink( $subitem.href, $relativePath ) )
-#*              *##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
-                  <li>#topLink( $currentItemHref $subitem.name $subitem.target )</li>
+#*            *##foreach( $subItem in $item.items )
+                  <li>#topLink( $subItem )</li>
 #*            *##end
               </ul>
             </li>
 #*      *##else
-#*        *##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
-#*        *##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
-            <li>#topLink( $currentItemHref $item.name $item.target )</li>
+            <li>#topLink( $item )</li>
 #*      *##end
 #*    *##end
         </ul>
@@ -48,275 +42,204 @@
 #**##end
 #end
 ##
-#macro ( topLink $href $name $target )
-#**##set ( $linkTitle = ' title="' + $esc.xml( $name ) + '"' )
-#**##if( $target )
-#*  *##set ( $linkTarget = ' target="' + $target + '"' )
-#**##else
-#*  *##set ( $linkTarget = "" )
-#**##end
-#**##if ( $alignedFileName == $href )
-#*  *#<a$linkTitle>$esc.xml( $name )</a>##
-#**##else
-#*  *#<a href="$href"$linkTarget$linkTitle>$esc.xml( $name )</a>##
-#**##end
-#end
-##
-#macro ( topLinks $links )
+#macro( topLinks $links )
 #**##foreach( $item in $links )
-#*  *##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
-#*  *##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
-    <li>#topLink( $currentItemHref $item.name $item.target )</li>
+    <li>#topLink( $item )</li>
 #**##end
 #end
 ##
-#macro ( link $href $name $target $img $position $alt $border $width $height $icon )
-#**##set ( $linkTitle = ' title="' + $esc.xml( $name ) + '"' )
-#**##if( $target )
-#*  *##set ( $linkTarget = ' target="' + $target + '"' )
+#macro( link $link $icon = false $omitImage = false $elemOnEmptyHref = "a" $dotSlashOnEmptyHref = false $imageClass = "imageLink" $elemClass = false )
+#**##if( $link.name )
+#*  *##set( $name = $esc.xml( $link.name ) )
 #**##else
-#*  *##set ( $linkTarget = "" )
+#*  *##set( $name = "" )
 #**##end
-#**##if ( $decoration.isLink( $href ) )
-#*  *##set ( $linkClass = ' class="externalLink"' )
-#**##else
-#*  *##set ( $linkClass = "" )
-#**##end
-#**##if( $href )
-#*  *##set ( $href = ' href="' + $href + '"' )
-#**##else
-#*  *##set ( $href = "" )
-#**##end
-#**##if ( $img )
-#*  *##if ( $position == "left" )
-#*    *#<a$href$linkClass$linkTarget$linkTitle>#image( $img $alt $border $width $height )$name</a>##
+#**##if( $link.href || $dotSlashOnEmptyHref == "always" )
+#*  *##set( $href = $link.href )
+#*  *##if( !$site.isLink( $href ) )
+#*    *##set( $href = $PathTool.calculateLink( $href, $relativePath ) )
+#*    *##set( $href = $href.replaceAll( '\\', '/' ) )
+#*    *##if( $href == "" && ( $dotSlashOnEmptyHref == "set" || $dotSlashOnEmptyHref == "always" ) )
+#*      *##set( $href = "./" )
+#*    *##end
+#*    *##set( $class = "" )
 #*  *##else
-#*    *#<a$href$linkClass$linkTarget$linkTitle>$esc.xml( $name ) #image( $img $alt $border $width $height )</a>##
+#*    *##set( $class = ' class="externalLink"' )
+#*  *##end
+#*  *##if( $link.target )
+#*    *##set( $target = ' target="' + $link.target + '"' )
+#*  *##else
+#*    *##set( $target = "" )
+#*  *##end
+#*  *##if( $alignedFileName == $href && $dotSlashOnEmptyHref != "always" )
+#*    *##set( $href = "" )
+#*    *##set( $target = "" )
+#*    *##set( $class = "" )
+#*  *##else
+#*    *##set( $href = ' href="' + $href + '"' )
 #*  *##end
 #**##else
-#*  *#<a$href$linkClass$linkTarget$linkTitle>##
+#*  *##set( $href = "" )
+#*  *##set( $target = "" )
+#*  *##set( $class = "" )
+#**##end
+##
+#**##set( $wrap = $href || !$href && $elemOnEmptyHref )
+#**##set( $wrapElem = "a" )
+#**##if( !$href && $elemOnEmptyHref )
+#*  *##set( $wrapElem = $elemOnEmptyHref )
+#**##end
+#**##if( $elemClass )
+#*  *##set( $class = ' class="' + $elemClass + '"' )
+#**##end
+#**##if( $wrap )<$wrapElem#end$href$target$class#if( $wrap )>#end##
+#**##if( $link.image && !$omitImage )
+#*  *##set( $img = "#image( $link.image $imageClass )" )
+#*  *##if( $link.image.position == "left" )
+#*    *#$img#if( $name ) $name#end##
+#*  *##else
+#*    *##if( $name )$name #end$img##
+#*  *##end
+#**##else
 #*  *##if( $icon )
 #*    *#<span class="$icon"></span>##
 #*  *##end
-#*  *#$esc.xml( $name )</a>##
+#*  *#$name##
+#**##end
+#**##if( $wrap )</$wrapElem>##
 #**##end
 #end
 ##
-#macro ( image $img $alt $border $width $height )
-#**##if( $img )
-#*  *##if ( !$decoration.isLink( $img ) )
-#*    *##set ( $imgSrc = $PathTool.calculateLink( $img, $relativePath ) )
-#*    *##set ( $imgSrc = $imgSrc.replaceAll( '\\', '/' ) )
-#*    *##set ( $imgSrc = ' src="' + $imgSrc + '"' )
+#macro( topLink $link )
+#**##link ( $link false true )
+#end
+##
+#macro( image $image $class )
+#*  *##if( !$site.isLink( $image.src ) )
+#*    *##set( $src = $PathTool.calculateLink( $image.src, $relativePath ) )
+#*    *##set( $src = $src.replace( '\\', '/' ) )
+#*    *##set( $src = ' src="' + $src + '"' )
 #*  *##else
-#*    *##set ( $imgSrc = ' src="' + $img + '"' )
+#*    *##set( $src = ' src="' + $image.src + '"' )
 #*  *##end
-#*  *##if( $alt )
-#*    *##set ( $imgAlt = ' alt="' + $esc.xml( $alt ) + '"' )
+#*  *##if( $image.alt )
+#*    *##set( $alt = ' alt="' + $esc.xml( $image.alt ) + '"' )
 #*  *##else
-#*    *##set ( $imgAlt = "" )
+#*    *##set( $alt = "" )
 #*  *##end
-#*  *##if( $border )
-#*    *##set ( $imgBorder = 'border: ' + $border + '; ' )
+#*  *##if( $image.width )
+#*    *##set( $width = 'width: ' + $image.width + ';' )
 #*  *##else
-#*    *##set ( $imgBorder = "" )
+#*    *##set( $width = "" )
 #*  *##end
-#*  *##if( $width )
-#*    *##set ( $imgWidth = 'width: ' + $width + '; ' )
+#*  *##if( $image.height )
+#*    *##set( $height = 'height: ' + $image.height + ';' )
 #*  *##else
-#*    *##set ( $imgWidth = "" )
+#*    *##set( $height = "" )
 #*  *##end
-#*  *##if( $height )
-#*    *##set ( $imgHeight = 'height: ' + $height + ';' )
+#*  *##if( $image.style )
+#*    *##set( $style = $image.style )
 #*  *##else
-#*    *##set ( $imgHeight = "" )
+#*    *##set( $style = "" )
 #*  *##end
-<img class="imageLink"$imgSrc$imgAlt style="$imgBorder$imgWidth$imgHeight" />##
+#*  *##set( $style = "$width$height$style" )
+<img class="$class"$src$alt#if( $style ) style="$style"#end />##
+#end
+##
+#macro( banner $banner $id )
+#**##if( $banner )
+#*  *#<div id="$id"><h1>#link( $banner false false false "set" )</h1></div>##
 #**##end
 #end
 ##
-#macro ( banner $banner $id )
-#**##if ( $banner )
-#*  *##if( $banner.href )
-#*    *##set ( $hrf = $banner.href )
-#*    *##if ( !$decoration.isLink( $hrf ) )
-#*      *##set ( $hrf = $PathTool.calculateLink( $hrf, $relativePath ) )
-#*      *##set ( $hrf = $hrf.replaceAll( '\\', '/' ) )
-#*      *##if ( ( $hrf == '' ) )
-#*        *##set ( $hrf = './' )
-#*      *##end
-#*    *##end
-#*    *#<a href="$hrf" id="$id"#if( $banner.alt ) title="$esc.xml( $banner.alt )"#end>##
-#*  *##else
-#*    *#<div id="$id">##
-#*  *##end
-##
-#*  *##if( $banner.src )
-#*    *##set ( $src = $banner.src )
-#*    *##if ( !$decoration.isLink( $src ) )
-#*      *##set ( $src = $PathTool.calculateLink( $src, $relativePath ) )
-#*      *##set ( $src = $src.replaceAll( '\\', '/' ) )
-#*    *##end
-#*    *##if ( $banner.alt )
-#*      *##set ( $alt = ' alt="' + $esc.xml( $banner.alt ) + '"' )
-#*    *##elseif ( $banner.name )
-#*      *##set ( $alt = ' alt="' + $esc.xml( $banner.name ) + '"' )
-#*    *##else
-#*      *##set ( $alt = "" )
-#*    *##end
-#*    *##if( $banner.border )
-#*      *##set ( $imgBorder = 'border: ' + $banner.border + '; ' )
-#*    *##else
-#*      *##set ( $imgBorder = "" )
-#*    *##end
-#*    *##if( $banner.width )
-#*      *##set ( $imgWidth = 'width: ' + $banner.width + '; ' )
-#*    *##else
-#*      *##set ( $imgWidth = "" )
-#*    *##end
-#*    *##if( $banner.height )
-#*      *##set ( $imgHeight = 'height: ' + $banner.height + ';' )
-#*    *##else
-#*      *##set ( $imgHeight = "" )
-#*    *##end
-#*    *##if( $banner.title )
-#*      *##set ( $bannerTitle=' title="' + $esc.xml( $banner.title ) + '"' )
-#*    *##else
-#*      *##set ( $bannerTitle="" )
-#*    *##end
-#*    *#<img src="$src" $alt$bannerTitle style="$imgBorder$imgWidth$imgHeight" />##
-#*  *##else
-#*    *#<h1>$esc.xml( $banner.name )</h1>
-#*  *##end
-##
-#*  *##if( $banner.href )
-#*    *#</a>##
-#*  *##else
-#*    *#</div>
-#*  *##end
-#**##end
-#end
-##
-#macro ( links $links )
-#**##if ( $links && $links.size() > 0 )
-#*  *##set ( $counter = 0 )
+#macro( links $links )
+#**##if( $links && $links.size() > 0 )
+#*  *##set( $counter = 0 )
 #*  *### MSKINS-41
-#*  *##set ( $begin = $links.size() - 1 )
+#*  *##set( $begin = $links.size() - 1 )
 #*  *##foreach( $index in [$begin..0] )
-#*    *##set ( $item = $links.get( $index ) )
-#*    *##set ( $counter = $counter + 1 )
-#*    *##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
-#*    *##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
+#*    *##set( $item = $links.get( $index ) )
+#*    *##set( $counter = $counter + 1 )
 ##
         <li class="pull-right">##
-#*    *##if ( $counter > 0 && $counter < $links.size() )
+#*    *##if( $counter > 0 && $counter < $links.size() )
 #*    *#<span class="divider">|</span>
 #*    *##end
-#*    *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false )
+#*    *##link( $item )
 #*    *#</li>
 #*  *##end
 #**##end
 #end
 ##
-#macro ( breadcrumbs $breadcrumbs $cssClass )
-#**##set ( $breadcrumbDivider = $decoration.getCustomValue( 'fluidoSkin.breadcrumbDivider', '/' ) )
+#macro( breadcrumbs $breadcrumbs $cssClass )
+#**##set( $breadcrumbDivider = $site.getCustomValue( 'fluidoSkin.breadcrumbDivider', '/' ) )
 #**##foreach( $item in $breadcrumbs )
-#*  *##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
-#*  *##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
-#*  *##if ( ( $currentItemHref == '' ) )
-#*    *##set ( $currentItemHref = './' )
-#*  *##end
-##
-#*  *##if( $cssClass )
-      <li class="$cssClass">##
-#*  *##else
-      <li>##
-#end
-#*  *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false )
+      <li#if( $cssClass ) class="$cssClass"#end>##
+#*  *##link( $item false false "a" "always" )
 #*  *#<span class="divider">$breadcrumbDivider</span>##
 #*  *#</li>
 #**##end
 #**### add Edit button if content is editable
-#**##if( $decoration.edit && $docRenderingContext.editable )
-#*  *##set ( $edit = ' <a href="' + $docRenderingContext.getDoxiaSourcePath( $decoration.edit ) + '"><img src="' + $relativePath + '/images/accessories-text-editor.png" alt="' + $text.get( "template.edit" )+ '" /></a>' )
+#**##if( $site.edit && $docRenderingContext.editable )
+#*  *##set( $edit = ' <a href="' + $docRenderingContext.getDoxiaSourcePath( $site.edit ) + '"><img src="' + $relativePath + '/images/accessories-text-editor.png" alt="' + $text.get( "template.edit" ) + '" /></a>' )
 #**##end
-#**##if ( $shortTitle )
-    <li class="active $cssClass">$esc.xml( $shortTitle )$!edit</li>
+#**##if( $shortTitle )
+    <li class="active#if( $cssClass ) $cssClass#end">$esc.xml( $shortTitle )$!edit</li>
 #**##else
 #* TODO $title can be empty! *#
-    <li class="active $cssClass">$esc.xml( $title )$!edit</li>
+    <li class="active#if( $cssClass ) $cssClass#end">$esc.xml( $title )$!edit</li>
 #**##end
 #end
 ##
-#macro ( displayTree $display $item )
-#**##if ( $item && $item.items && $item.items.size() > 0 )
-#*  *##foreach( $subitem in $item.items )
-#*    *##set ( $subitemHref = $PathTool.calculateLink( $subitem.href, $relativePath ) )
-#*    *##set ( $subitemHref = $subitemHref.replaceAll( '\\', '/' ) )
+#macro( displayTree $item $display )
+#**##if( $item.items && $item.items.size() > 0 )
+#*  *##foreach( $subItem in $item.items )
+#*    *##set( $subItemHref = $PathTool.calculateLink( $subItem.href, $relativePath ) )
+#*    *##set( $subItemHref = $subItemHref.replaceAll( '\\', '/' ) )
 ##
-#*    *##if ( $alignedFileName == $subitemHref )
-#*      *##set ( $display = true )
+#*    *##if( $alignedFileName == $subItemHref )
+#*      *##set( $display = true )
 #*    *##end
 ##
-#*    *##displayTree( $display $subitem )
+#*    *##displayTree( $subItem $display )
 #*  *##end
 #**##end
 #end
 ##
-#macro ( menuItem $item $indent )
-#**##set ( $collapseClass = "none" )
-#**##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
-#**##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
+#macro( menuItem $item $indent )
+#**##set( $collapseClass = false )
+#**##set( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
+#**##set( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
 ##
-#**##if ( $item && $item.items && $item.items.size() > 0 )
-#*  *##if ( $item.collapse == false )
-#*    *##set ( $collapseClass = "icon-chevron-down" )
+#**##if( $item.items && $item.items.size() > 0 )
+#*  *##if( $item.collapse == false )
+#*    *##set( $collapseClass = "icon-chevron-down" )
 #*  *##else
 #*    *### By default collapsed
-#*    *##set ( $collapseClass = "icon-chevron-right" )
+#*    *##set( $collapseClass = "icon-chevron-right" )
 #*  *##end
 ##
-#*  *##set ( $display = false )
-#*  *##displayTree( $display $item )
+#*  *##set( $display = false )
+#*  *##displayTree( $item $display )
 ##
-#*  *##if ( $alignedFileName == $currentItemHref || $display )
-#*    *##set ( $collapseClass = "icon-chevron-down" )
+#*  *##if( $alignedFileName == $currentItemHref || $display )
+#*    *##set( $collapseClass = "icon-chevron-down" )
 #*  *##end
 #**##end
 ##
-#**##if ( $alignedFileName == $currentItemHref )
+#**##if( $alignedFileName == $currentItemHref )
 $indent    <li class="active">##
 #**##else
 $indent    <li>##
 #**##end
 ##
-#**##if ( $item.img )
-#*  *##if ( $item.position == "left" )
-#*    *##if ( $alignedFileName == $currentItemHref )
-#*      *#<a>#image( $item.img $item.alt $item.border $item.width $item.height ) $esc.xml( $item.name )</a>##
-#*    *##else
-#*      *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false )
-#*    *##end
-#*  *##else
-#*    *##if ( $alignedFileName == $currentItemHref )
-#*      *#<a>$esc.xml( $item.name ) #image( $item.img $item.alt $item.border $item.width $item.height )</a>##
-#*    *##else
-#*      *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false )
-#*    *##end
-#*  *##end
-#**##else
-#*  *##if ( $alignedFileName == $currentItemHref )
-#*    *#<a><span class="$collapseClass"></span>$esc.xml( $item.name )</a>##
-#*  *##else
-#*    *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height $collapseClass )
-#*  *##end
-#**##end
-#**##if ( $item && $item.items && $item.items.size() > 0 )
-#*  *##if ( $collapseClass == "icon-chevron-down" )
+#**##link( $item $collapseClass )
+#**##if( $item.items && $item.items.size() > 0 )
+#*  *##if( $collapseClass == "icon-chevron-down" )
 
 $indent     <ul class="nav nav-list">
-#*    *##foreach( $subitem in $item.items )
-#*      *##menuItem( $subitem "$indent  " )
+#*    *##foreach( $subItem in $item.items )
+#*      *##menuItem( $subItem "$indent  " )
 #*    *##end
 $indent     </ul>##
 #*  *##end
@@ -324,60 +247,13 @@ $indent     </ul>##
 #**#</li>
 #end
 ##
-#macro ( mainMenu $menus )
+#macro( mainMenu $menus )
   <ul class="nav nav-list">
 #**##foreach( $menu in $menus )
-#**##if ( $menu.name )
-#*  *##if ( $menu.img )
-#*    *##if( $menu.position )
-#*      *##set ( $position = $menu.position )
-#*    *##else
-#*      *##set ( $position = "left" )
-#*    *##end
-##
-#*    *##if ( !$decoration.isLink( $menu.img ) )
-#*      *##set ( $src = $PathTool.calculateLink( $menu.img, $relativePath ) )
-#*      *##set ( $src = $src.replaceAll( '\\', '/' ) )
-#*      *##set ( $src = ' src="' + $src + '"' )
-#*    *##else
-#*      *##set ( $src = ' src="' + $menu.img + '"' )
-#*    *##end
-##
-#*    *##if( $menu.alt )
-#*      *##set ( $alt = ' alt="' + $esc.xml( $menu.alt ) + '"' )
-#*    *##else
-#*      *##set ( $alt = ' alt="' + $esc.xml( $menu.name ) + '"' )
-#*    *##end
-##
-#*    *##if( $menu.border )
-#*      *##set ( $border = 'border: ' + $menu.border + '; ' )
-#*    *##else
-#*      *##set ( $border = 'border: 0;' )
-#*    *##end
-##
-#*    *##if( $menu.width )
-#*      *##set ( $width = 'width: ' + $menu.width + '; ' )
-#*    *##else
-#*      *##set ( $width = "" )
-#*    *##end
-#*    *##if( $menu.height )
-#*      *##set ( $height = 'height: ' + $menu.height + ';' )
-#*    *##else
-#*      *##set ( $height = "" )
-#*    *##end
-##
-#*    *##set ( $img = '<img class="imageLink"' + $src + $alt + ' style="' + $border + $width + $height + '" />' )
-##
-#*    *##if ( $position == "left" )
-   <li class="nav-header">$img $esc.xml( $menu.name )</li>
-#*    *##else
-   <li class="nav-header">$esc.xml( $menu.name ) $img</li>
-#*    *##end
-#*  *##else
-   <li class="nav-header">$esc.xml( $menu.name )</li>
-#*  *##end
+#**##if( $menu.name )
+   <li class="nav-header">#link( $menu false false false )</li>
 #**##end
-#**##if ( $menu.items && $menu.items.size() > 0 )
+#**##if( $menu.items && $menu.items.size() > 0 )
 #*  *##foreach( $item in $menu.items )
 #*    *##menuItem( $item '' )
 #*  *##end
@@ -386,180 +262,136 @@ $indent     </ul>##
   </ul>
 #end
 ##
-#macro ( copyright )
-#**##if ( $project )
-#*  *##set ( $currentYear = ${date.year} )
+#macro( copyright )
+#**##if( $project )
+#*  *##set( $currentYear = ${date.year} )
 ##
-#*  *##if ( ${project.inceptionYear} && ( ${project.inceptionYear} != ${currentYear.toString()} ) )
+#*  *##if( ${project.inceptionYear} && ( ${project.inceptionYear} != ${currentYear.toString()} ) )
       ${project.inceptionYear}$esc.unicode( '\u2013' )${currentYear}
 #*  *##else
       ${currentYear}
 #*  *##end
 ##
-#*  *##if ( ${project.organization} )
-#*    *##if ( ${project.organization.name} && ${project.organization.url} )
+#*  *##if( ${project.organization} )
+#*    *##if( ${project.organization.name} && ${project.organization.url} )
 #*      *#<a href="$project.organization.url">$esc.xml( ${project.organization.name} )</a>
-#*    *##elseif ( ${project.organization.name} )
+#*    *##elseif( ${project.organization.name} )
 #*      *#$esc.xml( ${project.organization.name} )
 #*    *##end
 #*  *##end
 #**##end
 #end
 ##
-#macro ( publishDate $position $decorationPublishDate $version )
-#**##if ( $publishDate )
-#*  *##set ( $dateValue = $date.format( $publishDate ) )
+#macro( publishDate $position $sitePublishDate $version )
+#**##if( $publishDate )
+#*  *##set( $dateValue = $date.format( $publishDate ) )
 #**##else
-#*  *##set ( $dateValue = $date )
+#*  *##set( $dateValue = $date )
 #**##end
 ##
-#**##set ( $datePosition = $decorationPublishDate.position )
-#**##set ( $versionPosition = $version.position )
+#**##set( $datePosition = $sitePublishDate.position )
+#**##set( $versionPosition = $version.position )
 ##
-#**##set ( $breadcrumbs = $decoration.body.breadcrumbs )
-#**##set ( $links = $decoration.body.links )
+#**##set( $breadcrumbs = $site.body.breadcrumbs )
+#**##set( $links = $site.body.links )
 ##
-#**##if ( $datePosition.equalsIgnoreCase( "right" ) && ( $versionPosition.equalsIgnoreCase( "right" ) || !$topBarEnabled
-                                                                                                         && $decoration.body.links
-                                                                                                         && $decoration.body.links.size() > 0 ) )
-#*  *##set ( $prefix = '<span class="divider">|</span> ' )
+#**##if( $datePosition.equalsIgnoreCase( "right" ) && ( $versionPosition.equalsIgnoreCase( "right" ) || !$topBarEnabled
+                                                                                                         && $site.body.links
+                                                                                                         && $site.body.links.size() > 0 ) )
+#*  *##set( $prefix = '<span class="divider">|</span> ' )
 #**##else
-#*  *##set ( $prefix = "" )
+#*  *##set( $prefix = "" )
 #**##end
 ##
-#**##if ( $datePosition.equalsIgnoreCase( $position ) )
-#*  *##if ( ( $datePosition.equalsIgnoreCase( "right" ) ) || ( $datePosition.equalsIgnoreCase( "bottom" ) ) )
+#**##if( $datePosition.equalsIgnoreCase( $position ) )
+#*  *##if( $datePosition.equalsIgnoreCase( "right" ) || $datePosition.equalsIgnoreCase( "bottom" ) )
+## FIXME In some languages like French a space must preceed the colon
         <li id="publishDate" class="pull-right">$prefix$text.get( "template.lastpublished" ): $dateValue</li>
-#*    *##if ( $versionPosition.equalsIgnoreCase( $position ) )
+#*    *##if( $versionPosition.equalsIgnoreCase( $position ) )
           <li id="projectVersion" class="pull-right">##
-#*      *##if ( !$topBarEnabled
-              && $decoration.body.links
-              && $decoration.body.links.size() > 0 )
+#*      *##if( !$topBarEnabled
+              && $site.body.links
+              && $site.body.links.size() > 0 )
 #*        *#<span class="divider">|</span>##
 #*      *##end
+## FIXME In some languages like French a space must preceed the colon
 #*      *#$text.get( "template.version" ): ${project.version}##
 #*      *#</li>
 #*    *##end
-#*  *##elseif ( ( $datePosition.equalsIgnoreCase( "navigation-bottom" ) ) || ( $datePosition.equalsIgnoreCase( "navigation-top" ) ) )
+#*  *##elseif( $datePosition.equalsIgnoreCase( "navigation-bottom" ) || $datePosition.equalsIgnoreCase( "navigation-top" ) )
       <div id="lastPublished">
+## FIXME In some languages like French a space must preceed the colon
         <span id="publishDate">$text.get( "template.lastpublished" ): $dateValue</span>
-#*    *##if ( $versionPosition.equalsIgnoreCase( $position ) )
+#*    *##if( $versionPosition.equalsIgnoreCase( $position ) )
+## FIXME In some languages like French a space must preceed the colon
         <span class="divider">|</span> <span id="projectVersion">$text.get( "template.version" ): ${project.version}</span>
 #*    *##end
       </div>
-#*  *##elseif ( $datePosition.equalsIgnoreCase("left") )
+#*  *##elseif( $datePosition.equalsIgnoreCase("left") )
+## FIXME In some languages like French a space must preceed the colon
         <li id="publishDate">$text.get( "template.lastpublished" ): $dateValue##
-#*    *##if ( $versionPosition.equalsIgnoreCase( $position ) || $breadcrumbs && $breadcrumbs.size() > 0 )
+#*    *##if( $versionPosition.equalsIgnoreCase( $position ) || $breadcrumbs && $breadcrumbs.size() > 0 )
 #*      *#<span class="divider">|</span>
 #*    *##end
 #*    *#</li>
-#*    *##if ( $versionPosition.equalsIgnoreCase( $position ) )
+#*    *##if( $versionPosition.equalsIgnoreCase( $position ) )
+## FIXME In some languages like French a space must preceed the colon
           <li id="projectVersion">$text.get( "template.version" ): ${project.version}##
-#*      *##if ( $breadcrumbs && $breadcrumbs.size() > 0 )
+#*      *##if( $breadcrumbs && $breadcrumbs.size() > 0 )
 #*        *#<span class="divider">|</span>##
 #*      *##end
 #*      *#</li>
 #*    *##end
-#*    *##if ( $breadcrumbs && $breadcrumbs.size() > 0 )
+#*    *##if( $breadcrumbs && $breadcrumbs.size() > 0 )
 #*      *##breadcrumbs( $breadcrumbs "" )
 #*    *##end
 #*  *##end
-#**##elseif ( $versionPosition.equalsIgnoreCase( $position ) )
-#*  *##if ( $versionPosition.equalsIgnoreCase( "right" ) )
+#**##elseif( $versionPosition.equalsIgnoreCase( $position ) )
+#*  *##if( $versionPosition.equalsIgnoreCase( "right" ) )
+## FIXME In some languages like French a space must preceed the colon
       <li id="projectVersion" class="pull-right">$prefix$text.get( "template.version" ): ${project.version}</li>
-#*  *##elseif ( $versionPosition.equalsIgnoreCase( "bottom" ) )
+#*  *##elseif( $versionPosition.equalsIgnoreCase( "bottom" ) )
+## FIXME In some languages like French a space must preceed the colon
       <span id="projectVersion">$text.get( "template.version" ): ${project.version}</span>
-#*  *##elseif ( ( $versionPosition.equalsIgnoreCase( "navigation-bottom" ) ) || ( $versionPosition.equalsIgnoreCase( "navigation-top" ) ) )
+#*  *##elseif( $versionPosition.equalsIgnoreCase( "navigation-bottom" ) || $versionPosition.equalsIgnoreCase( "navigation-top" ) )
       <div id="lastPublished">
+## FIXME In some languages like French a space must preceed the colon
         <span id="projectVersion">$text.get( "template.version" ): ${project.version}</span>
       </div>
-#*  *##elseif ( $versionPosition.equalsIgnoreCase("left") )
+#*  *##elseif( $versionPosition.equalsIgnoreCase("left") )
+## FIXME In some languages like French a space must preceed the colon
         <li id="projectVersion">$text.get( "template.version" ): ${project.version}##
-#*      *##if ( $breadcrumbs && $breadcrumbs.size() > 0 )
+#*      *##if( $breadcrumbs && $breadcrumbs.size() > 0 )
 #*        *#<span class="divider">|</span>##
 #*      *##end
 #*    *#</li>
-#*    *##if ( $breadcrumbs && $breadcrumbs.size() > 0 )
+#*    *##if( $breadcrumbs && $breadcrumbs.size() > 0 )
 #*      *##breadcrumbs( $breadcrumbs "")
 #*    *##end
 #*  *##end
-#**##elseif ( $position.equalsIgnoreCase( "left" ) )
-#*  *##if ( $breadcrumbs && $breadcrumbs.size() > 0 )
+#**##elseif( $position.equalsIgnoreCase( "left" ) )
+#*  *##if( $breadcrumbs && $breadcrumbs.size() > 0 )
 #*    *##breadcrumbs( $breadcrumbs "" )
 #*  *##end
 #**##end
 #end
 ##
-#macro ( builtByLogo $poweredBy )
+#macro( builtByLogo $poweredBy )
 #**##if( $poweredBy )
-#**##foreach ( $item in $poweredBy )
-#*  *##if( $item.href )
-#*    *##set ( $href = $PathTool.calculateLink( $item.href, $relativePath ) )
-#*    *##set ( $href = $href.replaceAll( '\\', '/' ) )
-#*  *##else
-#*    *##set ( $href="https://maven.apache.org/" )
-#*  *##end
-##
-#*  *##if( $item.name )
-#*    *##set ( $name = $item.name )
-#*  *##else
-#*    *##set ( $name = $text.get( "template.builtby" )  )
-#*    *##set ( $name = "${name} Maven"  )
-#*  *##end
-##
-#*  *##if( $item.img )
-#*    *##set ( $img = $item.img )
-#*  *##else
-#*    *##set ( $img = "images/logos/maven-feather.png" )
-#*  *##end
-##
-#*  *##if ( !$decoration.isLink( $img ) )
-#*    *##set ( $img = $PathTool.calculateLink( $img, $relativePath ) )
-#*    *##set ( $img = $img.replaceAll( '\\', '/' ) )
-#*  *##end
-##
-#*  *##if( $item.alt )
-#*    *##set ( $alt = ' alt="' + $esc.xml( $item.alt ) + '"' )
-#*  *##else
-#*    *##set ( $alt = ' alt="' + $esc.xml( $name ) + '"' )
-#*  *##end
-##
-#*  *##if( $item.border )
-#*    *##set ( $border = 'border: ' + $item.border + '; ' )
-#*  *##else
-#*    *##set ( $border = "" )
-#*  *##end
-##
-#*  *##if( $item.width )
-#*    *##set ( $width = 'width: ' + $item.width + '; ' )
-#*  *##else
-#*    *##set ( $width = "" )
-#*  *##end
-#*  *##if( $item.height )
-#*    *##set ( $height = 'height: ' + $item.height + ';' )
-#*  *##else
-#*    *##set ( $height = "" )
-#*  *##end
-##
-#*  *#<a href="$href" title="$esc.xml( $name )" class="builtBy">##
-#*    *#<img class="builtBy" $alt src="$img" style="$border$width$height" />##
-#*  *#</a>
-#**##end
-#**##if( $poweredBy.isEmpty() )
-#*  *#<a href="https://maven.apache.org/" title="$text.get( "template.builtby" ) Maven" class="poweredBy">##
-#*    *#<img class="builtBy" alt="$text.get( "template.builtby" ) Maven" src="$relativePath/images/logos/maven-feather.png" />##
-#*  *#</a>
+#**##foreach( $item in $poweredBy )
+#*  *##link( $item false false "span" false "builtBy" "builtBy" )
+
 #**##end
 #**##else
-#**#<a href="https://maven.apache.org/" title="$text.get( "template.builtby" ) Maven" class="poweredBy">##
+#**#<a href="https://maven.apache.org/" class="builtBy" target="_blank">##
 #*  *#<img class="builtBy" alt="$text.get( "template.builtby" ) Maven" src="$relativePath/images/logos/maven-feather.png" />##
 #**#</a>
 #**##end
 #end
 ##
-#macro ( googleAnalytics )
-#set ( $accountId = $decoration.getCustomValue( 'fluidoSkin.googleAnalytics.accountId' ) )
-#**##if( $accountId && $accountId != "" )
+#macro( googleAnalytics )
+#set( $accountId = $site.getCustomValue( 'fluidoSkin.googleAnalytics.accountId' ) )
+#**##if( $accountId && $accountId.length() > 0 )
     <!-- Google Analytics -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -568,25 +400,24 @@ $indent     </ul>##
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', '$accountId', 'auto');
       ga('send', 'pageview');
-#**##if( $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.googleAnalytics.anonymizeIp', 'true' ) ) )
+#**##if( $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.googleAnalytics.anonymizeIp', 'true' ) ) )
       ga('set', 'anonymizeIp', true);
 #**##end
-#**##if( $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.googleAnalytics.forceSSL', 'true' ) ) )
+#**##if( $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.googleAnalytics.forceSSL', 'true' ) ) )
       ga('set', 'forceSSL', true);
 #**##end
     </script>
 #**##end
 #end
 
-#macro ( matomo )
-#**##if (  $decoration.getCustomValue( 'matomo.url' ) && $decoration.getCustomValue( 'matomo.url' ) != ''
-&& $decoration.getCustomValue( 'matomo.siteId' ) && $decoration.getCustomValue( 'matomo.siteId' ) != '')
-
+#macro( matomo )
+#**##if( $site.getCustomValue( 'matomo.url' ) && $site.getCustomValue( 'matomo.url' ).length() > 0
+          && $site.getCustomValue( 'matomo.siteId' ) && $site.getCustomValue( 'matomo.siteId' ).length() > 0 )
     <!-- Matomo -->
     <script>
         var _paq = window._paq = window._paq || [];
-#*    *##foreach( $option in $decoration.getCustomChild( 'matomo.options' ).getChildren() )
-#*      *##if( $option.value && $option.value != "" )
+#*    *##foreach( $option in $site.getCustomChild( 'matomo.options' ).getChildren() )
+#*      *##if( $option.value && $option.value.length() > 0 )
         _paq.push(['$option.name', '$option.value']);
 #*      *##else
         _paq.push(['$option.name']);
@@ -594,9 +425,9 @@ $indent     </ul>##
 #*    *##end
 
         (function() {
-            var u="$decoration.getCustomValue( 'matomo.url' )";
+            var u="$site.getCustomValue( 'matomo.url' )";
             _paq.push(['setTrackerUrl', u+'/matomo.php']);
-            _paq.push(['setSiteId', '$decoration.getCustomValue( 'matomo.siteId' )']);
+            _paq.push(['setSiteId', '$site.getCustomValue( 'matomo.siteId' )']);
             var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
             g.async=true; g.src=u+'/matomo.js'; s.parentNode.insertBefore(g,s);
         })();
@@ -606,102 +437,102 @@ $indent     </ul>##
 #end
 
 ##
-#macro ( googleSearch $top )
-<form id="search-form" action="https://www.google.com/search" method="get" #if ( $top ) class="navbar-search pull-right" #end>
-#**##if( $decoration.getCustomChild( 'fluidoSkin.googleSearch.sitesearch' ) )
-#*  *##set( $sitesearchValue = $decoration.getCustomValue( 'fluidoSkin.googleSearch.sitesearch' ) )
+#macro( googleSearch $top )
+<form id="search-form" action="https://www.google.com/search" method="get" #if( $top ) class="navbar-search pull-right"#end>
+#**##if( $site.getCustomChild( 'fluidoSkin.googleSearch.sitesearch' ) )
+#*  *##set( $sitesearchValue = $site.getCustomValue( 'fluidoSkin.googleSearch.sitesearch' ) )
 #**##else
-#*  *##set( $startIndex = $project.url.indexOf("://") + 3 )
+#*  *##set( $startIndex = $project.url.indexOf( '://' ) + 3 )
 #*  *##set( $sitesearchValue = $project.url.substring( $startIndex, $project.url.length() ) )
 #**##end
-  <input value="$sitesearchValue" name="sitesearch" type="hidden"/>
+  <input value="$sitesearchValue" name="sitesearch" type="hidden" />
   <input class="search-query" name="q" id="query" type="text" placeholder="Search with Google..." />
 </form>
 #end
 ##
-#macro ( forkMeOnGitHubHead )
+#macro( forkMeOnGitHubHead )
 ##
-#*  *##set ( $ribbonColor = 'red' )
-#*  *##set ( $definedRibbonColor = $decoration.getCustomChild( 'fluidoSkin.gitHub.ribbonColor' ) )
+#*  *##set( $ribbonColor = "red" )
+#*  *##set( $definedRibbonColor = $site.getCustomChild( 'fluidoSkin.gitHub.ribbonColor' ) )
 ##
-#*  *##if ( $definedRibbonColor
+#*  *##if( $definedRibbonColor
             && ($definedRibbonColor.getValue().equalsIgnoreCase( "green" )
             || $definedRibbonColor.getValue().equalsIgnoreCase( "black" )
             || $definedRibbonColor.getValue().equalsIgnoreCase( "orange" )
             || $definedRibbonColor.getValue().equalsIgnoreCase( "gray" ) ) )
-#*    *##set ( $ribbonColor = $definedRibbonColor.getValue().toLowerCase() )
+#*    *##set( $ribbonColor = $definedRibbonColor.getValue().toLowerCase() )
     <style>.github-fork-ribbon:before { background-color: $ribbonColor; }</style>
 #*  *##end
 #end
 ##
-#macro ( forkMeOnGitHub )
-#**##if ( $decoration.getCustomChild( 'fluidoSkin.gitHub.projectId' ) )
+#macro( forkMeOnGitHub )
+#**##if( $site.getCustomChild( 'fluidoSkin.gitHub.projectId' ) )
 ##
-#*  *##set ( $gitHubProjectId = $decoration.getCustomValue( 'fluidoSkin.gitHub.projectId' ) )
+#*  *##set( $gitHubProjectId = $site.getCustomValue( 'fluidoSkin.gitHub.projectId' ) )
 ##
-#*  *##set ( $ribbonOrientation = 'left-top' )
-#*  *##if ( $decoration.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'right' )
-            || $decoration.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'right-top' ) )
-#*    *##set ( $ribbonOrientation = 'right-top' )
+#*  *##set( $ribbonOrientation = "left-top" )
+#*  *##if( $site.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'right' )
+            || $site.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'right-top' ) )
+#*    *##set( $ribbonOrientation = "right-top" )
 #*  *##end
-#*  *##if ( $decoration.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'left' )
-            || $decoration.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'left-top' ) )
-#*    *##set ( $ribbonOrientation = 'left-top' )
+#*  *##if( $site.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'left' )
+            || $site.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'left-top' ) )
+#*    *##set( $ribbonOrientation = "left-top" )
 #*  *##end
-#*  *##if ( $decoration.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'right-bottom' )
-            || $decoration.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'left-bottom' ) )
-#*    *##set ( $ribbonOrientation = "$decoration.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation' ) fixed" )
+#*  *##if( $site.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'right-bottom' )
+            || $site.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'left-bottom' ) )
+#*    *##set( $ribbonOrientation = "$site.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation' ) fixed" )
 #*  *##end
 ##
-    <a class="github-fork-ribbon $ribbonOrientation" href="https://github.com/$gitHubProjectId" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+    <a class="github-fork-ribbon $ribbonOrientation" href="https://github.com/$gitHubProjectId" data-ribbon="Fork me on GitHub">Fork me on GitHub</a>
 #**##end
 #end
 ##
 ## activate profile background image if custom.fluidoSkin.profile value set to "retired", "pre-release" or "sandbox"
-#macro ( prjProfile )
-#**##set ( $profile = $decoration.getCustomValue( 'fluidoSkin.profile', '' ) )
-#**##if ( $profile.equalsIgnoreCase( "retired" )
+#macro( prjProfile )
+#**##set( $profile = $site.getCustomValue( 'fluidoSkin.profile', '' ) )
+#**##if( $profile.equalsIgnoreCase( "retired" )
           || $profile.equalsIgnoreCase( "pre-release" )
           || $profile.equalsIgnoreCase( "sandbox" ) )
       <style type="text/css">body{background-image: url('$relativePath/images/profiles/${profile}.png');}</style>
 #**##end
 #end
 ##
-#macro ( facebookLoadSDK )
-#**##if ( $decoration.getCustomChild( 'fluidoSkin.facebookLike' ) && $project.url )
+#macro( facebookLoadSDK )
+#**##if( $site.getCustomChild( 'fluidoSkin.facebookLike' ) && $project.url )
     <!-- Load Facebook SDK for JavaScript -->
     <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/#if ( $locale.toString() )$locale#{else}en#end/sdk.js#xfbml=1&version=v6.0"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/#if( $locale.toString() )$locale#{else}en#end/sdk.js#xfbml=1&version=v6.0"></script>
 #**##end
 #end
 ##
-#macro ( facebookLike $sideBarEnabled )
-#**##if ( $decoration.getCustomChild( 'fluidoSkin.facebookLike' ) && $project.url )
+#macro( facebookLike $sideBarEnabled )
+#**##if( $site.getCustomChild( 'fluidoSkin.facebookLike' ) && $project.url )
 ##
-#*  *##set( $layout = 'box_count' )
+#*  *##set( $layout = "box_count" )
 #*  *##if( !$sideBarEnabled )
-#*    *##set( $layout = 'button_count' )
+#*    *##set( $layout = "button_count" )
 #*  *##end
-#*  *##set( $layout = $decoration.getCustomValue( 'fluidoSkin.facebookLike.layout', $layout ) )
+#*  *##set( $layout = $site.getCustomValue( 'fluidoSkin.facebookLike.layout', $layout ) )
 ##
-#*  *##set( $action = 'like' )
-#*  *##if ( $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.facebookLike.recommend', 'false' ) ) )
-#*    *##set( $action = 'recommend' )
+#*  *##set( $action = "like" )
+#*  *##if( $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.facebookLike.recommend', 'false' ) ) )
+#*    *##set( $action = "recommend" )
 #*  *##end
 ##
-#*  *##set( $shareButton = $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.facebookLike.shareButton', 'false' ) ) )
+#*  *##set( $shareButton = $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.facebookLike.shareButton', 'false' ) ) )
 ##
     <div class="fb-like#if( !$sideBarEnabled ) pull-right#end" style="border:none; margin-top: 10px" data-href="$project.url" data-layout="$layout" data-show-faces="false" data-action="$action" data-share="$shareButton"></div>
 #**##end
 #end
 ##
-#macro ( followTwitter $sideBarEnabled )
-#**##if ( $decoration.getCustomChild( 'fluidoSkin.twitter.user' ) )
-#*  *##set( $user = $decoration.getCustomValue( 'fluidoSkin.twitter.user' ) )
-#*  *##set( $showUser = $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.twitter.showUser', 'false' ) ) )
-#*  *##set( $showFollowers = $convert.toBoolean( $decoration.getCustomValue( 'fluidoSkin.twitter.showFollowers', 'false' ) ) )
+#macro( followTwitter $sideBarEnabled )
+#**##if( $site.getCustomChild( 'fluidoSkin.twitter.user' ) )
+#*  *##set( $user = $site.getCustomValue( 'fluidoSkin.twitter.user' ) )
+#*  *##set( $showUser = $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.twitter.showUser', 'false' ) ) )
+#*  *##set( $showFollowers = $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.twitter.showFollowers', 'false' ) ) )
 ##
-#*  *##if ( $sideBarEnabled )
+#*  *##if( $sideBarEnabled )
 #*    *##set( $dataSize = "medium" )
 #*    *##set( $dataAlign = "left" )
     <div id="twitter" style="border:none; margin-top: 10px">
@@ -711,10 +542,10 @@ $indent     </ul>##
     <ul class="nav pull-right" style="border:none; margin-top: 7px"><li>
 #*  *##end
 ##
-    <a href="https://twitter.com/${user}" class="twitter-follow-button" data-show-count="${showFollowers}" data-align="${dataAlign}" data-size="${dataSize}" data-show-screen-name="${showUser}" data-lang="#if ( $locale.toString() )$locale#{else}en#end" data-dnt="true" >Follow ${user}</a>
+    <a href="https://twitter.com/${user}" class="twitter-follow-button" data-show-count="${showFollowers}" data-align="${dataAlign}" data-size="${dataSize}" data-show-screen-name="${showUser}" data-lang="#if( $locale.toString() )$locale#{else}en#end" data-dnt="true" >Follow ${user}</a>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 ##
-#*  *##if ( $sideBarEnabled )
+#*  *##if( $sideBarEnabled )
     </div>
 #*  *##else
     </li></ul>
@@ -722,33 +553,32 @@ $indent     </ul>##
 #**##end
 #end
 ##
-#macro ( flattrHead )
-#**##if ( $decoration.getCustomChild( 'fluidoSkin.flattr.thing' )
-          && ( $decoration.getCustomChild( 'fluidoSkin.flattr.url' ) || $project.url ) )
+#macro( flattrHead )
+#**##if( $site.getCustomChild( 'fluidoSkin.flattr.thing' )
+          && ( $site.getCustomChild( 'fluidoSkin.flattr.url' ) || $project.url ) )
     <script>
-    /* <![CDATA[ */
         (function() {
             var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
             s.async = true;
             s.src = 'https://api.flattr.com/js/0.6/load.js?mode=auto';
             t.parentNode.insertBefore(s, t);
         })();
-    /* ]]> */</script>
+    </script>
 #**##end
 #end
 ##
-#macro ( flattrBody $sideBarEnabled )
-#**##if ( $decoration.getCustomChild( 'fluidoSkin.flattr.thing' )
-          && ( $decoration.getCustomChild( 'fluidoSkin.flattr.url' ) || $project.url ) )
-#*  *##set ( $flattrThing = $decoration.getCustomValue( 'fluidoSkin.flattr.thing' ) )
-#*  *##set ( $flattrUrl = $decoration.getCustomValue( 'fluidoSkin.flattr.url', $project.url ) )
+#macro( flattrBody $sideBarEnabled )
+#**##if( $site.getCustomChild( 'fluidoSkin.flattr.thing' )
+          && ( $site.getCustomChild( 'fluidoSkin.flattr.url' ) || $project.url ) )
+#*  *##set( $flattrThing = $site.getCustomValue( 'fluidoSkin.flattr.thing' ) )
+#*  *##set( $flattrUrl = $site.getCustomValue( 'fluidoSkin.flattr.url', $project.url ) )
 ##
-#*  *##set ( $styleModifier = '' )
-#*  *##if ( $decoration.getCustomValue( 'fluidoSkin.flattr.style', '' ).equalsIgnoreCase( 'compact' ) )
-#*    *##set ( $styleModifier = 'rev="flattr;button:compact;"' )
+#*  *##set( $styleModifier = "" )
+#*  *##if( $site.getCustomValue( 'fluidoSkin.flattr.style', '' ).equalsIgnoreCase( 'compact' ) )
+#*    *##set( $styleModifier = 'rev="flattr;button:compact;"' )
 #*  *##end
 ##
-#*  *##if ( $sideBarEnabled )
+#*  *##if( $sideBarEnabled )
     <div id="flattr">
 #*  *##else
     <ul class="nav pull-right"><li>
@@ -756,9 +586,9 @@ $indent     </ul>##
 ##
     <a class="FlattrButton" style="display:none;" $styleModifier href="$flattrUrl"></a>
     <noscript><a href="https://flattr.com/thing/$flattrThing" target="_blank">
-    <img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" style="border: 0;" /></a></noscript>
+    <img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" style="border: 0;" /></a></noscript>
 ##
-#*  *##if ( $sideBarEnabled )
+#*  *##if( $sideBarEnabled )
     </div>
 #*  *##else
     </li></ul>

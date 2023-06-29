@@ -19,9 +19,9 @@ specific language governing permissions and limitations
 under the License.
 -->
 
-<skin xmlns="http://maven.apache.org/SKIN/1.7.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/SKIN/1.7.0 http://maven.apache.org/xsd/skin-1.7.0.xsd">
+<skin xmlns="http://maven.apache.org/SKIN/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SKIN/2.0.0 http://maven.apache.org/xsd/skin-2.0.0.xsd">
   <prerequisites>
-    <doxia-sitetools>2.0.0-M11</doxia-sitetools>
+    <doxia-sitetools>2.0.0-M12</doxia-sitetools>
   </prerequisites>
 </skin>
