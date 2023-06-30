@@ -63,9 +63,7 @@
 #end
 ##
 #macro ( topLinks $links )
-#**##set ( $counter = 0 )
 #**##foreach( $item in $links )
-#*  *##set ( $counter = $counter + 1 )
 #*  *##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
 #*  *##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
     <li>#topLink( $currentItemHref $item.name $item.target )</li>
