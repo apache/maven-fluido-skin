@@ -81,10 +81,14 @@ li.none {
 }
 
 body.topBarEnabled {
-  padding-top: 60px;
+  /* calculated height of the topbar */
+  padding-top: 43px;
 }
-body.topBarDisabled {
-  padding-top: 20px;
+
+div.container-top,
+div.container-fluid-top {
+  /* Bootstrap already adds 10 px to <h1> */
+  padding-top: 10px;
 }
 
 .builtBy {
