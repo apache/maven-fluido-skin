@@ -60,7 +60,7 @@
 #**##if ( $topBarEnabled )
   <body class="topBarEnabled">
 #**##else
-  <body class="topBarDisabled">
+  <body>
 #**##end
 #**##forkMeOnGitHub()
 #**##facebookLoadSDK()
@@ -177,9 +177,9 @@
 #**##end
 ##
 #**##if ( $sideBarEnabled )
-    <div class="container-fluid">
+    <div class="container-fluid container-fluid-top">
 #**##else
-    <div class="container">
+    <div class="container container-top">
 #**##end
       <header>
         <div id="banner">
