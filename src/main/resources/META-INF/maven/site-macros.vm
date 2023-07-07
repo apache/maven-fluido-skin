@@ -546,12 +546,12 @@ $indent     </ul>##
 #*  *#</a>
 #**##end
 #**##if( $poweredBy.isEmpty() )
-#*  *#<a href="http://maven.apache.org/" title="$text.get( "template.builtby" ) Maven" class="poweredBy">##
+#*  *#<a href="https://maven.apache.org/" title="$text.get( "template.builtby" ) Maven" class="poweredBy">##
 #*    *#<img class="builtBy" alt="$text.get( "template.builtby" ) Maven" src="$relativePath/images/logos/maven-feather.png" />##
 #*  *#</a>
 #**##end
 #**##else
-#**#<a href="http://maven.apache.org/" title="$text.get( "template.builtby" ) Maven" class="poweredBy">##
+#**#<a href="https://maven.apache.org/" title="$text.get( "template.builtby" ) Maven" class="poweredBy">##
 #*  *#<img class="builtBy" alt="$text.get( "template.builtby" ) Maven" src="$relativePath/images/logos/maven-feather.png" />##
 #**#</a>
 #**##end
