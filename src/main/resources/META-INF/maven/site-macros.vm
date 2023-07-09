@@ -238,7 +238,7 @@
 #**##end
 #**### add Edit button if content is editable
 #**##if( $decoration.edit && $docRenderingContext.editable )
-#*  *##set ( $edit = ' <a href="' + $docRenderingContext.getDoxiaSourcePath( $decoration.edit ) + '"><img src="' + $relativePath + '/images/accessories-text-editor.png" title="Edit" /></a>' )
+#*  *##set ( $edit = ' <a href="' + $docRenderingContext.getDoxiaSourcePath( $decoration.edit ) + '"><img src="' + $relativePath + '/images/accessories-text-editor.png" alt="' + $text.get( "template.edit" )+ '" /></a>' )
 #**##end
 #**##if ( $shortTitle )
     <li class="active $cssClass">$esc.xml( $shortTitle )$!edit</li>
