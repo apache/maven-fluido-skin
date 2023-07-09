@@ -159,7 +159,7 @@
               && $decoration.body.links.size() > 0 )
             <ul class="nav pull-right">
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown">External Links <b class="caret"></b></a>
+                <a class="dropdown-toggle" data-toggle="dropdown">$text.get( "template.externallinks" ) <b class="caret"></b></a>
                 <ul class="dropdown-menu">
 #*            *##topLinks( $decoration.body.links )
                 </ul>
