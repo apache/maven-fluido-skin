@@ -98,8 +98,8 @@ under the License.
   <properties>
     <bootstrap.version>2.3.2</bootstrap.version>
     <jquery.version>1.11.2</jquery.version>
-    <sitePluginVersion>4.0.0-M7</sitePluginVersion>
-    <projectInfoReportsPluginVersion>3.4.2</projectInfoReportsPluginVersion>
+    <sitePluginVersion>4.0.0-M9</sitePluginVersion>
+    <projectInfoReportsPluginVersion>3.4.5</projectInfoReportsPluginVersion>
     <project.build.outputTimestamp>2023-04-26T07:00:24Z</project.build.outputTimestamp>
     <anchorjs.version>4.3.1</anchorjs.version>
   </properties>
