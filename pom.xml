@@ -172,6 +172,12 @@ under the License.
           <artifactId>maven-site-plugin</artifactId>
           <version>${sitePluginVersion}</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.2.0</version>
+          <!-- workaround for https://issues.apache.org/jira/browse/MSKINS-235 -->
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
