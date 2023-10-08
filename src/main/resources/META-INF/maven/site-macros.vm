@@ -553,49 +553,6 @@ $indent     </ul>##
 #**##end
 #end
 ##
-#macro( flattrHead )
-#**##if( $site.getCustomChild( 'fluidoSkin.flattr.thing' )
-          && ( $site.getCustomChild( 'fluidoSkin.flattr.url' ) || $project.url ) )
-    <script>
-        (function() {
-            var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-            s.async = true;
-            s.src = 'https://api.flattr.com/js/0.6/load.js?mode=auto';
-            t.parentNode.insertBefore(s, t);
-        })();
-    </script>
-#**##end
-#end
-##
-#macro( flattrBody $sideBarEnabled )
-#**##if( $site.getCustomChild( 'fluidoSkin.flattr.thing' )
-          && ( $site.getCustomChild( 'fluidoSkin.flattr.url' ) || $project.url ) )
-#*  *##set( $flattrThing = $site.getCustomValue( 'fluidoSkin.flattr.thing' ) )
-#*  *##set( $flattrUrl = $site.getCustomValue( 'fluidoSkin.flattr.url', $project.url ) )
-##
-#*  *##set( $styleModifier = "" )
-#*  *##if( $site.getCustomValue( 'fluidoSkin.flattr.style', '' ).equalsIgnoreCase( 'compact' ) )
-#*    *##set( $styleModifier = 'rev="flattr;button:compact;"' )
-#*  *##end
-##
-#*  *##if( $sideBarEnabled )
-    <div id="flattr">
-#*  *##else
-    <ul class="nav pull-right"><li>
-#*  *##end
-##
-    <a class="FlattrButton" style="display:none;" $styleModifier href="$flattrUrl"></a>
-    <noscript><a href="https://flattr.com/thing/$flattrThing" target="_blank">
-    <img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" style="border: 0;" /></a></noscript>
-##
-#*  *##if( $sideBarEnabled )
-    </div>
-#*  *##else
-    </li></ul>
-#*  *##end
-#**##end
-#end
-##
 #macro( generatedBy )
 Apache Maven Doxia Site Renderer#if( $doxiaSiteRendererVersion ) $doxiaSiteRendererVersion#end##
 #end

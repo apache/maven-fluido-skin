@@ -638,36 +638,6 @@ under the License.
                 </configuration>
               </execution>
               <execution>
-                <id>copy-mskins-76</id>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <phase>site</phase>
-                <configuration>
-                  <resources>
-                    <resource>
-                      <directory>${project.build.directory}/it/mskins-76/target/site/</directory>
-                    </resource>
-                  </resources>
-                  <outputDirectory>${project.build.directory}/site/mskins-76/</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>copy-mskins-76_topbar</id>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <phase>site</phase>
-                <configuration>
-                  <resources>
-                    <resource>
-                      <directory>${project.build.directory}/it/mskins-76_topbar/target/site/</directory>
-                    </resource>
-                  </resources>
-                  <outputDirectory>${project.build.directory}/site/mskins-76_topbar/</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
                 <id>copy-mskins-85</id>
                 <goals>
                   <goal>copy-resources</goal>

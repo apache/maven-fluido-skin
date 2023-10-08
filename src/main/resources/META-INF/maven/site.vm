@@ -53,7 +53,6 @@
 #**##if( $headContent )$headContent#end
 #**##googleAnalytics()
 #**##matomo()
-#**##flattrHead()
 #**##forkMeOnGitHubHead()
   </head>
 #**##set( $topBarEnabled = $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.topBarEnabled', 'false' ) ) && !$standalone )
@@ -150,7 +149,6 @@
 #*      *##if( !$sideBarEnabled )
 #*        *##facebookLike( $sideBarEnabled )
 #*        *##followTwitter( $sideBarEnabled )
-#*        *##flattrBody( $sideBarEnabled )
 #*      *##end
 ##
 ##        ## MSKINS-31
@@ -225,8 +223,6 @@
 #*        *##facebookLike( $sideBarEnabled )
               <div class="clear"></div>
 #*        *##followTwitter( $sideBarEnabled )
-              <div class="clear"></div>
-#*        *##flattrBody( $sideBarEnabled )
               <div class="clear"></div>
 #*        *##builtByLogo( $site.poweredBy )
             </div>
