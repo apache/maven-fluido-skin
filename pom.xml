@@ -96,12 +96,14 @@ under the License.
   </distributionManagement>
 
   <properties>
+    <anchorjs.version>4.3.1</anchorjs.version>
     <bootstrap.version>2.3.2</bootstrap.version>
     <jquery.version>1.11.2</jquery.version>
-    <sitePluginVersion>4.0.0-M10</sitePluginVersion>
-    <projectInfoReportsPluginVersion>3.4.5</projectInfoReportsPluginVersion>
+    <version.maven-site-plugin>4.0.0-M10</version.maven-site-plugin>
     <project.build.outputTimestamp>2023-10-08T14:07:28Z</project.build.outputTimestamp>
-    <anchorjs.version>4.3.1</anchorjs.version>
+    <!-- the following properties are used in ITs (which do not inherit anything from a common parent) -->
+    <sitePluginVersion>${version.maven-site-plugin}</sitePluginVersion>
+    <projectInfoReportsPluginVersion>${version.maven-project-info-reports-plugin}</projectInfoReportsPluginVersion>
   </properties>
 
   <build>
@@ -166,11 +168,6 @@ under the License.
               <exclude>src/main/resources/css/gh-fork-ribbon.css</exclude>
             </excludes>
           </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>${sitePluginVersion}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
