@@ -239,7 +239,7 @@
 #*        *##set( $sourceStyle = "prettyprint" )
 #*      *##end
 ##
-#*      *#$bodyContent.replaceAll( '<div class="verbatim source">(\r?\n)?<pre>', '<div class="verbatim source"><pre class="' + $sourceStyle + '">' ).replaceAll( 'class="bodyTable"', 'class="table table-striped"' ).replaceAll( 'class="bodyTable bodyTableBorder"', 'class="table table-bordered table-striped"' )
+#*      *#$bodyContent.replace( '<pre><code>', '<pre class="' + $sourceStyle + '"><code>' ).replace( 'class="bodyTable"', 'class="table table-striped"' ).replace( 'class="bodyTable bodyTableBorder"', 'class="table table-bordered table-striped"' )
         </main>
 #*    *##if( $sideBarEnabled )
       </div>
