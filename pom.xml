@@ -99,7 +99,7 @@ under the License.
     <anchorjs.version>4.3.1</anchorjs.version>
     <bootstrap.version>2.3.2</bootstrap.version>
     <jquery.version>1.11.2</jquery.version>
-    <version.maven-site-plugin>4.0.0-M10</version.maven-site-plugin>
+    <version.maven-site-plugin>4.0.0-M14</version.maven-site-plugin>
     <project.build.outputTimestamp>2023-10-08T14:07:28Z</project.build.outputTimestamp>
     <!-- the following properties are used in ITs (which do not inherit anything from a common parent) -->
     <sitePluginVersion>${version.maven-site-plugin}</sitePluginVersion>
