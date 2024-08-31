@@ -143,12 +143,12 @@
 #*    *##set( $style = "" )
 #*  *##end
 #*  *##set( $style = "$width$height$style" )
-<img class="$class"$src$alt#if( $style ) style="$style"#end />##
+<img#if( $class ) class="$class"#end$src$alt#if( $style ) style="$style"#end />##
 #end
 ##
 #macro( banner $banner $id )
 #**##if( $banner )
-#*  *#<div id="$id"><h1>#link( $banner false false false "set" )</h1></div>##
+#*  *#<div id="$id"><h1>#link( $banner false false false "set" false )</h1></div>##
 #**##end
 #end
 ##
