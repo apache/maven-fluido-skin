@@ -48,7 +48,7 @@
 #**##end
 #end
 ##
-#macro( link $link $icon = false $omitImage = false $elemOnEmptyHref = "a" $dotSlashOnEmptyHref = false $imageClass = "imageLink" $elemClass = false )
+#macro( link $link $icon = false $omitImage = false $elemOnEmptyHref = "a" $dotSlashOnEmptyHref = false $imageClass = "imageLink" $overrideElemClass = false )
 #**##if( $link.name )
 #*  *##set( $name = $esc.xml( $link.name ) )
 #**##else
@@ -89,8 +89,10 @@
 #**##if( !$href && $elemOnEmptyHref )
 #*  *##set( $wrapElem = $elemOnEmptyHref )
 #**##end
-#**##if( $elemClass )
-#*  *##set( $class = ' class="' + $elemClass + '"' )
+#**##if( $overrideElemClass && $overrideElemClass != "" )
+#*  *##set( $class = ' class="' + $overrideElemClass + '"' )
+#**##elseif( $overrideElemClass == "" )
+#*  *##set( $class = "" )
 #**##end
 #**##if( $wrap )<$wrapElem#end$href$target$class#if( $wrap )>#end##
 #**##if( $link.image && !$omitImage )
@@ -148,7 +150,7 @@
 ##
 #macro( banner $banner $id )
 #**##if( $banner )
-#*  *#<div id="$id"><h1>#link( $banner false false false "set" false )</h1></div>##
+#*  *#<div id="$id"><h1>#link( $banner false false false "set" false "" )</h1></div>##
 #**##end
 #end
 ##
