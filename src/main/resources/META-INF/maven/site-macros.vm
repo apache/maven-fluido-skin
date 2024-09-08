@@ -48,7 +48,7 @@
 #**##end
 #end
 ##
-#macro( link $link $icon = false $omitImage = false $elemOnEmptyHref = "a" $dotSlashOnEmptyHref = false $imageClass = "imageLink" $overrideElemClass = false )
+#macro( link $link $iconClass = null $omitImage = false $elemOnEmptyHref = "a" $dotSlashOnEmptyHref = null $imageClass = "imageLink" $overrideElemClass = null )
 #**##if( $link.name )
 #*  *##set( $name = $esc.xml( $link.name ) )
 #**##else
@@ -103,8 +103,8 @@
 #*    *##if( $name )$name #end$img##
 #*  *##end
 #**##else
-#*  *##if( $icon )
-#*    *#<span class="$icon"></span>##
+#*  *##if( $iconClass )
+#*    *#<span class="$iconClass"></span>##
 #*  *##end
 #*  *#$name##
 #**##end
@@ -113,7 +113,7 @@
 #end
 ##
 #macro( topLink $link )
-#**##link ( $link false true )
+#**##link ( $link $null true )
 #end
 ##
 #macro( image $image $class )
@@ -150,7 +150,7 @@
 ##
 #macro( banner $banner $id )
 #**##if( $banner )
-#*  *#<div id="$id"><h1>#link( $banner false false false "set" false "" )</h1></div>##
+#*  *#<div id="$id"><h1>#link( $banner $null false $null "set" $null "" )</h1></div>##
 #**##end
 #end
 ##
@@ -177,7 +177,7 @@
 #**##set( $breadcrumbDivider = $site.getCustomValue( 'fluidoSkin.breadcrumbDivider', '/' ) )
 #**##foreach( $item in $breadcrumbs )
       <li#if( $cssClass ) class="$cssClass"#end>##
-#*  *##link( $item false false "a" "always" )
+#*  *##link( $item $null false "a" "always" )
 #*  *#<span class="divider">$breadcrumbDivider</span>##
 #*  *#</li>
 #**##end
@@ -253,7 +253,7 @@ $indent     </ul>##
   <ul class="nav nav-list">
 #**##foreach( $menu in $menus )
 #**##if( $menu.name )
-   <li class="nav-header">#link( $menu false false false )</li>
+   <li class="nav-header">#link( $menu $null false $null )</li>
 #**##end
 #**##if( $menu.items && $menu.items.size() > 0 )
 #*  *##foreach( $item in $menu.items )
@@ -381,7 +381,7 @@ $indent     </ul>##
 #macro( builtByLogo $poweredBy )
 #**##if( $poweredBy )
 #**##foreach( $item in $poweredBy )
-#*  *##link( $item false false "span" false "builtBy" "builtBy" )
+#*  *##link( $item $null false "span" $null "builtBy" "builtBy" )
 
 #**##end
 #**##else
