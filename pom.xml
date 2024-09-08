@@ -99,6 +99,7 @@ under the License.
     <anchorjs.version>4.3.1</anchorjs.version>
     <bootstrap.version>2.3.2</bootstrap.version>
     <jquery.version>1.11.2</jquery.version>
+    <highlightjs.version>11.10.0</highlightjs.version>
     <version.maven-site-plugin>3.20.0</version.maven-site-plugin>
     <project.build.outputTimestamp>2024-08-15T17:29:37Z</project.build.outputTimestamp>
     <!-- the following properties are used in ITs (which do not inherit anything from a common parent) -->
@@ -136,11 +137,13 @@ under the License.
         <!-- add skin-info -->
       </resource>
 
-      <!-- include the print.css -->
+      <!-- include the some files -->
       <resource>
         <directory>${basedir}/src/main/resources</directory>
         <includes>
           <include>css/print.css</include>
+          <include>css/highlight-default-${highlightjs.version}.min.css</include>
+          <include>js/highlight-${highlightjs.version}.min.js</include>
         </includes>
       </resource>
 
@@ -162,10 +165,11 @@ under the License.
           <configuration>
             <excludes combine.children="append">
               <exclude>src/main/resources/fonts/glyphicons-halflings-regular.svg</exclude>
-              <exclude>src/main/resources/js/prettify.js</exclude>
+              <exclude>src/main/resources/js/highlight-*.js</exclude>
               <exclude>src/main/resources/js/jquery-*.js</exclude>
               <exclude>src/main/resources/js/anchor-*.js</exclude>
               <exclude>src/main/resources/css/gh-fork-ribbon.css</exclude>
+              <exclude>src/main/resources/css/highlight-default-*.css</exclude>
             </excludes>
           </configuration>
         </plugin>
@@ -215,7 +219,6 @@ under the License.
                 <cssSourceFile>bootstrap-${bootstrap.version}-responsive.css</cssSourceFile>
                 <cssSourceFile>maven-base.css</cssSourceFile>
                 <cssSourceFile>maven-theme.css</cssSourceFile>
-                <cssSourceFile>prettify.css</cssSourceFile>
                 <cssSourceFile>gh-fork-ribbon.css</cssSourceFile>
               </cssSourceFiles>
               <cssFinalFile>apache-maven-fluido-${project.version}.css</cssFinalFile>
@@ -223,7 +226,6 @@ under the License.
               <jsSourceFiles>
                 <jsSourceFile>jquery-${jquery.version}.js</jsSourceFile>
                 <jsSourceFile>bootstrap-${bootstrap.version}.js</jsSourceFile>
-                <jsSourceFile>prettify.js</jsSourceFile>
                 <jsSourceFile>fluido.js</jsSourceFile>
                 <jsSourceFile>anchor-${anchorjs.version}.js</jsSourceFile>
               </jsSourceFiles>
