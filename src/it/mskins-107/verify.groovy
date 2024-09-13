@@ -20,4 +20,4 @@
 File index = new File( basedir, "target/site/index.html" )
 
 assert index.exists()
-assert index.text.contains("<meta name=\"generator\" content=\"Apache Maven Doxia Site Renderer 2.0.0-M18\" />")
+assert index.text.contains("<meta name=\"generator\" content=\"Apache Maven Doxia Site Renderer 2.0.0-M19\" />")
