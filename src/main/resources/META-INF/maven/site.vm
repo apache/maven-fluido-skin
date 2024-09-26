@@ -43,10 +43,13 @@
 #end
     <title>$esc.xml( $title )</title>
     <link rel="stylesheet" href="$relativePath/css/apache-maven-fluido-@project.version@.min.css" />
+    <link rel="stylesheet" href="$relativePath/css/highlight-default-@highlightjs.version@.min.css">
     <link rel="stylesheet" href="$relativePath/css/site.css" />
     <link rel="stylesheet" href="$relativePath/css/print.css" media="print" />
 #**##prjProfile()
     <script src="$relativePath/js/apache-maven-fluido-@project.version@.min.js"></script>
+    <script src="$relativePath/js/highlight-@highlightjs.version@.min.js"></script>
+    <script>hljs.highlightAll();</script>
 #**##if( $site.body.head )
 #*  *#$render.eval( $site.body.head )
 #**##end
@@ -233,13 +236,7 @@
 #*    *##set( $bodyColumnClass = $site.getCustomValue( 'fluidoSkin.bodyColumnClass', 'span10' ) )
 ##
         <main id="bodyColumn"#if( $sideBarEnabled ) class="$bodyColumnClass"#end>
-#*      *##if( $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.sourceLineNumbersEnabled', 'false' ) ) )
-#*        *##set( $sourceStyle = "prettyprint linenums" )
-#*      *##else
-#*        *##set( $sourceStyle = "prettyprint" )
-#*      *##end
-##
-#*      *##if ( $bodyContent )$bodyContent.replaceAll( '<pre>(<code[ >])', '<pre class="' + $sourceStyle + '">' + $esc.d + '1' ).replace( 'class="bodyTable"', 'class="table table-striped"' ).replace( 'class="bodyTable bodyTableBorder"', 'class="table table-bordered table-striped"' )#end
+#*      *##if ( $bodyContent )$bodyContent.replace( 'class="bodyTable"', 'class="table table-striped"' ).replace( 'class="bodyTable bodyTableBorder"', 'class="table table-bordered table-striped"' )#end
         </main>
 #*    *##if( $sideBarEnabled )
       </div>
