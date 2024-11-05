@@ -21,9 +21,9 @@
  */
  -->
 
-<project xmlns="http://maven.apache.org/DECORATION/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.1.0 http://maven.apache.org/xsd/decoration-1.1.0.xsd"
-         name="${skinName}">
+<site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd"
+  name="${skinName}">
 
   <skin>
     <groupId>${skinGroupId}</groupId>
@@ -46,4 +46,4 @@
   <publishDate format="yyyy-MM-dd" position="right"/>
   <version position="right"/>
 
-</project>
+</site>

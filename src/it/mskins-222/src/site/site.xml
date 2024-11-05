@@ -21,8 +21,8 @@
  */
  -->
 
-<project xmlns="http://maven.apache.org/DECORATION/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.1.0 http://maven.apache.org/xsd/decoration-1.1.0.xsd"
+<site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd"
   name="${skinName}">
 
   <skin>
@@ -31,32 +31,24 @@
     <version>${skinVersion}</version>
   </skin>
 
-  <bannerLeft>
-    <name>Banner &quot;left&quot; &lt;name&gt;</name>
-    <alt>Banner &quot;left&quot; &lt;alt&gt;</alt>
-    <title>Banner &quot;left&quot; &lt;title&gt;</title>
-  </bannerLeft>
-  <bannerRight>
-    <name>Banner &quot;right&quot; &lt;name&gt;</name>
-    <alt>Banner &quot;right&quot; &lt;alt&gt;</alt>
-    <title>Banner &quot;right&quot; &lt;title&gt;</title>
-  </bannerRight>
+  <bannerLeft name="Banner &quot;left&quot; &lt;name&gt;" />
+  <bannerRight name="Banner &quot;right&quot; &lt;name&gt;" />
 
   <poweredBy>
-    <logo name="&lt;Powered by&gt; &quot;logo&quot; &apos;@name&apos;" alt="&lt;Powered by&gt; &quot;logo&quot; &apos;@alt&apos;" title="&lt;Powered by&gt; &quot;logo&quot; &apos;@title&apos;" />
+    <logo name="&lt;Powered by&gt; &quot;logo&quot; &apos;@name&apos;" />
   </poweredBy>
 
   <body>
     <links>
-      <item name="&lt;Links&gt; &quot;item&quot; &apos;@name&apos;" alt="&lt;Links&gt; &quot;item&quot; &apos;@alt&apos;" title="&lt;Links&gt; &quot;item&quot; &apos;@title&apos;" />
+      <item name="&lt;Links&gt; &quot;item&quot; &apos;@name&apos;" />
     </links>
     <breadcrumbs>
-      <item name="&lt;Breadcrumbs&gt; &quot;item&quot; &apos;@name&apos;" alt="&lt;Breadcrumbs&gt; &quot;item&quot; &apos;@alt&apos;" title="&lt;Breadcrumbs&gt; &quot;item&quot; &apos;@title&apos;" />
+      <item name="&lt;Breadcrumbs&gt; &quot;item&quot; &apos;@name&apos;" />
    </breadcrumbs>
 
-    <menu name="&lt;Menu&gt; &apos;@name&apos;" alt="&lt;Menu&gt; &apos;@alt&apos;" title="&lt;Menu&gt; &apos;@title&apos;">
-      <item name="&lt;Menu&gt; &quot;item&quot; &apos;@name&apos;" alt="&lt;Menu&gt; &quot;item&quot; &apos;@alt&apos;" title="&lt;Menu&gt; &quot;item&quot; &apos;@title&apos;" />
+    <menu name="&lt;Menu&gt; &apos;@name&apos;">
+      <item name="&lt;Menu&gt; &quot;item&quot; &apos;@name&apos;" />
     </menu>
   </body>
 
-</project>
+</site>
