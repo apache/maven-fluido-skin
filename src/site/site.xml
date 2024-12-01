@@ -57,7 +57,6 @@ under the License.
       <item name="Sidebar" href="./sidebar/index.html"/>
       <item name="Topbar" href="./topbar/index.html"/>
       <item name="Topbar (inverse)" href="./topbar-inverse/index.html"/>
-      <item name="Issues ITs" href="./ITs.html"/>
     </menu>
 
     <menu ref="reports"/>
