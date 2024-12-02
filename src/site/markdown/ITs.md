@@ -1,0 +1,93 @@
+ ------
+ Maven Fluido Skin ITs
+ ------
+ Hervé Boutemy
+ ------
+ 2018-01-01
+ ------
+
+~~ Licensed to the Apache Software Foundation (ASF) under one
+~~ or more contributor license agreements.  See the NOTICE file
+~~ distributed with this work for additional information
+~~ regarding copyright ownership.  The ASF licenses this file
+~~ to you under the Apache License, Version 2.0 (the
+~~ "License"); you may not use this file except in compliance
+~~ with the License.  You may obtain a copy of the License at
+~~
+~~   http://www.apache.org/licenses/LICENSE-2.0
+~~
+~~ Unless required by applicable law or agreed to in writing,
+~~ software distributed under the License is distributed on an
+~~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~~ KIND, either express or implied.  See the License for the
+~~ specific language governing permissions and limitations
+~~ under the License.
+
+~~ NOTE: For help with the syntax of this file, see:
+~~ http://maven.apache.org/doxia/references/apt-format.html
+
+Maven Fuido Skin ITs
+
+  Here is a list of skin ITs to test misc. configuration conditions:
+
+  * {{{./mskins-14/index.html}Search}}
+
+  * {{{./mskins-177-apache-analytics/index.html}Apache Analytics}}
+
+  * {{{./mskins-14_sitesearch/index.html}Search (sitesearch)}}
+
+  * {{{./mskins-22/index.html}GitHub}}
+
+  * {{{./mskins-22_default/index.html}GitHub (default)}}
+
+  * {{{./mskins-22_topbar/index.html}GitHub (topbar)}}
+
+  * {{{./mskins-24/index.html}Twitter}}
+
+  * {{{./mskins-24_topbar/index.html}Twitter (topbar)}}
+
+  * {{{./mskins-33/index.html}Like}}
+
+  * {{{./mskins-161-sidebar-fb-like-share}Like with share}}
+
+  * {{{./mskins-161-sidebar-fb-recommend-share}Like - Recommend with share}}
+
+  * {{{./mskins-33_topbar/index.html}Like (topbar)}}
+
+  * {{{./mskins-161-topbar-fb-like-share}Like with share (topbar)}}
+
+  * {{{./mskins-161-topbar-fb-recommend-share}Like - Recommend with share (topbar)}}
+
+  * {{{./mskins-10/index.html}MSKINS-10}}
+
+  * {{{./mskins-13/index.html}MSKINS-13}}
+
+  * {{{./mskins-15/index.html}MSKINS-15}}
+
+  * {{{./mskins-16/index.html}MSKINS-16}}
+
+  * {{{./mskins-17/index.html}MSKINS-17}}
+
+  * {{{./mskins-21/index.html}MSKINS-21}}
+
+  * {{{./mskins-23/index.html}MSKINS-23}}
+
+  * {{{./mskins-28/index.html}MSKINS-28}}
+
+  * {{{./mskins-41/index.html}MSKINS-41}}
+
+  * {{{./mskins-72/index.html}MSKINS-72}}
+
+  * {{{./mskins-76/index.html}MSKINS-76}}
+
+  * {{{./mskins-76_topbar/index.html}MSKINS-76 (topbar)}}
+
+  * {{{./mskins-85/index.html}MSKINS-85}}
+
+  * {{{./mskins-143_default/index.html}MSKINS-143 (using defaults)}}
+
+  * {{{./mskins-143_false/index.html}MSKINS-143 (using explicit false)}}
+
+  * {{{./mskins-143_true/index.html}MSKINS-143 (using explicit true)}}
+
+  []
