@@ -1,51 +1,41 @@
- ------
- Introduction
- ------
- Hervé Boutemy
- Simone "Simo" Tripodi
- ------
- 2012-06-28
- ------
+---
+title: Introduction
+author: 
+  - Hervé Boutemy
+  - Simone "Simo" Tripodi
+date: 2012-06-28
+---
 
-~~ Licensed to the Apache Software Foundation (ASF) under one
-~~ or more contributor license agreements.  See the NOTICE file
-~~ distributed with this work for additional information
-~~ regarding copyright ownership.  The ASF licenses this file
-~~ to you under the Apache License, Version 2.0 (the
-~~ "License"); you may not use this file except in compliance
-~~ with the License.  You may obtain a copy of the License at
-~~
-~~   http://www.apache.org/licenses/LICENSE-2.0
-~~
-~~ Unless required by applicable law or agreed to in writing,
-~~ software distributed under the License is distributed on an
-~~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-~~ KIND, either express or implied.  See the License for the
-~~ specific language governing permissions and limitations
-~~ under the License.
+<!-- Licensed to the Apache Software Foundation (ASF) under one-->
+<!-- or more contributor license agreements.  See the NOTICE file-->
+<!-- distributed with this work for additional information-->
+<!-- regarding copyright ownership.  The ASF licenses this file-->
+<!-- to you under the Apache License, Version 2.0 (the-->
+<!-- "License"); you may not use this file except in compliance-->
+<!-- with the License.  You may obtain a copy of the License at-->
+<!---->
+<!--   http://www.apache.org/licenses/LICENSE-2.0-->
+<!---->
+<!-- Unless required by applicable law or agreed to in writing,-->
+<!-- software distributed under the License is distributed on an-->
+<!-- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY-->
+<!-- KIND, either express or implied.  See the License for the-->
+<!-- specific language governing permissions and limitations-->
+<!-- under the License.-->
 
-~~ NOTE: For help with the syntax of this file, see:
-~~ http://maven.apache.org/doxia/references/apt-format.html
+# Welcome to ${project.name}!
 
-Welcome to ${project.name}!
+The Apache Maven Fluido Skin is an Apache Maven site skin built on top of [Twitter&apos;s Bootstrap ${project.properties.get('bootstrap.version')}](http://bootstrapdocs.com/v${project.properties.get('bootstrap.version')}/docs)\.
 
- The Apache Maven Fluido Skin is an Apache Maven site skin built on top of
- {{{http://bootstrapdocs.com/v${project.properties.get('bootstrap.version')}/docs/}Twitter's Bootstrap ${project.properties.get('bootstrap.version')}}}.
+A [sample page](./sample.html) is provided to see the skin in action, and two complete sites to show skin configurations: one for [sidebar layout \(default\)](./sidebar/) and the other for [topbar layout](./topbar/)\.
 
- A {{{./sample.html}sample page}} is provided to see the skin in action, and two complete sites to show skin
- configurations: one for {{{./sidebar/}sidebar layout (default)}} and the other for {{{./topbar/}topbar layout}}.
+Notice: since version 1\.5 of this skin, Velocity 1\.7 \(used by Maven Site Plugin version 3\.5\) is required\. But in previous versions of the skin, it was Velocity 1\.5, which has some incompatibilities\. If you need to mix versions, please see [the migration guide](/plugins/maven-site-plugin/migrate.html) to override Velocity version used by Maven Site Plugin as per your specific skin and site plugin requirements\.
 
- Notice: since version 1.5 of this skin, Velocity 1.7 (used by Maven Site Plugin version 3.5) is required.
- But in previous versions of the skin, it was Velocity 1.5, which has some incompatibilities.
- If you need to mix versions, please see {{{/plugins/maven-site-plugin/migrate.html}the migration guide}} to override
- Velocity version used by Maven Site Plugin as per your specific skin and site plugin requirements.
+${esc.h}${esc.h} Usage
 
-* Usage
+To use this skin in your project, use the skin element of [the `site.xml` site descriptor](/doxia/doxia-sitetools/doxia-site-model/site.html#class_skin):
 
- To use this skin in your project, use the skin element of
- {{{/doxia/doxia-sitetools/doxia-site-model/site.html#class_skin}the <<<site.xml>>> site descriptor}}:
-
-+-----+
+```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   [...]
@@ -56,19 +46,16 @@ Welcome to ${project.name}!
   </skin>
   [...]
 </site>
-+-----+
+```
 
+The following aspects may be configured:
 
- The following aspects may be configured:
+<!-- MACRO{toc|section=1|fromDepth=3} -->
+${esc.h}${esc.h}${esc.h} <a id="Topbar_and.2For_Sidebar"></a>Topbar and/or Sidebar
 
-%{toc|section=1|fromDepth=3}
+The skin supports different layouts, enabling/disabling the left sidebar menu and the topbar menu\. Users have just play with flags in the `custom.fluidoSkin` element in `site.xml`:
 
-** {Topbar and/or Sidebar}
-
- The skin supports different layouts, enabling/disabling the left sidebar menu and the topbar menu.
- Users have just play with flags in the <<<custom.fluidoSkin>>> element in <<<site.xml>>>:
-
-+-----+
+```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   [...]
@@ -80,28 +67,22 @@ Welcome to ${project.name}!
   </custom>
   [...]
 </site>
-+-----+
+```
 
- That allows users having 4 skins in only 1!
+That allows users having 4 skins in only 1\!
 
-  [[1]] sidebar only;
+1. sidebar only;
+1. topbar only;
+1. both side/top bars;
+1. none at all\.
 
-  [[2]] topbar only;
+Default skin setting is the option **1**\.
 
-  [[3]] both side/top bars;
+${esc.h}${esc.h}${esc.h} <a id="Topbar_Icon"></a>Topbar Icon
 
-  [[4]] none at all.
+When users decide to enable the topbar, they can plug a small icon/logo there \(typically 108\*20 px\) just configuring the `custom.fluidoSkin.topBarIcon` element in `site.xml`:
 
-  []
-
- Default skin setting is the option <<1>>.
-
-** {Topbar Icon}
-
- When users decide to enable the topbar, they can plug a small icon/logo there (typically 108*20 px) just configuring
- the <<<custom.fluidoSkin.topBarIcon>>> element in <<<site.xml>>>:
-
-+-----+
+```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   [...]
@@ -118,13 +99,13 @@ Welcome to ${project.name}!
   </custom>
   [...]
 </site>
-+-----+
+```
 
-** {Topbar Container Style}
+${esc.h}${esc.h}${esc.h} <a id="Topbar_Container_Style"></a>Topbar Container Style
 
-  You can configure the style attribute value of the div container for your topbar
+You can configure the style attribute value of the div container for your topbar
 
-+-----+
+```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   [...]
@@ -136,14 +117,13 @@ Welcome to ${project.name}!
   </custom>
   [...]
 </site>
-+-----+
+```
 
-** {Navbar Style}
+${esc.h}${esc.h}${esc.h} <a id="Navbar_Style"></a>Navbar Style
 
-  You can configure style of your top bar nav (since bootstrap 2.1.0 is not anymore black by default).
-  Use navbar-inverse to have the black one.
+You can configure style of your top bar nav \(since bootstrap 2\.1\.0 is not anymore black by default\)\. Use navbar\-inverse to have the black one\.
 
-+-----+
+```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   [...]
@@ -155,15 +135,13 @@ Welcome to ${project.name}!
   </custom>
   [...]
 </site>
-+-----+
+```
 
-** {Configuring column class}
+${esc.h}${esc.h}${esc.h} <a id="Configuring_column_class"></a>Configuring column class
 
-  When using sidebar, the navigation column uses by default <<<span2>>> class and body column uses
-  <<<span10>>>. To prevent weird/ugly result, the sum must be 12.
-  You can change that using:
+When using sidebar, the navigation column uses by default `span2` class and body column uses `span10`\. To prevent weird/ugly result, the sum must be 12\. You can change that using:
 
-+-----+
+```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   [...]
@@ -175,14 +153,13 @@ Welcome to ${project.name}!
   </custom>
   [...]
 </site>
-+-----+
+```
 
-** {Matomo (e.g. Apache Analytics)}
+${esc.h}${esc.h}${esc.h} <a id="Matomo_.28e.g._Apache_Analytics.29"></a>Matomo \(e\.g\. Apache Analytics\)
 
-  Users can optionally enable <<Matomo>>.
-  How to configure it for Apache Analytics, the <<options>> element will contain some configuration (here some privacy setup):
+Users can optionally enable **Matomo**\. How to configure it for Apache Analytics, the **options** element will contain some configuration \(here some privacy setup\):
 
-+-----+
+```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   [...]
@@ -199,13 +176,13 @@ Welcome to ${project.name}!
   </custom>
   [...]
 </site>
-+-----+
+```
 
-** {Google Analytics}
+${esc.h}${esc.h}${esc.h} <a id="Google_Analytics"></a>Google Analytics
 
- Users can optionally enable <<Google Analytics>> for the generated site:
+Users can optionally enable **Google Analytics** for the generated site:
 
-+-----+
+```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   [...]
@@ -218,11 +195,11 @@ Welcome to ${project.name}!
   </custom>
   [...]
 </site>
-+-----+
+```
 
- By default, <<<forceSSL>>> and <<<anonymizeIp>>> are enabled. You can disable both, but this might be illegal in several countries or regions (e.g., in the EU due to GDPR):
+By default, `forceSSL` and `anonymizeIp` are enabled\. You can disable both, but this might be illegal in several countries or regions \(e\.g\., in the EU due to GDPR\):
 
-+-----+
+```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   [...]
@@ -237,59 +214,52 @@ Welcome to ${project.name}!
   </custom>
   [...]
 </site>
-+-----+
+```
 
-** {Google Search}
+${esc.h}${esc.h}${esc.h} <a id="Google_Search"></a>Google Search
 
- Users can optionally enable the <<Google Search>> for the generated site, requirements are:
+Users can optionally enable the **Google Search** for the generated site, requirements are:
 
- * the <<<project.url>>> property in <<<pom.xml>>>, unless the <<<custom.fluidoSkin.googleSearch.sitesearch>>> property is set in the <<<site.xml>>>:
+- the `project.url` property in `pom.xml`, unless the `custom.fluidoSkin.googleSearch.sitesearch` property is set in the `site.xml`:
 
-+-----+
-<site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
-  [...]
-  <url>http://maven.apache.org/skins/${project.artifactId}</url>
-  [...]
-</site>
-+-----+
+    ```xml
+    <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
+      [...]
+      <url>http://maven.apache.org/skins/${project.artifactId}</url>
+      [...]
+    </site>
+    ```
 
- * the <<<custom.fluidoSkin.googleSearch>>> element in <<<site.xml>>>:
+- the `custom.fluidoSkin.googleSearch` element in `site.xml`:
 
-+-----+
-<site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
-  [...]
-  <custom>
-    <fluidoSkin>
-      <googleSearch>
-        <sitesearch/>
-      </googleSearch>
-    </fluidoSkin>
-  </custom>
-  [...]
-</site>
-+-----+
+    ```xml
+    <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
+      [...]
+      <custom>
+        <fluidoSkin>
+          <googleSearch>
+            <sitesearch/>
+          </googleSearch>
+        </fluidoSkin>
+      </custom>
+      [...]
+    </site>
+    ```
 
- []
+By default, the search form:
 
- By default, the search form:
+- is _not_ enabled; adding `custom.fluidoSkin.googleSearch` is enough to enable the searchbox\.
+- is rendered in the sidebar, if the topbar only is available it will be rendered there\.
 
- * is <not> enabled; adding <<<custom.fluidoSkin.googleSearch>>> is enough to enable the searchbox.
+External links are either rendered in the sidebar or the topbar\. When both sidebar and topbar are enabled, they are rendered as dropdown in the topbar only\.
 
- * is rendered in the sidebar, if the topbar only is available it will be rendered there.
+${esc.h}${esc.h}${esc.h} <a id="Source_code_line_numbers"></a>Source code line numbers
 
- []
+Source code sections are enhanced by [Google Code Prettify](https://github.com/google/code-prettify), users can optionally enable line numbers rendering \(disabled by default\):
 
- External links are either rendered in the sidebar or the topbar. When both sidebar and topbar are enabled,
- they are rendered as dropdown in the topbar only.
-
-** {Source code line numbers}
-
- Source code sections are enhanced by {{{https://github.com/google/code-prettify}Google Code Prettify}}, users can
- optionally enable line numbers rendering (disabled by default):
-
-+-----+
+```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   [...]
@@ -300,13 +270,13 @@ Welcome to ${project.name}!
   </custom>
   [...]
 </site>
-+-----+
+```
 
-** {Copyright class}
+${esc.h}${esc.h}${esc.h} <a id="Copyright_class"></a>Copyright class
 
-  Since version <<1.3.1>>, you can configure a copyright class:
+Since version **1\.3\.1**, you can configure a copyright class:
 
-+-----+
+```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   [...]
@@ -317,149 +287,130 @@ Welcome to ${project.name}!
   </custom>
   [...]
 </site>
-+-----+
+```
 
-** {head/footer placeholders}
+${esc.h}${esc.h}${esc.h} <a id="head.2Ffooter_placeholders"></a>head/footer placeholders
 
- This skin will pass your custom head/footer to <<<${esc.d}render.eval()>>> and replace all variables
- known to the Velocity context.
+This skin will pass your custom head/footer to `$<a id="esc.d"></a>esc.drender.eval()` and replace all variables known to the Velocity context\.
 
-** {GitHub Ribbons}
+${esc.h}${esc.h}${esc.h} <a id="GitHub_Ribbons"></a>GitHub Ribbons
 
- Since version <<1.11.1>>, fluido-skin supports {{{https://github.com/simonwhitaker/github-fork-ribbon-css}GitHub ribbons}} to simplify
- the <Fork me on GitHub> banner integration. Users must define:
+Since version **1\.11\.1**, fluido\-skin supports [GitHub ribbons](https://github.com/simonwhitaker/github-fork-ribbon-css) to simplify the _Fork me on GitHub_ banner integration\. Users must define:
 
- * <<<custom.fluidoSkin.gitHub.projectId>>>: <<required>>, the project id on GitHub and will be used to build the project page URL;
+- `custom.fluidoSkin.gitHub.projectId`: **required**, the project id on GitHub and will be used to build the project page URL;
+- `custom.fluidoSkin.gitHub.ribbonOrientation`: **optional**, the ribbon position, `left-top`&gt; \(`left`\)/`right-top` \(`right`\)/`left-bottom`/`right-bottom` are accepted only \(`left-top` by default\);
+- `custom.fluidoSkin.gitHub.ribbonColor`: **optional**, the ribbon color, `red`/`green`/`black`/`darkblue`/`orange`/`gray` are accepted only \(`red` by default\)\.
 
- * <<<custom.fluidoSkin.gitHub.ribbonOrientation>>>: <<optional>>, the ribbon position, <<<left-top>>>> (<<<left>>>)/<<<right-top>>> (<<<right>>>)/<<<left-bottom>>>/<<<right-bottom>>> are accepted only (<<<left-top>>> by default);
+    ```xml
+    <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
+      [...]
+      <custom>
+        <fluidoSkin>
+          <gitHub>
+            <projectId>apache/maven-skins</projectId>
+            <ribbonOrientation>right</ribbonOrientation>
+            <ribbonColor>black</ribbonColor>
+          </gitHub>
+        </fluidoSkin>
+      </custom>
+      [...]
+    </site>
+    ```
 
- * <<<custom.fluidoSkin.gitHub.ribbonColor>>>: <<optional>>, the ribbon color, <<<red>>>/<<<green>>>/<<<black>>>/<<<darkblue>>>/<<<orange>>>/<<<gray>>> are accepted only (<<<red>>> by default).
+${esc.h}${esc.h}${esc.h} <a id="Project_profile"></a>Project profile
 
-+-----+
-<site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
-  [...]
-  <custom>
-    <fluidoSkin>
-      <gitHub>
-        <projectId>apache/maven-skins</projectId>
-        <ribbonOrientation>right</ribbonOrientation>
-        <ribbonColor>black</ribbonColor>
-      </gitHub>
-    </fluidoSkin>
-  </custom>
-  [...]
-</site>
-+-----+
+As shown in [MojoHaus Maven plugins list](http://www.mojohaus.org/plugins.html), plugins life\-cycle are characterized by different status/stages:
 
-** {Project profile}
+- Production
+- Pre\-release
+- Sandbox
+- Graveyard \(retired projects\)
 
- As shown in {{{http://www.mojohaus.org/plugins.html}MojoHaus Maven plugins list}}, plugins life-cycle are characterized by
- different status/stages:
+    Users can configure different backgrounds depending on the project status \(except the production\) to warrant users they are not using a production ready software:
 
- * Production
+    ```xml
+    <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
+      [...]
+      <custom>
+        <fluidoSkin>
+          <profile>(pre-release|sandbox|retired)</profile>
+        </fluidoSkin>
+      </custom>
+      [...]
+    </site>
+    ```
 
- * Pre-release
+${esc.h}${esc.h}${esc.h} <a id="Twitter_follow_button"></a>Twitter follow button
 
- * Sandbox
+Since version **1\.1**, fluido\-skin supports the Twitter [follow button](https://dev.twitter.com/web/follow-button) to simplify its integration\. Users must define:
 
- * Graveyard (retired projects)
+- `custom.fluidoSkin.twitter.user`: **required**, it is the Twitter id to suggest to follow;
+- `custom.fluidoSkin.twitter.showUser`: **optional**, flag to mark the user has to be shown \(`false` by default\);
+- `custom.fluidoSkin.twitter.showFollowers`: **optional**, flag to mark the followers ribbon has to be shown \(`false` by default\)\.
 
- Users can configure different backgrounds depending on the project status (except the production) to warrant users they
- are not using a production ready software:
+    ```xml
+    <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
+      [...]
+      <custom>
+        <fluidoSkin>
+          <twitter>
+            <user>simonetripodi</user>
+            <showUser>true</showUser>
+            <showFollowers>true</showFollowers>
+          </twitter>
+        </fluidoSkin>
+      </custom>
+      [...]
+    </site>
+    ```
 
-+-----+
-<site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
-  [...]
-  <custom>
-    <fluidoSkin>
-      <profile>(pre-release|sandbox|retired)</profile>
-    </fluidoSkin>
-  </custom>
-  [...]
-</site>
-+-----+
+    By default, it is rendered in the sidebar, if the topbar only is available it will be rendered there\.
 
-** {Twitter follow button}
+${esc.h}${esc.h}${esc.h} <a id="Facebook_like_button"></a>Facebook like button
 
- Since version <<1.1>>, fluido-skin supports the Twitter {{{https://dev.twitter.com/web/follow-button}follow button}}
- to simplify its integration. Users must define:
+Since version **1\.2**, fluido\-skin supports the Facebook [like](https://developers.facebook.com/docs/plugins/like-button) integration\. Users can define similar option to Facebook SDK:
 
- * <<<custom.fluidoSkin.twitter.user>>>: <<required>>, it is the Twitter id to suggest to follow;
+- `custom.fluidoSkin.facebookLike.recommend`: **optional**, if set to `true` **Recommend** button will be rendered instead of **Like**
+- `custom.fluidoSkin.facebookLike.shareButton`: **optional**, if set to `true` **Share Button** will be included\.
+- `custom.fluidoSkin.facebookLike.layout`: **optional** facebook layout, Can be one of:
+    - `standard`
+    - `button_count`: default if sidebar is not enabled
+    - `button`
+    - `box_count`: default if sidebar is enabled
 
- * <<<custom.fluidoSkin.twitter.showUser>>>: <<optional>>, flag to mark the user has to be shown (<<<false>>> by default);
+        ```xml
+        <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
+          [...]
+          <custom>
+            <fluidoSkin>
+              <facebookLike>
+                <recommend>true/false</recommend>
+                <shareButton>true/false</shareButton>
+                <layout>box_count</layout>
+              </facebookLike>
+            </fluidoSkin>
+          </custom>
+          [...]
+        </site>
+        ```
 
- * <<<custom.fluidoSkin.twitter.showFollowers>>>: <<optional>>, flag to mark the followers ribbon has to be shown (<<<false>>> by default).
+    By default, it is rendered in the sidebar, if the topbar only is available it will be rendered there\.
 
-+-----+
-<site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
-  [...]
-  <custom>
-    <fluidoSkin>
-      <twitter>
-        <user>simonetripodi</user>
-        <showUser>true</showUser>
-        <showFollowers>true</showFollowers>
-      </twitter>
-    </fluidoSkin>
-  </custom>
-  [...]
-</site>
-+-----+
+    **Note** in order the Facebook like button appears, `${project.url}` property **must** be set in the `pom.xml`\!
 
- By default, it is rendered in the sidebar, if the topbar only is available it will be rendered there.
+${esc.h}${esc.h}${esc.h} <a id="Flattr_button"></a>Flattr button
 
-** {Facebook like button}
+As of version **2\.0\.0\-M9**, support for Flattr buttons in fluido\-skin has been removed\.
 
- Since version <<1.2>>, fluido-skin supports the Facebook {{{https://developers.facebook.com/docs/plugins/like-button}like}}
- integration. Users can define similar option to Facebook SDK:
+${esc.h}${esc.h}${esc.h} <a id="AnchorJS"></a>AnchorJS
 
- * <<<custom.fluidoSkin.facebookLike.recommend>>>: <<optional>>, if set to <<<true>>> <<Recommend>> button will be rendered instead of <<Like>>
+You can optionally enable anchor ID generation with [AnchorJS](https://www.bryanbraun.com/anchorjs/):
 
- * <<<custom.fluidoSkin.facebookLike.shareButton>>>: <<optional>>, if set to <<<true>>> <<Share Button>> will be included.
-
- * <<<custom.fluidoSkin.facebookLike.layout>>>: <<optional>> facebook layout, Can be one of:
-
-   * <<<standard>>>
-
-   * <<<button_count>>>: default if sidebar is not enabled
-
-   * <<<button>>>
-
-   * <<<box_count>>>: default if sidebar is enabled
-
-+-----+
-<site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
-  [...]
-  <custom>
-    <fluidoSkin>
-      <facebookLike>
-        <recommend>true/false</recommend>
-        <shareButton>true/false</shareButton>
-        <layout>box_count</layout>
-      </facebookLike>
-    </fluidoSkin>
-  </custom>
-  [...]
-</site>
-+-----+
-
- By default, it is rendered in the sidebar, if the topbar only is available it will be rendered there.
-
- <<Note>> in order the Facebook like button appears, <<<$\{project.url\}>>> property <<must>> be set in the <<<pom.xml>>>!
-
-** {Flattr button}
-
- As of version <<2.0.0-M9>>, support for Flattr buttons in fluido-skin has been removed.
-
-** {AnchorJS}
-
- You can optionally enable anchor ID generation with {{{https://www.bryanbraun.com/anchorjs/}AnchorJS}}:
-
-+-----+
+```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   [...]
@@ -470,13 +421,13 @@ Welcome to ${project.name}!
   </custom>
   [...]
 </site>
-+-----+
+```
 
- Note that the generated IDs are not compatible with IDs generated by the underlying Doxia framework.
+Note that the generated IDs are not compatible with IDs generated by the underlying Doxia framework\.
 
- Additionally you can provide a CSS selector for the <<<add()>>> function and options:
+Additionally you can provide a CSS selector for the `add()` function and options:
 
-+-----+
+```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   [...]
@@ -493,14 +444,13 @@ Welcome to ${project.name}!
   </custom>
   [...]
 </site>
-+-----+
+```
 
-** {Skip generation date}
+${esc.h}${esc.h}${esc.h} <a id="Skip_generation_date"></a>Skip generation date
 
-  Since version <<1.3.1>>, you can skip generation date from the line "Generated by Apache Maven Doxia at \<date\>"
-  to enable it:
+Since version **1\.3\.1**, you can skip generation date from the line &quot;Generated by Apache Maven Doxia at &lt;date&gt;&quot; to enable it:
 
-+-----+
+```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   [...]
@@ -511,13 +461,13 @@ Welcome to ${project.name}!
   </custom>
   [...]
 </site>
-+-----+
+```
 
-** {Breadcrumb Divider}
+${esc.h}${esc.h}${esc.h} <a id="Breadcrumb_Divider"></a>Breadcrumb Divider
 
-   Since version <<1.3.1>>, you can configure the breadcrumb divider (default is a slash):
+Since version **1\.3\.1**, you can configure the breadcrumb divider \(default is a slash\):
 
-+-----+
+```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   [...]
@@ -528,10 +478,9 @@ Welcome to ${project.name}!
   </custom>
   [...]
 </site>
-+-----+
+```
 
-Acknowledgment
+# Acknowledgment
 
-  ${project.name} contains/redistributes {{{http://glyphicons.com}Glyphicons Halflings}} as part of Bootstrap by Twitter,
-  released under {{{http://creativecommons.org/licenses/by/3.0/deed.en}Creative Commons Attribution 3.0 Unported (CC BY 3.0)}}.
+${project.name} contains/redistributes [Glyphicons Halflings](http://glyphicons.com) as part of Bootstrap by Twitter, released under [Creative Commons Attribution 3\.0 Unported \(CC BY 3\.0\)](http://creativecommons.org/licenses/by/3.0/deed.en)\.
 

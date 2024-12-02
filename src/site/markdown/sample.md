@@ -1,193 +1,131 @@
- ------
- Sample Content
- ------
- Hervé Boutemy
- ------
- 2011-11-07
- ------
+---
+title: Sample Content
+author: 
+  - Hervé Boutemy
+date: 2011-11-07
+---
 
-~~ Licensed to the Apache Software Foundation (ASF) under one
-~~ or more contributor license agreements.  See the NOTICE file
-~~ distributed with this work for additional information
-~~ regarding copyright ownership.  The ASF licenses this file
-~~ to you under the Apache License, Version 2.0 (the
-~~ "License"); you may not use this file except in compliance
-~~ with the License.  You may obtain a copy of the License at
-~~
-~~   http://www.apache.org/licenses/LICENSE-2.0
-~~
-~~ Unless required by applicable law or agreed to in writing,
-~~ software distributed under the License is distributed on an
-~~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-~~ KIND, either express or implied.  See the License for the
-~~ specific language governing permissions and limitations
-~~ under the License.
+<!-- Licensed to the Apache Software Foundation (ASF) under one-->
+<!-- or more contributor license agreements.  See the NOTICE file-->
+<!-- distributed with this work for additional information-->
+<!-- regarding copyright ownership.  The ASF licenses this file-->
+<!-- to you under the Apache License, Version 2.0 (the-->
+<!-- "License"); you may not use this file except in compliance-->
+<!-- with the License.  You may obtain a copy of the License at-->
+<!---->
+<!--   http://www.apache.org/licenses/LICENSE-2.0-->
+<!---->
+<!-- Unless required by applicable law or agreed to in writing,-->
+<!-- software distributed under the License is distributed on an-->
+<!-- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY-->
+<!-- KIND, either express or implied.  See the License for the-->
+<!-- specific language governing permissions and limitations-->
+<!-- under the License.-->
 
-~~ NOTE: For help with the syntax of this file, see:
-~~ http://maven.apache.org/doxia/references/apt-format.html
+# Sample content
 
-Sample content
+Regular font\. _Italic_ font\. **Bold** font\. `Monospaced` font\.
 
-  Regular font. <Italic> font. <<Bold>> font. <<<Monospaced>>> font.
+<a id="Anchor"></a>Anchor\. Links: [to Anchor](#Anchor), [to http:](http://www.pixware.fr), [to https:](https://www.pixware.fr), [to file:](file:///tmp), [to ftp:](ftp://ftp.apache.org), [to e\-mail](mailto:dev@maven.apach.org), [to \.asc](http://unknown.asc), [to \.jpg](http://unknown.jpg), [to \.jpeg](http://unknown.jpeg), [to \.gif](http://unknown.gif), [to \.png](http://unknown.png), [to \.tar\.gz](http://unknown.tar.gz), [to \.zip](http://unknown.zip), [to \.md5](http://unknown.md5), [to \.sha1](http://unknown.sha1)\.
 
-  {Anchor}. Links: {{{Anchor}to Anchor}},
-  {{{http://www.pixware.fr}to http:}},
-  {{{https://www.pixware.fr}to https:}},
-  {{{file:///tmp}to file:}},
-  {{{ftp://ftp.apache.org}to ftp:}},
-  {{{mailto:dev at maven dot apache dot org}to e-mail}},
-  {{{http://unknown.asc}to .asc}},
-  {{{http://unknown.jpg}to .jpg}},
-  {{{http://unknown.jpeg}to .jpeg}},
-  {{{http://unknown.gif}to .gif}},
-  {{{http://unknown.png}to .png}},
-  {{{http://unknown.tar.gz}to .tar.gz}},
-  {{{http://unknown.zip}to .zip}},
-  {{{http://unknown.md5}to .md5}},
-  {{{http://unknown.sha1}to .sha1}}.
+Basic icons = Success, Warning, Error, Info:
 
-  Basic icons = Success, Warning, Error, Info:
+![Success](images/icon\_success\_sml\.gif)![Warning](images/icon\_warning\_sml\.gif)![Error](images/icon\_error\_sml\.gif)![Info](images/icon\_info\_sml\.gif)
 
-[images/icon_success_sml.gif] Success
+Changes plugin legend = Add, Fix, Help, Remove, Update:
 
-[images/icon_warning_sml.gif] Warning
+![Add](images/add\.gif)![Fix](images/fix\.gif)![Help](images/icon\_help\_sml\.gif)![Remove](images/remove\.gif)![Update](images/update\.gif)
 
-[images/icon_error_sml.gif] Error
+RSS icon \(shared across multiple plugins\):
 
-[images/icon_info_sml.gif] Info
+![rss](images/rss\.png)
+# Section title
 
-  Changes plugin legend = Add, Fix, Help, Remove, Update:
+## Sub\-section title
 
-[images/add.gif] Add
+### Sub\-sub\-section title
 
-[images/fix.gif] Fix
+#### Sub\-sub\-sub\-section title
 
-[images/icon_help_sml.gif] Help
+##### Sub\-sub\-sub\-sub\-section title
 
-[images/remove.gif] Remove
+List:
 
-[images/update.gif] Update
+- List item 1\.
+- List item 2\.
 
-  RSS icon (shared across multiple plugins):
+    Paragraph contained in list item 2\.
 
-[images/rss.png] rss
+    - Sub\-list item 1\.
+    - Sub\-list item 2\.
+- List item 3\. Force end of list:
 
-Section title
+Numbered list with multiple schemes: \[\[1\]\], \[\[a\]\], \[\[A\]\], \[\[i\]\], \[\[I\]\]
 
-* Sub-section title
+1. Numbered item 1\.
+    1. Numbered item A\.
+    1. Numbered item B\.
+1. Numbered item 2\.
+    1. Numbered item a\.
+    1. Numbered item b\.
+1. Numbered item 3\.
+    1. Numbered item i\.
+    1. Numbered item i\.
+1. Numbered item 4\.
+    1. Numbered item I\.
+    1. Numbered item I\.
 
-** Sub-sub-section title
+<dl>
+<dt>Defined term 1</dt>
+<dd>of definition list.</dd>
+<dt>Defined term 2</dt>
+<dd>of definition list.
 
-*** Sub-sub-sub-section title
-
-**** Sub-sub-sub-sub-section title
-
-  List:
-
-  * List item 1.
-
-  * List item 2.
-
-    Paragraph contained in list item 2.
-
-      * Sub-list item 1.
-
-      * Sub-list item 2.
-
-  * List item 3.
-    Force end of list:
-
-  []
-
-  Numbered list with multiple schemes: [[1]], [[a]], [[A]], [[i]], [[I]]
-
-  [[1]] Numbered item 1.
-
-    [[A]] Numbered item A.
-
-    [[B]] Numbered item B.
-
-  [[2]] Numbered item 2.
-
-    [[a]] Numbered item a.
-
-    [[b]] Numbered item b.
-
-  [[3]] Numbered item 3.
-
-    [[i]] Numbered item i.
-
-    [[i]] Numbered item i.
-
-  [[4]] Numbered item 4.
-
-    [[I]] Numbered item I.
-
-    [[I]] Numbered item I.
-
-  []
-
-      [Defined term 1] of definition list.
-
-      [Defined term 2] of definition list.
-
-+-------------------------------+
+```unknown
 Verbatim text
                         in a box        
-+-------------------------------+
+```
 
----------------------------------
+```
 Verbatim text
                      without box        
----------------------------------
+```
 
-[figure] Figure caption
+![Figure caption](figure)
 
-*----------*--------------+----------------:
-| Centered | Left-aligned | Right-aligned  |
-| cell 1,1 | cell 1,2     | cell 1,3       |
-*----------*--------------+----------------:
-| cell 2,1 | cell 2,2     | cell 2,3       |
-*----------*--------------+----------------:
-| cell 3,1 | cell 3,2     | cell 3,3       |
-*----------*--------------+----------------:
-| cell 4,1 | cell 4,2     | cell 4,3       |
-*----------*--------------+----------------:
-| cell 5,1 | cell 5,2     | cell 5,3       |
-*----------*--------------+----------------:
-Table caption
+|header   |header   |header   |
+|:---:|:---|---:|
+|Centered cell 1,1|Left\-aligned cell 1,2|Right\-aligned cell 1,3|
+|cell 2,1|cell 2,2|cell 2,3|
+|cell 3,1|cell 3,2|cell 3,3|
+|cell 4,1|cell 4,2|cell 4,3|
+|cell 5,1|cell 5,2|cell 5,3|
+</dd>
+</dl>
 
-  No grid, no caption:
+No grid, no caption:
 
-*-----*------*
- cell | cell
-*-----*------*
- cell | cell
-*-----*------*
- cell | cell
-*-----*------*
- cell | cell
-*-----*------*
- cell | cell
-*-----*------*
+|   |   |
+|:---:|:---:|
+|cell|cell|
+|cell|cell|
+|cell|cell|
+|cell|cell|
+|cell|cell|
 
-*---------*---------*
-|| header || header |
-*---------*---------*
-|  cell   |  cell   |
-*---------*---------*
-|  cell   |  cell   |
-*---------*---------*
-|  cell   |  cell   |
-*---------*---------*
-|  cell   |  cell   |
-*---------*---------*
+|header|header|
+|:---:|:---:|
+|cell|cell|
+|cell|cell|
+|cell|cell|
+|cell|cell|
 
-  Horizontal line:
+Horizontal line:
 
-=======================================================================
+***
 
-  Force line\
-  break.
+Force line  
+break\.
 
-  Non\ breaking\ space.
+Non&nbsp;breaking&nbsp;space\.
+
