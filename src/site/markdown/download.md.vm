@@ -25,9 +25,6 @@ under the License.
 ${project.name} ${project.version} is distributed in source format\. Use a source archive if you intend to build
 ${project.name} yourself\. Otherwise, simply use the ready\-made binary artifacts from central repository\.
 
-You will be prompted for a mirror \- if the file is not found on yours, please be patient, as it may take 24
-hours to reach all mirrors\.
-
 In order to guard against corrupted downloads/installations, it is highly recommended to
 [verify the signature](http://www.apache.org/dev/release-signing#verifying-signature)
 of the release bundles against the public [KEYS](https://www.apache.org/dist/maven/KEYS) used by the Apache Maven
@@ -35,50 +32,14 @@ developers\.
 
 ${project.name} is distributed under the [Apache License, version 2\.0](http://www.apache.org/licenses/)\.
 
-We **strongly** encourage our users to configure a Maven repository mirror closer to their location, please read [How to Use Mirrors for Repositories](./guides/mini/guide-mirror-settings.html)\.
-
-<a id="mirror"></a>
-
-${esc.h}${esc.h} Mirror
-
-\[if-any logo\]
-  [![logo](\[logo\])](\[link\])
-\[end\]
-The currently selected mirror is **[preferred]**. If you encounter a problem with this mirror, please select another mirror\. If all mirrors are failing, there are _backup_ mirrors \(at the end of the mirrors list\) that should be available\.
-
-<form action="[location]" method="get" id="SelectMirror">
-  Other mirrors:
-  <select name="Preferred">
-    [if-any http]
-    [for http]
-    <option value="[http]">[http]</option>
-    [end]
-    [end]
-    [if-any ftp]
-    [for ftp]
-    <option value="[ftp]">[ftp]</option>
-    [end]
-    [end]
-    [if-any backup]
-    [for backup]
-    <option value="[backup]">[backup] (backup)</option>
-    [end]
-    [end]
-  </select>
-  <input type="submit" value="Change"/>
-</form>
-
-You may also consult the [complete list of mirrors\.](http://www.apache.org/mirrors/)
-
-
 ${esc.h}${esc.h} ${project.name} ${project.version}
 
 This is the current stable version of ${project.name}\.
 
 |  |Link|Checksum|Signature|
 |---|---|---|---|
-${project.name} ${project.version} \(Source zip\)|[maven/skins/${project.artifactId}\-${project.version}\-source\-release\.zip](\[preferred\]maven/skins/${project.artifactId}-${project.version}-source-release.zip)|[maven/skins/${project.artifactId}\-${project.version}\-source\-release\.zip\.sha512](https://www.apache.org/dist/maven/skins/${project.artifactId}-${project.version}-source-release.zip.sha512)|[maven/skins/${project.artifactId}\-${project.version}\-source\-release\.zip\.asc](https://www.apache.org/dist/maven/skins/${project.artifactId}-${project.version}-source-release.zip.asc)|
+${project.name} ${project.version} \(Source zip\)|[maven/skins/${project.artifactId}\-${project.version}\-source\-release\.zip](\[preferred\]/maven/skins/${project.artifactId}-${project.version}-source-release.zip)|[maven/skins/${project.artifactId}\-${project.version}\-source\-release\.zip\.sha512](https://www.apache.org/dist/maven/skins/${project.artifactId}-${project.version}-source-release.zip.sha512)|[maven/skins/${project.artifactId}\-${project.version}\-source\-release\.zip\.asc](https://www.apache.org/dist/maven/skins/${project.artifactId}-${project.version}-source-release.zip.asc)|
 
 ${esc.h}${esc.h} Previous Versions
 
-Older non\-recommended releases can be found on our [archive site](http://archive.apache.org/dist/maven/skins/)\.
+Older non\-recommended releases can be found on our [archive site](https://archive.apache.org/dist/maven/skins/)\.
