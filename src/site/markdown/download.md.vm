@@ -38,7 +38,7 @@ This is the current stable version of ${project.name}\.
 
 |  |Link|Checksum|Signature|
 |---|---|---|---|
-${project.name} ${project.version} \(Source zip\)|[maven/skins/${project.artifactId}\-${project.version}\-source\-release\.zip](\[preferred\]/maven/skins/${project.artifactId}-${project.version}-source-release.zip)|[maven/skins/${project.artifactId}\-${project.version}\-source\-release\.zip\.sha512](https://www.apache.org/dist/maven/skins/${project.artifactId}-${project.version}-source-release.zip.sha512)|[maven/skins/${project.artifactId}\-${project.version}\-source\-release\.zip\.asc](https://www.apache.org/dist/maven/skins/${project.artifactId}-${project.version}-source-release.zip.asc)|
+${project.name} ${project.version} \(Source zip\)|[maven/skins/${project.artifactId}\-${project.version}\-source\-release\.zip](\[preferred\]maven/skins/${project.artifactId}-${project.version}-source-release.zip)|[maven/skins/${project.artifactId}\-${project.version}\-source\-release\.zip\.sha512](https://downloads.apache.org/maven/skins/${project.artifactId}-${project.version}-source-release.zip.sha512)|[maven/skins/${project.artifactId}\-${project.version}\-source\-release\.zip\.asc](https://downloads.apache.org/maven/skins/${project.artifactId}-${project.version}-source-release.zip.asc)|
 
 ${esc.h}${esc.h} Previous Versions
 
