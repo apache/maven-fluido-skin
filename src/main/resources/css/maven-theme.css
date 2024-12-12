@@ -160,3 +160,8 @@ h5 > code {
 .table td {
   text-align: revert;
 }
+
+/* linked code must be styled in same color as plain links */
+a > code {
+  color: #0088cc;
+}
