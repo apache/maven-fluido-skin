@@ -26,7 +26,7 @@ date: 2011-11-07
 
 Regular font\. _Italic_ font\. **Bold** font\. `Monospaced` font\.
 
-<a id="Anchor"></a>Anchor\. Links: [to Anchor](#Anchor), [to http:](http://www.pixware.fr), [to https:](https://www.pixware.fr), [to file:](file:///tmp), [to ftp:](ftp://ftp.apache.org), [to e\-mail](mailto:dev@maven.apach.org), [to \.asc](http://unknown.asc), [to \.jpg](http://unknown.jpg), [to \.jpeg](http://unknown.jpeg), [to \.gif](http://unknown.gif), [to \.png](http://unknown.png), [to \.tar\.gz](http://unknown.tar.gz), [to \.zip](http://unknown.zip), [to \.md5](http://unknown.md5), [to \.sha1](http://unknown.sha1)\.
+<a id="Anchor"></a>Anchor\. Links: [to Anchor](#Anchor), [to http:](http://www.pixware.fr), [to https:](https://www.pixware.fr), [to file:](file:///tmp), [to ftp:](ftp://ftp.apache.org), [to e\-mail](mailto:dev@maven.apach.org), [to \.asc](http://unknown.asc), [to \.jpg](http://unknown.jpg), [to \.jpeg](http://unknown.jpeg), [to \.gif](http://unknown.gif), [to \.png](http://unknown.png), [to \.tar\.gz](http://unknown.tar.gz), [to \.zip](http://unknown.zip), [to \.md5](http://unknown.md5), [to \.sha1](http://unknown.sha1), [`from code to http`](http://www.pixware.fr)\.
 
 Basic icons = Success, Warning, Error, Info:
 
