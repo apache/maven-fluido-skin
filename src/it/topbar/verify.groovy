@@ -28,4 +28,4 @@ assert html.contains( '<li><a>About</a></li>' )
 assert html.contains( '<li><a href="summary.html">Summary</a></li>' )
 assert html.contains( '<li><a href="plugins.html">Plugins</a></li>' )
 // breadcrumb
-assert html.contains( '<li><a href="https://www.apache.org/" class="externalLink">Apache</a><span class="divider">/</span></li>' )
+assert html.contains( '<li><a href="https://www.apache.org/">Apache</a><span class="divider">/</span></li>' )

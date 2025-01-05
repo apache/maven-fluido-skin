@@ -62,9 +62,6 @@
 #*    *##if( $href == "" && ( $dotSlashOnEmptyHref == "set" || $dotSlashOnEmptyHref == "always" ) )
 #*      *##set( $href = "./" )
 #*    *##end
-#*    *##set( $class = "" )
-#*  *##else
-#*    *##set( $class = ' class="externalLink"' )
 #*  *##end
 #*  *##if( $link.target )
 #*    *##set( $target = ' target="' + $link.target + '"' )
@@ -74,14 +71,12 @@
 #*  *##if( $alignedFileName == $href && $dotSlashOnEmptyHref != "always" )
 #*    *##set( $href = "" )
 #*    *##set( $target = "" )
-#*    *##set( $class = "" )
 #*  *##else
 #*    *##set( $href = ' href="' + $href + '"' )
 #*  *##end
 #**##else
 #*  *##set( $href = "" )
 #*  *##set( $target = "" )
-#*  *##set( $class = "" )
 #**##end
 ##
 #**##set( $wrap = $href || !$href && $elemOnEmptyHref )
@@ -91,7 +86,7 @@
 #**##end
 #**##if( $overrideElemClass && $overrideElemClass != "" )
 #*  *##set( $class = ' class="' + $overrideElemClass + '"' )
-#**##elseif( $overrideElemClass == "" )
+#**##else
 #*  *##set( $class = "" )
 #**##end
 #**##if( $wrap )<$wrapElem#end$href$target$class#if( $wrap )>#end##
