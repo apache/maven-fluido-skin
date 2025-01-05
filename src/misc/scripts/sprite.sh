@@ -19,13 +19,5 @@
 #------------------------------------------------------------------------------
 
 montage window-new.png \
-        internet-web-browser.png \
         accessories-text-editor.png \
-        image-x-generic.png \
-        package-x-generic.png \
-        document-properties.png \
-        application-certificate.png \
-        drive-harddisk.png \
-        network-server.png \
-        contact-new.png \
         -tile 4x3 -geometry +2+2 -background none external-links.png
