@@ -29,3 +29,10 @@ assert html.contains( '<li><a href="summary.html">Summary</a>' )
 assert html.contains( '<li><a href="plugins.html">Plugins</a></li>' )
 // breadcrumb
 assert html.contains( '<li><a href="https://www.apache.org/">Apache</a><span class="divider">/</span></li>' )
+
+// MSKINS-263 - image without class in banner
+assert html.contains('<div class="pull-left"><div id="bannerLeft"><h1><a href="https://www.apache.org/"><img src="../../../images/apache-maven-project.png" /></a></h1></div></div>')
+assert html.contains('<div class="pull-right"><div id="bannerRight"><h1><a href="../../../"><img src="../../../images/maven-logo-black-on-white.png" /></a></h1></div></div>')
+
+// and image with class
+assert html.contains('<a href="https://maven.apache.org/" class="builtBy" target="_blank"><img class="builtBy" alt="Built by Maven" src="./images/logos/maven-feather.png" /></a>')
