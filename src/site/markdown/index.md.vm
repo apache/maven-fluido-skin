@@ -25,7 +25,7 @@ date: 2012-06-28
 
 # Welcome to ${project.name}!
 
-The Apache Maven Fluido Skin is an Apache Maven site skin built on top of [Twitter&apos;s Bootstrap ${project.properties.get('bootstrap.version')}](http://bootstrapdocs.com/v${project.properties.get('bootstrap.version')}/docs)\.
+The Apache Maven Fluido Skin is an Apache Maven site skin built on top of [Twitter&apos;s Bootstrap ${project.properties.get('bootstrap.version')}](https://bootstrapdocs.com/v${project.properties.get('bootstrap.version')}/docs)\.
 
 A [sample page](./sample.html) is provided to see the skin in action, and two complete sites to show skin configurations: one for [sidebar layout \(default\)](./sidebar/) and the other for [topbar layout](./topbar/)\.
 
@@ -226,7 +226,7 @@ Users can optionally enable the **Google Search** for the generated site, requir
     <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
       [...]
-      <url>http://maven.apache.org/skins/${project.artifactId}</url>
+      <url>https://maven.apache.org/skins/${project.artifactId}</url>
       [...]
     </site>
     ```
@@ -320,7 +320,7 @@ Since version **1\.11\.1**, fluido\-skin supports [GitHub ribbons](https://githu
 
 ${esc.h}${esc.h}${esc.h} <a id="Project_profile"></a>Project profile
 
-As shown in [MojoHaus Maven plugins list](http://www.mojohaus.org/plugins.html), plugins life\-cycle are characterized by different status/stages:
+As shown in [MojoHaus Maven plugins list](https://www.mojohaus.org/plugins.html), plugins life\-cycle are characterized by different status/stages:
 
 - Production
 - Pre\-release
@@ -482,5 +482,5 @@ Since version **1\.3\.1**, you can configure the breadcrumb divider \(default is
 
 # Acknowledgment
 
-${project.name} contains/redistributes [Glyphicons Halflings](http://glyphicons.com) as part of Bootstrap by Twitter, released under [Creative Commons Attribution 3\.0 Unported \(CC BY 3\.0\)](http://creativecommons.org/licenses/by/3.0/deed.en)\.
+${project.name} contains/redistributes [Glyphicons Halflings](https://glyphicons.com) as part of Bootstrap by Twitter, released under [Creative Commons Attribution 3\.0 Unported \(CC BY 3\.0\)](https://creativecommons.org/licenses/by/3.0/deed.en)\.
 
