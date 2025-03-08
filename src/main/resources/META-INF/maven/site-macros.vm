@@ -85,11 +85,11 @@
 #*  *##set( $wrapElem = $elemOnEmptyHref )
 #**##end
 #**##if( $overrideElemClass && $overrideElemClass != "" )
-#*  *##set( $class = ' class="' + $overrideElemClass + '"' )
+#*  *##set( $elementClass = ' class="' + $overrideElemClass + '"' )
 #**##else
-#*  *##set( $class = "" )
+#*  *##set( $elementClass = "" )
 #**##end
-#**##if( $wrap )<$wrapElem#end$href$target$class#if( $wrap )>#end##
+#**##if( $wrap )<$wrapElem#end$href$target$elementClass#if( $wrap )>#end##
 #**##if( $link.image && !$omitImage )
 #*  *##set( $img = "#image( $link.image $imageClass )" )
 #*  *##if( $link.image.position == "left" )
@@ -111,7 +111,7 @@
 #**##link ( $link $null true )
 #end
 ##
-#macro( image $image $class )
+#macro( image $image $imageClass )
 #*  *##if( !$site.isLink( $image.src ) )
 #*    *##set( $src = $PathTool.calculateLink( $image.src, $relativePath ) )
 #*    *##set( $src = $src.replace( '\\', '/' ) )
@@ -140,7 +140,7 @@
 #*    *##set( $style = "" )
 #*  *##end
 #*  *##set( $style = "$width$height$style" )
-<img#if( $class ) class="$class"#end$src$alt#if( $style ) style="$style"#end />##
+<img#if( $imageClass ) class="$imageClass"#end$src$alt#if( $style ) style="$style"#end />##
 #end
 ##
 #macro( banner $banner $id )
