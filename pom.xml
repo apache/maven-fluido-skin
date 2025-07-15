@@ -172,7 +172,7 @@ under the License.
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>3.2.0</version>
+          <version>3.3.1</version>
           <!-- workaround for https://issues.apache.org/jira/browse/MSKINS-235 -->
         </plugin>
       </plugins>
