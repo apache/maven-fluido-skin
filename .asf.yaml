@@ -23,11 +23,15 @@ github:
     - build-management
     - maven-skin
     - maven
+  protected_branches:
+    master: { }
+    maven-fluido-skin-1.x: { }
+  pull_requests:
+    del_branch_on_merge: true
   enabled_merge_buttons:
     squash: true
     merge: false
     rebase: true
-  del_branch_on_merge: true
   features:
     issues: true
 
