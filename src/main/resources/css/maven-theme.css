@@ -79,6 +79,7 @@ table.zebra-striped {
 .sidebar-nav {
   padding-left: 0px;
   padding-right: 0px;
+  overflow-wrap: anywhere;
 }
 
 .sidebar-nav .icon-chevron-right, .sidebar-nav .icon-chevron-down {
