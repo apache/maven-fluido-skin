@@ -104,6 +104,8 @@ under the License.
     <!-- the following properties are used in ITs (which do not inherit anything from a common parent) -->
     <sitePluginVersion>${version.maven-site-plugin}</sitePluginVersion>
     <projectInfoReportsPluginVersion>3.8.0</projectInfoReportsPluginVersion>
+
+    <version.maven-invoker-plugin>3.9.1</version.maven-invoker-plugin>
   </properties>
 
   <build>
