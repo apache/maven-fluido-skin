@@ -239,7 +239,13 @@
 #*        *##set( $sourceStyle = "prettyprint" )
 #*      *##end
 ##
-#*      *##if ( $bodyContent )$bodyContent.replaceAll( '<pre>(<code[ >](?!.*class=\"nohighlight nocode\"))', '<pre class="' + $sourceStyle + '">' + $esc.d + '1' ).replace( 'class="bodyTable"', 'class="table table-striped"' ).replace( 'class="bodyTable bodyTableBorder"', 'class="table table-bordered table-striped"' )#end
+#*      *##if ( $site.getCustomChild( 'fluidoSkin.mermaid' ) )
+#*        *##set( $prettyPrintRegex = '<pre>(<code[ >](?!.*class=\"nohighlight nocode\")(?!.*class=\"language-mermaid\"))' )
+#*      *##else
+#*        *##set( $prettyPrintRegex = '<pre>(<code[ >](?!.*class=\"nohighlight nocode\"))' )
+#*      *##end
+##
+#*      *##if ( $bodyContent )$bodyContent.replaceAll( $prettyPrintRegex, '<pre class="' + $sourceStyle + '">' + $esc.d + '1' ).replace( 'class="bodyTable"', 'class="table table-striped"' ).replace( 'class="bodyTable bodyTableBorder"', 'class="table table-bordered table-striped"' )#end
         </main>
 #*    *##if( $sideBarEnabled )
       </div>
@@ -275,5 +281,6 @@
       </div>
     </footer>
 #**##anchorJs()
+#**##mermaid()
   </body>
 </html>

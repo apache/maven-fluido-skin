@@ -570,3 +570,27 @@ Apache Maven Doxia Site Renderer#if( $doxiaSiteRendererVersion ) $doxiaSiteRende
 #**##end
 #end
 ##
+#macro( mermaid )
+#**##if ( $site.getCustomChild( 'fluidoSkin.mermaid' ) )
+    <script src="$relativePath/js/mermaid-@mermaid.version@.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var codes = document.querySelectorAll('code.language-mermaid');
+      for (var i = 0; i < codes.length; i++) {
+        var code = codes[i];
+        var pre = code.parentElement;
+        if (pre && pre.tagName === 'PRE') {
+          var content = code.textContent;
+          pre.className = 'mermaid';
+          pre.textContent = content;
+        }
+      }
+      if (codes.length > 0) {
+        mermaid.initialize({ startOnLoad: false });
+        mermaid.run();
+      }
+    });
+    </script>
+#**##end
+#end
+##
