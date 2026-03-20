@@ -280,8 +280,18 @@ $indent     </ul>##
 #end
 ##
 #macro( publishDate $position $sitePublishDate $version )
-#**##if( $publishDate )
-#*  *##set( $dateValue = $date.format( $publishDate ) )
+## Retrieve the relevant date to display (despite the macro name not always publish date)
+#**##set( $documentDate = $context.get( $sitePublishDate.value ) )
+##
+#**##if( $documentDate )
+#*  *##set( $datePrefix = $text.get( $sitePublishDate.prefix ) )
+#**##else
+#*  *##set( $documentDate = $context.get( $sitePublishDate.fallbackValue ) )
+#*  *##set( $datePrefix = $text.get( $sitePublishDate.fallbackPrefix ) )
+#**##end
+##
+#**##if( $documentDate )
+#*  *##set( $dateValue = $date.format( $documentDate ) )
 #**##else
 #*  *##set( $dateValue = $date )
 #**##end
@@ -303,7 +313,7 @@ $indent     </ul>##
 #**##if( $datePosition.equalsIgnoreCase( $position ) )
 #*  *##if( $datePosition.equalsIgnoreCase( "right" ) || $datePosition.equalsIgnoreCase( "bottom" ) )
 ## FIXME In some languages like French a space must preceed the colon
-        <li id="publishDate" class="pull-right">$prefix$text.get( "template.lastpublished" ): $dateValue</li>
+        <li id="publishDate" class="pull-right">$prefix$datePrefix: $dateValue</li>
 #*    *##if( $versionPosition.equalsIgnoreCase( $position ) )
           <li id="projectVersion" class="pull-right">##
 #*      *##if( !$topBarEnabled
@@ -318,7 +328,7 @@ $indent     </ul>##
 #*  *##elseif( $datePosition.equalsIgnoreCase( "navigation-bottom" ) || $datePosition.equalsIgnoreCase( "navigation-top" ) )
       <div id="lastPublished">
 ## FIXME In some languages like French a space must preceed the colon
-        <span id="publishDate">$text.get( "template.lastpublished" ): $dateValue</span>
+        <span id="publishDate">$datePrefix: : $dateValue</span>
 #*    *##if( $versionPosition.equalsIgnoreCase( $position ) )
 ## FIXME In some languages like French a space must preceed the colon
         <span class="divider">|</span> <span id="projectVersion">$text.get( "template.version" ): ${project.version}</span>
@@ -326,7 +336,7 @@ $indent     </ul>##
       </div>
 #*  *##elseif( $datePosition.equalsIgnoreCase("left") )
 ## FIXME In some languages like French a space must preceed the colon
-        <li id="publishDate">$text.get( "template.lastpublished" ): $dateValue##
+        <li id="publishDate">$datePrefix: $dateValue##
 #*    *##if( $versionPosition.equalsIgnoreCase( $position ) || $breadcrumbs && $breadcrumbs.size() > 0 )
 #*      *#<span class="divider">|</span>
 #*    *##end

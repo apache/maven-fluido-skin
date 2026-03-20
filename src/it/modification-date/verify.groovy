@@ -18,6 +18,8 @@
  */
 
 File index = new File( basedir, "target/site/index.html" )
-
 assert index.exists()
-assert index.text.contains("<meta name=\"generator\" content=\"Apache Maven Doxia Site Renderer 2.1.0\" />")
+assert index.text.contains( 'Last Modified: 2026-03-20' )
+File report = new File( basedir, "target/site/plugins.html" )
+assert report.exists()
+assert report.text.contains( 'Last Published: 1990-01-01' )
