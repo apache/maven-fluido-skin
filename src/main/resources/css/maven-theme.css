@@ -120,3 +120,96 @@ h5 > code {
 a > code {
   color: #0088cc;
 }
+
+.nav-header, .nav-list>li>a, .breadcrumb>li {
+  text-shadow: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --area-background-color: #222;
+    --stripe-color: #333;
+    --border-color: #666;
+    --pre-color: #c1c1c1;
+    --text-color: #fff;
+    --link-color: #0088cc;
+    --code-color: #ff7b72;
+    --tag-color: #7cacf8;
+    --atn-color: #bf67ff;
+    --atv-color: #6dd58c;
+    --pun-color: #facc15;
+  }
+  .nav>li>a:hover, .nav>li>a:focus {
+    background-color: var(--stripe-color);
+    color: var(--text-color);
+  }
+  body {
+    color: var(--text-color);
+    background-color: unset;
+  }
+  .breadcrumb, .well {
+    background-color: var(--area-background-color);
+    color: var( --text-color);
+  }
+  .table-striped>tbody>tr:nth-child(even)>td,
+  .table-striped>tbody>tr:nth-child(even)>th,
+  li.L0, li.L2, li.L4, li.L6, li.L8, .zebra-striped {
+    background-color: var(--area-background-color) !important;
+  }
+  .table-striped>tbody>tr:nth-child(odd)>td,
+  .table-striped>tbody>tr:nth-child(odd)>th,
+  li.L1, li.L3, li.L5, li.L7, li.L9 {
+    background-color: var(--stripe-color) !important;
+  }
+  .table th, .table td {
+    border-top-color: var(--border-color);
+  }
+  pre.prettyprint, .well, .table-bordered, .table-bordered th, .table-bordered td {
+    border-color: var(--border-color);
+  }
+  pre {
+    background-color: var(--area-background-color);
+  }
+  .linenums > li, pre {
+    color: var(--pre-color);
+  }
+  li {
+    color: unset;
+  }
+  code, tt {
+    color: var(--code-color);
+    background-color: unset;
+    border-color: var(--border-color);
+  }
+  .tag {
+    color: var(--tag-color) !important;
+  }
+  .atn, .typ {
+    color: var(--atn-color) !important;
+  }
+  .atv, .str, .lit {
+    color: var(--atv-color) !important;
+  }
+  .pln {
+    color: var(--text-color) !important;
+  }
+  .com {
+    color: var(--code-color) !important;
+  }
+  .pun, .opn, .clo {
+    color: var(--pun-color) !important;
+  }
+  hr {
+    border-bottom-color: var(--border-color);
+    border-top-color: var(--border-color);
+  }
+  input[type="text"] {
+    background-color: var(--area-background-color);
+    border-color: var(--border-color);
+    color: var(--text-color);
+  }
+  [class^="icon-"], [class*=" icon-"] {
+    background-image: url(../img/glyphicons-halflings-white.png);
+  }
+}
