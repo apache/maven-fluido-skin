@@ -143,6 +143,7 @@ under the License.
         <directory>${basedir}/src/main/resources</directory>
         <includes>
           <include>css/print.css</include>
+          <include>css/dark-theme.css</include>
         </includes>
       </resource>
 
