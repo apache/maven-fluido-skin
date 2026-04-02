@@ -97,6 +97,7 @@ under the License.
 
   <properties>
     <anchorjs.version>4.3.1</anchorjs.version>
+    <mermaid.version>11.6.0</mermaid.version>
     <bootstrap.version>2.3.2</bootstrap.version>
     <jquery.version>1.11.2</jquery.version>
     <version.maven-site-plugin>3.21.0</version.maven-site-plugin>
@@ -146,6 +147,14 @@ under the License.
         </includes>
       </resource>
 
+      <!-- include mermaid.js separately (not in minified bundle) -->
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+        <includes>
+          <include>js/mermaid-${mermaid.version}.min.js</include>
+        </includes>
+      </resource>
+
       <!-- include minified only -->
       <resource>
         <directory>${project.build.directory}/${project.build.finalName}</directory>
@@ -167,6 +176,7 @@ under the License.
               <exclude>src/main/resources/js/prettify.js</exclude>
               <exclude>src/main/resources/js/jquery-*.js</exclude>
               <exclude>src/main/resources/js/anchor-*.js</exclude>
+              <exclude>src/main/resources/js/mermaid-*.js</exclude>
               <exclude>src/main/resources/css/gh-fork-ribbon.css</exclude>
             </excludes>
           </configuration>
