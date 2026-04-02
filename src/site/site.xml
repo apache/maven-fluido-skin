@@ -32,6 +32,7 @@ under the License.
 
   <custom>
     <fluidoSkin>
+      <darkThemeEnabled>true</darkThemeEnabled>
       <gitHub>
         <projectId>apache/${project.artifactId}</projectId>
         <ribbonOrientation>right</ribbonOrientation>
