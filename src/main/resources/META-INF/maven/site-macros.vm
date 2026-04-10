@@ -381,7 +381,7 @@ $indent     </ul>##
 #**##end
 #**##else
 #**#<a href="https://maven.apache.org/" class="builtBy" target="_blank">##
-#*  *#<img class="builtBy" alt="$text.get( "template.builtby" ) Maven" src="$relativePath/images/logos/maven-feather.png" />##
+#*  *#<img class="builtBy" alt="$text.get( "template.builtby" ) Maven" src="$relativePath/images/logos/MavenLogoLeaf.png" height="30px" width="90px""/>##
 #**#</a>
 #**##end
 #end
