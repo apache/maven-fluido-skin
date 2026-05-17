@@ -31,5 +31,5 @@ assert html.contains( '<li><a href="plugins.html">Plugins</a></li>' )
 assert html.contains( '<li><a href="https://www.apache.org/">Apache</a><span class="divider">/</span></li>' )
 
 // MSKINS-263 - image without class in banner
-assert html.contains('<div class="pull-left"><div id="bannerLeft"><h1><a href="https://www.apache.org/"><img src="../../../images/apache-maven-project.png" /></a></h1></div></div>')
-assert html.contains('<div class="pull-right"><div id="bannerRight"><h1><a href="../../../"><img src="../../../images/maven-logo-black-on-white.png" /></a></h1></div></div>')
+assert html.contains('<div class="pull-left"><div id="bannerLeft"><h1><a href="../../../"><img src="../../../images/apache-maven-project-light-theme.svg" style="width: 489px;height: 83px;" /></a></h1></div></div>')
+assert html.contains('<div class="pull-right"><div id="bannerRight"><h1><img src="../../../images/logos/MavenLogoLeafSmall.png" /></h1></div></div>')

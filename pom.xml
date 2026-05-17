@@ -23,7 +23,7 @@ under the License.
   <parent>
     <groupId>org.apache.maven.skins</groupId>
     <artifactId>maven-skins</artifactId>
-    <version>47</version>
+    <version>48</version>
     <relativePath />
   </parent>
 
@@ -99,13 +99,10 @@ under the License.
     <anchorjs.version>4.3.1</anchorjs.version>
     <bootstrap.version>2.3.2</bootstrap.version>
     <jquery.version>1.11.2</jquery.version>
-    <version.maven-site-plugin>3.21.0</version.maven-site-plugin>
     <project.build.outputTimestamp>2025-03-08T23:27:09Z</project.build.outputTimestamp>
     <!-- the following properties are used in ITs (which do not inherit anything from a common parent) -->
     <sitePluginVersion>${version.maven-site-plugin}</sitePluginVersion>
-    <projectInfoReportsPluginVersion>3.8.0</projectInfoReportsPluginVersion>
-
-    <version.maven-invoker-plugin>3.9.1</version.maven-invoker-plugin>
+    <projectInfoReportsPluginVersion>${version.maven-project-info-reports-plugin}</projectInfoReportsPluginVersion>
   </properties>
 
   <build>
@@ -171,12 +168,12 @@ under the License.
             </excludes>
           </configuration>
         </plugin>
-        <plugin>
+        <!-- <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.5.0</version>
-          <!-- workaround for https://issues.apache.org/jira/browse/MSKINS-235 -->
-        </plugin>
+        workaround for https://issues.apache.org/jira/browse/MSKINS-235
+        </plugin>-->
       </plugins>
     </pluginManagement>
     <plugins>
