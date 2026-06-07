@@ -149,7 +149,9 @@ under the License.
         <directory>${project.build.directory}/${project.build.finalName}</directory>
         <includes>
           <include>css/apache-maven-fluido-${project.version}.min.css</include>
+          <include>css/gh-fork-ribbon.min.css</include>
           <include>js/apache-maven-fluido-${project.version}.min.js</include>
+          <include>js/anchor-${anchorjs.version}.min.js</include>
         </includes>
       </resource>
     </resources>
@@ -192,6 +194,12 @@ under the License.
         <groupId>com.samaxes.maven</groupId>
         <artifactId>minify-maven-plugin</artifactId>
         <version>1.7.6</version>
+        <configuration>
+          <webappSourceDir>${basedir}/src/main/resources</webappSourceDir>
+          <cssSourceDir>css</cssSourceDir>
+          <jsSourceDir>js</jsSourceDir>
+          <jsEngine>CLOSURE</jsEngine>
+        </configuration>
         <!-- https://github.com/samaxes/minify-maven-plugin/pull/176 -->
         <dependencies>
           <dependency>
@@ -202,33 +210,53 @@ under the License.
         </dependencies>
         <executions>
           <execution>
-            <id>default-minify</id>
+            <id>minify-main-resources</id>
             <goals>
               <goal>minify</goal>
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-              <webappSourceDir>${basedir}/src/main/resources</webappSourceDir>
-              <cssSourceDir>css</cssSourceDir>
               <cssSourceFiles>
                 <cssSourceFile>bootstrap-${bootstrap.version}.css</cssSourceFile>
                 <cssSourceFile>bootstrap-${bootstrap.version}-responsive.css</cssSourceFile>
                 <cssSourceFile>maven-base.css</cssSourceFile>
                 <cssSourceFile>maven-theme.css</cssSourceFile>
                 <cssSourceFile>prettify.css</cssSourceFile>
-                <cssSourceFile>gh-fork-ribbon.css</cssSourceFile>
               </cssSourceFiles>
               <cssFinalFile>apache-maven-fluido-${project.version}.css</cssFinalFile>
-              <jsSourceDir>js</jsSourceDir>
               <jsSourceFiles>
                 <jsSourceFile>jquery-${jquery.version}.js</jsSourceFile>
                 <jsSourceFile>bootstrap-${bootstrap.version}.js</jsSourceFile>
                 <jsSourceFile>prettify.js</jsSourceFile>
                 <jsSourceFile>fluido.js</jsSourceFile>
-                <jsSourceFile>anchor-${anchorjs.version}.js</jsSourceFile>
               </jsSourceFiles>
               <jsFinalFile>apache-maven-fluido-${project.version}.js</jsFinalFile>
-              <jsEngine>CLOSURE</jsEngine>
+            </configuration>
+          </execution>
+          <execution>
+            <id>minify-anchor-resources</id>
+            <goals>
+              <goal>minify</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <jsSourceFiles>
+                <jsSourceFile>anchor-${anchorjs.version}.js</jsSourceFile>
+              </jsSourceFiles>
+              <jsFinalFile>anchor-${anchorjs.version}.js</jsFinalFile>
+            </configuration>
+          </execution>
+          <execution>
+            <id>minify-gh-fork-ribbon-resources</id>
+            <goals>
+              <goal>minify</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <cssSourceFiles>
+                <cssSourceFile>gh-fork-ribbon.css</cssSourceFile>
+              </cssSourceFiles>
+              <cssFinalFile>gh-fork-ribbon.css</cssFinalFile>
             </configuration>
           </execution>
         </executions>
