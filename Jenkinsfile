@@ -16,5 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+@Library('maven-jenkins-lib@feature/disable-shallow-clone') _
 
-asfMavenTlpStdBuild()
+asfMavenTlpStdBuild(fetchDepth: 0)
