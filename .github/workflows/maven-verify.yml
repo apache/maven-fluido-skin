@@ -27,4 +27,6 @@ jobs:
     uses: apache/maven-gh-actions-shared/.github/workflows/maven-verify.yml@v4
     with:
       ff-site-goal: '-DskipTests -P reporting package site site:stage'
+      # disable shallow cloning in order to run ITs related to SCM last modified date
+      fetch-depth: 0
     

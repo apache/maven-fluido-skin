@@ -451,6 +451,10 @@ ${esc.h}${esc.h}${esc.h} Expose last modified date instead of publish date
 Since version **2.2.0**, you can expose the last modified date of the Doxia source file (derived from SCM metadata, not from regular file system metadata) instead of the publish date.
 This requires a dedicated dependency on the [`doxia-site-scm-context` artifact](/doxia/doxia-sitetools/doxia-site-scm-context/index.html) and is only supported by Maven Site Plugin version 3.22.0 (leveraging Doxia Sitetools 2.1.0) or later.
 
+*Note: This only works correctly if you are not using [shallow clones](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt) for your SCM repository, 
+otherwise the last modified date will be the date of most recent commit not the actual last modified date of the file in the repository. 
+Further details in [Maven SCM Issue #1378](https://github.com/apache/maven-scm/issues/1378).*
+
 To add the dependency you need to add the following snippet to your `pom.xml`:
 
 ```xml

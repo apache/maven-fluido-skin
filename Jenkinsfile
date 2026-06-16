@@ -16,5 +16,5 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-asfMavenTlpStdBuild()
+// disable shallow cloning in order to run ITs related to SCM last modified date
+asfMavenTlpStdBuild(fetchDepth: 0)
