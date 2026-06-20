@@ -385,14 +385,9 @@ $indent     </ul>##
 ##
 #macro( builtByLogo $poweredBy )
 #**##if( $poweredBy )
-#**##foreach( $item in $poweredBy )
-#*  *##link( $item $null false "span" $null "builtBy" "builtBy" )
-
-#**##end
-#**##else
-#**#<a href="https://maven.apache.org/" class="builtBy" target="_blank">##
-#*  *#<img class="builtBy" alt="$text.get( "template.builtby" ) Maven" src="$relativePath/images/logos/MavenLogoLeaf.png" height="30px" width="90px""/>##
-#**#</a>
+#*  *##foreach( $item in $poweredBy )
+#*    *##link( $item $null false "span" $null "builtBy" "builtBy" )
+#*  *##end
 #**##end
 #end
 ##
