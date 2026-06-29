@@ -23,7 +23,7 @@ under the License.
   <parent>
     <groupId>org.apache.maven.skins</groupId>
     <artifactId>maven-skins</artifactId>
-    <version>48</version>
+    <version>49</version>
     <relativePath />
   </parent>
 
