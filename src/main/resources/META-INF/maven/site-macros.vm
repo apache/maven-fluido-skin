@@ -454,6 +454,7 @@ $indent     </ul>##
 ##
 #macro( forkMeOnGitHubHead )
 ##
+    <link rel="stylesheet" href="$relativePath/css/gh-fork-ribbon.css" />
 #*  *##set( $ribbonColor = "red" )
 #*  *##set( $definedRibbonColor = $site.getCustomChild( 'fluidoSkin.gitHub.ribbonColor' ) )
 ##
@@ -561,6 +562,7 @@ Apache Maven Doxia Site Renderer#if( $doxiaSiteRendererVersion ) $doxiaSiteRende
 ##
 #macro( anchorJs )
 #**##if ( $decoration.getCustomChild( 'fluidoSkin.anchorJs' ) )
+    <script src="$relativePath/js/anchor-@anchorjs.version@.min.js"></script>
     <script>
 #*  *##if ( $decoration.getCustomValue( 'fluidoSkin.anchorJs.cssSelector' ) && $decoration.getCustomValue( 'fluidoSkin.anchorJs.cssSelector' ) != '' )
 #*    *##set ( $cssSelector = '"' + $decoration.getCustomValue( 'fluidoSkin.anchorJs.cssSelector' ) + '"' )
