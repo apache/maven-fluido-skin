@@ -120,3 +120,7 @@ h5 > code {
 a > code {
   color: #0088cc;
 }
+
+.nav-header, .nav-list>li>a, .breadcrumb>li {
+  text-shadow: none;
+}
