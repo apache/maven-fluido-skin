@@ -24,9 +24,9 @@ date: 2011-11-07
 
 # Sample content
 
-Regular font\. _Italic_ font\. **Bold** font\. `Monospaced` font\.
+Regular font. _Italic_ font. **Bold** font. `Monospaced` font.
 
-<a id="Anchor"></a>Anchor\. Links: [to Anchor](#Anchor), [to http:](http://www.pixware.fr), [to https:](https://www.pixware.fr), [to file:](file:///tmp), [to ftp:](ftp://ftp.apache.org), [to e\-mail](mailto:dev@maven.apach.org), [to \.asc](http://unknown.asc), [to \.jpg](http://unknown.jpg), [to \.jpeg](http://unknown.jpeg), [to \.gif](http://unknown.gif), [to \.png](http://unknown.png), [to \.tar\.gz](http://unknown.tar.gz), [to \.zip](http://unknown.zip), [to \.md5](http://unknown.md5), [to \.sha1](http://unknown.sha1), [`from code to http`](http://www.pixware.fr)\.
+<a id="Anchor"></a>Anchor. Links: [to Anchor](#Anchor), [to http:](http://www.pixware.fr), [to https:](https://www.pixware.fr), [to file:](file:///tmp), [to ftp:](ftp://ftp.apache.org), [to e-mail](mailto:dev@maven.apach.org), [to .asc](http://unknown.asc), [to .jpg](http://unknown.jpg), [to .jpeg](http://unknown.jpeg), [to .gif](http://unknown.gif), [to .png](http://unknown.png), [to .tar.gz](http://unknown.tar.gz), [to .zip](http://unknown.zip), [to .md5](http://unknown.md5), [to .sha1](http://unknown.sha1), [`from code to http`](http://www.pixware.fr).
 
 Basic icons = Success, Warning, Error, Info:
 
@@ -36,18 +36,18 @@ Changes plugin legend = Add, Fix, Help, Remove, Update:
 
 ![Add](images/add\.gif)![Fix](images/fix\.gif)![Help](images/icon\_help\_sml\.gif)![Remove](images/remove\.gif)![Update](images/update\.gif)
 
-RSS icon \(shared across multiple plugins\):
+RSS icon (shared across multiple plugins):
 
 ![rss](images/rss\.png)
 # Section title
 
-## Sub\-section title
+## Sub-section title
 
-### Sub\-sub\-section title
+### Sub-sub-section title
 
-#### Sub\-sub\-sub\-section title
+#### Sub-sub-sub-section title
 
-##### Sub\-sub\-sub\-sub\-section title
+##### Sub-sub-sub-sub-section title
 
 List:
 
@@ -56,24 +56,24 @@ List:
 
     Paragraph contained in list item 2\.
 
-    - Sub\-list item 1\.
-    - Sub\-list item 2\.
+    - Sub-list item 1\.
+    - Sub-list item 2\.
 - List item 3\. Force end of list:
 
 Numbered list with multiple schemes: \[\[1\]\], \[\[a\]\], \[\[A\]\], \[\[i\]\], \[\[I\]\]
 
 1. Numbered item 1\.
-    1. Numbered item A\.
-    1. Numbered item B\.
+    1. Numbered item A.
+    1. Numbered item B.
 1. Numbered item 2\.
-    1. Numbered item a\.
-    1. Numbered item b\.
+    1. Numbered item a.
+    1. Numbered item b.
 1. Numbered item 3\.
-    1. Numbered item i\.
-    1. Numbered item i\.
+    1. Numbered item i.
+    1. Numbered item i.
 1. Numbered item 4\.
-    1. Numbered item I\.
-    1. Numbered item I\.
+    1. Numbered item I.
+    1. Numbered item I.
 
 <dl>
 <dt>Defined term 1</dt>
@@ -95,7 +95,7 @@ Verbatim text
 
 |header   |header   |header   |
 |:---:|:---|---:|
-|Centered cell 1,1|Left\-aligned cell 1,2|Right\-aligned cell 1,3|
+|Centered cell 1,1|Left-aligned cell 1,2|Right-aligned cell 1,3|
 |cell 2,1|cell 2,2|cell 2,3|
 |cell 3,1|cell 3,2|cell 3,3|
 |cell 4,1|cell 4,2|cell 4,3|
@@ -125,7 +125,7 @@ Horizontal line:
 ***
 
 Force line  
-break\.
+break.
 
-Non&nbsp;breaking&nbsp;space\.
+Non&nbsp;breaking&nbsp;space.
 
