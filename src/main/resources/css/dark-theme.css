@@ -1,0 +1,107 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: dark;
+        --area-background-color: #222;
+        --stripe-color: #333;
+        --border-color: #666;
+        --pre-color: #c1c1c1;
+        --text-color: #fff;
+        --link-color: #0088cc;
+        --code-color: #ff7b72;
+        --tag-color: #7cacf8;
+        --atn-color: #bf67ff;
+        --atv-color: #6dd58c;
+        --pun-color: #facc15;
+    }
+    .nav>li>a:hover, .nav>li>a:focus {
+        background-color: var(--stripe-color);
+        color: var(--text-color);
+    }
+    body {
+        color: var(--text-color);
+        background-color: unset;
+    }
+    .breadcrumb, .well {
+        background-color: var(--area-background-color);
+        color: var( --text-color);
+    }
+    .table-striped>tbody>tr:nth-child(even)>td,
+    .table-striped>tbody>tr:nth-child(even)>th,
+    li.L0, li.L2, li.L4, li.L6, li.L8, .zebra-striped {
+        background-color: var(--area-background-color);
+    }
+    .table-striped>tbody>tr:nth-child(odd)>td,
+    .table-striped>tbody>tr:nth-child(odd)>th,
+    li.L1, li.L3, li.L5, li.L7, li.L9 {
+        background-color: var(--stripe-color);
+    }
+    .table th, .table td {
+        border-top-color: var(--border-color);
+    }
+    pre.prettyprint, .well, .table-bordered, .table-bordered th, .table-bordered td {
+        border-color: var(--border-color);
+    }
+    pre {
+        background-color: var(--area-background-color);
+    }
+    .linenums > li, pre {
+        color: var(--pre-color);
+    }
+    li {
+        color: unset;
+    }
+    code, tt {
+        color: var(--code-color);
+        background-color: unset;
+        border-color: var(--border-color);
+    }
+    .tag {
+        color: var(--tag-color);
+    }
+    .atn, .typ {
+        color: var(--atn-color);
+    }
+    .atv, .str, .lit {
+        color: var(--atv-color);
+    }
+    .pln {
+        color: var(--text-color);
+    }
+    .com {
+        color: var(--code-color);
+    }
+    .pun, .opn, .clo {
+        color: var(--pun-color);
+    }
+    hr {
+        border-bottom-color: var(--border-color);
+        border-top-color: var(--border-color);
+    }
+    input[type="text"] {
+        background-color: var(--area-background-color);
+        border-color: var(--border-color);
+        color: var(--text-color);
+    }
+    [class^="icon-"], [class*=" icon-"] {
+        background-image: url(../img/glyphicons-halflings-white.png);
+    }
+}
