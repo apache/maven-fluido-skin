@@ -19,9 +19,31 @@ specific language governing permissions and limitations
 under the License.
 -->
 
-<skin xmlns="http://maven.apache.org/SKIN/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/SKIN/2.0.0 http://maven.apache.org/xsd/skin-2.0.0.xsd">
+<skin xmlns="http://maven.apache.org/SKIN/2.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SKIN/2.1.0 https://maven.apache.org/xsd/skin-2.1.0.xsd">
   <prerequisites>
-    <doxia-sitetools>2.0.0</doxia-sitetools>
+    <doxia-sitetools>2.1.0</doxia-sitetools>
   </prerequisites>
+  <resource-conditions>
+    <resource-condition>
+      <resource-name>js/anchor-${anchorjs.version}.min.js</resource-name>
+      <vtl-condition>custom.fluidoSkin.anchorJs</vtl-condition>
+    </resource-condition>
+    <resource-condition>
+      <resource-name>css/gh-fork-ribbon.min.css</resource-name>
+      <vtl-condition>custom.fluidoSkin.gitHub</vtl-condition>
+    </resource-condition>
+    <resource-condition>
+      <resource-name>images/profiles/pre-release.png</resource-name>
+      <vtl-condition>custom.fluidoSkin.profile == 'pre-release'</vtl-condition>
+    </resource-condition>
+    <resource-condition>
+      <resource-name>images/profiles/retired.png</resource-name>
+      <vtl-condition>custom.fluidoSkin.profile == 'retired'</vtl-condition>
+    </resource-condition>
+    <resource-condition>
+      <resource-name>images/profiles/sandbox.png</resource-name>
+      <vtl-condition>custom.fluidoSkin.profile == 'sandbox'</vtl-condition>
+    </resource-condition>
+  </resource-conditions>
 </skin>
