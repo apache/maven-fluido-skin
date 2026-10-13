@@ -215,18 +215,21 @@
 #*      *##mainMenu( $site.body.menus )
 #*      *##publishDate( "navigation-bottom" $site.publishDate $site.version )
           </nav>
+#*        *##set( $poweredByEnabled = $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.poweredByEnabled', 'true' ) ) && !$standalone )
+#*        *##if( $poweredByEnabled )
           <div class="well sidebar-nav">
-#*      *##if( $searchEnabled )
-#*        *##googleSearch( false )
-#*      *##end
+#*          *##if( $searchEnabled )
+#*          *##googleSearch( false )
+#*          *##end
             <div id="poweredBy">
-#*        *##facebookLike( $sideBarEnabled )
-              <div class="clear"></div>
-#*        *##followTwitter( $sideBarEnabled )
-              <div class="clear"></div>
-#*        *##builtByLogo( $site.poweredBy )
+#*          *##facebookLike( $sideBarEnabled )
+                <div class="clear"></div>
+#*          *##followTwitter( $sideBarEnabled )
+                <div class="clear"></div>
+#*          *##builtByLogo( $site.poweredBy )
             </div>
           </div>
+#*      *##end
         </header>
 #*    *##end
 ##
