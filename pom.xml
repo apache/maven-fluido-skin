@@ -85,8 +85,8 @@ under the License.
     <url>https://github.com/apache/maven-fluido-skin/issues</url>
   </issueManagement>
   <ciManagement>
-    <system>Jenkins</system>
-    <url>https://ci-maven.apache.org/job/Maven/job/maven-box/job/maven-fluido-skin/</url>
+    <system>GitHub</system>
+    <url>https://github.com/apache/maven-fluido-skin/actions</url>
   </ciManagement>
   <distributionManagement>
     <site>
