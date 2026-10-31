@@ -215,18 +215,22 @@
 #*      *##mainMenu( $site.body.menus )
 #*      *##publishDate( "navigation-bottom" $site.publishDate $site.version )
           </nav>
+## no empty box when nothing is configured for it
+#*      *##if( $searchEnabled || ( $site.getCustomChild( 'fluidoSkin.facebookLike' ) && $project.url )
+              || $site.getCustomChild( 'fluidoSkin.twitter.user' ) || ( $site.poweredBy && !$site.poweredBy.isEmpty() ) )
           <div class="well sidebar-nav">
-#*      *##if( $searchEnabled )
-#*        *##googleSearch( false )
-#*      *##end
+#*        *##if( $searchEnabled )
+#*          *##googleSearch( false )
+#*        *##end
             <div id="poweredBy">
-#*        *##facebookLike( $sideBarEnabled )
+#*          *##facebookLike( $sideBarEnabled )
               <div class="clear"></div>
-#*        *##followTwitter( $sideBarEnabled )
+#*          *##followTwitter( $sideBarEnabled )
               <div class="clear"></div>
-#*        *##builtByLogo( $site.poweredBy )
+#*          *##builtByLogo( $site.poweredBy )
             </div>
           </div>
+#*      *##end
         </header>
 #*    *##end
 ##
