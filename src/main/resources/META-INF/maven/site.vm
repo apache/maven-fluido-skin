@@ -32,9 +32,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="#if ( $locale.toString() )$locale.toLanguageTag()#{else}en#end">
   <head>
     <meta charset="${outputEncoding}" />
+## the page head may not declare a second charset; its viewport and generator replace the skin's own
+#**##set( $pageHead = "$!headContent" )
+#**##set( $pageHead = $pageHead.replaceAll( '(?i)<meta\s+charset\s*=[^>]*>\s*', '' ) )
+#**##if( !$pageHead.matches( '(?is).*<meta\s[^>]*name\s*=\s*.?viewport\b.*' ) )
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+#**##end
 ## put meta together
+#**##if( !$pageHead.matches( '(?is).*<meta\s[^>]*name\s*=\s*.?generator\b.*' ) )
     <meta name="generator" content="#generatedBy()" />
+#**##end
 #foreach( $author in $authors )
     <meta name="author" content="$esc.xml( $author )" />
 #end
@@ -50,7 +57,7 @@
 #**##if( $site.body.head )
 #*  *#$render.eval( $site.body.head )
 #**##end
-#**##if( $headContent )$headContent#end
+#**#$pageHead
 #**##googleAnalytics()
 #**##matomo()
 #**##forkMeOnGitHubHead()
