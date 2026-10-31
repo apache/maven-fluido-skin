@@ -32,4 +32,4 @@ assert html.contains( '<li><a href="https://www.apache.org/">Apache</a><span cla
 
 // MSKINS-263 - image without class in banner
 assert html.contains('<div class="pull-left"><div id="bannerLeft"><h1><a href="../../../"><img src="../../../images/apache-maven-project-light-theme.svg" style="width: 489px;height: 83px;" /></a></h1></div></div>')
-assert html.contains('<div class="pull-right"><div id="bannerRight"><h1><img src="../../../images/logos/MavenLogoLeafSmall.png" /></h1></div></div>')
+assert html.contains('<div class="pull-right"><div id="bannerRight"><h1><img src="../../../images/logos/MavenLogoLeaf.svg" style="width: 340px;height: 83px;" /></h1></div></div>')
