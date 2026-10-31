@@ -287,6 +287,8 @@ under the License.
                 </goals>
                 <configuration>
                   <cloneProjectsTo>none</cloneProjectsTo>
+                  <!-- own reports, or this run deletes the results of the integration-test execution before its verify -->
+                  <reportsDirectory>${project.build.directory}/invoker-reports-without-cloning</reportsDirectory>
                   <pomIncludes>
                     <pomInclude>modification-date/pom.xml</pomInclude>
                   </pomIncludes>
