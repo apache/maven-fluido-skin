@@ -35,6 +35,10 @@ under the License.
       <vtl-condition><![CDATA[#if( $site.getCustomChild( 'fluidoSkin.gitHub.projectId' ) )true#end]]></vtl-condition>
     </resource-condition>
     <resource-condition>
+      <resource-name>css/dark-theme.css</resource-name>
+      <vtl-condition><![CDATA[#if( $site.getCustomValue( 'fluidoSkin.darkThemeEnabled', 'false' ).equalsIgnoreCase( 'true' ) )true#end]]></vtl-condition>
+    </resource-condition>
+    <resource-condition>
       <resource-name>images/profiles/pre-release.png</resource-name>
       <vtl-condition><![CDATA[#if( $site.getCustomValue( 'fluidoSkin.profile', '' ).equalsIgnoreCase( 'pre-release' ) )true#end]]></vtl-condition>
     </resource-condition>
