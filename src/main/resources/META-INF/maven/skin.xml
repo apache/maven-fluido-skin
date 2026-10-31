@@ -24,26 +24,27 @@ under the License.
   <prerequisites>
     <doxia-sitetools>2.1.0</doxia-sitetools>
   </prerequisites>
+  <!-- each condition must render "true" for the resource to be copied -->
   <resource-conditions>
     <resource-condition>
-      <resource-name>js/anchor-${anchorjs.version}.min.js</resource-name>
-      <vtl-condition>custom.fluidoSkin.anchorJs</vtl-condition>
+      <resource-name>js/anchor-@anchorjs.version@.min.js</resource-name>
+      <vtl-condition><![CDATA[#if( $site.getCustomChild( 'fluidoSkin.anchorJs' ) )true#end]]></vtl-condition>
     </resource-condition>
     <resource-condition>
       <resource-name>css/gh-fork-ribbon.min.css</resource-name>
-      <vtl-condition>custom.fluidoSkin.gitHub</vtl-condition>
+      <vtl-condition><![CDATA[#if( $site.getCustomChild( 'fluidoSkin.gitHub.projectId' ) )true#end]]></vtl-condition>
     </resource-condition>
     <resource-condition>
       <resource-name>images/profiles/pre-release.png</resource-name>
-      <vtl-condition>custom.fluidoSkin.profile == 'pre-release'</vtl-condition>
+      <vtl-condition><![CDATA[#if( $site.getCustomValue( 'fluidoSkin.profile', '' ).equalsIgnoreCase( 'pre-release' ) )true#end]]></vtl-condition>
     </resource-condition>
     <resource-condition>
       <resource-name>images/profiles/retired.png</resource-name>
-      <vtl-condition>custom.fluidoSkin.profile == 'retired'</vtl-condition>
+      <vtl-condition><![CDATA[#if( $site.getCustomValue( 'fluidoSkin.profile', '' ).equalsIgnoreCase( 'retired' ) )true#end]]></vtl-condition>
     </resource-condition>
     <resource-condition>
       <resource-name>images/profiles/sandbox.png</resource-name>
-      <vtl-condition>custom.fluidoSkin.profile == 'sandbox'</vtl-condition>
+      <vtl-condition><![CDATA[#if( $site.getCustomValue( 'fluidoSkin.profile', '' ).equalsIgnoreCase( 'sandbox' ) )true#end]]></vtl-condition>
     </resource-condition>
   </resource-conditions>
 </skin>
