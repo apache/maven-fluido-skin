@@ -50,11 +50,12 @@
 #end
     <title>$esc.xml( $title )</title>
     <link rel="stylesheet" href="$relativePath/css/apache-maven-fluido-@project.version@.min.css" />
-    <link rel="stylesheet" href="$relativePath/css/site.css" />
-    <link rel="stylesheet" href="$relativePath/css/print.css" media="print" />
+## before site.css, so that a project's own styles can override the dark theme
 #if( $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.darkThemeEnabled', 'false' ) ) )
     <link rel="stylesheet" href="$relativePath/css/dark-theme.css" />
 #end
+    <link rel="stylesheet" href="$relativePath/css/site.css" />
+    <link rel="stylesheet" href="$relativePath/css/print.css" media="print" />
 #**##prjProfile()
     <script src="$relativePath/js/apache-maven-fluido-@project.version@.min.js"></script>
 #**##if( $site.body.head )

@@ -19,6 +19,8 @@
 
 String html = new File( basedir, "target/site/index.html" ).text
 assert html.contains( '<link rel="stylesheet" href="./css/dark-theme.css" />' )
+// a project's site.css comes later and can override the dark theme
+assert html.indexOf( './css/dark-theme.css' ) < html.indexOf( './css/site.css' )
 
 File css = new File( basedir, "target/site/css/dark-theme.css" )
 assert css.exists()
