@@ -453,8 +453,8 @@ $indent     </ul>##
 #end
 ##
 #macro( forkMeOnGitHubHead )
-##
-    <link rel="stylesheet" href="$relativePath/css/gh-fork-ribbon.css" />
+#**##if( $site.getCustomChild( 'fluidoSkin.gitHub.projectId' ) )
+    <link rel="stylesheet" href="$relativePath/css/gh-fork-ribbon.min.css" />
 #*  *##set( $ribbonColor = "red" )
 #*  *##set( $definedRibbonColor = $site.getCustomChild( 'fluidoSkin.gitHub.ribbonColor' ) )
 ##
@@ -466,6 +466,7 @@ $indent     </ul>##
 #*    *##set( $ribbonColor = $definedRibbonColor.getValue().toLowerCase() )
     <style>.github-fork-ribbon:before { background-color: $ribbonColor; }</style>
 #*  *##end
+#**##end
 #end
 ##
 #macro( forkMeOnGitHub )

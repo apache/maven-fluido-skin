@@ -22,3 +22,11 @@ String html = new File( basedir, "target/site/index.html" ).text
 // no search, social buttons or poweredBy configured: only the menu box, no empty one below it
 assert ( html =~ /class="well sidebar-nav"/ ).size() == 1
 assert !html.contains( 'id="poweredBy"' )
+
+// no GitHub ribbon and no profile configured: their resources are neither linked nor copied
+File site = new File( basedir, "target/site" )
+assert !html.contains( 'gh-fork-ribbon' )
+assert !new File( site, "css/gh-fork-ribbon.min.css" ).exists()
+for ( String profile : [ 'pre-release', 'retired', 'sandbox' ] ) {
+    assert !new File( site, "images/profiles/${profile}.png" ).exists()
+}
