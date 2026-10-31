@@ -20,3 +20,4 @@
 String html = new File( basedir, "target/site/index.html" ).text
 // the dark theme is opt-in
 assert !html.contains( 'dark-theme.css' )
+assert !new File( basedir, "target/site/css/dark-theme.css" ).exists()
