@@ -37,6 +37,24 @@ jQuery( document ).ready( function()
         } );
     }
 
+    // label each cell with its column heading, for the stacked tables on narrow screens (maven-base.css);
+    // only tables whose first row is a plain heading row, and only rows with one cell per heading
+    $( '.table-wrap > table' ).each( function() {
+        var rows = $( this ).find( '> thead > tr, > tbody > tr' );
+        var head = rows.first();
+        if ( head.children( 'td' ).length || !head.children( 'th' ).length || head.children( '[rowspan], [colspan]' ).length ) {
+            return;
+        }
+        var labels = head.children( 'th' ).map( function() { return $.trim( $( this ).text() ); } ).get();
+        head.addClass( 'table-head' );
+        rows.slice( 1 ).each( function() {
+            var cells = $( this ).children();
+            if ( cells.length === labels.length ) {
+                cells.each( function( i ) { $( this ).attr( 'data-label', labels[ i ] ); } );
+            }
+        } );
+    } );
+
 } );
 
 function asyncJs( url ) {
