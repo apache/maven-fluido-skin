@@ -346,63 +346,11 @@ As shown in [MojoHaus Maven plugins list](https://www.mojohaus.org/plugins.html)
 
 ${esc.h}${esc.h}${esc.h} <a id="Twitter_follow_button"></a>Twitter follow button
 
-Since version **1\.1**, fluido-skin supports the Twitter [follow button](https://dev.twitter.com/web/follow-button) to simplify its integration. Users must define:
-
-- `custom.fluidoSkin.twitter.user`: **required**, it is the Twitter id to suggest to follow;
-- `custom.fluidoSkin.twitter.showUser`: **optional**, flag to mark the user has to be shown (`false` by default);
-- `custom.fluidoSkin.twitter.showFollowers`: **optional**, flag to mark the followers ribbon has to be shown (`false` by default).
-
-    ```xml
-    <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
-      [...]
-      <custom>
-        <fluidoSkin>
-          <twitter>
-            <user>simonetripodi</user>
-            <showUser>true</showUser>
-            <showFollowers>true</showFollowers>
-          </twitter>
-        </fluidoSkin>
-      </custom>
-      [...]
-    </site>
-    ```
-
-    By default, it is rendered in the sidebar, if the topbar only is available it will be rendered there.
+Removed in **2\.2\.0**: the button loaded a script from a third-party host on every page view, while the [ASF privacy policy](https://privacy.apache.org/policies/privacy-policy-public.html) integrates social media plug-ins with a two-click method. The `twitter` configuration is ignored.
 
 ${esc.h}${esc.h}${esc.h} <a id="Facebook_like_button"></a>Facebook like button
 
-Since version **1\.2**, fluido-skin supports the Facebook [like](https://developers.facebook.com/docs/plugins/like-button) integration. Users can define similar option to Facebook SDK:
-
-- `custom.fluidoSkin.facebookLike.recommend`: **optional**, if set to `true` **Recommend** button will be rendered instead of **Like**
-- `custom.fluidoSkin.facebookLike.shareButton`: **optional**, if set to `true` **Share Button** will be included.
-- `custom.fluidoSkin.facebookLike.layout`: **optional** facebook layout, Can be one of:
-    - `standard`
-    - `button_count`: default if sidebar is not enabled
-    - `button`
-    - `box_count`: default if sidebar is enabled
-
-        ```xml
-        <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
-          [...]
-          <custom>
-            <fluidoSkin>
-              <facebookLike>
-                <recommend>true/false</recommend>
-                <shareButton>true/false</shareButton>
-                <layout>box_count</layout>
-              </facebookLike>
-            </fluidoSkin>
-          </custom>
-          [...]
-        </site>
-        ```
-
-    By default, it is rendered in the sidebar, if the topbar only is available it will be rendered there.
-
-    **Note** in order the Facebook like button appears, `${project.url}` property **must** be set in the `pom.xml`!
+Removed in **2\.2\.0**, for the same reason. The `facebookLike` configuration is ignored.
 
 ${esc.h}${esc.h}${esc.h} <a id="Flattr_button"></a>Flattr button
 
