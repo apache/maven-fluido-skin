@@ -223,9 +223,10 @@ under the License.
               <cssSourceFiles>
                 <cssSourceFile>bootstrap-${bootstrap.version}.css</cssSourceFile>
                 <cssSourceFile>bootstrap-${bootstrap.version}-responsive.css</cssSourceFile>
+                <!-- before the skin's own styles, so that they can adjust the theme's colours -->
+                <cssSourceFile>highlight-github-${highlightjs.version}.min.css</cssSourceFile>
                 <cssSourceFile>maven-base.css</cssSourceFile>
                 <cssSourceFile>maven-theme.css</cssSourceFile>
-                <cssSourceFile>highlight-github-${highlightjs.version}.min.css</cssSourceFile>
               </cssSourceFiles>
               <cssFinalFile>apache-maven-fluido-${project.version}.css</cssFinalFile>
               <jsSourceFiles>
