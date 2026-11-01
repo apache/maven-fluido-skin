@@ -97,6 +97,7 @@ under the License.
 
   <properties>
     <anchorjs.version>4.3.1</anchorjs.version>
+    <highlightjs.version>11.12.0</highlightjs.version>
     <bootstrap.version>2.3.2</bootstrap.version>
     <jquery.version>1.11.2</jquery.version>
     <project.build.outputTimestamp>2025-03-08T23:27:09Z</project.build.outputTimestamp>
@@ -135,12 +136,13 @@ under the License.
         <!-- add skin-info -->
       </resource>
 
-      <!-- include the print.css -->
+      <!-- include the print.css, the dark theme and the already minified highlight.js bundle -->
       <resource>
         <directory>${basedir}/src/main/resources</directory>
         <includes>
           <include>css/print.css</include>
           <include>css/dark-theme.css</include>
+          <include>js/highlight-${highlightjs.version}.min.js</include>
         </includes>
       </resource>
 
@@ -164,7 +166,8 @@ under the License.
           <configuration>
             <inputExcludes combine.children="append">
               <exclude>src/main/resources/fonts/glyphicons-halflings-regular.svg</exclude>
-              <exclude>src/main/resources/js/prettify.js</exclude>
+              <exclude>src/main/resources/js/highlight-*.min.js</exclude>
+              <exclude>src/main/resources/css/highlight-*.min.css</exclude>
               <exclude>src/main/resources/js/jquery-*.js</exclude>
               <exclude>src/main/resources/js/anchor-*.js</exclude>
               <exclude>src/main/resources/css/gh-fork-ribbon.css</exclude>
@@ -222,13 +225,12 @@ under the License.
                 <cssSourceFile>bootstrap-${bootstrap.version}-responsive.css</cssSourceFile>
                 <cssSourceFile>maven-base.css</cssSourceFile>
                 <cssSourceFile>maven-theme.css</cssSourceFile>
-                <cssSourceFile>prettify.css</cssSourceFile>
+                <cssSourceFile>highlight-github-${highlightjs.version}.min.css</cssSourceFile>
               </cssSourceFiles>
               <cssFinalFile>apache-maven-fluido-${project.version}.css</cssFinalFile>
               <jsSourceFiles>
                 <jsSourceFile>jquery-${jquery.version}.js</jsSourceFile>
                 <jsSourceFile>bootstrap-${bootstrap.version}.js</jsSourceFile>
-                <jsSourceFile>prettify.js</jsSourceFile>
                 <jsSourceFile>fluido.js</jsSourceFile>
               </jsSourceFiles>
               <jsFinalFile>apache-maven-fluido-${project.version}.js</jsFinalFile>

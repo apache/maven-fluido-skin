@@ -22,7 +22,20 @@ jQuery( document ).ready( function()
     // initialize the dropdown menu if found
     $( '.topbar' ).dropdown();
 
-    prettyPrint();
+    // highlight the code blocks that site.vm marked; line numbers where sourceLineNumbersEnabled added linenums
+    if ( window.hljs ) {
+        $( 'pre.prettyprint > code' ).each( function() {
+            // a language highlight.js does not know (Markdown ```unknown) is detected instead, as prettify did
+            var lang = ( this.className.match( /\blanguage-(\S+)/ ) || [] )[ 1 ];
+            if ( lang && !hljs.getLanguage( lang ) ) {
+                $( this ).removeClass( 'language-' + lang );
+            }
+            hljs.highlightElement( this );
+            if ( hljs.lineNumbersBlock && $( this ).parent().hasClass( 'linenums' ) ) {
+                hljs.lineNumbersBlock( this, { singleLine: true } );
+            }
+        } );
+    }
 
 } );
 
