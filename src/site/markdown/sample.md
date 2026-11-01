@@ -83,7 +83,7 @@ Numbered list with multiple schemes: \[\[1\]\], \[\[a\]\], \[\[A\]\], \[\[i\]\],
 <dt>Defined term 2</dt>
 <dd>of definition list.
 
-```unknown
+```text
 Verbatim text
                         in a box        
 ```
