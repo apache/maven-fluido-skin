@@ -244,7 +244,7 @@
 #*        *##set( $sourceStyle = "prettyprint" )
 #*      *##end
 ##
-#*      *##if ( $bodyContent )$bodyContent.replaceAll( '<pre>(<code[ >](?!.*class=\"nohighlight nocode\"))', '<pre class="' + $sourceStyle + '">' + $esc.d + '1' ).replace( 'class="bodyTable"', 'class="table table-striped"' ).replace( 'class="bodyTable bodyTableBorder"', 'class="table table-bordered table-striped"' )#end
+#*      *##if ( $bodyContent )$bodyContent.replaceAll( '<pre>(<code[ >](?!.*class=\"nohighlight nocode\"))', '<pre class="' + $sourceStyle + '">' + $esc.d + '1' ).replace( 'class="bodyTable"', 'class="table table-striped"' ).replace( 'class="bodyTable bodyTableBorder"', 'class="table table-bordered table-striped"' ).replace( '<table', '<div class="table-wrap" tabindex="0"><table' ).replace( '</table>', '</table></div>' )#end
         </main>
 #*    *##if( $sideBarEnabled )
       </div>

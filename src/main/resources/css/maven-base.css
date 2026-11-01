@@ -30,6 +30,7 @@ section > p,
 section > dt,
 section > dl,
 section > table.table,
+section > .table-wrap,
 section > pre {
   margin-right: 7px;
   margin-left: 7px;
@@ -37,4 +38,51 @@ section > pre {
 
 #poweredBy {
   text-align: center;
+}
+
+/* a wide table scrolls in its own box, reachable by keyboard (site.vm adds tabindex), instead of widening the page */
+.table-wrap {
+  overflow-x: auto;
+}
+
+@media (max-width: 767px) {
+  /* long identifiers, paths and URLs wrap instead of pushing the page sideways */
+  #bodyColumn {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  /* inline code only: a code block keeps its line breaks and indentation */
+  #bodyColumn :not(pre) > code {
+    white-space: normal;
+  }
+  /* each table row becomes a card with one cell per line; fluido.js labels the cells with their column heading
+     and hides the heading row, which stays visible as a legend without JavaScript */
+  .table-wrap > table,
+  .table-wrap > table > thead,
+  .table-wrap > table > tbody,
+  .table-wrap > table > * > tr,
+  .table-wrap > table > * > tr > th,
+  .table-wrap > table > * > tr > td {
+    display: block;
+    width: auto;
+  }
+  .table-wrap > table > * > tr {
+    padding: 4px 0;
+    border-top: 1px solid #ddd;
+  }
+  .table-wrap > table > * > tr > th,
+  .table-wrap > table > * > tr > td {
+    padding: 2px 8px;
+    border-top: 0;
+  }
+  .table-wrap > table > * > tr.table-head {
+    display: none;
+  }
+  .table-wrap td[data-label]:before {
+    content: attr(data-label);
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    color: #555;
+  }
 }
