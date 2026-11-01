@@ -19,33 +19,14 @@
 
 File buildLog = new File( basedir, 'build.log' )
 assert buildLog.exists()
-assert buildLog.text.contains('[INFO] BUILD SUCCESS')
+assert buildLog.text.contains( '[INFO] BUILD SUCCESS' )
 
-File index = new File( basedir, 'sidebar-fb-like-share/target/site/index.html')
-assert index.exists()
-assert index.text.contains('<div id="fb-root"></div>')
-assert index.text.contains('<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en/sdk.js#xfbml=1&version=v6.0"></script>')
-assert index.text.contains(
-        '<div class="fb-like" style="border:none; margin-top: 10px" data-href="http://maven.apache.org/skins/maven-fluido-skin/mskins-161/" data-layout="box_count" data-show-faces="false" data-action="like" data-share="true"></div>')
-
-index = new File( basedir, 'sidebar-fb-recommend-share/target/site/index.html')
-assert index.exists()
-assert index.text.contains('<div id="fb-root"></div>')
-assert index.text.contains('<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en/sdk.js#xfbml=1&version=v6.0"></script>')
-assert index.text.contains(
-        '<div class="fb-like" style="border:none; margin-top: 10px" data-href="http://maven.apache.org/skins/maven-fluido-skin/mskins-161/" data-layout="button" data-show-faces="false" data-action="recommend" data-share="true"></div>')
-
-index = new File( basedir, 'topbar-fb-like-share/target/site/index.html')
-assert index.exists()
-assert index.text.contains('<div id="fb-root"></div>')
-assert index.text.contains('<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en/sdk.js#xfbml=1&version=v6.0"></script>')
-assert index.text.contains(
-        '<div class="fb-like pull-right" style="border:none; margin-top: 10px" data-href="http://maven.apache.org/skins/maven-fluido-skin/mskins-161/" data-layout="button_count" data-show-faces="false" data-action="like" data-share="true"></div>')
-
-index = new File( basedir, 'topbar-fb-recommend-share/target/site/index.html')
-assert index.exists()
-assert index.text.contains('<div id="fb-root"></div>')
-assert index.text.contains('<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en/sdk.js#xfbml=1&version=v6.0"></script>')
-assert index.text.contains(
-        '<div class="fb-like pull-right" style="border:none; margin-top: 10px" data-href="http://maven.apache.org/skins/maven-fluido-skin/mskins-161/" data-layout="button_count" data-show-faces="false" data-action="recommend" data-share="true"></div>')
-
+for ( String module : [ 'sidebar-fb-like-share', 'sidebar-fb-recommend-share', 'topbar-fb-like-share', 'topbar-fb-recommend-share' ] ) {
+    String html = new File( basedir, module + '/target/site/index.html' ).text
+    // Facebook and Twitter buttons were removed: nothing from their hosts is loaded or rendered
+    assert !html.contains( 'connect.facebook.net' )
+    assert !html.contains( 'fb-root' )
+    assert !html.contains( 'class="fb-like' )
+    assert !html.contains( 'platform.twitter.com' )
+    assert !html.contains( 'twitter-follow-button' )
+}

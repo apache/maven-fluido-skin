@@ -19,12 +19,12 @@
 
 File buildLog = new File( basedir, 'build.log' )
 assert buildLog.exists()
-assert buildLog.text.contains('[INFO] BUILD SUCCESS')
+assert buildLog.text.contains( '[INFO] BUILD SUCCESS' )
 
-File index = new File( basedir, 'target/site/index.html')
-assert index.exists()
-assert index.text.contains('<div id="fb-root"></div>')
-assert index.text.contains('<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en/sdk.js#xfbml=1&version=v6.0"></script>')
-assert index.text.contains(
-        '<div class="fb-like" style="border:none; margin-top: 10px" data-href="https://maven.apache.org/skins/maven-fluido-skin/mskins-33/" data-layout="box_count" data-show-faces="false" data-action="like" data-share="false"></div>')
-
+String html = new File( basedir, 'target/site/index.html' ).text
+// Facebook and Twitter buttons were removed: nothing from their hosts is loaded or rendered
+assert !html.contains( 'connect.facebook.net' )
+assert !html.contains( 'fb-root' )
+assert !html.contains( 'class="fb-like' )
+assert !html.contains( 'platform.twitter.com' )
+assert !html.contains( 'twitter-follow-button' )

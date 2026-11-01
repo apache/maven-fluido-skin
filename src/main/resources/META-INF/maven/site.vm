@@ -74,7 +74,6 @@
   <body>
 #**##end
 #**##forkMeOnGitHub()
-#**##facebookLoadSDK()
 ##
 #**##set( $sideBarEnabled = $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.sideBarEnabled', 'true' ) ) && !$standalone )
 #**##set( $searchEnabled = $site.getCustomChild( 'fluidoSkin.googleSearch' )
@@ -158,11 +157,6 @@
 #*        *##googleSearch( true )
 #*      *##end
 ##
-#*      *##if( !$sideBarEnabled )
-#*        *##facebookLike( $sideBarEnabled )
-#*        *##followTwitter( $sideBarEnabled )
-#*      *##end
-##
 ##        ## MSKINS-31
 #*      *##if( $site.body
               && $site.body.links
@@ -228,17 +222,12 @@
 #*      *##publishDate( "navigation-bottom" $site.publishDate $site.version )
           </nav>
 ## no empty box when nothing is configured for it
-#*      *##if( $searchEnabled || ( $site.getCustomChild( 'fluidoSkin.facebookLike' ) && $project.url )
-              || $site.getCustomChild( 'fluidoSkin.twitter.user' ) || ( $site.poweredBy && !$site.poweredBy.isEmpty() ) )
+#*      *##if( $searchEnabled || ( $site.poweredBy && !$site.poweredBy.isEmpty() ) )
           <div class="well sidebar-nav">
 #*        *##if( $searchEnabled )
 #*          *##googleSearch( false )
 #*        *##end
             <div id="poweredBy">
-#*          *##facebookLike( $sideBarEnabled )
-              <div class="clear"></div>
-#*          *##followTwitter( $sideBarEnabled )
-              <div class="clear"></div>
 #*          *##builtByLogo( $site.poweredBy )
             </div>
           </div>
