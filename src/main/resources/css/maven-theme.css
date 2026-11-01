@@ -125,6 +125,20 @@ pre.prettyprint code.hljs {
   background: transparent;
   padding: 0;
 }
+/* GitHub theme colours that fall below 4.5:1 on the #f5f5f5 code background, darkened to pass (WCAG 1.4.3) */
+.hljs-doctag, .hljs-keyword, .hljs-meta .hljs-keyword, .hljs-template-tag, .hljs-template-variable, .hljs-type,
+.hljs-variable.language_ {
+  color: #c93643;
+}
+.hljs-built_in, .hljs-symbol {
+  color: #bb5003;
+}
+.hljs-code, .hljs-comment, .hljs-formula {
+  color: #5f6872;
+}
+.hljs-name, .hljs-quote, .hljs-selector-pseudo, .hljs-selector-tag, .hljs-addition {
+  color: #208138;
+}
 /* line numbers (sourceLineNumbersEnabled); the plugin injects .hljs-ln td { padding: 0 } at runtime, so the cell
    rules below need the higher specificity */
 .hljs-ln {
