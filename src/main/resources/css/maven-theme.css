@@ -17,11 +17,6 @@
  * under the License.
  */
 
-a.newWindow {
-  background: url('../images/window-new.png') right center no-repeat;
-  padding-right: 18px;
-}
-
 li.none {
   list-style: none;
 }
