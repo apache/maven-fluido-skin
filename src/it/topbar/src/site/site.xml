@@ -31,6 +31,8 @@
     <version>${skinVersion}</version>
   </skin>
 
+  <edit>https://github.com/apache/maven-fluido-skin/tree/master/src/it/topbar/</edit>
+
   <!-- START SNIPPET: skin-custom-config -->
   <custom>
     <fluidoSkin>
@@ -55,7 +57,6 @@
   <body>
     <breadcrumbs>
       <item name="Apache Maven Fluido Skin"  href="https://maven.apache.org/skins/maven-fluido-skin/index.html" />
-      <item name="Maven Fluido Skin ITs"  href="https://maven.apache.org/skins/maven-fluido-skin/ITs.html" />
     </breadcrumbs>
     <links>
       <item name="Just Test" href="http://nowhere.com/"/>
