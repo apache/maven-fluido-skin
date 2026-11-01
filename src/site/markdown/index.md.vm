@@ -259,7 +259,7 @@ External links are either rendered in the sidebar or the topbar. When both sideb
 
 ${esc.h}${esc.h}${esc.h} <a id="Source_code_line_numbers"></a>Source code line numbers
 
-Source code sections are enhanced by [Google Code Prettify](https://github.com/google/code-prettify), users can optionally enable line numbers rendering (disabled by default):
+Source code sections are highlighted by [highlight.js](https://highlightjs.org/) (since **2\.2\.0**; earlier versions used Google Code Prettify), with grammars for XML, Java, Bash/shell, JSON, properties, Groovy and JavaScript; a block that names no language is detected among them. Users can optionally enable line numbers rendering (disabled by default):
 
 ```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

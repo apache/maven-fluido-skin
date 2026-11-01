@@ -124,3 +124,30 @@ a > code {
 .nav-header, .nav-list>li>a, .breadcrumb>li {
   text-shadow: none;
 }
+
+/* highlight.js inside the code blocks site.vm marks: keep the block's own background and padding */
+pre.prettyprint code.hljs {
+  background: transparent;
+  padding: 0;
+}
+/* line numbers (sourceLineNumbersEnabled); the plugin injects .hljs-ln td { padding: 0 } at runtime, so the cell
+   rules below need the higher specificity */
+.hljs-ln {
+  border-collapse: collapse;
+}
+.hljs-ln td {
+  padding: 0;
+  border: 0;
+  vertical-align: top;
+}
+pre .hljs-ln td.hljs-ln-numbers {
+  padding-right: .5em;
+  border-right: 1px solid #ddd;
+  color: #999;
+  text-align: right;
+  -webkit-user-select: none;
+  user-select: none;
+}
+pre .hljs-ln td.hljs-ln-code {
+  padding-left: .75em;
+}
