@@ -160,3 +160,9 @@ pre .hljs-ln td.hljs-ln-numbers {
 pre .hljs-ln td.hljs-ln-code {
   padding-left: .75em;
 }
+
+/* links in lists are only 16px high; 24px between list items keeps neighbouring links far enough apart to tap
+   (WCAG 2.5.8) */
+#bodyColumn li {
+  padding: 2px 0;
+}
