@@ -31,8 +31,8 @@ assert html.contains( '<li><a href="plugins.html">Plugins</a></li>' )
 assert html.contains( '<li><a href="https://www.apache.org/">Apache</a><span class="divider">/</span></li>' )
 
 // MSKINS-263 - image without class in banner
-assert html.contains('<div class="pull-left"><div id="bannerLeft"><h1><a href="../../../"><img src="../../../images/apache-maven-project-light-theme.svg" style="width: 489px;height: 83px;" /></a></h1></div></div>')
-assert html.contains('<div class="pull-right"><div id="bannerRight"><h1><img src="../../../images/logos/MavenLogoLeaf.svg" style="width: 340px;height: 83px;" /></h1></div></div>')
+assert html.contains('<div class="pull-left"><div id="bannerLeft"><h1><a href="../../../"><img src="../../../images/apache-maven-project-light-theme.svg" alt="Apache Maven Fluido Skin IT, topbar layout" style="width: 489px;height: 83px;" /></a></h1></div></div>')
+assert html.contains('<div class="pull-right"><div id="bannerRight"><h1><img src="../../../images/logos/MavenLogoLeaf.svg" alt="" style="width: 340px;height: 83px;" /></h1></div></div>')
 
 // edit link after the page title: the SVG icon, copied with the site
 assert html =~ /<a href="[^"]+"><img src="\.\/images\/edit\.svg" alt="Edit" width="14" height="14" \/><\/a><\/li>/

@@ -35,7 +35,7 @@
     <image src="images/apache-maven-project-2.png" width="473px" height="93px" style="border: 0" />
   </bannerLeft>
 
-  <bannerRight href="http://www.apache.org">
+  <bannerRight name="Apache" href="http://www.apache.org">
     <image src="images/apache-maven-project-2.png" width="473px" height="93px" style="border: 1" />
   </bannerRight>
 
