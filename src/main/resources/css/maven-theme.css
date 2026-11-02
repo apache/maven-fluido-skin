@@ -178,6 +178,14 @@ pre .hljs-ln td.hljs-ln-code {
   padding: 2px 0;
 }
 
+/* site.vm puts a decorative banner in a div instead of an empty h1; give it the h1's box so the banners stay aligned */
+#banner .banner-decoration {
+  margin: 10px 0;
+  font-size: 38.5px;
+  font-weight: bold;
+  line-height: 40px;
+}
+
 /* on phones the right banner sits below the left one and pushes the page down; keep only the left one */
 @media (max-width: 767px) {
   #banner .pull-left:not(:empty) + .pull-right {
