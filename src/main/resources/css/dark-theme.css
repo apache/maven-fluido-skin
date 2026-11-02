@@ -28,6 +28,13 @@
         --link-color: #0088cc;
         --code-color: #ff7b72;
     }
+    /* the light theme's darker link and heading colours are too dark on a dark background */
+    a, a > code {
+        color: var(--link-color);
+    }
+    .nav-header, .breadcrumb>.active {
+        color: #999;
+    }
     .nav>li>a:hover, .nav>li>a:focus {
         background-color: var(--stripe-color);
         color: var(--text-color);
