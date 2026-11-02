@@ -155,7 +155,12 @@
 #*  *##else
 #*    *##set( $bannerAlt = "" )
 #*  *##end
-#*  *#<div id="$id"><h1>#link( $banner $null false $null "set" $null "" )</h1></div>##
+#*  *##if( $banner.name || $banner.href || $banner.image.alt )
+#*    *#<div id="$id"><h1>#link( $banner $null false $null "set" $null "" )</h1></div>##
+#*  *##else
+## an unlinked image without a name or alt text is decorative: no heading, so screen readers do not announce an empty one
+#*    *#<div id="$id"><div class="banner-decoration">#link( $banner $null false $null "set" $null "" )</div></div>##
+#*  *##end
 #*  *##set( $inBanner = false )
 #**##end
 #end
