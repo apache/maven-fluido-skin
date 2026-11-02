@@ -111,9 +111,20 @@ h5 > code {
   text-align: revert;
 }
 
-/* linked code must be styled in same color as plain links */
-a > code {
-  color: #0088cc;
+/* Bootstrap's #0088cc links reach 3.9:1 on white and 3.6:1 on the grey sidebar, its #999 headings 2.6:1; these
+   reach 4.5:1 on both (WCAG 1.4.3). Linked code must be styled in same color as plain links. */
+a, a > code {
+  color: #006da3;
+}
+.nav-header, .breadcrumb>.active {
+  color: #6c6c6c;
+}
+.nav-list>.active>a, .nav-list>.active>a:hover, .nav-list>.active>a:focus {
+  background-color: #006da3;
+}
+/* the darker blue is too close to the body text to mark links by colour alone (WCAG 1.4.1) */
+#bodyColumn a:not(.btn) {
+  text-decoration: underline;
 }
 
 .nav-header, .nav-list>li>a, .breadcrumb>li {
