@@ -209,6 +209,10 @@
           </ul>
         </div>
 #*    *##end
+#*    *##if( $sideBarEnabled )
+## on phones the menu comes after the content, so this link at the top leads to it (maven-base.css shows it there only)
+        <p class="menu-jump"><a href="#leftColumn">Menu</a></p>
+#*    *##end
       </header>
 ##
 #*    *##if( $sideBarEnabled )
@@ -232,9 +236,13 @@
 #*    *##if( $sideBarEnabled )
         <header id="leftColumn" class="$leftColumnClass">
           <nav class="well sidebar-nav">
+## open by default, so the menu stays usable without JavaScript; fluido.js collapses it on phones
+            <details class="sidebar-menu" open>
+              <summary>Menu</summary>
 #*      *##publishDate( "navigation-top" $site.publishDate $site.version )
 #*      *##mainMenu( $site.body.menus )
 #*      *##publishDate( "navigation-bottom" $site.publishDate $site.version )
+            </details>
           </nav>
 ## no empty box when nothing is configured for it
 #*      *##if( $searchEnabled || ( $site.poweredBy && !$site.poweredBy.isEmpty() ) )

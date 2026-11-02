@@ -33,3 +33,8 @@ assert html.contains( '<li><a href="https://www.apache.org/">Apache</a><span cla
 // MSKINS-263 - image without class in banner
 assert html.contains('<div class="pull-left"><div id="bannerLeft"><h1><a href="../../../"><img src="../../../images/apache-maven-project-light-theme.svg" alt="Apache Maven Fluido Skin IT, sidebar layout" style="width: 489px;height: 83px;" /></a></h1></div></div>')
 assert html.contains('<div class="pull-right"><div id="bannerRight"><div class="banner-decoration"><img src="../../../images/logos/MavenLogoLeaf.svg" alt="" style="width: 340px;height: 83px;" /></div></div></div>')
+
+// the side menu collapses on phones: open by default, with a link at the top that leads to it
+assert html.contains( '<details class="sidebar-menu" open>' )
+assert html.contains( '<summary>Menu</summary>' )
+assert html.contains( '<p class="menu-jump"><a href="#leftColumn">Menu</a></p>' )

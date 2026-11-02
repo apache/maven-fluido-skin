@@ -55,6 +55,21 @@ jQuery( document ).ready( function()
         } );
     } );
 
+    // the side menu starts collapsed on phones, where maven-base.css shows the summary that opens it, and is
+    // opened again on wider screens, where the summary is hidden; the link at the top of the page opens it too
+    var menu = $( 'details.sidebar-menu' );
+    var phone = window.matchMedia ? window.matchMedia( '(max-width: 767px)' ) : null;
+    if ( menu.length && phone ) {
+        var collapseOnPhone = function() { menu.prop( 'open', !phone.matches ); };
+        collapseOnPhone();
+        if ( phone.addEventListener ) {
+            phone.addEventListener( 'change', collapseOnPhone );
+        } else if ( phone.addListener ) {
+            phone.addListener( collapseOnPhone );
+        }
+    }
+    $( '.menu-jump a' ).on( 'click', function() { menu.prop( 'open', true ); } );
+
 } );
 
 function asyncJs( url ) {
