@@ -38,3 +38,14 @@ section > pre {
 #poweredBy {
   text-align: center;
 }
+
+/* site.vm puts the page content before the menu, so that it comes first on a phone; from 768 px wide the menu goes
+   back to the left. The gap between the columns stays the one Bootstrap computes for each width. */
+@media (min-width: 768px) {
+  .row-fluid > #bodyColumn {
+    float: right;
+  }
+  .row-fluid > #leftColumn {
+    margin-left: 0;
+  }
+}
