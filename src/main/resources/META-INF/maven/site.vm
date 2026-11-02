@@ -215,6 +215,21 @@
 #*      *##set( $leftColumnClass = $site.getCustomValue( 'fluidoSkin.leftColumnClass', 'span2' ) )
 ##
       <div class="row-fluid">
+#*    *##end
+## the page content comes before the menu, so that it comes first on a phone; maven-base.css keeps the menu on the left
+##
+#*    *##set( $bodyColumnClass = $site.getCustomValue( 'fluidoSkin.bodyColumnClass', 'span10' ) )
+##
+        <main id="bodyColumn"#if( $sideBarEnabled ) class="$bodyColumnClass"#end>
+#*      *##if( $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.sourceLineNumbersEnabled', 'false' ) ) )
+#*        *##set( $sourceStyle = "prettyprint linenums" )
+#*      *##else
+#*        *##set( $sourceStyle = "prettyprint" )
+#*      *##end
+##
+#*      *##if ( $bodyContent )$bodyContent.replaceAll( '<pre>(<code[ >](?!.*class=\"nohighlight nocode\"))', '<pre class="' + $sourceStyle + '">' + $esc.d + '1' ).replace( 'class="bodyTable"', 'class="table table-striped"' ).replace( 'class="bodyTable bodyTableBorder"', 'class="table table-bordered table-striped"' )#end
+        </main>
+#*    *##if( $sideBarEnabled )
         <header id="leftColumn" class="$leftColumnClass">
           <nav class="well sidebar-nav">
 #*      *##publishDate( "navigation-top" $site.publishDate $site.version )
@@ -233,20 +248,6 @@
           </div>
 #*      *##end
         </header>
-#*    *##end
-##
-#*    *##set( $bodyColumnClass = $site.getCustomValue( 'fluidoSkin.bodyColumnClass', 'span10' ) )
-##
-        <main id="bodyColumn"#if( $sideBarEnabled ) class="$bodyColumnClass"#end>
-#*      *##if( $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.sourceLineNumbersEnabled', 'false' ) ) )
-#*        *##set( $sourceStyle = "prettyprint linenums" )
-#*      *##else
-#*        *##set( $sourceStyle = "prettyprint" )
-#*      *##end
-##
-#*      *##if ( $bodyContent )$bodyContent.replaceAll( '<pre>(<code[ >](?!.*class=\"nohighlight nocode\"))', '<pre class="' + $sourceStyle + '">' + $esc.d + '1' ).replace( 'class="bodyTable"', 'class="table table-striped"' ).replace( 'class="bodyTable bodyTableBorder"', 'class="table table-bordered table-striped"' )#end
-        </main>
-#*    *##if( $sideBarEnabled )
       </div>
 #*    *##end
     </div>
