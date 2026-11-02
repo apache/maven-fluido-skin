@@ -38,3 +38,7 @@ assert html.contains('<div class="pull-right"><div id="bannerRight"><div class="
 assert html =~ /<a href="[^"]+"><img src="\.\/images\/edit\.svg" alt="Edit" width="14" height="14" \/><\/a><\/li>/
 assert new File( basedir, "target/site/images/edit.svg" ).exists()
 assert !new File( basedir, "target/site/images/accessories-text-editor.png" ).exists()
+
+// no side menu, so nothing to collapse or jump to
+assert !html.contains( 'sidebar-menu' )
+assert !html.contains( 'menu-jump' )

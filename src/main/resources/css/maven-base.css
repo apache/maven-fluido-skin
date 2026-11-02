@@ -56,7 +56,24 @@ section > pre {
   overflow-x: auto;
 }
 
+/* the side menu collapses on phones only: its summary, and the link that leads to it, show there alone */
+.sidebar-menu > summary,
+.menu-jump {
+  display: none;
+}
+
 @media (max-width: 767px) {
+  .sidebar-menu > summary {
+    display: list-item;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 3px 15px;
+  }
+  .menu-jump {
+    display: block;
+    margin: 0 0 10px;
+    text-align: right;
+  }
   /* long identifiers, paths and URLs wrap instead of pushing the page sideways */
   #bodyColumn {
     word-wrap: break-word;
