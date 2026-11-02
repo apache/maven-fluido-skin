@@ -121,6 +121,8 @@
 #*  *##end
 #*  *##if( $image.alt )
 #*    *##set( $alt = ' alt="' + $esc.xml( $image.alt ) + '"' )
+#*  *##elseif( $inBanner )
+#*    *##set( $alt = ' alt="' + $esc.xml( $bannerAlt ) + '"' )
 #*  *##else
 #*    *##set( $alt = "" )
 #*  *##end
@@ -143,9 +145,18 @@
 <img#if( $imageClass ) class="$imageClass"#end$src$alt#if( $style ) style="$style"#end />##
 #end
 ##
+## a banner image without alt that is the only content of its link takes the project name, so the link has a name;
+## otherwise its alt is empty: the banner's own name gives the text, or an unlinked logo is decorative
 #macro( banner $banner $id )
 #**##if( $banner )
+#*  *##set( $inBanner = true )
+#*  *##if( !$banner.name && $banner.href && $project && $project.name )
+#*    *##set( $bannerAlt = $project.name )
+#*  *##else
+#*    *##set( $bannerAlt = "" )
+#*  *##end
 #*  *#<div id="$id"><h1>#link( $banner $null false $null "set" $null "" )</h1></div>##
+#*  *##set( $inBanner = false )
 #**##end
 #end
 ##

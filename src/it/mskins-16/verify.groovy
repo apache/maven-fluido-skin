@@ -30,3 +30,7 @@ assert !new File( site, "css/gh-fork-ribbon.min.css" ).exists()
 for ( String profile : [ 'pre-release', 'retired', 'sandbox' ] ) {
     assert !new File( site, "images/profiles/${profile}.png" ).exists()
 }
+
+// banner images without alt: the project name when the banner has no name, empty when its name gives the text
+assert html.contains( '<a href="http://www.apache.org"><img src="images/apache-maven-project-2.png" alt="Apache Maven Fluido Skin IT, MSKINS-16" ' )
+assert html.contains( '<a href="http://www.apache.org"><img src="images/apache-maven-project-2.png" alt="" style="width: 473px;height: 93px;border: 1" /> Apache</a>' )
