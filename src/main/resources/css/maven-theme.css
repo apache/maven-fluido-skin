@@ -177,3 +177,10 @@ pre .hljs-ln td.hljs-ln-code {
 #bodyColumn li {
   padding: 2px 0;
 }
+
+/* on phones the right banner sits below the left one and pushes the page down; keep only the left one */
+@media (max-width: 767px) {
+  #banner .pull-left:not(:empty) + .pull-right {
+    display: none;
+  }
+}
