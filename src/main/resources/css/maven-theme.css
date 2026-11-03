@@ -17,126 +17,53 @@
  * under the License.
  */
 
-li.none {
-  list-style: none;
+/* Details on top of Bootstrap 5, in Bootstrap's custom properties so they follow the colour mode. */
+
+/* code blocks in a box, as in Fluido 2 */
+pre {
+  padding: 9.5px;
+  background-color: var(--bs-tertiary-bg);
+  border: 1px solid var(--bs-border-color-translucent);
+  border-radius: var(--bs-border-radius);
 }
 
-.search-query {
-  width:95%;
+/* links in lists are only 16px high; 24px between list items keeps neighbouring links far enough apart to tap
+   (WCAG 2.5.8) */
+#bodyColumn li {
+  padding: 2px 0;
 }
 
-.sidebar-nav .search-query {
-  width: calc(100% - 30px);
+/* banner and logo images and Mermaid diagrams (sitetools initialises Mermaid with its light theme) are drawn for a
+   white page: in the dark colour mode they keep a white card */
+/* the Edit icon */
+.edit-link {
+  line-height: 1;
 }
 
-body.topBarEnabled {
-  /* calculated height of the topbar */
-  padding-top: 43px;
+/* a logo with a dark-theme sibling swaps to it in the dark colour mode */
+.banner-dark,
+[data-bs-theme=dark] .banner-light {
+  display: none;
+}
+[data-bs-theme=dark] .banner-dark {
+  display: inline;
 }
 
-div.container-top,
-div.container-fluid-top {
-  /* Bootstrap already adds 10 px to <h1> */
-  padding-top: 10px;
+[data-bs-theme=dark] pre.mermaid,
+[data-bs-theme=dark] #banner img:not(.banner-dark) {
+  color: #1b1f23;
+  background-color: #fff;
+  border-radius: var(--bs-border-radius);
 }
 
-.builtBy {
-  display: block;
-}
-img.builtBy {
-  margin: 10px auto;
-}
-
-#search-form {
-  margin-left: 9px;
-  margin-right: 9px;
-}
-
-/* Tweaks to the bootstrap theme
---------------------------------- */
-
-/* avoid greyed list items */
-li {
-  color:#404040;
-}
-
-/* avoid transparent background of table */
-table.zebra-striped {
-  background-color:#FFF;
-}
-
-/* avoid transparent footer */
-.footer {
-  background-color:#EEE;
-}
-
-/* align with adjustments of http://twitter.github.com/bootstrap/examples/fluid.html */
-.sidebar-nav {
-  padding-left: 0px;
-  padding-right: 0px;
-  overflow-wrap: anywhere;
-}
-
-.sidebar-nav .icon-chevron-right, .sidebar-nav .icon-chevron-down {
-  margin-top: 2px;
-  margin-right: -6px;
-  float: right;
-  opacity: 0.25;
-}
-
-/* MSKINS-79: pull-right compresses list items */
-li.pull-right {
-  margin-left: 3px;
-  margin-right: 3px;
-}
-
-.well {
-  margin-bottom: 10px;
-}
-
-a.dropdown-toggle {
-  cursor: pointer;
-}
-
-h1 > code,
-h2 > code,
-h3 > code,
-h4 > code,
-h5 > code {
-  font-size: unset;
-}
-
-.table th,
-.table td {
-  text-align: revert;
-}
-
-/* Bootstrap's #0088cc links reach 3.9:1 on white and 3.6:1 on the grey sidebar, its #999 headings 2.6:1; these
-   reach 4.5:1 on both (WCAG 1.4.3). Linked code must be styled in same color as plain links. */
-a, a > code {
-  color: #006da3;
-}
-.nav-header, .breadcrumb>.active {
-  color: #6c6c6c;
-}
-.nav-list>.active>a, .nav-list>.active>a:hover, .nav-list>.active>a:focus {
-  background-color: #006da3;
-}
-/* the darker blue is too close to the body text to mark links by colour alone (WCAG 1.4.1) */
-#bodyColumn a:not(.btn) {
-  text-decoration: underline;
-}
-
-.nav-header, .nav-list>li>a, .breadcrumb>li {
-  text-shadow: none;
-}
-
-/* highlight.js inside the code blocks site.vm marks: keep the block's own background and padding */
+/* highlight.js inside the code blocks site.vm marks: keep the block's own background and padding, and let the
+   focusable <pre> scroll rather than the <code> inside it */
 pre.prettyprint code.hljs {
+  overflow-x: visible;
   background: transparent;
   padding: 0;
 }
-/* GitHub theme colours that fall below 4.5:1 on the #f5f5f5 code background, darkened to pass (WCAG 1.4.3) */
+/* GitHub theme colours that fall below 4.5:1 on the code background, darkened to pass (WCAG 1.4.3) */
 .hljs-doctag, .hljs-keyword, .hljs-meta .hljs-keyword, .hljs-template-tag, .hljs-template-variable, .hljs-type,
 .hljs-variable.language_ {
   color: #c93643;
@@ -150,6 +77,52 @@ pre.prettyprint code.hljs {
 .hljs-name, .hljs-quote, .hljs-selector-pseudo, .hljs-selector-tag, .hljs-addition {
   color: #208138;
 }
+/* the dark colour mode: GitHub's dark colours, lightened where they miss 4.5:1 on the dark code background */
+[data-bs-theme=dark] .hljs {
+  color: #c9d1d9;
+}
+[data-bs-theme=dark] .hljs-doctag, [data-bs-theme=dark] .hljs-keyword, [data-bs-theme=dark] .hljs-meta .hljs-keyword,
+[data-bs-theme=dark] .hljs-template-tag, [data-bs-theme=dark] .hljs-template-variable, [data-bs-theme=dark] .hljs-type,
+[data-bs-theme=dark] .hljs-variable.language_ {
+  color: #ff7b72;
+}
+[data-bs-theme=dark] .hljs-title, [data-bs-theme=dark] .hljs-title.class_,
+[data-bs-theme=dark] .hljs-title.class_.inherited__, [data-bs-theme=dark] .hljs-title.function_ {
+  color: #d2a8ff;
+}
+[data-bs-theme=dark] .hljs-attr, [data-bs-theme=dark] .hljs-attribute, [data-bs-theme=dark] .hljs-literal,
+[data-bs-theme=dark] .hljs-meta, [data-bs-theme=dark] .hljs-number, [data-bs-theme=dark] .hljs-operator,
+[data-bs-theme=dark] .hljs-selector-attr, [data-bs-theme=dark] .hljs-selector-class,
+[data-bs-theme=dark] .hljs-selector-id, [data-bs-theme=dark] .hljs-variable, [data-bs-theme=dark] .hljs-section {
+  color: #79c0ff;
+}
+[data-bs-theme=dark] .hljs-meta .hljs-string, [data-bs-theme=dark] .hljs-regexp, [data-bs-theme=dark] .hljs-string {
+  color: #a5d6ff;
+}
+[data-bs-theme=dark] .hljs-built_in, [data-bs-theme=dark] .hljs-symbol {
+  color: #ffa657;
+}
+[data-bs-theme=dark] .hljs-code, [data-bs-theme=dark] .hljs-comment, [data-bs-theme=dark] .hljs-formula {
+  color: #a0a8b1;
+}
+[data-bs-theme=dark] .hljs-name, [data-bs-theme=dark] .hljs-quote, [data-bs-theme=dark] .hljs-selector-pseudo,
+[data-bs-theme=dark] .hljs-selector-tag {
+  color: #7ee787;
+}
+[data-bs-theme=dark] .hljs-subst {
+  color: #c9d1d9;
+}
+[data-bs-theme=dark] .hljs-bullet {
+  color: #f2cc60;
+}
+[data-bs-theme=dark] .hljs-addition {
+  color: #aff5b4;
+  background-color: #033a16;
+}
+[data-bs-theme=dark] .hljs-deletion {
+  color: #ffdcd7;
+  background-color: #67060c;
+}
 /* line numbers (sourceLineNumbersEnabled); the plugin injects .hljs-ln td { padding: 0 } at runtime, so the cell
    rules below need the higher specificity */
 .hljs-ln {
@@ -162,33 +135,12 @@ pre.prettyprint code.hljs {
 }
 pre .hljs-ln td.hljs-ln-numbers {
   padding-right: .5em;
-  border-right: 1px solid #ddd;
-  color: #999;
+  border-right: 1px solid var(--bs-border-color);
+  color: var(--bs-secondary-color);
   text-align: right;
   -webkit-user-select: none;
   user-select: none;
 }
 pre .hljs-ln td.hljs-ln-code {
   padding-left: .75em;
-}
-
-/* links in lists are only 16px high; 24px between list items keeps neighbouring links far enough apart to tap
-   (WCAG 2.5.8) */
-#bodyColumn li {
-  padding: 2px 0;
-}
-
-/* site.vm puts a decorative banner in a div instead of an empty h1; give it the h1's box so the banners stay aligned */
-#banner .banner-decoration {
-  margin: 10px 0;
-  font-size: 38.5px;
-  font-weight: bold;
-  line-height: 40px;
-}
-
-/* on phones the right banner sits below the left one and pushes the page down; keep only the left one */
-@media (max-width: 767px) {
-  #banner .pull-left:not(:empty) + .pull-right {
-    display: none;
-  }
 }

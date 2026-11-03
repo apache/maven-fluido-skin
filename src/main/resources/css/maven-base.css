@@ -17,72 +17,58 @@
  * under the License.
  */
 
-.clear {
-  clear: both;
-  visibility: hidden;
+/* What Bootstrap 5 does not provide: the side menu's look and tables that stack on phones.
+   Everything else on the page is Bootstrap's own classes and utilities. */
+
+/* the side menu: the one list that repeats dozens of times per page, so its items carry no classes */
+.menu-list li > a,
+.menu-list li > span {
+  display: block;
+  padding: .25rem 1rem;
+  border-left: 3px solid transparent;
+  text-decoration: none;
+}
+.menu-list li > a[href]:hover {
+  text-decoration: underline;
+}
+.menu-list li > a.active {
+  font-weight: 600;
+  color: var(--bs-emphasis-color);
+  border-left-color: var(--bs-primary);
+}
+/* an item whose sub-items are not shown */
+.menu-list li > a.collapsed:after {
+  content: " \203A";
 }
 
-.clear hr {
-  display: none;
+/* the phone menu panel scrolls on its own by touch, and a scroll at its end does not move the page behind it */
+#sidebarMenu .offcanvas-body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
-section > p,
-section > dt,
-section > dl,
-section > table.table,
-section > .table-wrap,
-section > pre {
-  margin-right: 7px;
-  margin-left: 7px;
+/* parameter tables: fluido.js moved the type and since version under the name */
+.table-wrap .param-merged {
+  display: none !important;
+}
+.table-wrap .param-meta {
+  margin-top: .15rem;
+  font-size: .875em;
+  font-weight: normal;
+  color: var(--bs-secondary-color);
 }
 
-#poweredBy {
-  text-align: center;
+#bodyColumn img {
+  max-width: 100%;
 }
 
-/* site.vm puts the page content before the menu, so that it comes first on a phone; from 768 px wide the menu goes
-   back to the left. The gap between the columns stays the one Bootstrap computes for each width. */
-@media (min-width: 768px) {
-  .row-fluid > #bodyColumn {
-    float: right;
-  }
-  .row-fluid > #leftColumn {
-    margin-left: 0;
-  }
-}
-
-/* a wide table scrolls in its own box, reachable by keyboard (site.vm adds tabindex), instead of widening the page */
-.table-wrap {
-  overflow-x: auto;
-}
-
-/* the side menu collapses on phones only: its summary, and the link that leads to it, show there alone */
-.sidebar-menu > summary,
-.menu-jump {
-  display: none;
+/* long identifiers, paths and URLs wrap instead of pushing the page sideways; unlike Bootstrap's text-break this
+   never splits a word in a narrow table column, and code blocks keep their lines */
+#bodyColumn {
+  overflow-wrap: break-word;
 }
 
 @media (max-width: 767px) {
-  .sidebar-menu > summary {
-    display: list-item;
-    cursor: pointer;
-    font-weight: bold;
-    padding: 3px 15px;
-  }
-  .menu-jump {
-    display: block;
-    margin: 0 0 10px;
-    text-align: right;
-  }
-  /* long identifiers, paths and URLs wrap instead of pushing the page sideways */
-  #bodyColumn {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-  /* inline code only: a code block keeps its line breaks and indentation */
-  #bodyColumn :not(pre) > code {
-    white-space: normal;
-  }
   /* each table row becomes a card with one cell per line; fluido.js labels the cells with their column heading
      and hides the heading row, which stays visible as a legend without JavaScript */
   .table-wrap > table,
@@ -95,13 +81,14 @@ section > pre {
     width: auto;
   }
   .table-wrap > table > * > tr {
-    padding: 4px 0;
-    border-top: 1px solid #ddd;
+    padding: .75rem 0;
+    border-top: 1px solid var(--bs-border-color);
   }
   .table-wrap > table > * > tr > th,
   .table-wrap > table > * > tr > td {
     padding: 2px 8px;
     border-top: 0;
+    border-bottom: 0;
   }
   .table-wrap > table > * > tr.table-head {
     display: none;
@@ -111,6 +98,37 @@ section > pre {
     display: block;
     font-size: 12px;
     font-weight: bold;
-    color: #555;
+    color: var(--bs-secondary-color);
+  }
+  /* the short cells of a card share one line, read as "name  Type boolean  Since 2.2": the first without its
+     label, the others with the label inline; the last cell (the description, as a rule) takes the full width */
+  .table-wrap > table > * > tr > td[data-label]:not(:last-child) {
+    display: inline-block;
+    margin-right: 1rem;
+    vertical-align: baseline;
+  }
+  .table-wrap > table > * > tr > td[data-label]:first-child {
+    font-weight: 600;
+  }
+  .table-wrap > table > * > tr > td[data-label]:first-child:before {
+    display: none;
+  }
+  .table-wrap > table > * > tr > td[data-label]:not(:first-child):not(:last-child):before {
+    display: inline;
+    margin-right: .35em;
+  }
+  /* the last cell below the name line needs no label: in a parameter table it is plainly the description */
+  .table-wrap > table > * > tr > td[data-label]:last-child:not(:first-child):before {
+    display: none;
+  }
+  .table-wrap > table > * > tr > td[data-label]:last-child:not(:first-child) {
+    margin-top: .25rem;
+  }
+  .table-wrap > table > * > tr > td[data-label].table-cell-empty {
+    display: none;
+  }
+  /* cards are separated by their top border: no per-cell stripes */
+  .table-wrap > table > * > tr > * {
+    box-shadow: none;
   }
 }

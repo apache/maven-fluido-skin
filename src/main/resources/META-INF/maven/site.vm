@@ -49,14 +49,16 @@
     <meta name="date" content="$documentDate" />
 #end
     <title>$esc.xml( $title )</title>
+    <link rel="stylesheet" href="$relativePath/css/bootstrap-@bootstrap.version@.min.css" />
     <link rel="stylesheet" href="$relativePath/css/apache-maven-fluido-@project.version@.min.css" />
-## before site.css, so that a project's own styles can override the dark theme
+## darkThemeEnabled: follow a dark colour scheme of the OS through Bootstrap's colour modes, before the first paint
 #if( $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.darkThemeEnabled', 'false' ) ) )
-    <link rel="stylesheet" href="$relativePath/css/dark-theme.css" />
+    <script>if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.setAttribute('data-bs-theme','dark');}</script>
 #end
     <link rel="stylesheet" href="$relativePath/css/site.css" />
     <link rel="stylesheet" href="$relativePath/css/print.css" media="print" />
 #**##prjProfile()
+    <script src="$relativePath/js/bootstrap-@bootstrap.version@.bundle.min.js" defer></script>
     <script src="$relativePath/js/apache-maven-fluido-@project.version@.min.js"></script>
     <script src="$relativePath/js/highlight-@highlightjs.version@.min.js"></script>
 #**##if( $site.body.head )
@@ -73,6 +75,7 @@
 #**##else
   <body>
 #**##end
+    <a class="visually-hidden-focusable" href="#bodyColumn">Skip to the content</a>
 #**##forkMeOnGitHub()
 ##
 #**##set( $sideBarEnabled = $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.sideBarEnabled', 'true' ) ) && !$standalone )
@@ -81,33 +84,19 @@
 ##
 #**##if( $topBarEnabled )
 #*  *##set( $navBarStyle = $site.getCustomValue( 'fluidoSkin.navBarStyle', '' ) )
-    <header id="topbar" class="navbar navbar-fixed-top $navBarStyle">
-      <div class="navbar-inner">
+## Bootstrap 2's navbar-inverse was a dark bar: Bootstrap 5 draws it with the dark colour mode
+#*  *##if( $navBarStyle.contains( 'navbar-inverse' ) )
+#*    *##set( $navBarTheme = ' data-bs-theme="dark"' )
+#*    *##set( $navBarStyle = $navBarStyle.replace( 'navbar-inverse', '' ).trim() )
+#*  *##end
+## Bootstrap's navbar: collapsed behind a toggler below 992 px, menus as dropdowns
+    <header id="topbar" class="navbar navbar-expand-lg bg-body-tertiary border-bottom $navBarStyle"$!navBarTheme>
 #*    *##if( $sideBarEnabled )
-        <div class="container-fluid">
-        <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
+      <div class="container-fluid">
+#*    *##elseif( $site.getCustomValue( 'fluidoSkin.topBarContainerStyle' ) )
+      <div class="container" style="$site.getCustomValue( 'fluidoSkin.topBarContainerStyle' )">
 #*    *##else
-#*      *##if( $site.getCustomValue( 'fluidoSkin.topBarContainerStyle' ) )
-            <div class="container" style="$site.getCustomValue( 'fluidoSkin.topBarContainerStyle' )">
-              <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </a>
-          <nav class="nav-collapse">
-#*      *##else
-            <div class="container">
-              <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </a>
-          <nav class="nav-collapse">
-#*      *##end
+      <div class="container">
 #*    *##end
 #*    *##if( $site.getCustomChild( 'fluidoSkin.topBarIcon' ) )
 #*      *##set( $topBarIcon = $site.getCustomChild( 'fluidoSkin.topBarIcon' ) )
@@ -121,7 +110,7 @@
 #*            *##set( $href = "./" )
 #*          *##end
 #*        *##end
-#*        *#<a class="brand" href="$href">##
+#*        *#<a class="brand navbar-brand" href="$href">##
 ##
 #*        *##set( $topBarIconName = $site.getCustomValue( 'fluidoSkin.topBarIcon.name', $project.name ) )
 ##
@@ -132,7 +121,7 @@
 #*            *##set( $src = $src.replaceAll( '\\', '/' ) )
 #*          *##end
 #*          *##set( $alt = $site.getCustomValue( 'fluidoSkin.topBarIcon.alt', $topBarIconName ) )
-#*          *#<img src="$src" #if( $alt )alt="$esc.xml( $alt )"#end />
+#*          *#<img class="img-fluid" src="$src" #if( $alt )alt="$esc.xml( $alt )"#end />
 #*        *##else
 #*          *#$esc.xml( $topBarIconName )
 #*        *##end
@@ -141,16 +130,13 @@
 #*      *##end
 #*    *##end
 ##
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbarMenus" aria-controls="topbarMenus" aria-expanded="false" aria-label="Menu"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="topbarMenus">
 ##      ## MSKINS-31
 #*      *##if( $site.body && $site.body.menus )
-            <ul class="nav">
+        <ul class="navbar-nav">
 #*          *##topMenu( $site.body.menus )
-            </ul>
-#*      *##end
-##
-#*      *##if( !$sideBarEnabled )
-          </nav>
-          <div class="nav-collapse">
+        </ul>
 #*      *##end
 ##
 #*      *##if( $searchEnabled && !$sideBarEnabled )
@@ -161,92 +147,128 @@
 #*      *##if( $site.body
               && $site.body.links
               && $site.body.links.size() > 0 )
-            <ul class="nav pull-right">
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown">$text.get( "template.externallinks" ) <b class="caret"></b></a>
-                <ul class="dropdown-menu">
+        <ul class="navbar-nav ms-lg-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">$text.get( "template.externallinks" )</a>
+            <ul class="dropdown-menu dropdown-menu-end">
 #*            *##topLinks( $site.body.links )
-                </ul>
-              </li>
             </ul>
+          </li>
+        </ul>
 #*      *##end
-##
-#*      *##if( !$sideBarEnabled )
-          </div>
-#*      *##end
-##
         </div>
+##
       </div>
     </header>
 #**##end
 ##
 #**##if( $sideBarEnabled )
-    <div class="container-fluid container-fluid-top">
+    <div class="container-fluid pt-2">
 #**##else
-    <div class="container container-top">
+    <div class="container pt-2">
 #**##end
       <header>
-        <div id="banner">
-          <div class="pull-left">#banner( $site.bannerLeft "bannerLeft" )</div>
-          <div class="pull-right">#banner( $site.bannerRight "bannerRight" )</div>
-          <div class="clear"><hr/></div>
+## on phones a decorative right banner would sit below the left one and push the page down: only the left one shows
+## there; a right banner that is a link stays, so no link is lost on a phone
+#*    *##if( $site.bannerLeft && $site.bannerRight && !$site.bannerRight.href )
+#*      *##set( $bannerRightClass = "d-none d-md-block" )
+#*    *##end
+## an editable page links to its source from the page tools, next to the theme switch
+#*    *##if( $site.edit && $docRenderingContext.editable )
+#*      *##set( $editHref = $docRenderingContext.getDoxiaSourcePath( $site.edit ) )
+#*    *##end
+## a navbar row: below 992 px the menu's hamburger at the start, then the banners
+        <div id="banner" class="navbar flex-nowrap align-items-center column-gap-2 py-0 mb-2">
+#*    *##if( $sideBarEnabled )
+          <button type="button" class="navbar-toggler menu-toggle d-lg-none flex-shrink-0" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-label="Menu"><span class="navbar-toggler-icon"></span></button>
+#*    *##end
+          #banner( $site.bannerLeft "bannerLeft" "me-auto" )
+          #banner( $site.bannerRight "bannerRight" $bannerRightClass )
+## without a side menu the page tools sit at the end of this row
+#*    *##if( !$sideBarEnabled )
+          #pageTools( "flex-shrink-0" )
+#*    *##end
         </div>
 
-#*    *##set( $publishDateLeftContent = "#publishDate( 'left' $site.publishDate $site.version )" )
-#*    *##set( $publishDateRightContent = "#publishDate( 'right' $site.publishDate $site.version )" )
+#*    *##set( $leftContent = "#publishDate( 'left' $site.publishDate $site.version )" )
+#*    *##if( $site.body.breadcrumbs && $site.body.breadcrumbs.size() > 0 )
+#*      *##set( $crumbsContent = "#breadcrumbs( $site.body.breadcrumbs )" )
+#*    *##end
 #*    *### MSITE-44
-#*    *##if( !$topBarEnabled )
+#*    *##if( !$topBarEnabled && $site.body.links )
 #*      *##set( $linksContent = "#links( $site.body.links )" )
 #*    *##end
-#*    *##if( $publishDateLeftContent.length() > 0 || $publishDateRightContent.length() > 0 ||
-             ( $linksContent && $linksContent.length() > 0 ) )
-        <div id="breadcrumbs">
-          <ul class="breadcrumb">
-#*        *#$publishDateLeftContent##
-#*        *#$publishDateRightContent##
-##
-#*        *#$!linksContent##
+#*    *##set( $rightContent = "$!linksContent#publishDate( 'right' $site.publishDate $site.version )" )
+#*    *##set( $breadcrumbDivider = $site.getCustomValue( 'fluidoSkin.breadcrumbDivider', '/' ) )
+#*    *##if( $breadcrumbDivider != '/' )
+#*      *##set( $dividerStyle = " style=" + '"' + "--bs-breadcrumb-divider: '" + $breadcrumbDivider.replace( "'", "\'" ) + "';" + '"' )
+#*    *##end
+## one bar: the date and version on the left, the breadcrumbs, then links, version and date on the right; plain lists
+## without separators, so nothing dangles when the bar wraps on a phone
+#*    *##if( $leftContent.trim().length() > 0 || $crumbsContent || $rightContent.trim().length() > 0 )
+        <div id="breadcrumbs" class="d-flex flex-wrap align-items-center column-gap-3 row-gap-1 mb-3 small">
+#*      *##if( $leftContent.trim().length() > 0 )
+          <ul class="list-unstyled d-flex flex-wrap column-gap-3 mb-0">
+#*        *#$leftContent##
           </ul>
+#*      *##end
+#*      *##if( $crumbsContent )
+          <nav aria-label="Breadcrumb">
+            <ol class="breadcrumb mb-0"$!dividerStyle>
+#*        *#$crumbsContent##
+            </ol>
+          </nav>
+#*      *##end
+#*      *##if( $rightContent.trim().length() > 0 )
+          <ul class="list-unstyled d-flex flex-wrap column-gap-3 mb-0 ms-md-auto">
+#*        *#$rightContent##
+          </ul>
+#*      *##end
         </div>
 #*    *##end
 #*    *##if( $sideBarEnabled )
-## on phones the menu comes after the content, so this link at the top leads to it (maven-base.css shows it there only)
-        <p class="menu-jump"><a href="#leftColumn">Menu</a></p>
 #*    *##end
       </header>
 ##
 #*    *##if( $sideBarEnabled )
-#*      *##set( $leftColumnClass = $site.getCustomValue( 'fluidoSkin.leftColumnClass', 'span2' ) )
+## the menu sits beside the content from 992 px up; below that the content gets the full width and the menu opens as
+## an offcanvas panel. Fluido 2's Bootstrap 2 grid classes (spanN) become the Bootstrap 5 columns of the same width
+#*      *##set( $leftColumnClass = $site.getCustomValue( 'fluidoSkin.leftColumnClass', 'col-lg-3 col-xl-2' ) )
+#*      *##set( $leftColumnClass = $leftColumnClass.replaceAll( '\bspan(\d+)\b', 'col-lg-$1' ) )
+#*      *##set( $bodyColumnClass = $site.getCustomValue( 'fluidoSkin.bodyColumnClass', 'col-lg-9 col-xl-10' ) )
+#*      *##set( $bodyColumnClass = $bodyColumnClass.replaceAll( '\bspan(\d+)\b', 'col-lg-$1' ) )
 ##
-      <div class="row-fluid">
+      <div class="row">
 #*    *##end
-## the page content comes before the menu, so that it comes first on a phone; maven-base.css keeps the menu on the left
-##
-#*    *##set( $bodyColumnClass = $site.getCustomValue( 'fluidoSkin.bodyColumnClass', 'span10' ) )
-##
-        <main id="bodyColumn"#if( $sideBarEnabled ) class="$bodyColumnClass"#end>
+## the page content comes before the menu in the source; from 992 px the menu goes to the left
+        <main id="bodyColumn"#if( $sideBarEnabled ) class="$bodyColumnClass order-lg-last"#end>
 #*      *##if( $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.sourceLineNumbersEnabled', 'false' ) ) )
 #*        *##set( $sourceStyle = "prettyprint linenums" )
 #*      *##else
 #*        *##set( $sourceStyle = "prettyprint" )
 #*      *##end
-##
-#*      *##if ( $bodyContent )$bodyContent.replaceAll( '<pre>(<code[ >](?!.*class=\"nohighlight nocode\"))', '<pre class="' + $sourceStyle + '">' + $esc.d + '1' ).replace( 'class="bodyTable"', 'class="table table-striped"' ).replace( 'class="bodyTable bodyTableBorder"', 'class="table table-bordered table-striped"' ).replace( '<table', '<div class="table-wrap" tabindex="0"><table' ).replace( '</table>', '</table></div>' )#end
+## additive rewrites only: highlighting classes, Bootstrap table classes, and a focusable box for wide tables and
+## code blocks, so a keyboard can scroll them
+#*      *##if ( $bodyContent )$bodyContent.replaceAll( '<pre>(<code[ >](?!.*class=\"nohighlight nocode\"))', '<pre class="' + $sourceStyle + '">' + $esc.d + '1' ).replace( '<pre', '<pre tabindex="0"' ).replace( 'class="bodyTable"', 'class="table table-striped"' ).replace( 'class="bodyTable bodyTableBorder"', 'class="table table-bordered table-striped"' ).replace( '<table', '<div class="table-wrap table-responsive" tabindex="0"><table' ).replace( '</table>', '</table></div>' )#end
         </main>
 #*    *##if( $sideBarEnabled )
-        <header id="leftColumn" class="$leftColumnClass">
-          <nav class="well sidebar-nav">
-## open by default, so the menu stays usable without JavaScript; fluido.js collapses it on phones
-            <details class="sidebar-menu" open>
-              <summary>Menu</summary>
+        <header id="leftColumn" class="$leftColumnClass order-lg-first">
+          <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+            <div class="offcanvas-header">
+              <p class="offcanvas-title h5 mb-0" id="sidebarMenuLabel">Menu</p>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body flex-column">
+## the page tools at the top of the menu: beside the content on wide screens, in the panel on phones
+          #pageTools( "mb-2 px-3" )
+          <nav class="sidebar-nav border-end mb-3" aria-label="Menu">
 #*      *##publishDate( "navigation-top" $site.publishDate $site.version )
 #*      *##mainMenu( $site.body.menus )
 #*      *##publishDate( "navigation-bottom" $site.publishDate $site.version )
-            </details>
           </nav>
 ## no empty box when nothing is configured for it
 #*      *##if( $searchEnabled || ( $site.poweredBy && !$site.poweredBy.isEmpty() ) )
-          <div class="well sidebar-nav">
+          <div class="sidebar-nav text-center mb-3">
 #*        *##if( $searchEnabled )
 #*          *##googleSearch( false )
 #*        *##end
@@ -255,34 +277,33 @@
             </div>
           </div>
 #*      *##end
+            </div>
+          </div>
         </header>
       </div>
 #*    *##end
     </div>
-    <hr/>
-    <footer>
+    <footer class="border-top mt-3 py-3">
 #*  *##if( $sideBarEnabled )
       <div class="container-fluid">
 #*  *##else
       <div class="container">
 #*  *##end
-#*    *##if( $sideBarEnabled )
-        <div class="row-fluid">
-#*    *##else
-        <div class="row">
-#*    *##end
+        <div class="footer-content clearfix">
 #*    *##if( $site.body.footer )
 #*      *#$render.eval( $site.body.footer )
 #*    *##else
 #*      *##if( $site.getCustomChild( 'fluidoSkin.copyrightClass' ) )
-#*        *##set( $copyrightClass = ' class="' + $site.getCustomValue( 'fluidoSkin.copyrightClass' ) + '"' )
+## Bootstrap 2's pull-right and pull-left are float-end and float-start in Bootstrap 5
+#*        *##set( $copyrightClass = $site.getCustomValue( 'fluidoSkin.copyrightClass' ).replaceAll( '\bpull-right\b', 'float-end' ).replaceAll( '\bpull-left\b', 'float-start' ) )
+#*        *##set( $copyrightClass = ' class="' + $copyrightClass + '"' )
 #*      *##end
             <p$!copyrightClass>$esc.unicode( '\u00A9' )#copyright()#publishDate( "bottom" $site.publishDate $site.version )</p>
 #*    *##end
         </div>
 ##
 #*    *##if( !$sideBarEnabled )
-        <p id="poweredBy" class="pull-right">##
+        <p id="poweredBy" class="float-end">##
 #*      *##builtByLogo( $site.poweredBy )
 #*    *#</p>
 #*    *##end

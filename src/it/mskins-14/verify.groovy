@@ -20,5 +20,5 @@
 String html = new File( basedir, "target/site/index.html" ).text
 
 // Google search configured: the box below the menu holds the search form
-assert ( html =~ /class="well sidebar-nav"/ ).size() == 2
+assert ( html =~ /class="sidebar-nav[ "]/ ).size() == 2
 assert html.contains( '<form id="search-form" action="https://www.google.com/search" method="get" >' )
