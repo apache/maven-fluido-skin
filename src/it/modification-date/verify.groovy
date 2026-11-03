@@ -19,6 +19,7 @@
 
 File index = new File( basedir, "target/site/index.html" )
 assert index.exists()
+assert index.text.contains( '<meta name="dcterms.date" content="2011-10-15" />' )
 assert index.text.contains( 'Last Modified: 2026-03-20' )
 File report = new File( basedir, "target/site/plugins.html" )
 assert report.exists()
