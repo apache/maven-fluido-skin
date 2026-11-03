@@ -41,10 +41,11 @@
   content: " \203A";
 }
 
-/* the phone menu panel scrolls on its own by touch, and a scroll at its end does not move the page behind it */
-#sidebarMenu .offcanvas-body {
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
+/* below 992 px the menu sits above the content, open; the menu button hides it until the next page */
+@media (max-width: 991.98px) {
+  #sidebarMenu.menu-hidden {
+    display: none;
+  }
 }
 
 /* parameter tables: fluido.js moved the type and since version under the name */

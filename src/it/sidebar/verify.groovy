@@ -35,20 +35,25 @@ assert html.contains('<div id="bannerLeft" class="me-auto"><p class="m-0 fs-3 fw
 // the right banner is hidden on phones when there is a left one
 assert html.contains('<div id="bannerRight" class="d-none d-md-block"><img class="img-fluid" src="../../../images/logos/MavenLogoLeaf.svg" alt="" style="width: 340px;height: 83px;" /></div>')
 
-// below 992 px the side menu is an offcanvas panel, opened by a Menu button at the top
-assert html.contains( '<div class="offcanvas-lg offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">' )
-// the hamburger that opens it is the first thing in the banner row
-assert html =~ /<div id="banner" class="navbar[^"]*">\s*<button type="button" class="navbar-toggler menu-toggle d-lg-none[^"]*" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"/
+// below 992 px the side menu is open above the content; a button, hidden until fluido.js shows it, hides and shows it
+assert html.contains( '<div id="sidebarMenu" class="sidebar-menu mb-3">' )
+assert !html.contains( 'offcanvas' )
+// the button is the first thing in the banner row, controls the menu, starts expanded and needs no Bootstrap script
+assert html =~ /<div id="banner" class="navbar[^"]*">\s*<button type="button" class="navbar-toggler menu-toggle d-lg-none[^"]*" aria-controls="sidebarMenu" aria-expanded="true" aria-label="Menu" hidden>/
+assert !( html =~ /class="navbar-toggler menu-toggle[^>]*data-bs-toggle/ )
+// nothing remembers the menu's state
+def fluidoJs = new File( basedir, "target/site/js" ).listFiles().find { it.name.startsWith( 'apache-maven-fluido-' ) }
+assert fluidoJs != null && fluidoJs.text.contains( 'menu-hidden' ) && !fluidoJs.text.contains( 'localStorage' )
 
 // Bootstrap 5 stylesheet and script bundle, no jQuery
 assert html.contains( '<link rel="stylesheet" href="./css/bootstrap-5.3.8.min.css" />' )
 assert new File( basedir, "target/site/css/bootstrap-5.3.8.min.css" ).exists()
 assert !html.contains( 'jquery' )
 assert new File( basedir, "target/site/js/bootstrap-5.3.8.bundle.min.js" ).exists()
-// default columns: Bootstrap 5 grid, content first in the source
-assert html.contains( '<main id="bodyColumn" class="col-lg-9 col-xl-10 order-lg-last">' )
-assert html.contains( '<header id="leftColumn" class="col-lg-3 col-xl-2 order-lg-first">' )
-assert html.indexOf( 'id="bodyColumn"' ) < html.indexOf( 'id="leftColumn"' )
+// default columns: Bootstrap 5 grid, the menu first in the source so that it is open above the content on phones
+assert html.contains( '<main id="bodyColumn" class="col-lg-9 col-xl-10">' )
+assert html.contains( '<header id="leftColumn" class="col-lg-3 col-xl-2">' )
+assert html.indexOf( 'id="leftColumn"' ) < html.indexOf( 'id="bodyColumn"' )
 // the theme switch is on by default: light until the reader chooses, script in the head
 assert html.contains( '<button type="button" class="theme-switch btn btn-sm border" title="Theme" aria-label="Theme" hidden>' )
 assert html.contains( 'class="theme-icon-dark"' )
@@ -71,7 +76,7 @@ assert html =~ /(?s)<div class="page-tools d-flex align-items-center gap-2 mb-2 
 // pages listed in sideBarSkipped render without the side menu, the others keep it
 String summary = new File( basedir, "target/site/summary.html" ).text
 assert !summary.contains( 'id="leftColumn"' )
-assert !summary.contains( 'data-bs-target="#sidebarMenu"' )
+assert !summary.contains( 'aria-controls="sidebarMenu"' )
 assert !new File( basedir, "target/site/dependency-info.html" ).text.contains( 'id="leftColumn"' )
 assert html.contains( 'id="leftColumn"' )
 assert new File( basedir, "target/site/plugins.html" ).text.contains( 'id="leftColumn"' )
