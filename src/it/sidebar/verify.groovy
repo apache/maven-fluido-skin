@@ -83,3 +83,7 @@ assert new File( basedir, "target/site/plugins.html" ).text.contains( 'id="leftC
 
 // a page in a subdirectory is named by its path from the site root
 assert !new File( basedir, "target/site/guide/overview.html" ).text.contains( 'id="leftColumn"' )
+
+// links reach 4.5:1 on the light tinted boxes too, not only on white (Bootstrap's own #0d6efd does not)
+def fluidoCss = new File( basedir, "target/site/css" ).listFiles().find { it.name.startsWith( 'apache-maven-fluido-' ) }
+assert fluidoCss != null && fluidoCss.text.contains( '--bs-link-color: #0a58ca;' )
