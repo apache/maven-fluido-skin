@@ -18,9 +18,10 @@
  */
 
 String html = new File( basedir, "target/site/index.html" ).text
-// the dark theme is Bootstrap's dark colour mode, chosen before the first paint when the OS is in dark mode
-assert html.contains( "matchMedia('(prefers-color-scheme: dark)')" )
-assert html.contains( "setAttribute('data-bs-theme','dark')" )
+// the dark theme is Bootstrap's dark colour mode: Auto (follow the OS) becomes the default, set before the first paint
+assert html.contains( 'data-fluido-theme="auto"' )
+assert html.indexOf( 'js/fluido-theme.js' ) < html.indexOf( '</head>' )
+assert new File( basedir, "target/site/js/fluido-theme.js" ).exists()
 // no separate dark stylesheet any more
 assert !html.contains( 'dark-theme.css' )
 assert !new File( basedir, "target/site/css/dark-theme.css" ).exists()

@@ -35,9 +35,18 @@ pre {
 
 /* banner and logo images and Mermaid diagrams (sitetools initialises Mermaid with its light theme) are drawn for a
    white page: in the dark colour mode they keep a white card */
-/* the Edit icon */
+/* the theme switch shows the icon of the current mode */
+.theme-switch,
 .edit-link {
   line-height: 1;
+}
+.theme-switch svg {
+  display: none;
+}
+.theme-switch[data-fluido-theme-mode=light] .theme-icon-light,
+.theme-switch[data-fluido-theme-mode=dark] .theme-icon-dark,
+.theme-switch[data-fluido-theme-mode=auto] .theme-icon-auto {
+  display: inline;
 }
 
 /* a logo with a dark-theme sibling swaps to it in the dark colour mode */

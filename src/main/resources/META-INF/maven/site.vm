@@ -29,7 +29,10 @@
  | Rendered using Apache Maven Fluido Skin @project.version@
 -->
 ##
-<html xmlns="http://www.w3.org/1999/xhtml" lang="#if ( $locale.toString() )$locale.toLanguageTag()#{else}en#end">
+## colour theme: light by default; darkThemeEnabled makes Auto (follow the OS) the default; themeSwitch adds the switch
+#set( $darkThemeEnabled = $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.darkThemeEnabled', 'false' ) ) )
+#set( $themeSwitch = $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.themeSwitch', 'true' ) ) )
+<html xmlns="http://www.w3.org/1999/xhtml" lang="#if ( $locale.toString() )$locale.toLanguageTag()#{else}en#end"#if( $darkThemeEnabled ) data-fluido-theme="auto"#end>
   <head>
     <meta charset="${outputEncoding}" />
 ## the page head may not declare a second charset; its viewport and generator replace the skin's own
@@ -51,9 +54,9 @@
     <title>$esc.xml( $title )</title>
     <link rel="stylesheet" href="$relativePath/css/bootstrap-@bootstrap.version@.min.css" />
     <link rel="stylesheet" href="$relativePath/css/apache-maven-fluido-@project.version@.min.css" />
-## darkThemeEnabled: follow a dark colour scheme of the OS through Bootstrap's colour modes, before the first paint
-#if( $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.darkThemeEnabled', 'false' ) ) )
-    <script>if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.setAttribute('data-bs-theme','dark');}</script>
+## sets Bootstrap's colour mode before the first paint; without it the page stays light
+#if( $themeSwitch || $darkThemeEnabled )
+    <script src="$relativePath/js/fluido-theme.js"></script>
 #end
     <link rel="stylesheet" href="$relativePath/css/site.css" />
     <link rel="stylesheet" href="$relativePath/css/print.css" media="print" />
