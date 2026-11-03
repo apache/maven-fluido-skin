@@ -116,7 +116,7 @@ under the License.
         </includes>
       </resource>
 
-      <!-- exclude css and js since will include the minified version, META-INF is filtered separately -->
+      <!-- css and js are added below, META-INF is filtered separately -->
       <resource>
         <directory>${basedir}/src/main/resources</directory>
         <excludes>
@@ -136,7 +136,7 @@ under the License.
       </resource>
 
       <!-- include the print.css, the theme script (loaded on its own in the page head) and the already minified Bootstrap
-        (stylesheet and script bundle) and highlight.js bundles -->
+        (stylesheet and script bundle), highlight.js and AnchorJS bundles -->
       <resource>
         <directory>${basedir}/src/main/resources</directory>
         <includes>
@@ -145,17 +145,17 @@ under the License.
           <include>css/bootstrap-${bootstrap.version}.min.css</include>
           <include>js/bootstrap-${bootstrap.version}.bundle.min.js</include>
           <include>js/highlight-${highlightjs.version}.min.js</include>
+          <include>js/anchor-${anchorjs.version}.min.js</include>
         </includes>
       </resource>
 
-      <!-- include minified only -->
+      <!-- the files bundled by maven-antrun-plugin -->
       <resource>
         <directory>${project.build.directory}/${project.build.finalName}</directory>
         <includes>
           <include>css/apache-maven-fluido-${project.version}.min.css</include>
           <include>css/gh-fork-ribbon.min.css</include>
           <include>js/apache-maven-fluido-${project.version}.min.js</include>
-          <include>js/anchor-${anchorjs.version}.min.js</include>
         </includes>
       </resource>
     </resources>
@@ -196,70 +196,28 @@ under the License.
           <useDefaultDelimiters>false</useDefaultDelimiters>
         </configuration>
       </plugin>
+      <!-- the skin's own stylesheets and script are small and served as written; the .min names stay, since sites with
+        their own site.vm reference them -->
       <plugin>
-        <groupId>com.samaxes.maven</groupId>
-        <artifactId>minify-maven-plugin</artifactId>
-        <version>1.7.6</version>
-        <configuration>
-          <webappSourceDir>${basedir}/src/main/resources</webappSourceDir>
-          <cssSourceDir>css</cssSourceDir>
-          <jsSourceDir>js</jsSourceDir>
-          <jsEngine>CLOSURE</jsEngine>
-        </configuration>
-        <!-- https://github.com/samaxes/minify-maven-plugin/pull/176 -->
-        <dependencies>
-          <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-utils</artifactId>
-            <version>3.6.2</version>
-          </dependency>
-        </dependencies>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
         <executions>
           <execution>
-            <id>minify-main-resources</id>
+            <id>bundle-resources</id>
             <goals>
-              <goal>minify</goal>
+              <goal>run</goal>
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-              <!-- Bootstrap ships minified and is linked on its own: these engines predate its CSS -->
-              <cssSourceFiles>
-                <!-- before the skin's own styles, so that they can adjust the theme's colours -->
-                <cssSourceFile>highlight-github-${highlightjs.version}.min.css</cssSourceFile>
-                <cssSourceFile>maven-base.css</cssSourceFile>
-                <cssSourceFile>maven-theme.css</cssSourceFile>
-              </cssSourceFiles>
-              <cssFinalFile>apache-maven-fluido-${project.version}.css</cssFinalFile>
-              <jsSourceFiles>
-                <jsSourceFile>fluido.js</jsSourceFile>
-              </jsSourceFiles>
-              <jsFinalFile>apache-maven-fluido-${project.version}.js</jsFinalFile>
-            </configuration>
-          </execution>
-          <execution>
-            <id>minify-anchor-resources</id>
-            <goals>
-              <goal>minify</goal>
-            </goals>
-            <phase>generate-resources</phase>
-            <configuration>
-              <jsSourceFiles>
-                <jsSourceFile>anchor-${anchorjs.version}.js</jsSourceFile>
-              </jsSourceFiles>
-              <jsFinalFile>anchor-${anchorjs.version}.js</jsFinalFile>
-            </configuration>
-          </execution>
-          <execution>
-            <id>minify-gh-fork-ribbon-resources</id>
-            <goals>
-              <goal>minify</goal>
-            </goals>
-            <phase>generate-resources</phase>
-            <configuration>
-              <cssSourceFiles>
-                <cssSourceFile>gh-fork-ribbon.css</cssSourceFile>
-              </cssSourceFiles>
-              <cssFinalFile>gh-fork-ribbon.css</cssFinalFile>
+              <target>
+                <property name="out" value="${project.build.directory}/${project.build.finalName}" />
+                <!-- the highlight.js theme first, so that the skin's own styles can adjust its colours -->
+                <concat destfile="${out}/css/apache-maven-fluido-${project.version}.min.css" encoding="UTF-8" fixlastline="true">
+                  <filelist dir="${basedir}/src/main/resources/css" files="highlight-github-${highlightjs.version}.min.css,maven-base.css,maven-theme.css" />
+                </concat>
+                <copy file="${basedir}/src/main/resources/js/fluido.js" tofile="${out}/js/apache-maven-fluido-${project.version}.min.js" />
+                <copy file="${basedir}/src/main/resources/css/gh-fork-ribbon.css" tofile="${out}/css/gh-fork-ribbon.min.css" />
+              </target>
             </configuration>
           </execution>
         </executions>
