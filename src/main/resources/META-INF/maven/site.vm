@@ -49,7 +49,7 @@
     <meta name="author" content="$esc.xml( $author )" />
 #end
 #if( $documentDate )
-    <meta name="date" content="$documentDate" />
+    <meta name="dcterms.date" content="$documentDate" />
 #end
     <title>$esc.xml( $title )</title>
     <link rel="stylesheet" href="$relativePath/css/bootstrap-@bootstrap.version@.min.css" />
