@@ -17,7 +17,8 @@
  * under the License.
  */
 
-/* Plain DOM code, ES5: highlighting and labels for the stacked tables. Menus are Bootstrap's own components. */
+/* Plain DOM code, ES5: the phone menu button, highlighting and labels for the stacked tables. The top bar's menus are
+   Bootstrap's own components. */
 ( function() {
 
     function each( list, fn ) {
@@ -87,7 +88,29 @@
         }
     }
 
+    // below 992 px the side menu is open above the content; the button in the banner row hides and shows it. Without
+    // JavaScript the button stays hidden and the menu open. Nothing is stored: every page starts with the menu open.
+    function menuToggle() {
+        var button = document.querySelector( '.menu-toggle' );
+        var menu = document.getElementById( 'sidebarMenu' );
+        if ( !button || !menu ) {
+            return;
+        }
+        button.hidden = false;
+        button.addEventListener( 'click', function() {
+            var open = button.getAttribute( 'aria-expanded' ) !== 'false';
+            button.setAttribute( 'aria-expanded', open ? 'false' : 'true' );
+            if ( open ) {
+                addClass( menu, 'menu-hidden' );
+            } else {
+                menu.className = trim( menu.className.replace( /(^|\s)menu-hidden(\s|$)/g, ' ' ) );
+            }
+        } );
+    }
+
     function init() {
+        menuToggle();
+
         // highlight the code blocks that site.vm marked; line numbers where sourceLineNumbersEnabled added linenums
         if ( window.hljs ) {
             each( document.querySelectorAll( 'pre.prettyprint > code' ), function( code ) {

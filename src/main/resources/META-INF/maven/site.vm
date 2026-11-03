@@ -188,10 +188,11 @@
 #*    *##if( $site.edit && $docRenderingContext.editable )
 #*      *##set( $editHref = $docRenderingContext.getDoxiaSourcePath( $site.edit ) )
 #*    *##end
-## a navbar row: below 992 px the menu's hamburger at the start, then the banners
+## a navbar row: below 992 px the button that hides and shows the menu at the start, then the banners
         <div id="banner" class="navbar flex-nowrap align-items-center column-gap-2 py-0 mb-2">
 #*    *##if( $sideBarEnabled )
-          <button type="button" class="navbar-toggler menu-toggle d-lg-none flex-shrink-0" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-label="Menu"><span class="navbar-toggler-icon"></span></button>
+## hidden until fluido.js shows it: without JavaScript the menu is simply open
+          <button type="button" class="navbar-toggler menu-toggle d-lg-none flex-shrink-0" aria-controls="sidebarMenu" aria-expanded="true" aria-label="Menu" hidden><span class="navbar-toggler-icon"></span></button>
 #*    *##end
           #banner( $site.bannerLeft "bannerLeft" "me-auto" )
           #banner( $site.bannerRight "bannerRight" $bannerRightClass )
@@ -242,8 +243,8 @@
       </header>
 ##
 #*    *##if( $sideBarEnabled )
-## the menu sits beside the content from 992 px up; below that the content gets the full width and the menu opens as
-## an offcanvas panel. Fluido 2's Bootstrap 2 grid classes (spanN) become the Bootstrap 5 columns of the same width
+## the menu sits beside the content from 992 px up and above it below that. Fluido 2's Bootstrap 2 grid classes
+## (spanN) become the Bootstrap 5 columns of the same width
 #*      *##set( $leftColumnClass = $site.getCustomValue( 'fluidoSkin.leftColumnClass', 'col-lg-3 col-xl-2' ) )
 #*      *##set( $leftColumnClass = $leftColumnClass.replaceAll( '\bspan(\d+)\b', 'col-lg-$1' ) )
 #*      *##set( $bodyColumnClass = $site.getCustomValue( 'fluidoSkin.bodyColumnClass', 'col-lg-9 col-xl-10' ) )
@@ -251,26 +252,12 @@
 ##
       <div class="row">
 #*    *##end
-## the page content comes before the menu in the source; from 992 px the menu goes to the left
-        <main id="bodyColumn"#if( $sideBarEnabled ) class="$bodyColumnClass order-lg-last"#end>
-#*      *##if( $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.sourceLineNumbersEnabled', 'false' ) ) )
-#*        *##set( $sourceStyle = "prettyprint linenums" )
-#*      *##else
-#*        *##set( $sourceStyle = "prettyprint" )
-#*      *##end
-## additive rewrites only: highlighting classes, Bootstrap table classes, and a focusable box for wide tables and
-## code blocks, so a keyboard can scroll them
-#*      *##if ( $bodyContent )$bodyContent.replaceAll( '<pre>(<code[ >](?!.*class=\"nohighlight nocode\"))', '<pre class="' + $sourceStyle + '">' + $esc.d + '1' ).replace( '<pre', '<pre tabindex="0"' ).replace( 'class="bodyTable"', 'class="table table-striped"' ).replace( 'class="bodyTable bodyTableBorder"', 'class="table table-bordered table-striped"' ).replace( '<table', '<div class="table-wrap table-responsive" tabindex="0"><table' ).replace( '</table>', '</table></div>' )#end
-        </main>
 #*    *##if( $sideBarEnabled )
-        <header id="leftColumn" class="$leftColumnClass order-lg-first">
-          <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-            <div class="offcanvas-header">
-              <p class="offcanvas-title h5 mb-0" id="sidebarMenuLabel">Menu</p>
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body flex-column">
-## the page tools at the top of the menu: beside the content on wide screens, in the panel on phones
+## the menu comes first: beside the content from 992 px up, above it on phones, where it is open until the reader hides
+## it with the button in the banner row (not remembered from page to page)
+        <header id="leftColumn" class="$leftColumnClass">
+          <div id="sidebarMenu" class="sidebar-menu mb-3">
+## the page tools at the top of the menu
           #pageTools( "mb-2 px-3" )
           <nav class="sidebar-nav border-end mb-3" aria-label="Menu">
 #*      *##publishDate( "navigation-top" $site.publishDate $site.version )
@@ -288,9 +275,20 @@
             </div>
           </div>
 #*      *##end
-            </div>
           </div>
         </header>
+#*    *##end
+        <main id="bodyColumn"#if( $sideBarEnabled ) class="$bodyColumnClass"#end>
+#*      *##if( $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.sourceLineNumbersEnabled', 'false' ) ) )
+#*        *##set( $sourceStyle = "prettyprint linenums" )
+#*      *##else
+#*        *##set( $sourceStyle = "prettyprint" )
+#*      *##end
+## additive rewrites only: highlighting classes, Bootstrap table classes, and a focusable box for wide tables and
+## code blocks, so a keyboard can scroll them
+#*      *##if ( $bodyContent )$bodyContent.replaceAll( '<pre>(<code[ >](?!.*class=\"nohighlight nocode\"))', '<pre class="' + $sourceStyle + '">' + $esc.d + '1' ).replace( '<pre', '<pre tabindex="0"' ).replace( 'class="bodyTable"', 'class="table table-striped"' ).replace( 'class="bodyTable bodyTableBorder"', 'class="table table-bordered table-striped"' ).replace( '<table', '<div class="table-wrap table-responsive" tabindex="0"><table' ).replace( '</table>', '</table></div>' )#end
+        </main>
+#*    *##if( $sideBarEnabled )
       </div>
 #*    *##end
     </div>
