@@ -17,8 +17,9 @@
  * under the License.
  */
 
+// Google Search was removed in 2.2.0: a site.xml that still configures it builds, without a search form or any link to
+// Google, and without the box below the menu that held the form
 String html = new File( basedir, "target/site/index.html" ).text
-
-// Google search configured: the box below the menu holds the search form
-assert ( html =~ /class="sidebar-nav[ "]/ ).size() == 2
-assert html.contains( '<form id="search-form" action="https://www.google.com/search" method="get" >' )
+assert ( html =~ /class="sidebar-nav[ "]/ ).size() == 1
+assert !html.contains( 'search-form' )
+assert !html.toLowerCase().contains( 'google' )

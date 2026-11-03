@@ -28,7 +28,7 @@
 
 ${project.name}
 
- This is a test for ${skinName} with additional Google Analytics options.
+ This is a test for ${skinName} with Google Analytics options, ignored since 2.2.0.
  ${skinDescription}
 
 * Actual configuration

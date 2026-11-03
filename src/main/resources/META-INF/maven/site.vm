@@ -68,7 +68,6 @@
 #*  *#$render.eval( $site.body.head )
 #**##end
 #**#$pageHead
-#**##googleAnalytics()
 #**##matomo()
 #**##forkMeOnGitHubHead()
   </head>
@@ -90,8 +89,6 @@
 #*    *##end
 #*  *##end
 #**##end
-#**##set( $searchEnabled = $site.getCustomChild( 'fluidoSkin.googleSearch' )
-            && ( $site.getCustomValue( 'fluidoSkin.googleSearch.sitesearch' ) || $project.url ) )
 ##
 #**##if( $topBarEnabled )
 #*  *##set( $navBarStyle = $site.getCustomValue( 'fluidoSkin.navBarStyle', '' ) )
@@ -148,10 +145,6 @@
         <ul class="navbar-nav">
 #*          *##topMenu( $site.body.menus )
         </ul>
-#*      *##end
-##
-#*      *##if( $searchEnabled && !$sideBarEnabled )
-#*        *##googleSearch( true )
 #*      *##end
 ##
 ##        ## MSKINS-31
@@ -265,11 +258,8 @@
 #*      *##publishDate( "navigation-bottom" $site.publishDate $site.version )
           </nav>
 ## no empty box when nothing is configured for it
-#*      *##if( $searchEnabled || ( $site.poweredBy && !$site.poweredBy.isEmpty() ) )
+#*      *##if( $site.poweredBy && !$site.poweredBy.isEmpty() )
           <div class="sidebar-nav text-center mb-3">
-#*        *##if( $searchEnabled )
-#*          *##googleSearch( false )
-#*        *##end
             <div id="poweredBy">
 #*          *##builtByLogo( $site.poweredBy )
             </div>
