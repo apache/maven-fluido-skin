@@ -27,7 +27,9 @@ under the License.
 
 # Welcome to ${project.name}!
 
-The Apache Maven Fluido Skin is an Apache Maven site skin built on top of [Bootstrap ${project.properties.get('bootstrap.version')}](https://getbootstrap.com/docs/5.3/). The skin ships Bootstrap's stylesheet and none of its scripts: menus, the side menu on phones and wide tables work without JavaScript, and the skin's own script only adds highlighting and small conveniences.
+The Apache Maven Fluido Skin is an Apache Maven site skin built on top of [Bootstrap ${project.properties.get('bootstrap.version')}](https://getbootstrap.com/docs/5.3/). Pages read and navigate without JavaScript: the side menu, also on phones, and wide tables work without it. Scripts add code highlighting, the button that hides the side menu on phones, the top bar's dropdown menus and, when enabled, the dark theme.
+
+Upgrading from 2.1.0 or earlier? Read [Migrating to Fluido 2.2.0](./migrate-2.2.html): Bootstrap 2 classes in your own pages and `site.css`, removed options and files, and how to stay on 2.1.0.
 
 A [sample page](./sample.html) is provided to see the skin in action, and two complete sites to show skin configurations: one for [sidebar layout (default)](./sidebar/) and the other for [topbar layout](./topbar/).
 
