@@ -20,7 +20,8 @@ File site = new File( basedir, "target/site" )
 String html = new File( site, "index.html" ).text
 
 // only the image of the configured profile is copied
-assert html.contains( "url('./images/profiles/retired.png')" )
-assert new File( site, "images/profiles/retired.png" ).exists()
-assert !new File( site, "images/profiles/sandbox.png" ).exists()
-assert !new File( site, "images/profiles/pre-release.png" ).exists()
+assert html.contains( "url('./images/profiles/retired.svg');background-size: 336px 252px;" )
+assert new File( site, "images/profiles/retired.svg" ).exists()
+assert !new File( site, "images/profiles/retired.png" ).exists()
+assert !new File( site, "images/profiles/sandbox.svg" ).exists()
+assert !new File( site, "images/profiles/pre-release.svg" ).exists()
