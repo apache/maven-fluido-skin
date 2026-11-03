@@ -19,6 +19,24 @@
 
 /* Details on top of Bootstrap 5, in Bootstrap's custom properties so they follow the colour mode. */
 
+/* links: Bootstrap's #0d6efd reaches 4.5:1 only on pure white and falls below it on the light tinted boxes pages
+   use (code blocks #f8f9fa, cards #fafafa, callouts #fdf3ef). #0a58ca keeps 5.9:1 or more on all of them, hover
+   #084298 more. In the dark colour mode Bootstrap's #6ea8fe keeps 4.7:1 or more up to #343a40; hover #9ec5fe.
+   Links stay underlined in running text (WCAG 1.4.1). */
+:root,
+[data-bs-theme=light] {
+  --bs-link-color: #0a58ca;
+  --bs-link-color-rgb: 10, 88, 202;
+  --bs-link-hover-color: #084298;
+  --bs-link-hover-color-rgb: 8, 66, 152;
+}
+[data-bs-theme=dark] {
+  --bs-link-color: #6ea8fe;
+  --bs-link-color-rgb: 110, 168, 254;
+  --bs-link-hover-color: #9ec5fe;
+  --bs-link-hover-color-rgb: 158, 197, 254;
+}
+
 /* code blocks in a box, as in Fluido 2 */
 pre {
   padding: 9.5px;
