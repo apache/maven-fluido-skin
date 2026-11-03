@@ -198,13 +198,73 @@
 #**##set( $pageHref = $pageHref.replaceAll( '\\', '/' ) )
 #end
 ##
+## the menu item for a page that no menu lists: the item whose directory is the longest prefix of the page's
+## directory, so a series of pages such as docs/4.0.0/release-notes.html marks the item for docs/history.html;
+## the page sits in a subdirectory of the item's, never next to it, and a directory counts only when exactly one item
+## points into it, so a folder of unrelated pages marks nothing;
+## items at the site root and links to other sites never match (apache/maven-doxia-sitetools#657)
+#macro( seriesItem $menus )
+#**##set( $exactItem = false )
+#**##set( $seriesItem = false )
+#**##set( $seriesOwners = {} )
+#**##set( $seriesCounts = {} )
+#**##foreach( $menu in $menus )
+#*  *##if( $menu.items && $menu.items.size() > 0 )#seriesWalk( $menu.items )#end
+#**##end
+#**##if( !$exactItem && $currentFileName && $currentFileName.lastIndexOf( '/' ) > 0 )
+#*  *##set( $pageDir = $currentFileName.substring( 0, $currentFileName.lastIndexOf( '/' ) + 1 ) )
+#*  *##set( $seriesDepth = 0 )
+#*  *##foreach( $dir in $seriesOwners.keySet() )
+#*    *##if( $pageDir.startsWith( $dir ) && $pageDir != $dir && $dir.length() > $seriesDepth && $seriesCounts.get( $dir ) == 1 )
+#*      *##set( $seriesItem = $seriesOwners.get( $dir ) )
+#*      *##set( $seriesDepth = $dir.length() )
+#*    *##end
+#*  *##end
+#**##end
+#end
+##
+#macro( seriesWalk $items )
+#**##foreach( $walkItem in $items )
+#*  *##pageHref( $walkItem.href )
+#*  *##if( $alignedFileName == $pageHref )
+#*    *##set( $exactItem = true )
+#*  *##end
+#*  *##set( $walkHref = "$!walkItem.href" )
+#*  *##if( $project && $project.url )
+#*    *##set( $siteRoot = $project.url )
+#*    *##if( !$siteRoot.endsWith( '/' ) )
+#*      *##set( $siteRoot = "${siteRoot}/" )
+#*    *##end
+#*    *##if( $walkHref.startsWith( $siteRoot ) )
+#*      *##set( $walkHref = $walkHref.substring( $siteRoot.length() ) )
+#*    *##end
+#*  *##end
+#*  *##if( $walkHref.startsWith( '/' ) )
+#*    *##set( $walkHref = $walkHref.substring( 1 ) )
+#*  *##elseif( $walkHref.startsWith( './' ) )
+#*    *##set( $walkHref = $walkHref.substring( 2 ) )
+#*  *##end
+#*  *##if( !$walkHref.contains( ':' ) && !$walkHref.startsWith( '../' ) && $walkHref.lastIndexOf( '/' ) > 0 )
+#*    *##set( $walkDir = $walkHref.substring( 0, $walkHref.lastIndexOf( '/' ) + 1 ) )
+#*    *##if( $seriesCounts.containsKey( $walkDir ) )
+#*      *##set( $walkCount = $seriesCounts.get( $walkDir ) + 1 )
+#*    *##else
+#*      *##set( $walkCount = 1 )
+#*      *##set( $walkIgnored = $seriesOwners.put( $walkDir, $walkItem ) )
+#*    *##end
+#*    *##set( $walkIgnored = $seriesCounts.put( $walkDir, $walkCount ) )
+#*  *##end
+#*  *##if( $walkItem.items && $walkItem.items.size() > 0 )#seriesWalk( $walkItem.items )#end
+#**##end
+#end
+##
 #macro( displayTree $item $display )
 #**##if( $item.items && $item.items.size() > 0 )
 #*  *##foreach( $subItem in $item.items )
 #*    *##pageHref( $subItem.href )
 #*    *##set( $subItemHref = $pageHref )
 ##
-#*    *##if( $alignedFileName == $subItemHref )
+#*    *##if( $alignedFileName == $subItemHref || $subItem == $seriesItem )
 #*      *##set( $display = true )
 #*    *##end
 ##
@@ -221,12 +281,15 @@
 ## collapsed by default: expanded when collapse is false, or when the page is the item or below it
 #*  *##set( $display = false )
 #*  *##displayTree( $item $display )
-#*  *##if( $item.collapse == false || $alignedFileName == $currentItemHref || $display )
+#*  *##if( $item.collapse == false || $alignedFileName == $currentItemHref || $item == $seriesItem || $display )
 #*    *##set( $expanded = true )
 #*  *##end
 #**##end
 #**##if( $alignedFileName == $currentItemHref )
 #*  *##set( $linkClass = 'active" aria-current="page' )
+#**##elseif( $item == $seriesItem )
+## the page belongs to this item's series: marked like the current page, announced as the current item of a set
+#*  *##set( $linkClass = 'active" aria-current="true' )
 #**##elseif( $item.items && $item.items.size() > 0 && !$expanded )
 ## a caret marks an item whose sub-items are not shown
 #*  *##set( $linkClass = "collapsed" )
@@ -247,6 +310,7 @@ $indent    ##
 #end
 ##
 #macro( mainMenu $menus )
+#**##seriesItem( $menus )
               <ul class="menu-list list-unstyled mb-0">
 #**##foreach( $menu in $menus )
 #**##if( $menu.name )
