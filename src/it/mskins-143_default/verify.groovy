@@ -17,9 +17,11 @@
  * under the License.
  */
 
+// Google Analytics was removed in 2.2.0: a site.xml that still configures it builds, and no page loads anything from
+// Google
 File index = new File( basedir, "target/site/index.html" )
 assert index.exists()
-assert !index.text.contains( '_gaq.push([\'_setAccount\', \'FOO-BAR\']);' )
-assert index.text.contains( 'ga(\'create\', \'FOO-BAR\', \'auto\');' )
-assert index.text.contains( 'ga(\'set\', \'anonymizeIp\', true);' )
-assert index.text.contains( 'ga(\'set\', \'forceSSL\', true);' )
+String html = index.text
+assert !html.contains( 'google-analytics.com' )
+assert !html.contains( 'GoogleAnalyticsObject' )
+assert !html.contains( "ga('create'" )

@@ -28,7 +28,7 @@
 
 ${project.name}
 
- This is a test for ${skinName} with sidebar enabled and Google Search.
+ This is a test for ${skinName} with sidebar enabled and a Google Search configuration, ignored since 2.2.0.
  ${skinDescription}
 
 * Actual configuration

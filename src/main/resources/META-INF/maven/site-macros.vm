@@ -396,27 +396,6 @@ $indent    ##
 #**##end
 #end
 ##
-#macro( googleAnalytics )
-#set( $accountId = $site.getCustomValue( 'fluidoSkin.googleAnalytics.accountId' ) )
-#**##if( $accountId && $accountId.length() > 0 )
-    <!-- Google Analytics -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', '$accountId', 'auto');
-      ga('send', 'pageview');
-#**##if( $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.googleAnalytics.anonymizeIp', 'true' ) ) )
-      ga('set', 'anonymizeIp', true);
-#**##end
-#**##if( $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.googleAnalytics.forceSSL', 'true' ) ) )
-      ga('set', 'forceSSL', true);
-#**##end
-    </script>
-#**##end
-#end
-
 #macro( matomo )
 #**##if( $site.getCustomValue( 'matomo.url' ) && $site.getCustomValue( 'matomo.url' ).length() > 0
           && $site.getCustomValue( 'matomo.siteId' ) && $site.getCustomValue( 'matomo.siteId' ).length() > 0 )
@@ -443,19 +422,6 @@ $indent    ##
 #**##end
 #end
 
-##
-#macro( googleSearch $top )
-<form id="search-form" action="https://www.google.com/search" method="get" #if( $top ) class="d-flex ms-auto"#end>
-#**##if( $site.getCustomChild( 'fluidoSkin.googleSearch.sitesearch' ) )
-#*  *##set( $sitesearchValue = $site.getCustomValue( 'fluidoSkin.googleSearch.sitesearch' ) )
-#**##else
-#*  *##set( $startIndex = $project.url.indexOf( '://' ) + 3 )
-#*  *##set( $sitesearchValue = $project.url.substring( $startIndex, $project.url.length() ) )
-#**##end
-  <input value="$sitesearchValue" name="sitesearch" type="hidden" />
-  <input class="search-query form-control form-control-sm" name="q" id="query" type="search" placeholder="Search with Google..." aria-label="Search with Google" />
-</form>
-#end
 ##
 #macro( forkMeOnGitHubHead )
 #**##if( $site.getCustomChild( 'fluidoSkin.gitHub.projectId' ) )

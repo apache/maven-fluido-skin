@@ -28,7 +28,7 @@
 
 ${project.name}
 
- This is a test for ${skinName} with topbar enabled, sidebar disabled and Google Search.
+ This is a test for ${skinName} with topbar enabled, sidebar disabled and a Google Search configuration, ignored since 2.2.0.
 
  bar.html
 

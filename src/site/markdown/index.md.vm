@@ -192,80 +192,14 @@ Users can optionally enable **Matomo**. How to configure it for Apache Analytics
 
 ${esc.h}${esc.h}${esc.h} <a id="Google_Analytics"></a>Google Analytics
 
-Users can optionally enable **Google Analytics** for the generated site:
-
-```xml
-<site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
-  [...]
-  <custom>
-    <fluidoSkin>
-      <googleAnalytics>
-        <accountId>UA-12345...</accountId>
-      </googleAnalytics>
-    </fluidoSkin>
-  </custom>
-  [...]
-</site>
-```
-
-By default, `forceSSL` and `anonymizeIp` are enabled. You can disable both, but this might be illegal in several countries or regions (e.g., in the EU due to GDPR):
-
-```xml
-<site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
-  [...]
-  <custom>
-    <fluidoSkin>
-      <googleAnalytics>
-        <accountId>UA-12345...</accountId>
-        <anonymizeIp>true/false</anonymizeIp>
-        <forceSSL>true/false</forceSSL>
-      </googleAnalytics>
-    </fluidoSkin>
-  </custom>
-  [...]
-</site>
-```
+Removed in **2\.2\.0**: the script came from a third-party host on every page view, and the Universal Analytics
+service it used no longer collects data. The `googleAnalytics` configuration is ignored. Use [Matomo](#Matomo_.28e.g._Apache_Analytics.29),
+or add your own script in the `head` element of the site descriptor's `body` ([head/footer placeholders](#head.2Ffooter_placeholders)).
 
 ${esc.h}${esc.h}${esc.h} <a id="Google_Search"></a>Google Search
 
-Users can optionally enable the **Google Search** for the generated site, requirements are:
-
-- the `project.url` property in `pom.xml`, unless the `custom.fluidoSkin.googleSearch.sitesearch` property is set in the `site.xml`:
-
-    ```xml
-    <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
-      [...]
-      <url>https://maven.apache.org/skins/${project.artifactId}</url>
-      [...]
-    </site>
-    ```
-
-- the `custom.fluidoSkin.googleSearch` element in `site.xml`:
-
-    ```xml
-    <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
-      [...]
-      <custom>
-        <fluidoSkin>
-          <googleSearch>
-            <sitesearch/>
-          </googleSearch>
-        </fluidoSkin>
-      </custom>
-      [...]
-    </site>
-    ```
-
-By default, the search form:
-
-- is _not_ enabled; adding `custom.fluidoSkin.googleSearch` is enough to enable the searchbox.
-- is rendered in the sidebar, if the topbar only is available it will be rendered there.
-
-External links are either rendered in the sidebar or the topbar. When both sidebar and topbar are enabled, they are rendered as dropdown in the topbar only.
+Removed in **2\.2\.0**: the search box sent the reader's query to a third-party host. The `googleSearch`
+configuration is ignored.
 
 ${esc.h}${esc.h}${esc.h} <a id="Source_code_line_numbers"></a>Source code line numbers
 

@@ -17,9 +17,7 @@
  * under the License.
  */
 
-File index = new File( basedir, "target/site/index.html" )
-assert index.exists()
-assert !index.text.contains( '_gaq.push([\'_setAccount\', \'FOO-BAR\']);' )
-assert index.text.contains( 'ga(\'create\', \'FOO-BAR\', \'auto\');' )
-assert !index.text.contains( 'ga(\'set\', \'anonymizeIp\', true);' )
-assert !index.text.contains( 'ga(\'set\', \'forceSSL\', true);' )
+// Google Search with a sitesearch value, removed in 2.2.0: the site builds and no page mentions Google
+String html = new File( basedir, "target/site/index.html" ).text
+assert !html.contains( 'search-form' )
+assert !html.toLowerCase().contains( 'google' )
