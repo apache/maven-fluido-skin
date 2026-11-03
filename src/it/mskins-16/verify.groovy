@@ -28,7 +28,7 @@ File site = new File( basedir, "target/site" )
 assert !html.contains( 'gh-fork-ribbon' )
 assert !new File( site, "css/gh-fork-ribbon.min.css" ).exists()
 for ( String profile : [ 'pre-release', 'retired', 'sandbox' ] ) {
-    assert !new File( site, "images/profiles/${profile}.png" ).exists()
+    assert !new File( site, "images/profiles/${profile}.svg" ).exists()
 }
 
 // banner images without alt: the project name when the banner has no name, empty when its name gives the text

@@ -39,15 +39,15 @@ under the License.
       <vtl-condition><![CDATA[#if( !$site.getCustomValue( 'fluidoSkin.themeSwitch', 'true' ).equalsIgnoreCase( 'false' ) || $site.getCustomValue( 'fluidoSkin.darkThemeEnabled', 'false' ).equalsIgnoreCase( 'true' ) )true#end]]></vtl-condition>
     </resource-condition>
     <resource-condition>
-      <resource-name>images/profiles/pre-release.png</resource-name>
+      <resource-name>images/profiles/pre-release.svg</resource-name>
       <vtl-condition><![CDATA[#if( $site.getCustomValue( 'fluidoSkin.profile', '' ).equalsIgnoreCase( 'pre-release' ) )true#end]]></vtl-condition>
     </resource-condition>
     <resource-condition>
-      <resource-name>images/profiles/retired.png</resource-name>
+      <resource-name>images/profiles/retired.svg</resource-name>
       <vtl-condition><![CDATA[#if( $site.getCustomValue( 'fluidoSkin.profile', '' ).equalsIgnoreCase( 'retired' ) )true#end]]></vtl-condition>
     </resource-condition>
     <resource-condition>
-      <resource-name>images/profiles/sandbox.png</resource-name>
+      <resource-name>images/profiles/sandbox.svg</resource-name>
       <vtl-condition><![CDATA[#if( $site.getCustomValue( 'fluidoSkin.profile', '' ).equalsIgnoreCase( 'sandbox' ) )true#end]]></vtl-condition>
     </resource-condition>
   </resource-conditions>

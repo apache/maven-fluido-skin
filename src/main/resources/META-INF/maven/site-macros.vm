@@ -439,7 +439,13 @@ $indent    ##
 #**##if( $profile.equalsIgnoreCase( "retired" )
           || $profile.equalsIgnoreCase( "pre-release" )
           || $profile.equalsIgnoreCase( "sandbox" ) )
-      <style type="text/css">body{background-image: url('$relativePath/images/profiles/${profile}.png');}</style>
+## SVG drawn at 700x525: scaled to the size of the PNGs that earlier versions shipped
+#*  *##if( $profile.equalsIgnoreCase( "retired" ) )
+#*    *##set( $profileSize = "336px 252px" )
+#*  *##else
+#*    *##set( $profileSize = "420px 315px" )
+#*  *##end
+      <style type="text/css">body{background-image: url('$relativePath/images/profiles/${profile}.svg');background-size: $profileSize;}</style>
 #**##end
 #end
 ##
