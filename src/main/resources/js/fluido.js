@@ -17,67 +17,136 @@
  * under the License.
  */
 
-jQuery( document ).ready( function()
-{
-    // initialize the dropdown menu if found
-    $( '.topbar' ).dropdown();
+/* Plain DOM code, ES5: highlighting and labels for the stacked tables. Menus are Bootstrap's own components. */
+( function() {
 
-    // highlight the code blocks that site.vm marked; line numbers where sourceLineNumbersEnabled added linenums
-    if ( window.hljs ) {
-        $( 'pre.prettyprint > code' ).each( function() {
-            // a language highlight.js does not know (Markdown ```unknown) is detected instead, as prettify did
-            var lang = ( this.className.match( /\blanguage-(\S+)/ ) || [] )[ 1 ];
-            if ( lang && !hljs.getLanguage( lang ) ) {
-                $( this ).removeClass( 'language-' + lang );
-            }
-            hljs.highlightElement( this );
-            if ( hljs.lineNumbersBlock && $( this ).parent().hasClass( 'linenums' ) ) {
-                hljs.lineNumbersBlock( this, { singleLine: true } );
-            }
-        } );
+    function each( list, fn ) {
+        for ( var i = 0; i < list.length; i++ ) {
+            fn( list[ i ], i );
+        }
     }
 
-    // label each cell with its column heading, for the stacked tables on narrow screens (maven-base.css);
-    // only tables whose first row is a plain heading row, and only rows with one cell per heading
-    $( '.table-wrap > table' ).each( function() {
-        var rows = $( this ).find( '> thead > tr, > tbody > tr' );
-        var head = rows.first();
-        if ( head.children( 'td' ).length || !head.children( 'th' ).length || head.children( '[rowspan], [colspan]' ).length ) {
+    function trim( text ) {
+        return ( text || '' ).replace( /^\s+|\s+$/g, '' );
+    }
+
+    function addClass( element, name ) {
+        element.className = trim( element.className + ' ' + name );
+    }
+
+    // a parameter table (Name or Element, Type, maybe Since, ..., Description) shows the type and the since
+    // version as a small line under the name and hides their columns, so the description gets the width
+    function mergeParameterColumns( rows, labels ) {
+        var lower = [];
+        each( labels, function( label ) {
+            lower.push( label.toLowerCase() );
+        } );
+        var type = lower.indexOf( 'type' ), since = lower.indexOf( 'since' );
+        if ( type < 1 || lower[ lower.length - 1 ] !== 'description' ) {
             return;
         }
-        var labels = head.children( 'th' ).map( function() { return $.trim( $( this ).text() ); } ).get();
-        head.addClass( 'table-head' );
-        rows.slice( 1 ).each( function() {
-            var cells = $( this ).children();
-            if ( cells.length === labels.length ) {
-                cells.each( function( i ) { $( this ).attr( 'data-label', labels[ i ] ); } );
-            }
+        var merged = [ type ];
+        if ( since > 0 && since < lower.length - 1 ) {
+            merged.push( since );
+        }
+        each( merged, function( i ) {
+            addClass( rows[ 0 ].children[ i ], 'param-merged' );
         } );
-    } );
-
-    // the side menu starts collapsed on phones, where maven-base.css shows the summary that opens it, and is
-    // opened again on wider screens, where the summary is hidden; the link at the top of the page opens it too
-    var menu = $( 'details.sidebar-menu' );
-    var phone = window.matchMedia ? window.matchMedia( '(max-width: 767px)' ) : null;
-    if ( menu.length && phone ) {
-        var collapseOnPhone = function() { menu.prop( 'open', !phone.matches ); };
-        collapseOnPhone();
-        if ( phone.addEventListener ) {
-            phone.addEventListener( 'change', collapseOnPhone );
-        } else if ( phone.addListener ) {
-            phone.addListener( collapseOnPhone );
+        for ( var r = 1; r < rows.length; r++ ) {
+            var cells = rows[ r ].children;
+            if ( cells.length !== labels.length ) {
+                continue;
+            }
+            var meta = document.createElement( 'div' );
+            meta.className = 'param-meta';
+            each( merged, function( i ) {
+                var cell = cells[ i ];
+                var text = trim( cell.textContent );
+                // plugin-tools writes "-" for a parameter without a since version
+                if ( text && text !== '-' ) {
+                    if ( meta.childNodes.length ) {
+                        meta.appendChild( document.createTextNode( ' \u00B7 ' ) );
+                    }
+                    if ( i === since ) {
+                        meta.appendChild( document.createTextNode( labels[ i ] + ' ' ) );
+                    }
+                    var copy = cell.cloneNode( true );
+                    each( copy.querySelectorAll( '[id], [name]' ), function( el ) {
+                        el.removeAttribute( 'id' );
+                        el.removeAttribute( 'name' );
+                    } );
+                    while ( copy.firstChild ) {
+                        meta.appendChild( copy.firstChild );
+                    }
+                }
+                addClass( cell, 'param-merged' );
+            } );
+            if ( meta.childNodes.length ) {
+                cells[ 0 ].appendChild( meta );
+            }
         }
     }
-    $( '.menu-jump a' ).on( 'click', function() { menu.prop( 'open', true ); } );
 
-} );
+    function init() {
+        // highlight the code blocks that site.vm marked; line numbers where sourceLineNumbersEnabled added linenums
+        if ( window.hljs ) {
+            each( document.querySelectorAll( 'pre.prettyprint > code' ), function( code ) {
+                // a language highlight.js does not know (Markdown ```unknown) is detected instead, as prettify did
+                var lang = code.className.match( /(^|\s)language-(\S+)/ );
+                if ( lang && !hljs.getLanguage( lang[ 2 ] ) ) {
+                    code.className = trim( code.className.replace( lang[ 0 ], ' ' ) );
+                }
+                hljs.highlightElement( code );
+                if ( hljs.lineNumbersBlock && /(^|\s)linenums(\s|$)/.test( code.parentNode.className ) ) {
+                    hljs.lineNumbersBlock( code, { singleLine: true } );
+                }
+            } );
+        }
 
-function asyncJs( url ) {
-    ( function() {
-            var s = document.createElement( 'script' ), t = document.getElementsByTagName( 'script' )[0];
-            s.type = 'text/javascript';
-            s.async = true;
-            s.src = url;
-            t.parentNode.insertBefore( s, t );
-        } )();
-}
+        // label each cell with its column heading, for the stacked tables on narrow screens (fluido.css);
+        // only tables whose first row is a plain heading row, and only rows with one cell per heading
+        each( document.querySelectorAll( '.table-wrap > table' ), function( table ) {
+            var rows = [];
+            each( table.children, function( section ) {
+                if ( section.tagName === 'THEAD' || section.tagName === 'TBODY' ) {
+                    each( section.children, function( row ) {
+                        rows.push( row );
+                    } );
+                }
+            } );
+            var head = rows[ 0 ];
+            if ( !head ) {
+                return;
+            }
+            var labels = [], plain = head.children.length > 0;
+            each( head.children, function( cell ) {
+                if ( cell.tagName !== 'TH' || cell.hasAttribute( 'rowspan' ) || cell.hasAttribute( 'colspan' ) ) {
+                    plain = false;
+                }
+                labels.push( trim( cell.textContent ) );
+            } );
+            if ( !plain ) {
+                return;
+            }
+            head.className = trim( head.className + ' table-head' );
+            for ( var r = 1; r < rows.length; r++ ) {
+                if ( rows[ r ].children.length === labels.length ) {
+                    each( rows[ r ].children, function( cell, i ) {
+                        cell.setAttribute( 'data-label', labels[ i ] );
+                        // an empty cell shows nothing but its label in a card: leave it out there
+                        if ( !trim( cell.textContent ) && !cell.querySelector( 'img' ) ) {
+                            cell.className = trim( cell.className + ' table-cell-empty' );
+                        }
+                    } );
+                }
+            }
+            mergeParameterColumns( rows, labels );
+        } );
+    }
+
+    if ( document.readyState === 'loading' ) {
+        document.addEventListener( 'DOMContentLoaded', init );
+    } else {
+        init();
+    }
+} )();

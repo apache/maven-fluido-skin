@@ -1,13 +1,13 @@
 Apache Maven - Fluido Skin
 Copyright 2011 The Apache Software Foundation
 
-Twitter Bootstrap - licensed under the Apache License v2.0.
+Bootstrap - licensed under the MIT License
 This product includes software developed by
-Twitter (http://twitter.github.com/bootstrap/).
+The Bootstrap Authors (https://getbootstrap.com/)
 
-JQuery - licensed under the MIT License
+Popper - licensed under the MIT License
 This product includes software developed by
-JQuery (http://jquery.org/)
+Federico Zivolo (https://popper.js.org/)
 
 Google code prettify - licensed under the Apache License v2.0.
 This product includes software developed by
@@ -16,7 +16,3 @@ Google (http://code.google.com/p/google-code-prettify/)
 Tango! base icon theme - released to the Public Domain
 This product includes software developed by
 Tango! Desktop Project (http://tango.freedesktop.org/)
-
-Glyphicons Halflings (part of Bootstrap by Twitter) - licensed under the Creative Commons Attribution 3.0 Unported (CC BY 3.0)
-This product includes software developed by
-Jan Kovařík (http://glyphicons.com/)

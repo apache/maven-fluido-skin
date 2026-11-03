@@ -32,7 +32,7 @@ under the License.
 
   <name>Apache Maven Fluido Skin</name>
   <description>The Apache Maven Fluido Skin is an Apache Maven site skin
-    built on top of Twitter's bootstrap.</description>
+    built on top of Bootstrap.</description>
   <inceptionYear>2011</inceptionYear>
 
   <contributors>
@@ -98,8 +98,7 @@ under the License.
   <properties>
     <anchorjs.version>4.3.1</anchorjs.version>
     <highlightjs.version>11.12.0</highlightjs.version>
-    <bootstrap.version>2.3.2</bootstrap.version>
-    <jquery.version>1.11.2</jquery.version>
+    <bootstrap.version>5.3.8</bootstrap.version>
     <project.build.outputTimestamp>2025-03-08T23:27:09Z</project.build.outputTimestamp>
     <!-- the following properties are used in ITs (which do not inherit anything from a common parent) -->
     <sitePluginVersion>${version.maven-site-plugin}</sitePluginVersion>
@@ -136,12 +135,13 @@ under the License.
         <!-- add skin-info -->
       </resource>
 
-      <!-- include the print.css, the dark theme and the already minified highlight.js bundle -->
+      <!-- include the print.css and the already minified Bootstrap (stylesheet and script bundle) and highlight.js bundles -->
       <resource>
         <directory>${basedir}/src/main/resources</directory>
         <includes>
           <include>css/print.css</include>
-          <include>css/dark-theme.css</include>
+          <include>css/bootstrap-${bootstrap.version}.min.css</include>
+          <include>js/bootstrap-${bootstrap.version}.bundle.min.js</include>
           <include>js/highlight-${highlightjs.version}.min.js</include>
         </includes>
       </resource>
@@ -165,10 +165,10 @@ under the License.
           <artifactId>apache-rat-plugin</artifactId>
           <configuration>
             <inputExcludes combine.children="append">
-              <exclude>src/main/resources/fonts/glyphicons-halflings-regular.svg</exclude>
+              <exclude>src/main/resources/css/bootstrap-*.min.css</exclude>
+              <exclude>src/main/resources/js/bootstrap-*.bundle.min.js</exclude>
               <exclude>src/main/resources/js/highlight-*.min.js</exclude>
               <exclude>src/main/resources/css/highlight-*.min.css</exclude>
-              <exclude>src/main/resources/js/jquery-*.js</exclude>
               <exclude>src/main/resources/js/anchor-*.js</exclude>
               <exclude>src/main/resources/css/gh-fork-ribbon.css</exclude>
             </inputExcludes>
@@ -220,9 +220,8 @@ under the License.
             </goals>
             <phase>generate-resources</phase>
             <configuration>
+              <!-- Bootstrap ships minified and is linked on its own: these engines predate its CSS -->
               <cssSourceFiles>
-                <cssSourceFile>bootstrap-${bootstrap.version}.css</cssSourceFile>
-                <cssSourceFile>bootstrap-${bootstrap.version}-responsive.css</cssSourceFile>
                 <!-- before the skin's own styles, so that they can adjust the theme's colours -->
                 <cssSourceFile>highlight-github-${highlightjs.version}.min.css</cssSourceFile>
                 <cssSourceFile>maven-base.css</cssSourceFile>
@@ -230,8 +229,6 @@ under the License.
               </cssSourceFiles>
               <cssFinalFile>apache-maven-fluido-${project.version}.css</cssFinalFile>
               <jsSourceFiles>
-                <jsSourceFile>jquery-${jquery.version}.js</jsSourceFile>
-                <jsSourceFile>bootstrap-${bootstrap.version}.js</jsSourceFile>
                 <jsSourceFile>fluido.js</jsSourceFile>
               </jsSourceFiles>
               <jsFinalFile>apache-maven-fluido-${project.version}.js</jsFinalFile>

@@ -20,7 +20,7 @@
 String html = new File( basedir, "target/site/index.html" ).text
 
 // no search, social buttons or poweredBy configured: only the menu box, no empty one below it
-assert ( html =~ /class="well sidebar-nav"/ ).size() == 1
+assert ( html =~ /class="sidebar-nav[ "]/ ).size() == 1
 assert !html.contains( 'id="poweredBy"' )
 
 // no GitHub ribbon and no profile configured: their resources are neither linked nor copied
@@ -32,5 +32,7 @@ for ( String profile : [ 'pre-release', 'retired', 'sandbox' ] ) {
 }
 
 // banner images without alt: the project name when the banner has no name, empty when its name gives the text
-assert html.contains( '<a href="http://www.apache.org"><img src="images/apache-maven-project-2.png" alt="Apache Maven Fluido Skin IT, MSKINS-16" ' )
-assert html.contains( '<a href="http://www.apache.org"><img src="images/apache-maven-project-2.png" alt="" style="width: 473px;height: 93px;border: 1" /> Apache</a>' )
+assert html.contains( '<a href="http://www.apache.org"><img class="img-fluid" src="images/apache-maven-project-2.png" alt="Apache Maven Fluido Skin IT, MSKINS-16" ' )
+assert html.contains( '<a href="http://www.apache.org"><img class="img-fluid" src="images/apache-maven-project-2.png" alt="" style="width: 473px;height: 93px;border: 1" /> Apache</a>' )
+// a right banner that is a link is not hidden on phones, even with a left banner
+assert html.contains( '<div id="bannerRight"><p class="m-0 fs-3 fw-bold"><a href="http://www.apache.org">' )

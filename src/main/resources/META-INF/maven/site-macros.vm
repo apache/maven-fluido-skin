@@ -18,33 +18,31 @@
 #macro( topMenu $menus )
 #**##foreach( $menu in $menus )
 #**##if( $menu.name )
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown">$esc.xml( $menu.name ) <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-#*    *##foreach( $item in $menu.items )
-#*      *##if( $item.items.size() > 0 )
-            <li class="dropdown-submenu">
-#*            *##topLink( $item )
-
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">$esc.xml( $menu.name )</a>
               <ul class="dropdown-menu">
+#*    *##foreach( $item in $menu.items )
+                <li>#topLink( $item )##
+#*      *##if( $item.items.size() > 0 )
+
+                  <ul class="list-unstyled ps-3">
 #*            *##foreach( $subItem in $item.items )
-                  <li>#topLink( $subItem )</li>
+                    <li>#topLink( $subItem )</li>
 #*            *##end
-              </ul>
-            </li>
-#*      *##else
-            <li>#topLink( $item )</li>
+                  </ul>
+                ##
 #*      *##end
+</li>
 #*    *##end
-        </ul>
-      </li>
+              </ul>
+          </li>
 #**##end
 #**##end
 #end
 ##
 #macro( topLinks $links )
 #**##foreach( $item in $links )
-    <li>#topLink( $item )</li>
+                <li>#topLink( $item )</li>
 #**##end
 #end
 ##
@@ -108,7 +106,7 @@
 #end
 ##
 #macro( topLink $link )
-#**##link ( $link $null true )
+#**##link( $link $null true "a" $null "imageLink" "dropdown-item" )
 #end
 ##
 #macro( image $image $imageClass )
@@ -142,12 +140,17 @@
 #*    *##set( $style = "" )
 #*  *##end
 #*  *##set( $style = "$width$height$style" )
+## a banner image named ...-light-theme... has a ...-dark-theme... sibling for the dark colour mode (maven-site's logo)
+#*  *##if( $inBanner && $src.contains( '-light-theme.' ) )
+<img class="#if( $imageClass )$imageClass #{end}banner-light"$src$alt#if( $style ) style="$style"#end /><img class="#if( $imageClass )$imageClass #{end}banner-dark"$src.replace( '-light-theme.', '-dark-theme.' )$alt#if( $style ) style="$style"#end />##
+#*  *##else
 <img#if( $imageClass ) class="$imageClass"#end$src$alt#if( $style ) style="$style"#end />##
+#*  *##end
 #end
 ##
 ## a banner image without alt that is the only content of its link takes the project name, so the link has a name;
 ## otherwise its alt is empty: the banner's own name gives the text, or an unlinked logo is decorative
-#macro( banner $banner $id )
+#macro( banner $banner $id $cssClass )
 #**##if( $banner )
 #*  *##set( $inBanner = true )
 #*  *##if( !$banner.name && $banner.href && $project && $project.name )
@@ -156,59 +159,50 @@
 #*    *##set( $bannerAlt = "" )
 #*  *##end
 #*  *##if( $banner.name || $banner.href || $banner.image.alt )
-#*    *#<div id="$id"><h1>#link( $banner $null false $null "set" $null "" )</h1></div>##
+#*    *#<div id="$id"#if( $cssClass ) class="$cssClass"#end><p class="m-0 fs-3 fw-bold">#link( $banner $null false $null "set" "img-fluid" "" )</p></div>##
 #*  *##else
 ## an unlinked image without a name or alt text is decorative: no heading, so screen readers do not announce an empty one
-#*    *#<div id="$id"><div class="banner-decoration">#link( $banner $null false $null "set" $null "" )</div></div>##
+#*    *#<div id="$id"#if( $cssClass ) class="$cssClass"#end>#link( $banner $null false $null "set" "img-fluid" "" )</div>##
 #*  *##end
 #*  *##set( $inBanner = false )
 #**##end
 #end
 ##
 #macro( links $links )
-#**##if( $links && $links.size() > 0 )
-#*  *##set( $counter = 0 )
-#*  *### MSKINS-41
-#*  *##set( $begin = $links.size() - 1 )
-#*  *##foreach( $index in [$begin..0] )
-#*    *##set( $item = $links.get( $index ) )
-#*    *##set( $counter = $counter + 1 )
-##
-        <li class="pull-right">##
-#*    *##if( $counter > 0 && $counter < $links.size() )
-#*    *#<span class="divider">|</span>
-#*    *##end
-#*    *##link( $item )
-#*    *#</li>
-#*  *##end
+#**##foreach( $item in $links )
+            <li>#link( $item )</li>
 #**##end
 #end
 ##
-#macro( breadcrumbs $breadcrumbs $cssClass )
-#**##set( $breadcrumbDivider = $site.getCustomValue( 'fluidoSkin.breadcrumbDivider', '/' ) )
+#macro( breadcrumbs $breadcrumbs )
 #**##foreach( $item in $breadcrumbs )
-      <li#if( $cssClass ) class="$cssClass"#end>##
-#*  *##link( $item $null false "a" "always" )
-#*  *#<span class="divider">$breadcrumbDivider</span>##
-#*  *#</li>
+            <li class="breadcrumb-item">#link( $item $null false "a" "always" )</li>
 #**##end
-#**### add Edit button if content is editable
-#**##if( $site.edit && $docRenderingContext.editable )
-#*  *##set( $edit = ' <a href="' + $docRenderingContext.getDoxiaSourcePath( $site.edit ) + '"><img src="' + $relativePath + '/images/edit.svg" alt="' + $text.get( "template.edit" ) + '" width="14" height="14" /></a>' )
+## the page itself is not a crumb: its heading follows right below the bar
+#end
+##
+## the link to a menu item as this page sees it; an item written as an absolute URL inside this site (as the
+## descriptor's links stay with relativizeSiteLinks false) is compared as the relative link it would otherwise be
+#macro( pageHref $href )
+#**##set( $pageHref = $href )
+#**##if( $href && $project && $project.url )
+#*  *##set( $siteRoot = $project.url )
+#*  *##if( !$siteRoot.endsWith( '/' ) )
+#*    *##set( $siteRoot = "${siteRoot}/" )
+#*  *##end
+#*  *##if( $href.startsWith( $siteRoot ) )
+#*    *##set( $pageHref = $href.substring( $siteRoot.length() ) )
+#*  *##end
 #**##end
-#**##if( $shortTitle )
-    <li class="active#if( $cssClass ) $cssClass#end">$esc.xml( $shortTitle )$!edit</li>
-#**##else
-#* TODO $title can be empty! *#
-    <li class="active#if( $cssClass ) $cssClass#end">$esc.xml( $title )$!edit</li>
-#**##end
+#**##set( $pageHref = $PathTool.calculateLink( $pageHref, $relativePath ) )
+#**##set( $pageHref = $pageHref.replaceAll( '\\', '/' ) )
 #end
 ##
 #macro( displayTree $item $display )
 #**##if( $item.items && $item.items.size() > 0 )
 #*  *##foreach( $subItem in $item.items )
-#*    *##set( $subItemHref = $PathTool.calculateLink( $subItem.href, $relativePath ) )
-#*    *##set( $subItemHref = $subItemHref.replaceAll( '\\', '/' ) )
+#*    *##pageHref( $subItem.href )
+#*    *##set( $subItemHref = $pageHref )
 ##
 #*    *##if( $alignedFileName == $subItemHref )
 #*      *##set( $display = true )
@@ -220,59 +214,51 @@
 #end
 ##
 #macro( menuItem $item $indent )
-#**##set( $collapseClass = false )
-#**##set( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
-#**##set( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
-##
+#**##pageHref( $item.href )
+#**##set( $currentItemHref = $pageHref )
+#**##set( $expanded = false )
 #**##if( $item.items && $item.items.size() > 0 )
-#*  *##if( $item.collapse == false )
-#*    *##set( $collapseClass = "icon-chevron-down" )
-#*  *##else
-#*    *### By default collapsed
-#*    *##set( $collapseClass = "icon-chevron-right" )
-#*  *##end
-##
+## collapsed by default: expanded when collapse is false, or when the page is the item or below it
 #*  *##set( $display = false )
 #*  *##displayTree( $item $display )
-##
-#*  *##if( $alignedFileName == $currentItemHref || $display )
-#*    *##set( $collapseClass = "icon-chevron-down" )
+#*  *##if( $item.collapse == false || $alignedFileName == $currentItemHref || $display )
+#*    *##set( $expanded = true )
 #*  *##end
 #**##end
-##
 #**##if( $alignedFileName == $currentItemHref )
-$indent    <li class="active">##
+#*  *##set( $linkClass = 'active" aria-current="page' )
+#**##elseif( $item.items && $item.items.size() > 0 && !$expanded )
+## a caret marks an item whose sub-items are not shown
+#*  *##set( $linkClass = "collapsed" )
 #**##else
-$indent    <li>##
+#*  *##set( $linkClass = $null )
 #**##end
-##
-#**##link( $item $collapseClass )
-#**##if( $item.items && $item.items.size() > 0 )
-#*  *##if( $collapseClass == "icon-chevron-down" )
+$indent    <li>#link( $item $null false "a" $null "imageLink" $linkClass )##
+#**##if( $expanded )
 
-$indent     <ul class="nav nav-list">
-#*    *##foreach( $subItem in $item.items )
-#*      *##menuItem( $subItem "$indent  " )
-#*    *##end
-$indent     </ul>##
+$indent      <ul class="list-unstyled ms-3">
+#*  *##foreach( $subItem in $item.items )
+#*    *##menuItem( $subItem "$indent    " )
 #*  *##end
+$indent      </ul>
+$indent    ##
 #**##end
-#**#</li>
+</li>
 #end
 ##
 #macro( mainMenu $menus )
-  <ul class="nav nav-list">
+              <ul class="menu-list list-unstyled mb-0">
 #**##foreach( $menu in $menus )
 #**##if( $menu.name )
-   <li class="nav-header">#link( $menu $null false $null )</li>
+                <li class="menu-heading pt-2 small fw-semibold text-uppercase text-body-secondary">#link( $menu $null false "span" )</li>
 #**##end
 #**##if( $menu.items && $menu.items.size() > 0 )
 #*  *##foreach( $item in $menu.items )
-#*    *##menuItem( $item '' )
+#*    *##menuItem( $item '            ' )
 #*  *##end
 #**##end
 #**##end
-  </ul>
+              </ul>
 #end
 ##
 #macro( copyright )
@@ -295,114 +281,53 @@ $indent     </ul>##
 #**##end
 #end
 ##
+## the date and the version, as list items at the "left" or "right" position of the breadcrumbs bar, or as a line at
+## the "navigation-top", "navigation-bottom" and "bottom" positions
 #macro( publishDate $position $sitePublishDate $version )
 ## Retrieve the relevant date to display (despite the macro name not always publish date)
 #**##set( $documentDate = $context.get( $sitePublishDate.value ) )
-##
 #**##if( $documentDate )
 #*  *##set( $datePrefix = $text.get( $sitePublishDate.prefix ) )
 #**##else
 #*  *##set( $documentDate = $context.get( $sitePublishDate.fallbackValue ) )
 #*  *##set( $datePrefix = $text.get( $sitePublishDate.fallbackPrefix ) )
 #**##end
-##
 #**##if( $documentDate )
 #*  *##set( $dateValue = $date.format( $documentDate ) )
 #**##else
 #*  *##set( $dateValue = $date )
 #**##end
-##
-#**##set( $datePosition = $sitePublishDate.position )
-#**##set( $versionPosition = $version.position )
-##
-#**##set( $breadcrumbs = $site.body.breadcrumbs )
-#**##set( $links = $site.body.links )
-##
-#**##if( $datePosition.equalsIgnoreCase( "right" ) && ( $versionPosition.equalsIgnoreCase( "right" ) || !$topBarEnabled
-                                                                                                         && $site.body.links
-                                                                                                         && $site.body.links.size() > 0 ) )
-#*  *##set( $prefix = '<span class="divider">|</span> ' )
-#**##else
-#*  *##set( $prefix = "" )
-#**##end
-##
-#**##if( $datePosition.equalsIgnoreCase( $position ) )
-#*  *##if( $datePosition.equalsIgnoreCase( "right" ) || $datePosition.equalsIgnoreCase( "bottom" ) )
+#**##set( $showDate = $sitePublishDate.position.equalsIgnoreCase( $position ) )
+#**##set( $showVersion = $version.position.equalsIgnoreCase( $position ) )
 ## FIXME In some languages like French a space must preceed the colon
-        <li id="publishDate" class="pull-right">$prefix$datePrefix: $dateValue</li>
-#*    *##if( $versionPosition.equalsIgnoreCase( $position ) )
-          <li id="projectVersion" class="pull-right">##
-#*      *##if( !$topBarEnabled
-              && $site.body.links
-              && $site.body.links.size() > 0 )
-#*        *#<span class="divider">|</span>##
-#*      *##end
-## FIXME In some languages like French a space must preceed the colon
-#*      *#$text.get( "template.version" ): ${project.version}##
-#*      *#</li>
-#*    *##end
-#*  *##elseif( $datePosition.equalsIgnoreCase( "navigation-bottom" ) || $datePosition.equalsIgnoreCase( "navigation-top" ) )
-      <div id="lastPublished">
-## FIXME In some languages like French a space must preceed the colon
-        <span id="publishDate">$datePrefix: : $dateValue</span>
-#*    *##if( $versionPosition.equalsIgnoreCase( $position ) )
-## FIXME In some languages like French a space must preceed the colon
-        <span class="divider">|</span> <span id="projectVersion">$text.get( "template.version" ): ${project.version}</span>
-#*    *##end
-      </div>
-#*  *##elseif( $datePosition.equalsIgnoreCase("left") )
-## FIXME In some languages like French a space must preceed the colon
-        <li id="publishDate">$datePrefix: $dateValue##
-#*    *##if( $versionPosition.equalsIgnoreCase( $position ) || $breadcrumbs && $breadcrumbs.size() > 0 )
-#*      *#<span class="divider">|</span>
-#*    *##end
-#*    *#</li>
-#*    *##if( $versionPosition.equalsIgnoreCase( $position ) )
-## FIXME In some languages like French a space must preceed the colon
-          <li id="projectVersion">$text.get( "template.version" ): ${project.version}##
-#*      *##if( $breadcrumbs && $breadcrumbs.size() > 0 )
-#*        *#<span class="divider">|</span>##
-#*      *##end
-#*      *#</li>
-#*    *##end
-#*    *##if( $breadcrumbs && $breadcrumbs.size() > 0 )
-#*      *##breadcrumbs( $breadcrumbs "" )
-#*    *##end
+#**##if( $position == "left" || $position == "right" )
+#*  *##if( $showDate && $position == "left" )
+            <li id="publishDate">$datePrefix: $dateValue</li>
 #*  *##end
-#**##elseif( $versionPosition.equalsIgnoreCase( $position ) )
-#*  *##if( $versionPosition.equalsIgnoreCase( "right" ) )
-## FIXME In some languages like French a space must preceed the colon
-      <li id="projectVersion" class="pull-right">$prefix$text.get( "template.version" ): ${project.version}</li>
-#*  *##elseif( $versionPosition.equalsIgnoreCase( "bottom" ) )
-## FIXME In some languages like French a space must preceed the colon
-      <span id="projectVersion">$text.get( "template.version" ): ${project.version}</span>
-#*  *##elseif( $versionPosition.equalsIgnoreCase( "navigation-bottom" ) || $versionPosition.equalsIgnoreCase( "navigation-top" ) )
-      <div id="lastPublished">
-## FIXME In some languages like French a space must preceed the colon
-        <span id="projectVersion">$text.get( "template.version" ): ${project.version}</span>
-      </div>
-#*  *##elseif( $versionPosition.equalsIgnoreCase("left") )
-## FIXME In some languages like French a space must preceed the colon
-        <li id="projectVersion">$text.get( "template.version" ): ${project.version}##
-#*      *##if( $breadcrumbs && $breadcrumbs.size() > 0 )
-#*        *#<span class="divider">|</span>##
-#*      *##end
-#*    *#</li>
-#*    *##if( $breadcrumbs && $breadcrumbs.size() > 0 )
-#*      *##breadcrumbs( $breadcrumbs "")
-#*    *##end
+#*  *##if( $showVersion )
+            <li id="projectVersion">$text.get( "template.version" ): ${project.version}</li>
 #*  *##end
-#**##elseif( $position.equalsIgnoreCase( "left" ) )
-#*  *##if( $breadcrumbs && $breadcrumbs.size() > 0 )
-#*    *##breadcrumbs( $breadcrumbs "" )
+#*  *##if( $showDate && $position == "right" )
+            <li id="publishDate">$datePrefix: $dateValue</li>
 #*  *##end
+#**##elseif( $showDate || $showVersion )
+#*  *##if( $position == "bottom" )
+#*    *#<span class="float-end">##
+#*  *##else
+              <div id="lastPublished" class="px-3 py-1 small">##
+#*  *##end
+#*  *##if( $showDate )<span id="publishDate" class="text-nowrap">$datePrefix: $dateValue</span>#end##
+#*  *##if( $showDate && $showVersion ) | #end##
+#*  *##if( $showVersion )<span id="projectVersion" class="text-nowrap">$text.get( "template.version" ): ${project.version}</span>#end##
+#*  *##if( $position == "bottom" )</span>#else</div>
+#end
 #**##end
 #end
 ##
 #macro( builtByLogo $poweredBy )
 #**##if( $poweredBy )
 #*  *##foreach( $item in $poweredBy )
-#*    *##link( $item $null false "span" $null "builtBy" "builtBy" )
+#*    *##link( $item $null false "span" $null "builtBy d-block mx-auto my-2" "builtBy d-block" )
 #*  *##end
 #**##end
 #end
@@ -456,7 +381,7 @@ $indent     </ul>##
 
 ##
 #macro( googleSearch $top )
-<form id="search-form" action="https://www.google.com/search" method="get" #if( $top ) class="navbar-search pull-right"#end>
+<form id="search-form" action="https://www.google.com/search" method="get" #if( $top ) class="d-flex ms-auto"#end>
 #**##if( $site.getCustomChild( 'fluidoSkin.googleSearch.sitesearch' ) )
 #*  *##set( $sitesearchValue = $site.getCustomValue( 'fluidoSkin.googleSearch.sitesearch' ) )
 #**##else
@@ -464,7 +389,7 @@ $indent     </ul>##
 #*  *##set( $sitesearchValue = $project.url.substring( $startIndex, $project.url.length() ) )
 #**##end
   <input value="$sitesearchValue" name="sitesearch" type="hidden" />
-  <input class="search-query" name="q" id="query" type="text" placeholder="Search with Google..." />
+  <input class="search-query form-control form-control-sm" name="q" id="query" type="search" placeholder="Search with Google..." aria-label="Search with Google" />
 </form>
 #end
 ##
@@ -504,7 +429,7 @@ $indent     </ul>##
 #*    *##set( $ribbonOrientation = "$site.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation' ) fixed" )
 #*  *##end
 ##
-    <a class="github-fork-ribbon $ribbonOrientation" href="https://github.com/$gitHubProjectId" data-ribbon="Fork me on GitHub">Fork me on GitHub</a>
+    <a class="github-fork-ribbon $ribbonOrientation d-none d-md-block" href="https://github.com/$gitHubProjectId" data-ribbon="Fork me on GitHub">Fork me on GitHub</a>
 #**##end
 #end
 ##
@@ -539,3 +464,13 @@ Apache Maven Doxia Site Renderer#if( $doxiaSiteRendererVersion ) $doxiaSiteRende
 #**##end
 #end
 ##
+##
+##
+## the page tools: for an editable page, an Edit link to its source
+#macro( pageTools $cssClass )
+#**##if( $editHref )
+<div class="page-tools d-flex align-items-center gap-2 $cssClass">##
+#*  *##if( $editHref )<a class="edit-link btn btn-sm border" href="$editHref" title="$text.get( "template.edit" )" aria-label="$text.get( "template.edit" )"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M11.2 1.8l3 3L5.4 13.6 1.8 14.2l.6-3.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9.4 3.6l3 3" stroke="currentColor" stroke-width="1.5"/></svg></a>#end##
+</div>
+#**##end
+#end
