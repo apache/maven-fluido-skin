@@ -427,12 +427,11 @@ Since version **1\.3\.1**, you can configure the breadcrumb divider (default is 
 
 ${esc.h}${esc.h}${esc.h} <a id="Dark_Theme"></a>Dark Theme
 
-Pages are light by default. A theme switch in the breadcrumbs bar lets the reader choose Light, Dark or Auto (follows
-the operating system) and keeps the choice for the next pages; it maps the choice onto Bootstrap's colour modes. Without
-JavaScript the switch does not show and pages stay light.
+Pages are light by default, with no theme switch and no theme script.
 
-With `darkThemeEnabled` (since **2\.2\.0**), Auto is the default, so the dark theme activates based on the browser
-preferences until the reader chooses otherwise:
+With `darkThemeEnabled` (since **2\.2\.0**), the dark theme activates based on the browser preferences (Auto), and a
+theme switch at the top of the menu lets the reader choose Light, Dark or Auto; the choice is kept for the next pages.
+Both map onto Bootstrap's colour modes and need JavaScript: without it pages stay light and the switch does not show.
 
 ```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -447,7 +446,7 @@ preferences until the reader chooses otherwise:
 </site>
 ```
 
-To remove the switch, set `themeSwitch` to `false`:
+To keep the dark theme following the browser but remove the switch, also set `themeSwitch` to `false`:
 
 ```xml
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -455,6 +454,7 @@ To remove the switch, set `themeSwitch` to `false`:
   [...]
   <custom>
     <fluidoSkin>
+      <darkThemeEnabled>true</darkThemeEnabled>
       <themeSwitch>false</themeSwitch>
     </fluidoSkin>
   </custom>

@@ -39,6 +39,7 @@
 
   <custom>
     <fluidoSkin>
+      <darkThemeEnabled>true</darkThemeEnabled>
       <themeSwitch>false</themeSwitch>
     </fluidoSkin>
   </custom>

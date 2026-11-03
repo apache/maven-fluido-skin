@@ -29,9 +29,10 @@
  | Rendered using Apache Maven Fluido Skin @project.version@
 -->
 ##
-## colour theme: light by default; darkThemeEnabled makes Auto (follow the OS) the default; themeSwitch adds the switch
+## colour theme: light, with no switch and no theme script, unless darkThemeEnabled makes Auto (follow the OS) the
+## default; then the switch shows too, unless themeSwitch is false
 #set( $darkThemeEnabled = $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.darkThemeEnabled', 'false' ) ) )
-#set( $themeSwitch = $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.themeSwitch', 'true' ) ) )
+#set( $themeSwitch = $darkThemeEnabled && $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.themeSwitch', 'true' ) ) )
 <html xmlns="http://www.w3.org/1999/xhtml" lang="#if ( $locale.toString() )$locale.toLanguageTag()#{else}en#end"#if( $darkThemeEnabled ) data-fluido-theme="auto"#end>
   <head>
     <meta charset="${outputEncoding}" />
@@ -55,7 +56,7 @@
     <link rel="stylesheet" href="$relativePath/css/bootstrap-@bootstrap.version@.min.css" />
     <link rel="stylesheet" href="$relativePath/css/apache-maven-fluido-@project.version@.min.css" />
 ## sets Bootstrap's colour mode before the first paint; without it the page stays light
-#if( $themeSwitch || $darkThemeEnabled )
+#if( $darkThemeEnabled )
     <script src="$relativePath/js/fluido-theme.js"></script>
 #end
     <link rel="stylesheet" href="$relativePath/css/site.css" />
