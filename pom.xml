@@ -135,11 +135,13 @@ under the License.
         <!-- add skin-info -->
       </resource>
 
-      <!-- include the print.css and the already minified Bootstrap (stylesheet and script bundle) and highlight.js bundles -->
+      <!-- include the print.css, the theme script (loaded on its own in the page head) and the already minified Bootstrap
+        (stylesheet and script bundle) and highlight.js bundles -->
       <resource>
         <directory>${basedir}/src/main/resources</directory>
         <includes>
           <include>css/print.css</include>
+          <include>js/fluido-theme.js</include>
           <include>css/bootstrap-${bootstrap.version}.min.css</include>
           <include>js/bootstrap-${bootstrap.version}.bundle.min.js</include>
           <include>js/highlight-${highlightjs.version}.min.js</include>

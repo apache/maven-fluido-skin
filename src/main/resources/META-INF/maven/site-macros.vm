@@ -465,11 +465,20 @@ Apache Maven Doxia Site Renderer#if( $doxiaSiteRendererVersion ) $doxiaSiteRende
 #end
 ##
 ##
+## the colour theme switch: one icon button showing the current mode, shown by fluido-theme.js
+#macro( themeSwitch )
+<button type="button" class="theme-switch btn btn-sm border" title="Theme" aria-label="Theme" hidden>##
+<svg class="theme-icon-light" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="currentColor"/><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M3.05 12.95l1.06-1.06M11.89 4.11l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>##
+<svg class="theme-icon-dark" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.2 1.2a6.9 6.9 0 1 0 8.6 8.6A5.6 5.6 0 0 1 6.2 1.2z" fill="currentColor"/></svg>##
+<svg class="theme-icon-auto" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.75a6.25 6.25 0 0 0 0 12.5z" fill="currentColor"/></svg>##
+</button>##
+#end
 ##
-## the page tools: for an editable page, an Edit link to its source
+## the page tools: the theme switch and, for an editable page, an Edit link to its source
 #macro( pageTools $cssClass )
-#**##if( $editHref )
+#**##if( $themeSwitch || $editHref )
 <div class="page-tools d-flex align-items-center gap-2 $cssClass">##
+#*  *##if( $themeSwitch )#themeSwitch()#end##
 #*  *##if( $editHref )<a class="edit-link btn btn-sm border" href="$editHref" title="$text.get( "template.edit" )" aria-label="$text.get( "template.edit" )"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M11.2 1.8l3 3L5.4 13.6 1.8 14.2l.6-3.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9.4 3.6l3 3" stroke="currentColor" stroke-width="1.5"/></svg></a>#end##
 </div>
 #**##end

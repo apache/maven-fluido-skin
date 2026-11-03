@@ -49,6 +49,13 @@ assert new File( basedir, "target/site/js/bootstrap-5.3.8.bundle.min.js" ).exist
 assert html.contains( '<main id="bodyColumn" class="col-lg-9 col-xl-10 order-lg-last">' )
 assert html.contains( '<header id="leftColumn" class="col-lg-3 col-xl-2 order-lg-first">' )
 assert html.indexOf( 'id="bodyColumn"' ) < html.indexOf( 'id="leftColumn"' )
+// the theme switch is on by default: light until the reader chooses, script in the head
+assert html.contains( '<button type="button" class="theme-switch btn btn-sm border" title="Theme" aria-label="Theme" hidden>' )
+assert html.contains( 'class="theme-icon-dark"' )
+// the switch sits in the menu, after the panel's header
+assert html.indexOf( 'class="theme-switch' ) > html.indexOf( 'id="sidebarMenu"' )
+assert !html.contains( 'data-fluido-theme=' )
+assert html.contains( '<script src="./js/fluido-theme.js"></script>' )
 
 // wide tables scroll in their own focusable box (and stack on phones); code blocks are focusable too
 String deps = new File( basedir, "target/site/dependencies.html" ).text
@@ -58,6 +65,5 @@ assert html =~ /<pre tabindex="0" class="prettyprint linenums">/
 for ( String icon : [ 'error', 'help', 'info', 'success', 'warning' ] ) {
     assert new File( basedir, "target/site/images/icon_${icon}_sml.gif" ).exists()
 }
-// the Edit icon sits at the top of the menu, after the panel's header
-assert html =~ /<div class="page-tools d-flex align-items-center gap-2 mb-2 px-3"><a class="edit-link btn btn-sm border" href="[^"]+"/
-assert html.indexOf( 'class="edit-link' ) > html.indexOf( 'id="sidebarMenu"' )
+// the Edit icon sits next to the theme switch in the menu
+assert html =~ /(?s)<div class="page-tools d-flex align-items-center gap-2 mb-2 px-3"><button type="button" class="theme-switch[^>]*>.*?<\/button>\s*<a class="edit-link btn btn-sm border" href="[^"]+"/
