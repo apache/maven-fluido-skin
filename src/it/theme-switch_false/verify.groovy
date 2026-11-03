@@ -19,7 +19,8 @@
 
 String html = new File( basedir, "target/site/index.html" ).text
 
-// themeSwitch false: no switch and no theme script, so the page stays light
+// darkThemeEnabled with themeSwitch false: no switch, but the theme script still follows the OS colour scheme
 assert !html.contains( 'theme-switch' )
-assert !html.contains( 'fluido-theme.js' )
-assert !html.contains( 'data-bs-theme' )
+assert html.contains( 'data-fluido-theme="auto"' )
+assert html.indexOf( 'js/fluido-theme.js' ) < html.indexOf( '</head>' )
+assert new File( basedir, "target/site/js/fluido-theme.js" ).exists()

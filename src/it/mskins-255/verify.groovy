@@ -25,3 +25,7 @@ assert new File( basedir, "target/site/js/fluido-theme.js" ).exists()
 // no separate dark stylesheet any more
 assert !html.contains( 'dark-theme.css' )
 assert !new File( basedir, "target/site/css/dark-theme.css" ).exists()
+
+// with the dark theme enabled the switch shows (fluido-theme.js unhides it) in the page tools of the menu
+assert html.contains( '<button type="button" class="theme-switch btn btn-sm border" title="Theme" aria-label="Theme" hidden>' )
+assert html.indexOf( 'class="theme-switch' ) > html.indexOf( 'id="sidebarMenu"' )
