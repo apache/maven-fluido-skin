@@ -38,6 +38,7 @@
     <fluidoSkin>
       <googleSearch/>
       <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+      <sideBarSkipped>dependency-info.html, summary.html, guide/overview.html</sideBarSkipped>
     </fluidoSkin>
   </custom>
   <!-- END SNIPPET: skin-custom-config -->

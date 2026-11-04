@@ -67,3 +67,14 @@ for ( String icon : [ 'error', 'help', 'info', 'success', 'warning' ] ) {
 }
 // the Edit icon sits next to the theme switch in the menu
 assert html =~ /(?s)<div class="page-tools d-flex align-items-center gap-2 mb-2 px-3"><button type="button" class="theme-switch[^>]*>.*?<\/button>\s*<a class="edit-link btn btn-sm border" href="[^"]+"/
+
+// pages listed in sideBarSkipped render without the side menu, the others keep it
+String summary = new File( basedir, "target/site/summary.html" ).text
+assert !summary.contains( 'id="leftColumn"' )
+assert !summary.contains( 'data-bs-target="#sidebarMenu"' )
+assert !new File( basedir, "target/site/dependency-info.html" ).text.contains( 'id="leftColumn"' )
+assert html.contains( 'id="leftColumn"' )
+assert new File( basedir, "target/site/plugins.html" ).text.contains( 'id="leftColumn"' )
+
+// a page in a subdirectory is named by its path from the site root
+assert !new File( basedir, "target/site/guide/overview.html" ).text.contains( 'id="leftColumn"' )
