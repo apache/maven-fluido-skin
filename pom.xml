@@ -234,6 +234,33 @@ under the License.
       <build>
         <plugins>
           <plugin>
+            <!-- an IT run in place leaves its output under src/it; the next cloned run would copy it, and Doxia
+                 Sitetools would skip re-rendering the pages, which then look newer than their sources -->
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-clean-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>clean-in-place-its</id>
+                <goals>
+                  <goal>clean</goal>
+                </goals>
+                <phase>pre-integration-test</phase>
+                <configuration>
+                  <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                  <filesets>
+                    <fileset>
+                      <directory>src/it</directory>
+                      <includes>
+                        <include>*/target/**</include>
+                        <include>*/build.log*</include>
+                      </includes>
+                    </fileset>
+                  </filesets>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-invoker-plugin</artifactId>
             <configuration>
