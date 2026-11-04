@@ -82,6 +82,14 @@
 #**##forkMeOnGitHub()
 ##
 #**##set( $sideBarEnabled = $convert.toBoolean( $site.getCustomValue( 'fluidoSkin.sideBarEnabled', 'true' ) ) && !$standalone )
+## pages listed in sideBarSkipped, such as a front page, go without the side menu
+#**##if( $sideBarEnabled && $site.getCustomValue( 'fluidoSkin.sideBarSkipped' ) )
+#*  *##foreach( $skippedPage in $site.getCustomValue( 'fluidoSkin.sideBarSkipped' ).split( ',' ) )
+#*    *##if( $skippedPage.trim() == $currentFileName )
+#*      *##set( $sideBarEnabled = false )
+#*    *##end
+#*  *##end
+#**##end
 #**##set( $searchEnabled = $site.getCustomChild( 'fluidoSkin.googleSearch' )
             && ( $site.getCustomValue( 'fluidoSkin.googleSearch.sitesearch' ) || $project.url ) )
 ##
