@@ -118,7 +118,7 @@ under the License.
 
       <!-- css and js are added below, META-INF is filtered separately -->
       <resource>
-        <directory>${project.basedir}/src/main/resources</directory>
+        <directory>${basedir}/src/main/resources</directory>
         <excludes>
           <exclude>css/**</exclude>
           <exclude>js/**</exclude>
@@ -128,7 +128,7 @@ under the License.
 
       <resource>
         <filtering>true</filtering>
-        <directory>${project.basedir}/src/main/resources</directory>
+        <directory>${basedir}/src/main/resources</directory>
         <includes>
           <include>META-INF/**</include>
         </includes>
@@ -138,7 +138,7 @@ under the License.
       <!-- include the print.css, the theme script (loaded on its own in the page head) and the already minified Bootstrap
         (stylesheet and script bundle), highlight.js and AnchorJS bundles -->
       <resource>
-        <directory>${project.basedir}/src/main/resources</directory>
+        <directory>${basedir}/src/main/resources</directory>
         <includes>
           <include>css/print.css</include>
           <include>js/fluido-theme.js</include>
