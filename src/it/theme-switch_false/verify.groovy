@@ -17,10 +17,10 @@
  * under the License.
  */
 
-String html = new File( basedir, "target/site/index.html" ).text
+String html = new File(basedir, "target/site/index.html").text
 
 // darkThemeEnabled with themeSwitch false: no switch, but the theme script still follows the OS colour scheme
-assert !html.contains( 'theme-switch' )
-assert html.contains( 'data-fluido-theme="auto"' )
-assert html.indexOf( 'js/fluido-theme.js' ) < html.indexOf( '</head>' )
-assert new File( basedir, "target/site/js/fluido-theme.js" ).exists()
+assert !html.contains('theme-switch')
+assert html.contains('data-fluido-theme="auto"')
+assert html.indexOf('js/fluido-theme.js') <html.indexOf('</head>')
+assert new File(basedir, "target/site/js/fluido-theme.js").exists()

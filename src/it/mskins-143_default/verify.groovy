@@ -19,9 +19,9 @@
 
 // Google Analytics was removed in 2.2.0: a site.xml that still configures it builds, and no page loads anything from
 // Google
-File index = new File( basedir, "target/site/index.html" )
+File index = new File(basedir, "target/site/index.html")
 assert index.exists()
 String html = index.text
-assert !html.contains( 'google-analytics.com' )
-assert !html.contains( 'GoogleAnalyticsObject' )
-assert !html.contains( "ga('create'" )
+assert !html.contains('google-analytics.com')
+assert !html.contains('GoogleAnalyticsObject')
+assert !html.contains("ga('create'")

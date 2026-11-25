@@ -17,12 +17,12 @@
  * under the License.
  */
 
-File index = new File( basedir, "target/site/index.html" )
+File index = new File(basedir, "target/site/index.html")
 assert index.exists()
-assert index.text.contains( 'var u=\"https://matomo.example.com\";')
-assert index.text.contains( '_paq.push([\'setSiteId\', \'X\']);')
-assert index.text.contains( '_paq.push([\'setTrackerUrl\', u+\'/matomo.php\']');
-assert !index.text.contains( '_paq.push([\'disableCookies\']);')
-assert !index.text.contains( '_paq.push([\'trackPageView\']);')
-assert !index.text.contains( '_paq.push([\'enableLinkTracking\']);')
-assert !index.text.contains( '_paq.push([\'foo\', \'Bar\']);')
+assert index.text.contains('var u=\"https://matomo.example.com\";')
+assert index.text.contains('_paq.push([\'setSiteId\', \'X\']);')
+assert index.text.contains('_paq.push([\'setTrackerUrl\', u+\'/matomo.php\']')
+assert !index.text.contains('_paq.push([\'disableCookies\']);')
+assert !index.text.contains('_paq.push([\'trackPageView\']);')
+assert !index.text.contains('_paq.push([\'enableLinkTracking\']);')
+assert !index.text.contains('_paq.push([\'foo\', \'Bar\']);')

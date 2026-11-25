@@ -17,9 +17,9 @@
  * under the License.
  */
 
-File index = new File( basedir, "target/site/index.html" )
+File index = new File(basedir, "target/site/index.html")
 int inceptionYear = 2002
 int currentYear = Calendar.getInstance().get(Calendar.YEAR)
 assert index.exists()
 // copyrightClass pull-right is Bootstrap 5's float-end
-assert index.getText("UTF-8").contains( "<p class=\"float-end\">\u00A9" )
+assert index.getText("UTF-8").contains("<p class=\"float-end\">\u00A9")

@@ -17,10 +17,10 @@
  * under the License.
  */
 
-String html = new File( basedir, 'target/site/index.html' ).text
+String html = new File(basedir, 'target/site/index.html').text
 // Facebook and Twitter buttons were removed: nothing from their hosts is loaded or rendered
-assert !html.contains( 'connect.facebook.net' )
-assert !html.contains( 'fb-root' )
-assert !html.contains( 'class="fb-like' )
-assert !html.contains( 'platform.twitter.com' )
-assert !html.contains( 'twitter-follow-button' )
+assert !html.contains('connect.facebook.net')
+assert !html.contains('fb-root')
+assert !html.contains('class="fb-like')
+assert !html.contains('platform.twitter.com')
+assert !html.contains('twitter-follow-button')

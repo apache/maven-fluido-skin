@@ -17,18 +17,18 @@
  * under the License.
  */
 
-File index = new File( basedir, "target/site/index.html" )
+File index = new File(basedir, "target/site/index.html")
 assert index.exists()
 
 // MSKINS-130 check that html structure is as clean as possible
 String html = index.text
 // active menu
-assert html.contains( '<li><a class="active" aria-current="page">About</a></li>' )
+assert html.contains('<li><a class="active" aria-current="page">About</a></li>')
 // inactive menu
-assert html.contains( '<li><a href="summary.html">Summary</a></li>' )
-assert html.contains( '<li><a href="plugins.html">Plugins</a></li>' )
+assert html.contains('<li><a href="summary.html">Summary</a></li>')
+assert html.contains('<li><a href="plugins.html">Plugins</a></li>')
 // breadcrumb
-assert html.contains( '<li class="breadcrumb-item"><a href="https://www.apache.org/">Apache</a></li>' )
+assert html.contains('<li class="breadcrumb-item"><a href="https://www.apache.org/">Apache</a></li>')
 
 // MSKINS-263 - image without class in banner
 assert html.contains('<div id="bannerLeft" class="me-auto"><p class="m-0 fs-3 fw-bold"><a href="../../../"><img class="img-fluid banner-light" src="../../../images/apache-maven-project-light-theme.svg" alt="Apache Maven Fluido Skin IT, sidebar layout" style="width: 489px;height: 83px;" /><img class="img-fluid banner-dark" src="../../../images/apache-maven-project-dark-theme.svg" alt="Apache Maven Fluido Skin IT, sidebar layout" style="width: 489px;height: 83px;" /></a></p></div>')
@@ -36,52 +36,56 @@ assert html.contains('<div id="bannerLeft" class="me-auto"><p class="m-0 fs-3 fw
 assert html.contains('<div id="bannerRight" class="d-none d-md-block"><img class="img-fluid" src="../../../images/logos/MavenLogoLeaf.svg" alt="" style="width: 340px;height: 83px;" /></div>')
 
 // below 992 px the side menu is open above the content; a button, hidden until fluido.js shows it, hides and shows it
-assert html.contains( '<div id="sidebarMenu" class="sidebar-menu mb-3">' )
-assert !html.contains( 'offcanvas' )
+assert html.contains('<div id="sidebarMenu" class="sidebar-menu mb-3">')
+assert !html.contains('offcanvas')
 // the button is the first thing in the banner row, controls the menu, starts expanded and needs no Bootstrap script
 assert html =~ /<div id="banner" class="navbar[^"]*">\s*<button type="button" class="navbar-toggler menu-toggle d-lg-none[^"]*" aria-controls="sidebarMenu" aria-expanded="true" aria-label="Menu" hidden>/
-assert !( html =~ /class="navbar-toggler menu-toggle[^>]*data-bs-toggle/ )
+assert !(html =~ /class="navbar-toggler menu-toggle[^>]*data-bs-toggle/)
 // nothing remembers the menu's state
-def fluidoJs = new File( basedir, "target/site/js" ).listFiles().find { it.name.startsWith( 'apache-maven-fluido-' ) }
-assert fluidoJs != null && fluidoJs.text.contains( 'menu-hidden' ) && !fluidoJs.text.contains( 'localStorage' )
+def fluidoJs = new File(basedir, "target/site/js").listFiles().find {
+    it.name.startsWith('apache-maven-fluido-')
+}
+assert fluidoJs != null && fluidoJs.text.contains('menu-hidden') && !fluidoJs.text.contains('localStorage')
 
 // Bootstrap 5 stylesheet and script bundle, no jQuery
-assert html.contains( '<link rel="stylesheet" href="./css/bootstrap-5.3.8.min.css" />' )
-assert new File( basedir, "target/site/css/bootstrap-5.3.8.min.css" ).exists()
-assert !html.contains( 'jquery' )
-assert new File( basedir, "target/site/js/bootstrap-5.3.8.bundle.min.js" ).exists()
+assert html.contains('<link rel="stylesheet" href="./css/bootstrap-5.3.8.min.css" />')
+assert new File(basedir, "target/site/css/bootstrap-5.3.8.min.css").exists()
+assert !html.contains('jquery')
+assert new File(basedir, "target/site/js/bootstrap-5.3.8.bundle.min.js").exists()
 // default columns: Bootstrap 5 grid, the menu first in the source so that it is open above the content on phones
-assert html.contains( '<main id="bodyColumn" class="col-lg-9 col-xl-10">' )
-assert html.contains( '<header id="leftColumn" class="col-lg-3 col-xl-2">' )
-assert html.indexOf( 'id="leftColumn"' ) < html.indexOf( 'id="bodyColumn"' )
+assert html.contains('<main id="bodyColumn" class="col-lg-9 col-xl-10">')
+assert html.contains('<header id="leftColumn" class="col-lg-3 col-xl-2">')
+assert html.indexOf('id="leftColumn"') <html.indexOf('id="bodyColumn"')
 // the dark theme is not enabled: no theme switch, no theme script, the page stays light
-assert !html.contains( 'theme-switch' )
-assert !html.contains( 'data-fluido-theme=' )
-assert !html.contains( 'fluido-theme.js' )
-assert !new File( basedir, "target/site/js/fluido-theme.js" ).exists()
+assert !html.contains('theme-switch')
+assert !html.contains('data-fluido-theme=')
+assert !html.contains('fluido-theme.js')
+assert !new File(basedir, "target/site/js/fluido-theme.js").exists()
 
 // wide tables scroll in their own focusable box (and stack on phones); code blocks are focusable too
-String deps = new File( basedir, "target/site/dependencies.html" ).text
-assert deps.contains( '<div class="table-wrap table-responsive" tabindex="0"><table class="table table-striped">' )
+String deps = new File(basedir, "target/site/dependencies.html").text
+assert deps.contains('<div class="table-wrap table-responsive" tabindex="0"><table class="table table-striped">')
 assert html =~ /<pre tabindex="0" class="prettyprint linenums">/
 // report icons that report plugins still reference stay in the skin
-for ( String icon : [ 'error', 'help', 'info', 'success', 'warning' ] ) {
-    assert new File( basedir, "target/site/images/icon_${icon}_sml.gif" ).exists()
+for (String icon : ['error', 'help', 'info', 'success', 'warning']) {
+    assert new File(basedir, "target/site/images/icon_${icon}_sml.gif").exists()
 }
 // the Edit icon sits at the top of the menu
 assert html =~ /<div class="page-tools d-flex align-items-center gap-2 mb-2 px-3"><a class="edit-link btn btn-sm border" href="[^"]+"/
 
 // pages listed in sideBarSkipped render without the side menu, the others keep it
-String summary = new File( basedir, "target/site/summary.html" ).text
-assert !summary.contains( 'id="leftColumn"' )
-assert !summary.contains( 'aria-controls="sidebarMenu"' )
-assert !new File( basedir, "target/site/dependency-info.html" ).text.contains( 'id="leftColumn"' )
-assert html.contains( 'id="leftColumn"' )
-assert new File( basedir, "target/site/plugins.html" ).text.contains( 'id="leftColumn"' )
+String summary = new File(basedir, "target/site/summary.html").text
+assert !summary.contains('id="leftColumn"')
+assert !summary.contains('aria-controls="sidebarMenu"')
+assert !new File(basedir, "target/site/dependency-info.html").text.contains('id="leftColumn"')
+assert html.contains('id="leftColumn"')
+assert new File(basedir, "target/site/plugins.html").text.contains('id="leftColumn"')
 
 // a page in a subdirectory is named by its path from the site root
-assert !new File( basedir, "target/site/guide/overview.html" ).text.contains( 'id="leftColumn"' )
+assert !new File(basedir, "target/site/guide/overview.html").text.contains('id="leftColumn"')
 
 // links reach 4.5:1 on the light tinted boxes too, not only on white (Bootstrap's own #0d6efd does not)
-def fluidoCss = new File( basedir, "target/site/css" ).listFiles().find { it.name.startsWith( 'apache-maven-fluido-' ) }
-assert fluidoCss != null && fluidoCss.text.contains( '--bs-link-color: #0a58ca;' )
+def fluidoCss = new File(basedir, "target/site/css").listFiles().find {
+    it.name.startsWith('apache-maven-fluido-')
+}
+assert fluidoCss != null && fluidoCss.text.contains('--bs-link-color: #0a58ca;')

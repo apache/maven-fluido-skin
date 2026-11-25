@@ -17,10 +17,10 @@
  * under the License.
  */
 
-File index = new File( basedir, "target/site/index.html" )
+File index = new File(basedir, "target/site/index.html")
 assert index.exists()
 // position right: the last item of the list on the right of the breadcrumbs bar, after the version
 String html = index.text
-assert html.contains( '<li id="publishDate">Last Published: 1990-01-01</li>' )
-String right = html.substring( html.indexOf( '<ul class="list-unstyled d-flex flex-wrap column-gap-3 mb-0 ms-md-auto">' ) )
-assert right.indexOf( 'id="projectVersion"' ) < right.indexOf( 'id="publishDate"' )
+assert html.contains('<li id="publishDate">Last Published: 1990-01-01</li>')
+String right = html.substring(html.indexOf('<ul class="list-unstyled d-flex flex-wrap column-gap-3 mb-0 ms-md-auto">'))
+assert right.indexOf('id="projectVersion"') <right.indexOf('id="publishDate"')

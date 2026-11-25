@@ -17,12 +17,14 @@
  * under the License.
  */
 
-File index = new File( basedir, "target/site/index.html" )
+File index = new File(basedir, "target/site/index.html")
 assert index.exists()
-assert index.text.contains( 'anchors.add("h1, h2, h3, h4, h5")')
-assert index.text.contains( 'anchors.options.class = ".anchor"')
-assert index.text.contains( 'anchors.options.titleText = "foo"')
+assert index.text.contains('anchors.add("h1, h2, h3, h4, h5")')
+assert index.text.contains('anchors.options.class = ".anchor"')
+assert index.text.contains('anchors.options.titleText = "foo"')
 
 // anchor.js is linked and copied because anchorJs is configured
-assert index.text.contains( '<script src="./js/anchor-' )
-assert new File( basedir, "target/site/js" ).list().any { it ==~ /anchor-.*\.min\.js/ }
+assert index.text.contains('<script src="./js/anchor-')
+assert new File(basedir, "target/site/js").list().any {
+    it ==~ /anchor-.*\.min\.js/
+}

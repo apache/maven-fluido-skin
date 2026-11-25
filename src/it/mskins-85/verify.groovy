@@ -17,7 +17,7 @@
  * under the License.
  */
 
-String html = new File( basedir, "target/site/index.html" ).text
+String html = new File(basedir, "target/site/index.html").text
 
 // breadcrumbDivider: Bootstrap's breadcrumb divider, set on the breadcrumbs list
-assert html.contains( "<ol class=\"breadcrumb mb-0\" style=\"--bs-breadcrumb-divider: '»';\">" )
+assert html.contains("<ol class=\"breadcrumb mb-0\" style=\"--bs-breadcrumb-divider: '»';\">")
