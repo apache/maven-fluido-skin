@@ -17,12 +17,12 @@
  * under the License.
  */
 
-String html = new File( basedir, "target/site/index.html" ).text
+String html = new File(basedir, "target/site/index.html").text
 // the dark theme is opt-in
-assert !html.contains( 'dark-theme.css' )
-assert !new File( basedir, "target/site/css/dark-theme.css" ).exists()
-assert !html.contains( 'data-bs-theme' )
+assert !html.contains('dark-theme.css')
+assert !new File(basedir, "target/site/css/dark-theme.css").exists()
+assert !html.contains('data-bs-theme')
 // and so is the switch: without darkThemeEnabled there is neither a switch nor the theme script
-assert !html.contains( 'theme-switch' )
-assert !html.contains( 'fluido-theme.js' )
-assert !new File( basedir, "target/site/js/fluido-theme.js" ).exists()
+assert !html.contains('theme-switch')
+assert !html.contains('fluido-theme.js')
+assert !new File(basedir, "target/site/js/fluido-theme.js").exists()

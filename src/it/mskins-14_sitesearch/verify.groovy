@@ -18,6 +18,6 @@
  */
 
 // Google Search with a sitesearch value, removed in 2.2.0: the site builds and no page mentions Google
-String html = new File( basedir, "target/site/index.html" ).text
-assert !html.contains( 'search-form' )
-assert !html.toLowerCase().contains( 'google' )
+String html = new File(basedir, "target/site/index.html").text
+assert !html.contains('search-form')
+assert !html.toLowerCase().contains('google')

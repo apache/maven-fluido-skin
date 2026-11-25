@@ -17,7 +17,7 @@
  * under the License.
  */
 
-File index = new File( basedir, "target/site/index.html" )
+File index = new File(basedir, "target/site/index.html")
 
 assert index.exists()
 assert index.text.contains("<meta name=\"generator\" content=\"Apache Maven Doxia Site Renderer 2.1.0\" />")

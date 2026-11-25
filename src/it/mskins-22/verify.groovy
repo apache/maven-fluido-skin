@@ -16,9 +16,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-File site = new File( basedir, "target/site" )
-String html = new File( site, "index.html" ).text
+File site = new File(basedir, "target/site")
+String html = new File(site, "index.html").text
 
 // the ribbon stylesheet is linked and copied because a GitHub project is configured
-assert html.contains( '<link rel="stylesheet" href="./css/gh-fork-ribbon.min.css" />' )
-assert new File( site, "css/gh-fork-ribbon.min.css" ).exists()
+assert html.contains('<link rel="stylesheet" href="./css/gh-fork-ribbon.min.css" />')
+assert new File(site, "css/gh-fork-ribbon.min.css").exists()

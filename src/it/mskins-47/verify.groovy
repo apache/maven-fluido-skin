@@ -17,6 +17,6 @@
  * under the License.
  */
 
-File index = new File( basedir, "target/site/index.html" )
+File index = new File(basedir, "target/site/index.html")
 assert index.exists()
-assert !index.text.contains( '$headContent' )
+assert !index.text.contains('$headContent')

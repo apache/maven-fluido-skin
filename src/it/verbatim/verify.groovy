@@ -21,7 +21,7 @@ private void assertVerbatimHtml(File file) {
     assert file.exists()
     String html = file.text
     // only one snippet with code and linenumbers
-    assert (html.count( 'class="prettyprint linenums"' ) == 1)
+    assert (html.count('class="prettyprint linenums"') == 1)
     // the other snippet is just verbatim (no code!)
 }
 

@@ -17,15 +17,15 @@
  * under the License.
  */
 
-String html = new File( basedir, "target/site/index.html" ).text
+String html = new File(basedir, "target/site/index.html").text
 // the dark theme is Bootstrap's dark colour mode: Auto (follow the OS) becomes the default, set before the first paint
-assert html.contains( 'data-fluido-theme="auto"' )
-assert html.indexOf( 'js/fluido-theme.js' ) < html.indexOf( '</head>' )
-assert new File( basedir, "target/site/js/fluido-theme.js" ).exists()
+assert html.contains('data-fluido-theme="auto"')
+assert html.indexOf('js/fluido-theme.js') <html.indexOf('</head>')
+assert new File(basedir, "target/site/js/fluido-theme.js").exists()
 // no separate dark stylesheet any more
-assert !html.contains( 'dark-theme.css' )
-assert !new File( basedir, "target/site/css/dark-theme.css" ).exists()
+assert !html.contains('dark-theme.css')
+assert !new File(basedir, "target/site/css/dark-theme.css").exists()
 
 // with the dark theme enabled the switch shows (fluido-theme.js unhides it) in the page tools of the menu
-assert html.contains( '<button type="button" class="theme-switch btn btn-sm border" title="Theme" aria-label="Theme" hidden>' )
-assert html.indexOf( 'class="theme-switch' ) > html.indexOf( 'id="sidebarMenu"' )
+assert html.contains('<button type="button" class="theme-switch btn btn-sm border" title="Theme" aria-label="Theme" hidden>')
+assert html.indexOf('class="theme-switch') > html.indexOf('id="sidebarMenu"')

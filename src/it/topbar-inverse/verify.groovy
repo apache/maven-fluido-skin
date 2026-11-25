@@ -17,10 +17,10 @@
  * under the License.
  */
 
-String html = new File( basedir, "target/site/index.html" ).text
+String html = new File(basedir, "target/site/index.html").text
 
 // navBarStyle navbar-inverse: a dark top bar through Bootstrap's dark colour mode; the Bootstrap 2 class itself is dropped
 assert html =~ /<header id="topbar" class="navbar navbar-expand-lg bg-body-tertiary border-bottom\s*" data-bs-theme="dark">/
-assert !( html =~ /class="[^"]*navbar-inverse/ )
+assert !(html =~ /class="[^"]*navbar-inverse/)
 // topBarIcon: the brand link with its image
-assert html.contains( '<a class="brand navbar-brand" href="index.html"><img class="img-fluid" src="images/topbar-logo.png" alt="Maven Fluido Skin" />' )
+assert html.contains('<a class="brand navbar-brand" href="index.html"><img class="img-fluid" src="images/topbar-logo.png" alt="Maven Fluido Skin" />')

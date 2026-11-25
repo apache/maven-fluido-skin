@@ -17,16 +17,16 @@
  * under the License.
  */
 
-String html = new File( basedir, "target/site/index.html" ).text
-def count = { String pattern -> ( html =~ pattern ).size() }
+String html = new File(basedir, "target/site/index.html").text
+def count = { String pattern -> (html =~ pattern).size() }
 
 // the skin writes the charset of the output encoding, the page cannot declare a second one
-assert count( /<meta charset=/ ) == 1
-assert html.contains( '<meta charset="UTF-8" />' )
+assert count(/<meta charset=/) == 1
+assert html.contains('<meta charset="UTF-8" />')
 // a viewport or generator from the page replaces the skin's own
-assert count( /<meta name="viewport"/ ) == 1
-assert html.contains( 'content="width=device-width, initial-scale=2"' )
-assert count( /<meta name="generator"/ ) == 1
-assert html.contains( '<meta name="generator" content="Hand written" />' )
+assert count(/<meta name="viewport"/) == 1
+assert html.contains('content="width=device-width, initial-scale=2"')
+assert count(/<meta name="generator"/) == 1
+assert html.contains('<meta name="generator" content="Hand written" />')
 // everything else from the page head is kept
-assert html.contains( '<meta name="description" content="Meta elements from the page head" />' )
+assert html.contains('<meta name="description" content="Meta elements from the page head" />')
